@@ -103,8 +103,12 @@ HOME (LOCANDA EXPERIENCE)
 Todas as seções novas são data-driven em `src/data/content.ts` (PT/EN/IT) e
 reutilizam `ContentDetailPage`, `KioskLayout`, QR, galeria e vídeo existentes.
 
-- **Attract Mode**: vídeo (muted/loop/playsInline/poster) com fallback automático para
-  carrossel de fotografias; a camada de toque cobre a tela inteira e **nunca** depende da mídia.
+- **Attract Mode**: composição limpa e sem fotografias — identidade oficial
+  (logo branca + rosa dos ventos decorativa) sobre fundo escuro, com orbe de
+  toque amplo e chamada "Toque na tela para começar". A camada de mídia
+  (vídeo autoplay com poster / carrossel de fotos) segue preparada e é
+  reativada por `FEATURE_FLAGS.attractUsesMedia` quando o material oficial
+  chegar. A camada de toque cobre a tela inteira e **nunca** depende de mídia.
 - **Inatividade**: `90 s` → aviso com contagem de `20 s` → reset. Vídeo em reprodução suspende
   o contador (com teto absoluto de sessão de `15 min`). Valores em `src/config/kiosk.ts`.
 - **`resetSession()`**: para vídeos, restaura mute/legendas, fecha modais e galerias, volta o

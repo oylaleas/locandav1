@@ -71,6 +71,13 @@ export const FEATURE_FLAGS = {
   showPendingContentBadges: true,
   /** Registra o Service Worker (apenas em produção). */
   enableServiceWorker: import.meta.env.PROD,
+  /**
+   * Attract Mode com mídia (vídeo/fotografias ao fundo).
+   * Desligado por decisão do responsável: a tela ociosa é limpa e sem fotos,
+   * apenas identidade + chamada de toque. Reativar quando o material oficial
+   * (vídeo institucional) for fornecido — a estrutura segue preparada.
+   */
+  attractUsesMedia: false,
   /** Attract Mode tenta reproduzir vídeo; cai para imagem se falhar. */
   attractUsesVideo: true,
 };

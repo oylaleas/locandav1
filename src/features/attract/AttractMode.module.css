@@ -3,10 +3,15 @@
   inset: 0;
   z-index: var(--z-attract);
   overflow: hidden;
-  background-color: var(--palette-ink-900);
   color: var(--color-text-inverse);
+  /* Fundo limpo e com profundidade — sem fotografias. */
+  background:
+    radial-gradient(120% 85% at 50% 6%, rgba(86, 110, 99, 0.5) 0%, rgba(20, 27, 24, 0) 48%),
+    linear-gradient(180deg, var(--palette-ink-800) 0%, var(--palette-ink-900) 58%, #0c110f 100%);
   animation: fade-in var(--motion-slow) var(--easing-standard);
 }
+
+/* ------------------------------- Camada de mídia (opcional, flag) ------------------------------- */
 
 .mediaLayer {
   position: absolute;
@@ -51,6 +56,8 @@
     linear-gradient(180deg, rgba(15, 20, 18, 0.62) 0%, rgba(15, 20, 18, 0.16) 34%, rgba(15, 20, 18, 0.92) 100%);
 }
 
+/* -------------------------------------------- Conteúdo -------------------------------------------- */
+
 .content {
   position: relative;
   z-index: 1;
@@ -75,55 +82,70 @@
   animation: rise-in var(--motion-slow) var(--easing-decelerate);
 }
 
-/* Marca d'água da rosa dos ventos — decoração de interação, bem sutil. */
+/* Marca d'água da rosa dos ventos — decoração de interação, bem sutil.
+   Rotação lenta e contínua, neutralizada por prefers-reduced-motion. */
 .windRose {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -58%);
-  color: rgba(247, 242, 233, 0.07);
-  pointer-events: none;
+  transform: translate(-50%, -56%);
+  color: rgba(241, 177, 0, 0.055);
+  animation: spin 110s linear infinite;
 }
 
 .subhead {
-  max-width: 26ch;
+  max-width: 30ch;
   font-size: var(--font-size-lg);
   line-height: var(--line-height-snug);
   color: var(--color-text-inverse-secondary);
 }
 
+/* ----------------------------------------------- CTA ----------------------------------------------- */
+
 .ctaBlock {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-sm);
+  gap: var(--space-md);
 }
 
+/* Orbe de toque: grande, com a rosa dos ventos em dourado (eco da logo). */
 .touchRing {
   position: relative;
   display: grid;
   place-items: center;
-  width: 7rem;
-  height: 7rem;
+  width: 11rem;
+  height: 11rem;
   margin-bottom: var(--space-2xs);
   border-radius: 50%;
-  background-color: rgba(247, 242, 233, 0.16);
-  box-shadow: inset 0 0 0 2px rgba(247, 242, 233, 0.45);
-  color: var(--color-text-inverse);
+  background-color: rgba(241, 177, 0, 0.07);
+  box-shadow: inset 0 0 0 2px rgba(241, 177, 0, 0.45);
+  color: var(--palette-brass-500);
+  transition: transform 140ms var(--easing-standard);
 }
 
 .touchPulse {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  box-shadow: 0 0 0 2px rgba(247, 242, 233, 0.65);
+  box-shadow: 0 0 0 2px rgba(241, 177, 0, 0.5);
   animation: pulse-ring 2600ms var(--easing-decelerate) infinite;
+}
+
+.ctaRose {
+  filter: drop-shadow(0 2px 14px rgba(241, 177, 0, 0.35));
+}
+
+/* Feedback tátil ao pressionar qualquer ponto da tela. */
+.contentPressed .touchRing {
+  transform: scale(0.93);
 }
 
 .cta {
   font-family: var(--font-display);
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-3xl);
   letter-spacing: var(--letter-spacing-tight);
+  margin: 0;
 }
 
 .languages {
@@ -131,6 +153,7 @@
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
   color: var(--color-text-inverse-secondary);
+  margin: 0;
 }
 
 .mediaNotice {
@@ -138,6 +161,8 @@
   font-size: var(--font-size-3xs);
   color: rgba(247, 242, 233, 0.55);
 }
+
+/* ------------------------------------------- Ativação ------------------------------------------- */
 
 .activationLayer {
   position: absolute;
@@ -148,11 +173,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-}
-
-.activationLayer:active + .content,
-.activationLayer:active {
-  opacity: 1;
+  -webkit-tap-highlight-color: transparent;
 }
 
 @media (max-width: 40rem) {
@@ -162,7 +183,11 @@
   }
 
   .touchRing {
-    width: 5.5rem;
-    height: 5.5rem;
+    width: 8.5rem;
+    height: 8.5rem;
+  }
+
+  .cta {
+    font-size: var(--font-size-2xl);
   }
 }

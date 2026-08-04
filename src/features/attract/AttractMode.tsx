@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Brandmark } from '@/components/layout/Brandmark';
-import { Icon } from '@/components/ui/Icon';
 import { SmartImage } from '@/components/ui/SmartImage';
 import { WindRose } from '@/components/ui/WindRose';
 import { ATTRACT_SLIDE_DURATION_MS, FEATURE_FLAGS } from '@/config/kiosk';
@@ -18,12 +17,16 @@ interface AttractModeProps {
 /**
  * ATTRACT MODE
  * --------------------------------------------------------------------------
- * Tela ociosa do totem. Requisitos atendidos:
- *  - vídeo com autoplay/muted/loop/playsInline e POSTER;
- *  - fallback automático para carrossel de fotografias se o vídeo falhar,
- *    estiver indisponível offline ou o autoplay for bloqueado;
- *  - o primeiro toque NUNCA depende da mídia: a camada de ativação cobre a
- *    tela inteira desde o primeiro frame.
+ * Tela ociosa do totem — composição LIMPA, sem fotografias:
+ * identidade oficial (logo branca) + rosa dos ventos decorativa + chamada
+ * de toque ampla e elegante.
+ *
+ * A camada de mídia (vídeo autoplay com poster / carrossel de fotos) segue
+ * preparada no código e é reativada via FEATURE_FLAGS.attractUsesMedia
+ * quando o material oficial chegar.
+ *
+ * O primeiro toque NUNCA depende de mídia: a camada de ativação cobre a
+ * tela inteira desde o primeiro frame.
  */
 export function AttractMode({ onActivate }: AttractModeProps) {
   const { t, tx } = useI18n();
@@ -35,18 +38,21 @@ export function AttractMode({ onActivate }: AttractModeProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoFailed, setVideoFailed] = useState(false);
   const [slide, setSlide] = useState(0);
+  const [pressed, setPressed] = useState(false);
 
-  const useVideo = FEATURE_FLAGS.attractUsesVideo && Boolean(video) && !videoFailed && !motionReduced;
+  const useMedia = FEATURE_FLAGS.attractUsesMedia;
+  const useVideo =
+    useMedia && FEATURE_FLAGS.attractUsesVideo && Boolean(video) && !videoFailed && !motionReduced;
 
-  // Carrossel de imagens: usado como fallback e quando o movimento é reduzido
-  // (nesse caso trocamos por transições longas e suaves, sem paralaxe).
+  // Carrossel de imagens (apenas no modo com mídia): fallback do vídeo e
+  // opção quando o movimento é reduzido.
   useEffect(() => {
-    if (useVideo || images.length <= 1) return;
+    if (!useMedia || useVideo || images.length <= 1) return;
     const interval = window.setInterval(() => {
       setSlide((current) => (current + 1) % images.length);
     }, ATTRACT_SLIDE_DURATION_MS);
     return () => window.clearInterval(interval);
-  }, [useVideo, images.length]);
+  }, [useMedia, useVideo, images.length]);
 
   useEffect(() => {
     const element = videoRef.current;
@@ -69,46 +75,48 @@ export function AttractMode({ onActivate }: AttractModeProps) {
 
   return (
     <div className={styles.root} data-surface="inverse" data-testid="attract-mode">
-      <div className={styles.mediaLayer} aria-hidden="true">
-        {useVideo && video ? (
-          <video
-            ref={videoRef}
-            className={styles.video}
-            src={video.src}
-            poster={video.poster}
-            muted
-            loop
-            playsInline
-            autoPlay
-            preload={video.preload}
-            disablePictureInPicture
-            onError={() => setVideoFailed(true)}
-            onStalled={() => setVideoFailed(true)}
-          />
-        ) : (
-          images.map((image, index) => (
-            <div
-              key={image.id}
-              className={cn(styles.slide, index === slide && styles.slideActive)}
-            >
-              <SmartImage
-                asset={image}
-                aspectRatio="auto"
-                priority={index === 0}
-                decorative
-                className={styles.slideImage}
-              />
-            </div>
-          ))
-        )}
-        <div className={styles.scrim} />
-      </div>
+      {useMedia && (
+        <div className={styles.mediaLayer} aria-hidden="true">
+          {useVideo && video ? (
+            <video
+              ref={videoRef}
+              className={styles.video}
+              src={video.src}
+              poster={video.poster}
+              muted
+              loop
+              playsInline
+              autoPlay
+              preload={video.preload}
+              disablePictureInPicture
+              onError={() => setVideoFailed(true)}
+              onStalled={() => setVideoFailed(true)}
+            />
+          ) : (
+            images.map((image, index) => (
+              <div
+                key={image.id}
+                className={cn(styles.slide, index === slide && styles.slideActive)}
+              >
+                <SmartImage
+                  asset={image}
+                  aspectRatio="auto"
+                  priority={index === 0}
+                  decorative
+                  className={styles.slideImage}
+                />
+              </div>
+            ))
+          )}
+          <div className={styles.scrim} />
+        </div>
+      )}
 
-      <div className={styles.content}>
+      <div className={cn(styles.content, pressed && styles.contentPressed)}>
         <div className={styles.brandBlock}>
           {/* Gráfico decorativo de interação inspirado na rosa dos ventos
               da logo — NUNCA substitui o logotipo oficial (ao lado). */}
-          <WindRose size="clamp(13rem, 42vh, 24rem)" className={styles.windRose} />
+          <WindRose size="clamp(16rem, 56vh, 30rem)" className={styles.windRose} />
           <Brandmark tone="dark" size="lg" withDescriptor />
           <p className={styles.subhead}>{tx(identity.attractSubhead)}</p>
         </div>
@@ -116,11 +124,11 @@ export function AttractMode({ onActivate }: AttractModeProps) {
         <div className={styles.ctaBlock}>
           <span className={styles.touchRing} aria-hidden="true">
             <span className={styles.touchPulse} />
-            <Icon name="touch" size="2.75rem" />
+            <WindRose size="3.4rem" className={styles.ctaRose} />
           </span>
           <p className={styles.cta}>{tx(identity.attractCallToAction)}</p>
           <p className={styles.languages}>{t.attract.languagesAvailable}</p>
-          {videoFailed && FEATURE_FLAGS.attractUsesVideo && (
+          {useMedia && videoFailed && FEATURE_FLAGS.attractUsesVideo && (
             <p className={styles.mediaNotice}>{t.attract.videoUnavailable}</p>
           )}
         </div>
@@ -134,6 +142,9 @@ export function AttractMode({ onActivate }: AttractModeProps) {
         type="button"
         className={styles.activationLayer}
         onClick={handleActivate}
+        onPointerDown={() => setPressed(true)}
+        onPointerUp={() => setPressed(false)}
+        onPointerLeave={() => setPressed(false)}
         data-testid="attract-activate"
       >
         <span className="visually-hidden">{tx(identity.attractCallToAction)}</span>

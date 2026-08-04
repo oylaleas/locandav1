@@ -20,6 +20,7 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 
 ## Vídeo
 
+- [x] Attract Mode limpo sem fotos (decisão do responsável) — identidade + chamada de toque; mídia reativável via `FEATURE_FLAGS.attractUsesMedia`
 - [x] Poster sempre presente (nunca área preta)
 - [x] Play / Pause
 - [x] Estado de áudio textual ("Sem som"/"Com som"), não só ícone
