@@ -276,18 +276,18 @@ export type VideoAssetId = keyof typeof VIDEO_ASSETS;
    --------------------------------------------------------------------------
    Recebidos em e95d8f2 ("Add files via upload"): quatro variações em PNG.
 
-   Composição das variações:
-   - logo-colorido.png (180×146)  lockup horizontal: rosa dos ventos dourada
-                                 #f1b100 + wordmark BRANCO sobre transparente.
-                                 O texto branco exige fundo escuro: o
-                                 <Brandmark/> o exibe sobre uma placa escura
-                                 em superfícies claras, ou direto no Attract.
-   - logo.png (125×101)           exportação menor do mesmo lockup (não usada;
-                                 mantida no repositório como cortesia).
-   - logo-branco.png (195×159)    lockup monocromático branco — reservada para
-                                 superfícies escuras que pedem menos cor.
+   Uso oficial de cada variação (apenas logos oficiais em exibição):
+   - logo-colorido.png (180×146)  lockup horizontal (rosa dos ventos dourada
+                                 #f1b100 + wordmark branco) — usado pelo
+                                 <Brandmark/> em superfícies CLARAS, dentro
+                                 da placa escura (Home, cabeçalho).
+   - logo-branco.png (195×159)    lockup monocromático branco — usado pelo
+                                 <Brandmark/> em superfícies ESCURAS (Attract
+                                 Mode), direto sobre o scrim.
    - logo-1.png (170×169)         emblema circular (azul #065895 + dourado) —
-                                 usada nos ícones PWA / favicon / apple-touch.
+                                 ícones PWA / favicon / apple-touch / offline.
+   - logo.png (125×101)           exportação menor do lockup colorido
+                                 (mantida no repositório; não usada em tela).
    ========================================================================== */
 
 import logoLockup from '@/assets/brand/logo-colorido.png';
@@ -295,13 +295,13 @@ import logoLockupWhite from '@/assets/brand/logo-branco.png';
 import logoEmblem from '@/assets/brand/logo-1.png';
 
 export const BRAND_ASSETS = {
-  /** Lockup horizontal principal (rosa dos ventos + wordmark). */
+  /** Lockup colorido — superfícies claras (com placa escura). */
   logoSrc: logoLockup,
   logoAlt: 'Locanda dei Venti',
   logoWidth: 180,
   logoHeight: 146,
 
-  /** Variação monocromática branca — superfícies escuras com menos cor. */
+  /** Lockup monocromático branco — superfícies escuras (Attract Mode). */
   logoSrcWhite: logoLockupWhite,
   logoAltWhite: 'Locanda dei Venti',
   logoWidthWhite: 195,

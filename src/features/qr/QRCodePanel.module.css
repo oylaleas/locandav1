@@ -1,10 +1,21 @@
 .content {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-lg);
   padding: var(--space-sm) 0 var(--space-md);
   text-align: center;
+}
+
+/* Rosa dos ventos decorativa (inspirada na logo) — sutil, ao fundo. */
+.watermark {
+  position: absolute;
+  top: var(--space-2xs);
+  right: var(--space-xs);
+  color: var(--color-accent);
+  opacity: 0.14;
+  pointer-events: none;
 }
 
 .destination {

@@ -21,10 +21,11 @@ interface BrandmarkProps {
 /**
  * Marca da Locanda dei Venti.
  *
- * Logotipo oficial integrado (src/assets/brand/). O lockup tem texto branco
- * e por isso é sempre exibido sobre fundo escuro: direto no Attract Mode ou
- * dentro da placa escura em superfícies claras. O fallback tipográfico abaixo
- * só existe caso BRAND_ASSETS.logoSrc seja removido no futuro.
+ * Apenas as LOGOS OFICIAIS (src/assets/brand/) são usadas:
+ * - superfície clara (Home, cabeçalho) → lockup colorido dentro da placa
+ *   escura (o wordmark é branco e exige fundo escuro para leitura);
+ * - superfície escura (Attract Mode) → lockup monocromático branco, direto.
+ * O fallback tipográfico abaixo só existe caso BRAND_ASSETS seja removido.
  */
 export function Brandmark({
   tone = 'light',
@@ -36,6 +37,13 @@ export function Brandmark({
 
   if (BRAND_ASSETS.logoSrc) {
     const onDarkSurface = tone === 'dark';
+    // Logo oficial para a superfície: branca em fundos escuros, colorida em
+    // fundos claros (sobre a placa). Nunca inventamos uma variação nova.
+    const logo = onDarkSurface ? BRAND_ASSETS.logoSrcWhite : BRAND_ASSETS.logoSrc;
+    const width = onDarkSurface ? BRAND_ASSETS.logoWidthWhite : BRAND_ASSETS.logoWidth;
+    const height = onDarkSurface ? BRAND_ASSETS.logoHeightWhite : BRAND_ASSETS.logoHeight;
+    const alt = onDarkSurface ? BRAND_ASSETS.logoAltWhite : BRAND_ASSETS.logoAlt;
+
     return (
       <span
         className={cn(
@@ -46,10 +54,10 @@ export function Brandmark({
         )}
       >
         <img
-          src={BRAND_ASSETS.logoSrc}
-          alt={BRAND_ASSETS.logoAlt}
-          width={BRAND_ASSETS.logoWidth}
-          height={BRAND_ASSETS.logoHeight}
+          src={logo}
+          alt={alt}
+          width={width}
+          height={height}
           className={styles.logo}
         />
         {withDescriptor && (

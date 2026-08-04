@@ -66,11 +66,23 @@
 }
 
 .brandBlock {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-md);
   animation: rise-in var(--motion-slow) var(--easing-decelerate);
+}
+
+/* Marca d'água da rosa dos ventos — decoração de interação, bem sutil. */
+.windRose {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -58%);
+  color: rgba(247, 242, 233, 0.07);
+  pointer-events: none;
 }
 
 .subhead {

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Brandmark } from '@/components/layout/Brandmark';
 import { Icon } from '@/components/ui/Icon';
 import { SmartImage } from '@/components/ui/SmartImage';
+import { WindRose } from '@/components/ui/WindRose';
 import { ATTRACT_SLIDE_DURATION_MS, FEATURE_FLAGS } from '@/config/kiosk';
 import { useAccessibility } from '@/features/a11y/AccessibilityProvider';
 import { useI18n } from '@/features/i18n/useI18n';
@@ -105,6 +106,9 @@ export function AttractMode({ onActivate }: AttractModeProps) {
 
       <div className={styles.content}>
         <div className={styles.brandBlock}>
+          {/* Gráfico decorativo de interação inspirado na rosa dos ventos
+              da logo — NUNCA substitui o logotipo oficial (ao lado). */}
+          <WindRose size="clamp(13rem, 42vh, 24rem)" className={styles.windRose} />
           <Brandmark tone="dark" size="lg" withDescriptor />
           <p className={styles.subhead}>{tx(identity.attractSubhead)}</p>
         </div>

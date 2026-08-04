@@ -109,6 +109,11 @@ HOME
 
 A **logotipia oficial** e as **fotografias reais** já foram integradas
 (4 variações em `src/assets/brand/` + 8 fotos em `src/assets/images/`).
+Uso das logos: lockup colorido em superfícies claras (placa escura no
+`<Brandmark/>`), lockup branco direto no Attract Mode, emblema nos ícones
+PWA/favicon/offline. A única imagem criada além das oficiais é o gráfico
+decorativo `WindRose` (rosa dos ventos inspirada na logo), usado como marca
+d'água de interação — nunca como logotipo.
 Os **textos institucionais**, **contatos**, **QR Codes** e **acomodações**
 foram preenchidos com o conteúdo compilado do site oficial
 (locandadeiventi.com.br) em `src/data/content.ts`:
