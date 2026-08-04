@@ -1,0 +1,28 @@
+{
+  "name": "Locanda dei Venti — Totem",
+  "short_name": "Locanda",
+  "description": "Totem interativo institucional da Locanda dei Venti.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "portrait",
+  "background_color": "#1B2320",
+  "theme_color": "#1B2320",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["travel", "lifestyle"],
+  "prefer_related_applications": false,
+  "icons": [
+    { "src": "/icons/favicon.png", "sizes": "64x64", "type": "image/png" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    {
+      "src": "/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

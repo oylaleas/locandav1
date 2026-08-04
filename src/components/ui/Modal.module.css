@@ -1,0 +1,99 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--kiosk-gutter);
+  padding-bottom: calc(var(--kiosk-gutter) + var(--kiosk-safe-bottom));
+  background-color: var(--color-surface-scrim);
+  animation: fade-in var(--motion-base) var(--easing-standard);
+  backdrop-filter: blur(3px);
+}
+
+.overlayDark {
+  background-color: var(--color-surface-scrim-strong);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 46rem);
+  max-height: min(92vh, 68rem);
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--elevation-3);
+  overflow: hidden;
+  animation: rise-in var(--motion-base) var(--easing-decelerate);
+}
+
+.panelDark {
+  background-color: var(--palette-ink-900);
+  color: var(--color-text-inverse);
+}
+
+.md {
+  width: min(100%, 46rem);
+}
+
+.lg {
+  width: min(100%, 64rem);
+}
+
+.full {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  border-radius: var(--radius-md);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-lg) var(--space-md);
+}
+
+.headings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+}
+
+.description {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+  max-width: 46ch;
+}
+
+.panelDark .description {
+  color: var(--color-text-inverse-secondary);
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  padding: 0 var(--space-lg) var(--space-lg);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: flex-end;
+  padding: var(--space-md) var(--space-lg) var(--space-lg);
+  border-top: var(--border-hairline);
+  background-color: var(--color-background);
+}
+
+.panelDark .footer {
+  background-color: rgba(255, 255, 255, 0.04);
+  border-top-color: var(--color-border-inverse);
+}

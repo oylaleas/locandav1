@@ -1,0 +1,111 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--elevation-1);
+  transition:
+    transform var(--motion-fast) var(--easing-standard),
+    box-shadow var(--motion-fast) var(--easing-standard);
+}
+
+.card:active {
+  transform: scale(0.985);
+  box-shadow: var(--elevation-2);
+}
+
+.horizontal {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.media {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  background-color: var(--color-surface-strong);
+}
+
+.horizontal .media {
+  width: 34%;
+  min-width: 9rem;
+}
+
+.image {
+  height: 100%;
+}
+
+.horizontal .image {
+  height: 100%;
+}
+
+.mediaBadges {
+  position: absolute;
+  left: var(--space-sm);
+  bottom: var(--space-sm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3xs);
+  max-width: calc(100% - var(--space-lg));
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding: var(--space-md) var(--space-md) var(--space-lg);
+  flex: 1;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  font-size: var(--font-size-3xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-snug);
+  color: var(--color-text-primary);
+}
+
+.featured .title {
+  font-size: var(--font-size-2xl);
+}
+
+.description {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pending {
+  margin-top: var(--space-3xs);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  margin-top: auto;
+  padding-top: var(--space-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-action-primary);
+}

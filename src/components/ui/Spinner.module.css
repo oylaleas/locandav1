@@ -1,0 +1,24 @@
+.spinner {
+  display: inline-block;
+  border-radius: 50%;
+  border: 3px solid currentColor;
+  border-top-color: transparent;
+  opacity: 0.85;
+  animation: spin 900ms linear infinite;
+}
+
+/* Com movimento reduzido, o giro é substituído por uma pulsação sutil,
+   preservando o feedback de "algo está acontecendo". */
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+    border-top-color: currentColor;
+    opacity: 0.5;
+  }
+}
+
+:global(:root[data-reduced-motion='true']) .spinner {
+  animation: none;
+  border-top-color: currentColor;
+  opacity: 0.5;
+}

@@ -1,0 +1,71 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+  min-height: 22rem;
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+  box-shadow: var(--elevation-1);
+}
+
+.compact {
+  min-height: 0;
+  padding: var(--space-lg);
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.dark {
+  background-color: rgba(20, 27, 24, 0.86);
+  color: var(--color-text-inverse);
+  box-shadow: none;
+}
+
+.loading {
+  box-shadow: none;
+  background-color: transparent;
+  color: var(--color-text-secondary);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  background-color: var(--color-surface-strong);
+  color: var(--color-text-primary);
+}
+
+.dark .icon {
+  background-color: rgba(247, 242, 233, 0.14);
+  color: var(--color-text-inverse);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  max-width: 24ch;
+}
+
+.message {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  max-width: 46ch;
+  line-height: var(--line-height-relaxed);
+}
+
+.dark .message {
+  color: var(--color-text-inverse-secondary);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-top: var(--space-2xs);
+}

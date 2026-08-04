@@ -1,0 +1,230 @@
+/* ==========================================================================
+   DESIGN TOKENS — LOCANDA DEI VENTI (TOTEM)
+   --------------------------------------------------------------------------
+   Fonte única de verdade para cor, tipografia, espaçamento, raio, elevação,
+   motion, sizing e z-index. Componentes NÃO devem usar valores literais.
+
+   [A VALIDAR] A identidade visual definitiva (logotipo, tipografia e paleta
+   oficiais da Locanda dei Venti) ainda não foi fornecida. A paleta abaixo é
+   uma base neutra e reversível: alterar aqui repropaga para toda a aplicação.
+   ========================================================================== */
+
+:root {
+  /* ---------------------------------------------------------------- PALETA */
+  --palette-ink-900: #141b18;
+  --palette-ink-800: #1b2320;
+  --palette-ink-700: #2c3733;
+  --palette-ink-600: #3f4d47;
+  --palette-ink-500: #55655d;
+  --palette-ink-400: #7a8880;
+
+  --palette-ivory-050: #fffdf8;
+  --palette-ivory-100: #f7f2e9;
+  --palette-ivory-200: #efe7d8;
+  --palette-sand-300: #e3d7c1;
+  --palette-sand-400: #cfbfa2;
+
+  --palette-clay-600: #8f4a2e;
+  --palette-clay-500: #a85a3c;
+  --palette-clay-300: #d9a88f;
+
+  --palette-olive-600: #45543f;
+  --palette-olive-500: #55684f;
+
+  --palette-brass-600: #8c6c2a;
+  --palette-brass-500: #b08c3f;
+
+  --palette-danger-600: #8e2f22;
+  --palette-danger-100: #f6e3df;
+  --palette-success-600: #2f6b4a;
+
+  /* ------------------------------------------------------------ SEMÂNTICAS */
+  --color-background: var(--palette-ivory-100);
+  --color-background-alt: var(--palette-ivory-200);
+  --color-surface: var(--palette-ivory-050);
+  --color-surface-strong: var(--palette-sand-300);
+  --color-surface-inverse: var(--palette-ink-800);
+  --color-surface-scrim: rgba(20, 27, 24, 0.72);
+  --color-surface-scrim-strong: rgba(20, 27, 24, 0.92);
+
+  --color-text-primary: var(--palette-ink-800);
+  --color-text-secondary: var(--palette-ink-500);
+  --color-text-inverse: var(--palette-ivory-100);
+  --color-text-inverse-secondary: rgba(247, 242, 233, 0.78);
+  --color-text-on-action: #ffffff;
+
+  --color-action-primary: var(--palette-clay-600);
+  --color-action-primary-pressed: #783c25;
+  --color-action-secondary: var(--palette-ink-800);
+  --color-action-secondary-pressed: var(--palette-ink-900);
+  --color-action-quiet-surface: rgba(27, 35, 32, 0.06);
+  --color-action-quiet-surface-pressed: rgba(27, 35, 32, 0.14);
+  --color-action-disabled-surface: rgba(27, 35, 32, 0.08);
+  --color-action-disabled-text: rgba(27, 35, 32, 0.42);
+
+  --color-accent: var(--palette-brass-600);
+  --color-accent-soft: var(--palette-sand-300);
+
+  --color-border-subtle: rgba(27, 35, 32, 0.12);
+  --color-border-strong: rgba(27, 35, 32, 0.28);
+  --color-border-inverse: rgba(247, 242, 233, 0.32);
+
+  --color-focus-ring: #0f5f8f;
+  --color-focus-ring-inverse: #ffd88a;
+
+  --color-danger: var(--palette-danger-600);
+  --color-danger-surface: var(--palette-danger-100);
+  --color-success: var(--palette-success-600);
+
+  /* ----------------------------------------------------------- TIPOGRAFIA */
+  /* [A VALIDAR] tipografia institucional oficial. Usamos stacks do sistema
+     para garantir 100% de funcionamento offline e zero requisição de fonte. */
+  --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia,
+    'Times New Roman', serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Escala fluida ancorada no viewport do totem (1080x1920 [VALIDAR NO HARDWARE REAL]).
+     --font-scale é multiplicado pelo controle de acessibilidade de texto. */
+  --font-scale: 1;
+  --font-root: clamp(16px, 0.6vw + 0.62vh, 26px);
+
+  --font-size-3xs: calc(0.72rem * var(--font-scale));
+  --font-size-2xs: calc(0.8rem * var(--font-scale));
+  --font-size-xs: calc(0.9rem * var(--font-scale));
+  --font-size-sm: calc(1rem * var(--font-scale));
+  --font-size-md: calc(1.15rem * var(--font-scale));
+  --font-size-lg: calc(1.35rem * var(--font-scale));
+  --font-size-xl: calc(1.65rem * var(--font-scale));
+  --font-size-2xl: calc(2.1rem * var(--font-scale));
+  --font-size-3xl: calc(2.7rem * var(--font-scale));
+  --font-size-4xl: calc(3.4rem * var(--font-scale));
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.12;
+  --line-height-snug: 1.28;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.68;
+
+  --letter-spacing-tight: -0.01em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.04em;
+  --letter-spacing-widest: 0.18em;
+
+  /* ------------------------------------------------------------ ESPAÇAMENTO */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+
+  /* ----------------------------------------------------------------- RAIO */
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.625rem;
+  --radius-md: 1rem;
+  --radius-card: 1.5rem;
+  --radius-panel: 2rem;
+  --radius-pill: 999px;
+
+  /* ------------------------------------------------------------- ELEVAÇÃO */
+  --elevation-0: none;
+  --elevation-1: 0 1px 2px rgba(20, 27, 24, 0.06), 0 2px 8px rgba(20, 27, 24, 0.05);
+  --elevation-2: 0 2px 6px rgba(20, 27, 24, 0.08), 0 12px 28px rgba(20, 27, 24, 0.09);
+  --elevation-3: 0 6px 16px rgba(20, 27, 24, 0.12), 0 28px 64px rgba(20, 27, 24, 0.16);
+  --elevation-inset-pressed: inset 0 2px 6px rgba(20, 27, 24, 0.18);
+
+  /* --------------------------------------------------------------- BORDAS */
+  --border-hairline: 1px solid var(--color-border-subtle);
+  --border-strong: 2px solid var(--color-border-strong);
+  --border-focus-width: 4px;
+
+  /* --------------------------------------------------------------- MOTION */
+  --motion-instant: 80ms;
+  --motion-fast: 140ms;
+  --motion-base: 240ms;
+  --motion-slow: 420ms;
+  --motion-ambient: 12000ms;
+  --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --easing-decelerate: cubic-bezier(0, 0, 0, 1);
+  --easing-accelerate: cubic-bezier(0.3, 0, 1, 1);
+
+  /* --------------------------------------------------------------- SIZING */
+  /* Alvos de toque generosos: usuário em pé, sem mouse, tela grande. */
+  --size-touch-min: 4.5rem; /* ~72px @ root 16px — mínimo absoluto */
+  --size-touch-comfort: 5.5rem;
+  --size-touch-large: 7rem;
+  --size-icon-sm: 1.25rem;
+  --size-icon-md: 1.75rem;
+  --size-icon-lg: 2.5rem;
+  --size-header-height: 7.5rem;
+  --size-actionbar-height: 8.5rem;
+  --size-content-max-width: 92rem;
+  --size-reading-max-width: 44rem;
+
+  /* -------------------------------------------------------------- Z-INDEX */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-header: 200;
+  --z-actionbar: 210;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-attract: 600;
+  --z-critical: 900;
+
+  /* --------------------------------------------------------- LAYOUT KIOSK */
+  --kiosk-safe-top: env(safe-area-inset-top, 0px);
+  --kiosk-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --kiosk-gutter: clamp(1.25rem, 3.5vw, 3.5rem);
+}
+
+/* --------------------------------------------------------------------------
+   ALTO CONTRASTE (controle de acessibilidade do totem)
+   -------------------------------------------------------------------------- */
+:root[data-contrast='high'] {
+  --color-background: #ffffff;
+  --color-background-alt: #f2f2f2;
+  --color-surface: #ffffff;
+  --color-surface-strong: #e6e6e6;
+  --color-surface-inverse: #000000;
+  --color-surface-scrim: rgba(0, 0, 0, 0.86);
+  --color-surface-scrim-strong: rgba(0, 0, 0, 0.96);
+
+  --color-text-primary: #000000;
+  --color-text-secondary: #1f1f1f;
+  --color-text-inverse: #ffffff;
+  --color-text-inverse-secondary: #ffffff;
+
+  --color-action-primary: #6d2f16;
+  --color-action-primary-pressed: #4d1f0d;
+  --color-action-secondary: #000000;
+  --color-action-quiet-surface: #ebebeb;
+  --color-action-quiet-surface-pressed: #d4d4d4;
+  --color-action-disabled-text: #5a5a5a;
+
+  --color-border-subtle: rgba(0, 0, 0, 0.55);
+  --color-border-strong: #000000;
+  --color-border-inverse: #ffffff;
+
+  --elevation-1: 0 0 0 2px #000000;
+  --elevation-2: 0 0 0 2px #000000;
+  --elevation-3: 0 0 0 3px #000000;
+}
+
+/* --------------------------------------------------------------------------
+   ESCALA DE TEXTO (controle de acessibilidade do totem)
+   -------------------------------------------------------------------------- */
+:root[data-text-scale='lg'] {
+  --font-scale: 1.15;
+}
+:root[data-text-scale='xl'] {
+  --font-scale: 1.32;
+}

@@ -1,0 +1,26 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: var(--size-content-max-width);
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: var(--font-size-3xl);
+}
+
+.intro {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  max-width: 48ch;
+  margin-top: var(--space-2xs);
+}
