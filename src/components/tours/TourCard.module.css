@@ -1,0 +1,97 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+  box-shadow: var(--elevation-1);
+  overflow: hidden;
+  color: var(--color-text-primary);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition:
+    transform 120ms var(--easing-standard),
+    box-shadow 120ms var(--easing-standard);
+}
+
+.card:active {
+  transform: scale(0.985);
+  box-shadow: var(--elevation-2);
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.media {
+  position: relative;
+  display: block;
+}
+
+.image {
+  width: 100%;
+}
+
+.optionsBadge {
+  position: absolute;
+  top: var(--space-sm);
+  left: var(--space-sm);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-tight);
+}
+
+.description {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-secondary);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-2xs);
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.price {
+  color: var(--color-accent);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin-top: var(--space-2xs);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-action-primary);
+}

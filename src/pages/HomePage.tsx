@@ -39,6 +39,23 @@ export default function HomePage() {
           </div>
         </header>
 
+        {/* Acessos às novas experiências do totem — dois cards, sem
+            sobrecarregar a Home (o conteúdo vive nas próprias seções). */}
+        <section className={styles.areas} aria-label={`${t.home.wellnessCta} · ${t.home.toursCta}`}>
+          <ActionCard
+            icon="spa"
+            title={t.home.wellnessCta}
+            description={t.home.wellnessCtaDesc}
+            onSelect={() => navigation.push(ROUTES.wellnessIndex)}
+          />
+          <ActionCard
+            icon="compass"
+            title={t.home.toursCta}
+            description={t.home.toursCtaDesc}
+            onSelect={() => navigation.push(ROUTES.toursIndex)}
+          />
+        </section>
+
         {featured && (
           <section aria-labelledby="destaque-titulo" className={styles.featuredSection}>
             <h2 id="destaque-titulo" className="visually-hidden">

@@ -17,6 +17,10 @@ const HomePage = lazy(() => import('@/pages/HomePage'));
 const ContentIndexPage = lazy(() => import('@/pages/ContentIndexPage'));
 const ContentDetailPage = lazy(() => import('@/pages/ContentDetailPage'));
 const GalleryPage = lazy(() => import('@/pages/GalleryPage'));
+const WellnessIndexPage = lazy(() => import('@/pages/WellnessIndexPage'));
+const WellnessPartnerPage = lazy(() => import('@/pages/WellnessPartnerPage'));
+const ToursIndexPage = lazy(() => import('@/pages/ToursIndexPage'));
+const TourDetailPage = lazy(() => import('@/pages/TourDetailPage'));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
 
 function ScreenViewTracker() {
@@ -94,6 +98,10 @@ export function AppShell() {
               <Route path={ROUTES.contentIndex} element={<ContentIndexPage />} />
               <Route path={`${ROUTES.contentIndex}/:slug`} element={<ContentDetailPage />} />
               <Route path={ROUTES.gallery} element={<GalleryPage />} />
+              <Route path={ROUTES.wellnessIndex} element={<WellnessIndexPage />} />
+              <Route path={`${ROUTES.wellnessIndex}/:partnerId`} element={<WellnessPartnerPage />} />
+              <Route path={ROUTES.toursIndex} element={<ToursIndexPage />} />
+              <Route path={`${ROUTES.toursIndex}/:slug`} element={<TourDetailPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>

@@ -30,6 +30,17 @@
   max-width: 40ch;
 }
 
+.areas {
+  display: grid;
+  gap: var(--space-md);
+}
+
+@media (min-width: 75rem) {
+  .areas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .featuredSection {
   display: block;
 }

@@ -23,6 +23,31 @@ todos os pontos têm placeholder claramente identificado ou abstração pronta p
 | Tipografia institucional | `src/styles/tokens.css` → `--font-display` / `--font-body` | Stacks do sistema **[A VALIDAR]** |
 | Paleta oficial | `src/styles/tokens.css` | Paleta neutra reversível **[A VALIDAR]** |
 
+### 1a. BEM-ESTAR (Espaço Onoda) — recebido, pontos a validar
+
+| Item | Onde trocar | Situação |
+| --- | --- | --- |
+| Serviços (8) e descrições | `src/data/wellness.ts` | **✅ Integrados** (Massagem Relaxante/Desportiva/Terapêutica, Ventosas, Acupuntura, Dry Needling, Quiropraxia, Wellness Day) |
+| WhatsApp +55 (88) 99630-9247 | `WELLNESS_PARTNERS[0].contact` | **✅ Integrado** — QR real `wa.me/5588996309247` (derivado do número) |
+| Instagram @espaco_onoda | `WELLNESS_PARTNERS[0].contact` | **✅ Integrado** — QR real `instagram.com/espaco_onoda` (derivado do handle) |
+| Relação comercial Espaço Onoda × Locanda | `WELLNESS_PARTNERS[0].notes` | **[A VALIDAR]** — texto mantido neutro, sem vínculo inventado |
+| Tradução EN/IT dos serviços | `src/data/wellness.ts` | **[TRADUÇÃO A VALIDAR PELO RESPONSÁVEL]** |
+| Foto do Espaço Onoda | `tour.coverImageId` (ou imagem dedicada) | **[ASSET A DEFINIR]** — sem imagem por enquanto (sem inventar) |
+
+### 1b. EXPERIÊNCIAS E PASSEIOS — recebido, pontos a validar
+
+| Item | Onde trocar | Situação |
+| --- | --- | --- |
+| Pôr do Sol (15:30–18:30 · R$ 370) | `src/data/tours.ts` | **✅ Integrado** |
+| Moitas de Icaraí — Opção 1 (09:00–16:00 · R$ 800 · barco · buggy 4p) | `src/data/tours.ts` | **✅ Integrado** — Rio Aracati Açu, Túnel do Amor, Ilha das Ostras, parada para almoço |
+| Moitas de Icaraí — Opção 2 (09:00–14:30 · R$ 650 · sem barco) | `src/data/tours.ts` | **✅ Integrado** — diferenciação explícita por texto |
+| Almofala, Ilha do Guajiru e Região (09:00–13:30 · R$ 500) | `src/data/tours.ts` | **✅ Integrado** |
+| Fotografias/vídeo oficiais dos passeios | `coverImageId`/`galleryImageIds`/`videoId` | **Usando fotos reais da região provisoriamente** — `[ASSET DO PASSEIO A DEFINIR]` |
+| Grafia de locais (Guajiru, Icaraí, Aracati Mirim/Açu, Espraiada, Torrões, Batedeira) | `src/data/tours.ts` | **[VALIDAR GRAFIA]** — forma "Guajiru" adotada (original citava "Guagirú") |
+| URLs de QR/contato dos passeios | `TourDetailPage` (não exibido sem destino real) | **[A DEFINIR]** — nenhum destino inventado |
+| Tradução EN/IT dos roteiros | `src/data/tours.ts` | **[TRADUÇÃO A VALIDAR PELO RESPONSÁVEL]** |
+| Capacidade da Opção 2 / ponto de encontro / operador | — | **Não informados — não inventados** |
+
 ## 2. Depende do HARDWARE REAL
 
 | Item | Onde | Observação |

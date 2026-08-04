@@ -28,7 +28,13 @@ export type IconName =
   | 'touch'
   | 'chevron-down'
   | 'alert'
-  | 'check';
+  | 'check'
+  | 'spa'
+  | 'sun'
+  | 'clock'
+  | 'boat'
+  | 'chat'
+  | 'instagram';
 
 export interface QrTarget {
   id: string;

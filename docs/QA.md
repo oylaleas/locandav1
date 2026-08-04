@@ -105,9 +105,38 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 - [x] Listeners de inatividade passivos e sem re-render
 - [ ] Medição de LCP/INP/CLS no hardware real
 
+## Bem-estar (Espaço Onoda)
+
+- [x] HOME → Bem-estar → Espaço Onoda → serviços → detalhe → fechar (teste automatizado)
+- [x] 8 serviços: Massagem Relaxante (55 min), Desportiva (55 min), Terapêutica (55 min), Ventosas, Acupuntura (50 min), Dry Needling, Quiropraxia, Wellness Day (1h30)
+- [x] Wellness Day lista itens incluídos (escalda-pés + massagem relaxante corporal)
+- [x] Detalhe em modal (não em tela dedicada) — fecha no session reset
+- [x] Contato WhatsApp (+55 88 99630-9247) e Instagram (@espaco_onoda) por QR real (wa.me/instagram.com)
+- [x] Totem nunca abre app externo — handoff via QR
+- [x] Sem alegações médicas ou vínculo comercial inventado (texto neutro)
+- [ ] Foto do Espaço Onoda (asset pendente)
+- [ ] Tradução EN/IT dos serviços validada pelo responsável
+
+## Experiências e passeios
+
+- [x] HOME → Experiências e passeios → listagem → detalhe → voltar (teste automatizado)
+- [x] Passeio Pôr do Sol — 15:30 às 18:30 · R$ 370 · roteiro completo (trilha do mangue, praias do Guajiru, farol, volta pelo rio, pôr do sol na Praia da Espraiada)
+- [x] Moitas de Icaraí — Opção 1: 09:00–16:00 · R$ 800 · **com** passeio de barco (Rio Aracati Açu, Túnel do Amor, Ilha das Ostras, almoço) · buggy até 4 pessoas
+- [x] Moitas de Icaraí — Opção 2: 09:00–14:30 · R$ 650 · **sem** passeio de barco
+- [x] Diferenciação das opções por TEXTO explícito (nunca apenas por cor) + listas Inclui/Não inclui
+- [x] Almofala, Ilha do Guajiru e Região — 09:00–13:30 · R$ 500 · roteiro com Porto dos Barcos, Praia da Tijuca, Almofala, Torrões, Guajiru, Farol, Volta do Rio
+- [x] Valores exatos preservados (R$ 370 / 800 / 650 / 500) — sem "a partir de", taxas ou descontos
+- [x] Sem CTA de compra/reserva (institucional)
+- [x] Dados 100% centralizados em `src/data/tours.ts` (preço, horário, roteiro editáveis sem tocar na UI)
+- [x] Estrutura reutilizável: `TourCard`, `TourOptionCard`, `TourDetailPage` (cobrem foto, roteiro, opções, galeria, vídeo via `VideoPlayer` quando existir)
+- [x] Galeria integrada ao `GalleryViewer` existente; vídeo pronto para `VideoPlayer` quando fornecido
+- [x] QR dos passeios NÃO exibido (sem destino real) — nada inventado
+- [ ] Fotos/vídeo oficiais dos passeios (usando fotos reais da região provisoriamente)
+- [ ] Grafia de locais validada (Guajiru/Icaraí/Aracati/Espraiada/Torrões/Batedeira)
+
 ## Qualidade de código
 
 - [x] TypeScript strict sem `any`
 - [x] ESLint (typescript-eslint + react-hooks) sem erros
-- [x] 24 testes automatizados (fluxos, player, galeria, QR, sessão, offline, utils)
+- [x] 33 testes automatizados (24 anteriores + 9 novos de bem-estar e passeios)
 - [x] Sem `console` visível ao visitante (apenas `import.meta.env.DEV`)

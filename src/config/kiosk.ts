@@ -83,4 +83,8 @@ export const ROUTES = {
   contentIndex: '/conteudos',
   contentDetail: (slug: string) => `/conteudos/${slug}`,
   gallery: '/galeria',
+  wellnessIndex: '/bem-estar',
+  wellnessPartner: (partnerId: string) => `/bem-estar/${partnerId}`,
+  toursIndex: '/experiencias-e-passeios',
+  tourDetail: (slug: string) => `/experiencias-e-passeios/${slug}`,
 } as const;

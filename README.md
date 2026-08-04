@@ -35,7 +35,7 @@ Dependências de runtime — apenas três, todas justificadas:
 | Pacote             | Por quê                                                                     |
 | ------------------ | --------------------------------------------------------------------------- |
 | `react`/`react-dom`| Base da aplicação                                                            |
-| `react-router-dom` | Rotas reais (`/home`, `/conteudos/:slug`, `/galeria`) e handoff para mobile  |
+| `react-router-dom` | Rotas reais (`/home`, `/conteudos/:slug`, `/galeria`, `/bem-estar`, `/experiencias-e-passeios`) e handoff para mobile |
 | `qrcode`           | Codificação QR (Reed-Solomon/máscaras) — carregada sob demanda (import dinâmico) |
 
 Nada de biblioteca de estado global, UI kit, ícones externos ou fontes remotas
@@ -54,12 +54,17 @@ src/
                    cards/ (ContentCard, ActionCard)
                    states/ (Loading, Error, Empty)
   config/kiosk.ts  ⬅ TODOS os tempos, limites e flags do totem
-  data/            content.ts (conteúdo mockado), media.ts (registro de assets), locales/
+  data/            content.ts (conteúdo institucional), media.ts (registro de assets),
+                   wellness.ts (Espaço Onoda), tours.ts (passeios), locales/
+  components/      ui/ · layout/ · cards/ · states/
+                   tours/ (TourCard, TourOptionCard) · wellness/ (ServiceCard)
   features/        attract · gallery · media (player) · qr · session · i18n · a11y · connectivity
-  pages/           Home, Índice de conteúdos, Detalhe, Galeria, 404
-  services/        contentService, qrService, analytics, serviceWorker
+                   wellness/ (ServiceDetailModal)
+  pages/           Home, Conteúdos, Bem-estar, Espaço Onoda, Experiências e passeios,
+                   Detalhe do passeio, Galeria, 404
+  services/        contentService, wellnessService, toursService, qrService, analytics, serviceWorker
   styles/          tokens.css (design system), base.css
-  types/           content, media, i18n, session, analytics
+  types/           content, wellness, tours, media, i18n, session, analytics
 ```
 
 Regras de organização:
@@ -77,6 +82,17 @@ Regras de organização:
 ATTRACT ──toque──▶ HOME ──▶ CONTEÚDOS ──▶ DETALHE ──▶ FOTOS / VÍDEO / QR
    ▲                                                        │
    └──── RESET (inatividade, "encerrar" ou Início) ◀────────┘
+```
+
+Áreas adicionais (mesma árvore de sessão, inatividade e reset):
+
+```
+HOME
+├── BEM-ESTAR ──▶ ESPAÇO ONODA ──▶ SERVIÇOS ──▶ DETALHE (modal) ──▶ CONTATO QR
+└── EXPERIÊNCIAS E PASSEIOS ──▶ LISTAGEM ──▶ DETALHE
+                                    ├── Passeio Pôr do Sol
+                                    ├── Moitas de Icaraí (Opção 1 — com barco / Opção 2 — sem barco)
+                                    └── Almofala, Ilha do Guajiru e Região
 ```
 
 - **Attract Mode**: vídeo (muted/loop/playsInline/poster) com fallback automático para
