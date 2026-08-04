@@ -48,13 +48,13 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 ## PWA
 
 - [x] `manifest.webmanifest` (nome, ícones, display `fullscreen`, orientação, theme color)
-- [x] Ícones 64/180/192/512 + maskable 512
+- [x] Ícones 64/180/192/512 + maskable 512 (regenerados a partir do emblema oficial azul/dourado)
 - [x] Service Worker com políticas separadas (shell / estáticos / imagens / vídeos)
 - [x] Fallback offline (`offline.html`)
 - [x] Atualização aplicada apenas no Attract Mode
 - [x] Registro somente em produção
+- [x] Ícones definitivos com o logotipo oficial (emblema em `src/assets/brand/logo-1.png`)
 - [~] Instalação/startup no dispositivo real
-- [ ] Ícones definitivos com o logotipo oficial
 
 ## Sessão
 

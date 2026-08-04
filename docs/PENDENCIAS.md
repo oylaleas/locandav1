@@ -9,7 +9,7 @@ todos os pontos têm placeholder claramente identificado ou abstração pronta p
 
 | Item | Onde trocar | Situação |
 | --- | --- | --- |
-| Logotipo oficial (SVG/PNG, versões clara e escura) | `src/data/media.ts` → `BRAND_ASSETS.logoSrc` | **Não recebido.** Wordmark tipográfico provisório em uso |
+| Logotipo oficial (PNG, 4 variações) | `src/assets/brand/` + `BRAND_ASSETS` | **✅ Recebido e integrado** — lockup dourado/branco no `<Brandmark/>` (placa escura em fundos claros, direto no Attract), emblema nos ícones PWA. Vetor SVG original continua bem-vindo para nitidez máxima em telas grandes |
 | Fotografias reais | `src/assets/images/` + `IMAGE_ASSETS` | 8 imagens abstratas placeholder (com selo na UI) |
 | Vídeo institucional e de experiências | `src/assets/videos/` + `VIDEO_ASSETS` | 3 clipes técnicos gerados apenas para validar o player |
 | Legendas (.vtt) revisadas nos 3 idiomas | `public/captions/` | Placeholders `[LEGENDA A DEFINIR]` |

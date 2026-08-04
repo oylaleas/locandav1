@@ -91,19 +91,20 @@ ATTRACT ──toque──▶ HOME ──▶ CONTEÚDOS ──▶ DETALHE ──�
 
 ## Substituir os assets placeholder pelo material real
 
-Toda a mídia atual é **placeholder** (marcada com selo na interface e com
-`isPlaceholder: true` nos dados).
+A **logotipia oficial já foi integrada** (4 variações em `src/assets/brand/`:
+lockup dourado/branco, lockup monocromático branco, emblema azul/dourado e um
+export menor do lockup). O `<Brandmark/>` exibe o lockup sobre a placa escura
+em superfícies claras e direto no Attract Mode; os ícones PWA/favicon foram
+regenerados a partir do emblema. As fotos, vídeos, legendas e textos seguem
+**placeholder** — para trocá-los:
 
-1. **Logotipo** → coloque o arquivo em `src/assets/brand/` e aponte
-   `BRAND_ASSETS.logoSrc` em `src/data/media.ts`. O `<Brandmark/>` passa a usar a imagem
-   automaticamente (hoje ele usa um wordmark tipográfico provisório).
-2. **Fotografias** → substitua os arquivos em `src/assets/images/` (+ `thumbs/`) e atualize
+1. **Fotografias** → substitua os arquivos em `src/assets/images/` (+ `thumbs/`) e atualize
    `IMAGE_ASSETS` (`width`, `height`, `dominantColor`, `alt`, `isPlaceholder: false`).
-3. **Vídeos** → substitua em `src/assets/videos/`, atualize `VIDEO_ASSETS` e as legendas em
+2. **Vídeos** → substitua em `src/assets/videos/`, atualize `VIDEO_ASSETS` e as legendas em
    `public/captions/`.
-4. **Textos** → `src/data/content.ts` (todos os campos com `[CONTEÚDO A DEFINIR]`).
-5. **URLs de QR** → `QR_TARGETS` em `src/data/content.ts` (`isPlaceholder: false`).
-6. Depois de trocar tudo, desligue os selos em `FEATURE_FLAGS.showPlaceholderBadges` e
+3. **Textos** → `src/data/content.ts` (todos os campos com `[CONTEÚDO A DEFINIR]`).
+4. **URLs de QR** → `QR_TARGETS` em `src/data/content.ts` (`isPlaceholder: false`).
+5. Depois de trocar tudo, desligue os selos em `FEATURE_FLAGS.showPlaceholderBadges` e
    `showPendingContentBadges` (`src/config/kiosk.ts`).
 
 `scripts/generate-placeholder-media.sh` só existe para (re)gerar a mídia provisória e pode ser

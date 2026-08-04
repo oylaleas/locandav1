@@ -1,3 +1,50 @@
+/* ------------------------------ Marca com imagem (logotipo real) ------------------------------ */
+
+.brand {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2xs);
+  line-height: 0;
+}
+
+/*
+ * Placa escura: o lockup oficial tem wordmark BRANCO (e rosa dos ventos
+ * dourada) e só fica legível sobre fundo escuro. Em superfícies claras
+ * (Home, cabeçalho) a marca é exibida nesta placa.
+ */
+.plate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--space-2xs) * 1.5) calc(var(--space-sm) * 1.15);
+  background-color: var(--color-surface-inverse);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 18px rgba(20, 27, 24, 0.22);
+}
+
+.logo {
+  display: block;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.sm .logo {
+  height: 2.25rem;
+}
+
+.md .logo {
+  height: 3.5rem;
+}
+
+.lg .logo {
+  height: clamp(4rem, 12vh, 7rem);
+}
+
+/* ------------------------------------- Wordmark tipográfico ------------------------------------- */
+
 .wordmark {
   display: inline-flex;
   flex-direction: column;
@@ -18,14 +65,31 @@
   padding-left: 0.08em;
 }
 
+/* Descritor sob a marca (imagem ou wordmark). */
 .descriptor {
-  margin-top: 0.55em;
+  margin-top: 0.3em;
   font-family: var(--font-body);
-  font-size: 0.28em;
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-widest);
   text-transform: uppercase;
   color: var(--color-text-secondary);
+}
+
+.sm .descriptor {
+  font-size: var(--font-size-3xs);
+}
+
+.md .descriptor {
+  font-size: var(--font-size-2xs);
+}
+
+.lg .descriptor {
+  font-size: var(--font-size-xs);
+}
+
+/* Sobre superfície escura (Attract Mode): descritor em tom claro. */
+.descriptorOnDark {
+  color: var(--color-text-inverse-secondary);
 }
 
 .dark {
@@ -46,11 +110,4 @@
 
 .lg {
   font-size: clamp(2.5rem, 7vw, 5rem);
-}
-
-.logo {
-  height: auto;
-  width: auto;
-  max-height: 100%;
-  object-fit: contain;
 }

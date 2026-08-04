@@ -226,15 +226,45 @@ export const VIDEO_ASSETS = {
 
 export type VideoAssetId = keyof typeof VIDEO_ASSETS;
 
-/** Assets de marca. [A VALIDAR] Logotipo oficial ainda não fornecido. */
+/* ==========================================================================
+   ASSETS DE MARCA — logotipos oficiais da Locanda dei Venti
+   --------------------------------------------------------------------------
+   Recebidos em e95d8f2 ("Add files via upload"): quatro variações em PNG.
+
+   Composição das variações:
+   - logo-colorido.png (180×146)  lockup horizontal: rosa dos ventos dourada
+                                 #f1b100 + wordmark BRANCO sobre transparente.
+                                 O texto branco exige fundo escuro: o
+                                 <Brandmark/> o exibe sobre uma placa escura
+                                 em superfícies claras, ou direto no Attract.
+   - logo.png (125×101)           exportação menor do mesmo lockup (não usada;
+                                 mantida no repositório como cortesia).
+   - logo-branco.png (195×159)    lockup monocromático branco — reservada para
+                                 superfícies escuras que pedem menos cor.
+   - logo-1.png (170×169)         emblema circular (azul #065895 + dourado) —
+                                 usada nos ícones PWA / favicon / apple-touch.
+   ========================================================================== */
+
+import logoLockup from '@/assets/brand/logo-colorido.png';
+import logoLockupWhite from '@/assets/brand/logo-branco.png';
+import logoEmblem from '@/assets/brand/logo-1.png';
+
 export const BRAND_ASSETS = {
-  /**
-   * Quando o logotipo real for entregue:
-   *   import logo from '@/assets/brand/locanda-dei-venti.svg';
-   *   logoSrc: logo
-   * O componente <Brandmark/> passa a usar a imagem automaticamente e o
-   * fallback tipográfico deixa de ser exibido.
-   */
-  logoSrc: null as string | null,
+  /** Lockup horizontal principal (rosa dos ventos + wordmark). */
+  logoSrc: logoLockup,
   logoAlt: 'Locanda dei Venti',
-};
+  logoWidth: 180,
+  logoHeight: 146,
+
+  /** Variação monocromática branca — superfícies escuras com menos cor. */
+  logoSrcWhite: logoLockupWhite,
+  logoAltWhite: 'Locanda dei Venti',
+  logoWidthWhite: 195,
+  logoHeightWhite: 159,
+
+  /** Emblema circular (azul + dourado) — ícones do aplicativo/PWA. */
+  emblemSrc: logoEmblem,
+  emblemAlt: 'Emblema da Locanda dei Venti',
+  emblemWidth: 170,
+  emblemHeight: 169,
+} as const;

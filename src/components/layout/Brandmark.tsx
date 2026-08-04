@@ -5,6 +5,12 @@ import { cn } from '@/utils/cn';
 import styles from './Brandmark.module.css';
 
 interface BrandmarkProps {
+  /**
+   * Superfície onde a marca é exibida:
+   * - `light` — fundo claro (Home, cabeçalho): o lockup tem wordmark BRANCO,
+   *   então é exibido dentro de uma placa escura para manter a legibilidade.
+   * - `dark` — fundo escuro (Attract Mode): o lockup é exibido diretamente.
+   */
   tone?: 'light' | 'dark';
   size?: 'sm' | 'md' | 'lg';
   /** Mostra o descritor sob o nome (Attract Mode / Home). */
@@ -15,10 +21,10 @@ interface BrandmarkProps {
 /**
  * Marca da Locanda dei Venti.
  *
- * [A VALIDAR] O logotipo oficial ainda não foi disponibilizado no repositório.
- * Assim que o arquivo existir, basta apontar BRAND_ASSETS.logoSrc em
- * src/data/media.ts — este componente passa a exibir a imagem e o fallback
- * tipográfico deixa de ser usado, sem alterações em nenhuma tela.
+ * Logotipo oficial integrado (src/assets/brand/). O lockup tem texto branco
+ * e por isso é sempre exibido sobre fundo escuro: direto no Attract Mode ou
+ * dentro da placa escura em superfícies claras. O fallback tipográfico abaixo
+ * só existe caso BRAND_ASSETS.logoSrc seja removido no futuro.
  */
 export function Brandmark({
   tone = 'light',
@@ -29,12 +35,35 @@ export function Brandmark({
   const { tx } = useI18n();
 
   if (BRAND_ASSETS.logoSrc) {
+    const onDarkSurface = tone === 'dark';
     return (
-      <img
-        src={BRAND_ASSETS.logoSrc}
-        alt={BRAND_ASSETS.logoAlt}
-        className={cn(styles.logo, styles[size], className)}
-      />
+      <span
+        className={cn(
+          styles.brand,
+          styles[size],
+          !onDarkSurface && styles.plate,
+          className,
+        )}
+      >
+        <img
+          src={BRAND_ASSETS.logoSrc}
+          alt={BRAND_ASSETS.logoAlt}
+          width={BRAND_ASSETS.logoWidth}
+          height={BRAND_ASSETS.logoHeight}
+          className={styles.logo}
+        />
+        {withDescriptor && (
+          <span
+            className={cn(
+              styles.descriptor,
+              styles[size],
+              onDarkSurface && styles.descriptorOnDark,
+            )}
+          >
+            {tx(SITE_IDENTITY.descriptor)}
+          </span>
+        )}
+      </span>
     );
   }
 
