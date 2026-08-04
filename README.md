@@ -95,20 +95,22 @@ A **logotipia oficial já foi integrada** (4 variações em `src/assets/brand/`:
 lockup dourado/branco, lockup monocromático branco, emblema azul/dourado e um
 export menor do lockup). O `<Brandmark/>` exibe o lockup sobre a placa escura
 em superfícies claras e direto no Attract Mode; os ícones PWA/favicon foram
-regenerados a partir do emblema. As fotos, vídeos, legendas e textos seguem
-**placeholder** — para trocá-los:
+regenerados a partir do emblema.
 
-1. **Fotografias** → substitua os arquivos em `src/assets/images/` (+ `thumbs/`) e atualize
-   `IMAGE_ASSETS` (`width`, `height`, `dominantColor`, `alt`, `isPlaceholder: false`).
-2. **Vídeos** → substitua em `src/assets/videos/`, atualize `VIDEO_ASSETS` e as legendas em
+As **fotografias reais** (recebidas em `3f3fc2c`) também foram integradas:
+8 fotos (aéreas de drone, praia e foto institucional) redimensionadas para o
+kiosk em `src/assets/images/` (+ `thumbs/`), registradas em `IMAGE_ASSETS`
+com `isPlaceholder: false`. O mapeamento foto→seção é uma proposta
+`[MAPPING A CONFIRMAR]` — veja `src/data/media.ts`.
+
+Ainda **placeholder** — para trocar:
+
+1. **Vídeos** → substitua em `src/assets/videos/`, atualize `VIDEO_ASSETS` e as legendas em
    `public/captions/`.
-3. **Textos** → `src/data/content.ts` (todos os campos com `[CONTEÚDO A DEFINIR]`).
-4. **URLs de QR** → `QR_TARGETS` em `src/data/content.ts` (`isPlaceholder: false`).
-5. Depois de trocar tudo, desligue os selos em `FEATURE_FLAGS.showPlaceholderBadges` e
+2. **Textos** → `src/data/content.ts` (todos os campos com `[CONTEÚDO A DEFINIR]`).
+3. **URLs de QR** → `QR_TARGETS` em `src/data/content.ts` (`isPlaceholder: false`).
+4. Depois de trocar tudo, desligue os selos em `FEATURE_FLAGS.showPlaceholderBadges` e
    `showPendingContentBadges` (`src/config/kiosk.ts`).
-
-`scripts/generate-placeholder-media.sh` só existe para (re)gerar a mídia provisória e pode ser
-removido quando o material real chegar.
 
 ---
 

@@ -372,7 +372,7 @@ export const CONTENT_SECTIONS: ContentSection[] = [
       },
     ],
     facts: [],
-    galleryImageIds: ['img-04', 'img-03', 'img-02'],
+    galleryImageIds: ['img-04', 'img-03', 'img-02', 'img-07'],
     videoIds: [],
     relatedSlugs: ['experiencias', 'como-chegar'],
   },
@@ -437,10 +437,10 @@ export const GALLERIES: GalleryDefinition[] = [
     id: 'gallery-principal',
     title: { 'pt-BR': 'Galeria', en: 'Gallery', it: 'Galleria' },
     description: {
-      'pt-BR': 'Imagens da Locanda dei Venti. [FOTOGRAFIAS REAIS A DEFINIR]',
-      en: 'Images of Locanda dei Venti. [REAL PHOTOGRAPHS TO BE DEFINED]',
-      it: 'Immagini della Locanda dei Venti. [FOTOGRAFIE REALI DA DEFINIRE]',
+      'pt-BR': 'Imagens da Locanda dei Venti — fotos reais recebidas.',
+      en: 'Images of Locanda dei Venti — real photographs received.',
+      it: 'Immagini della Locanda dei Venti — fotografie reali ricevute.',
     },
-    imageIds: ['img-01', 'img-05', 'img-02', 'img-06', 'img-03', 'img-04', 'img-attract'],
+    imageIds: ['img-01', 'img-05', 'img-02', 'img-06', 'img-03', 'img-04', 'img-07', 'img-attract'],
   },
 ];
