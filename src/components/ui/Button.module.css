@@ -1,0 +1,162 @@
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  min-height: var(--size-touch-min);
+  padding: 0 var(--space-lg);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    transform var(--motion-fast) var(--easing-standard),
+    background-color var(--motion-fast) var(--easing-standard),
+    box-shadow var(--motion-fast) var(--easing-standard),
+    color var(--motion-fast) var(--easing-standard);
+  /* A área de toque é sempre >= 72px mesmo quando o botão é visualmente menor. */
+  touch-action: manipulation;
+}
+
+.button::after {
+  /* Expansão invisível da área interativa (tamanho visual != alvo de toque). */
+  content: '';
+  position: absolute;
+  inset: calc(var(--touch-expand, 0px) * -1);
+  border-radius: inherit;
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.975);
+}
+
+.button:disabled,
+.button[aria-disabled='true'] {
+  cursor: not-allowed;
+  background-color: var(--color-action-disabled-surface);
+  color: var(--color-action-disabled-text);
+  box-shadow: none;
+  transform: none;
+}
+
+/* ------------------------------------------------------------------ SIZES */
+.sm {
+  min-height: 3.25rem;
+  --touch-expand: 0.65rem;
+  padding: 0 var(--space-md);
+  font-size: var(--font-size-sm);
+}
+
+.md {
+  min-height: var(--size-touch-min);
+}
+
+.lg {
+  min-height: var(--size-touch-comfort);
+  padding: 0 var(--space-xl);
+  font-size: var(--font-size-lg);
+}
+
+.iconOnly {
+  padding: 0;
+  width: var(--size-touch-min);
+  aspect-ratio: 1;
+}
+
+.iconOnly.sm {
+  width: 3.25rem;
+}
+
+.iconOnly.lg {
+  width: var(--size-touch-comfort);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------- VARIANTS */
+.primary {
+  background-color: var(--color-action-primary);
+  color: var(--color-text-on-action);
+  box-shadow: var(--elevation-1);
+}
+
+.primary:active:not(:disabled) {
+  background-color: var(--color-action-primary-pressed);
+  box-shadow: var(--elevation-inset-pressed);
+}
+
+.secondary {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  box-shadow: inset 0 0 0 2px var(--color-border-strong);
+}
+
+.secondary:active:not(:disabled) {
+  background-color: var(--color-surface-strong);
+}
+
+.quiet {
+  background-color: var(--color-action-quiet-surface);
+  color: var(--color-text-primary);
+}
+
+.quiet:active:not(:disabled) {
+  background-color: var(--color-action-quiet-surface-pressed);
+}
+
+.inverse {
+  background-color: rgba(247, 242, 233, 0.14);
+  color: var(--color-text-inverse);
+  box-shadow: inset 0 0 0 2px var(--color-border-inverse);
+  backdrop-filter: blur(6px);
+}
+
+.inverse:active:not(:disabled) {
+  background-color: rgba(247, 242, 233, 0.26);
+}
+
+.solidInverse {
+  background-color: var(--color-text-inverse);
+  color: var(--color-surface-inverse);
+}
+
+.solidInverse:active:not(:disabled) {
+  background-color: var(--color-surface-strong);
+}
+
+/* ---------------------------------------------------------------- STATES */
+.selected {
+  box-shadow:
+    inset 0 0 0 3px var(--color-action-primary),
+    var(--elevation-1);
+}
+
+.loading {
+  pointer-events: none;
+  color: transparent;
+}
+
+.spinner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--color-text-on-action);
+}
+
+.label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wrapLabel .label {
+  white-space: normal;
+}

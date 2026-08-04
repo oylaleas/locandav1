@@ -1,0 +1,46 @@
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background-color: var(--color-surface-strong);
+  isolation: isolate;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity var(--motion-base) var(--easing-standard);
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.contain {
+  object-fit: contain;
+}
+
+.ready {
+  opacity: 1;
+}
+
+.fallback,
+.errorLayer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  background-color: var(--color-surface-strong);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-2xs);
+  text-align: center;
+  padding: var(--space-sm);
+}
+
+.fallback {
+  position: relative;
+}

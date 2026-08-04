@@ -1,0 +1,292 @@
+.player {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--palette-ink-900);
+  color: var(--color-text-inverse);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--elevation-2);
+}
+
+/* "Tela cheia" por CSS: o elemento <video> NÃO é remontado, então a
+   reprodução continua exatamente de onde estava. Também evita depender da
+   Fullscreen API, que costuma ser restrita em navegadores de kiosk. */
+.expanded {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  border-radius: 0;
+  justify-content: center;
+  background-color: #000000;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000000;
+  isolation: isolate;
+}
+
+.expanded .stage {
+  flex: 1;
+  aspect-ratio: auto;
+  min-height: 0;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #000000;
+}
+
+/* Legendas legíveis sobre qualquer imagem (clara ou escura). */
+.video::cue {
+  background-color: rgba(10, 12, 11, 0.82);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+.posterLayer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.posterImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.posterScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 14, 12, 0.35), rgba(10, 14, 12, 0.78));
+}
+
+.posterContent {
+  position: relative;
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.bigPlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2xs);
+  color: var(--color-text-inverse);
+  padding: var(--space-md);
+  border-radius: var(--radius-card);
+  transition: transform var(--motion-fast) var(--easing-standard);
+}
+
+.bigPlay:active {
+  transform: scale(0.97);
+}
+
+.bigPlayIcon {
+  display: grid;
+  place-items: center;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  background-color: rgba(247, 242, 233, 0.92);
+  color: var(--palette-ink-900);
+  box-shadow: var(--elevation-2);
+}
+
+.bigPlayLabel {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+}
+
+.bigPlayMeta {
+  font-size: var(--font-size-2xs);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-text-inverse-secondary);
+}
+
+.busyLayer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  background-color: rgba(10, 14, 12, 0.55);
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-sm);
+}
+
+.endedLayer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  text-align: center;
+  background-color: rgba(10, 14, 12, 0.88);
+}
+
+.endedTitle {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-inverse);
+}
+
+.endedMessage {
+  color: var(--color-text-inverse-secondary);
+  font-size: var(--font-size-md);
+}
+
+.endedActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-top: var(--space-2xs);
+}
+
+.errorBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2xs);
+  color: var(--color-text-inverse);
+}
+
+.errorTitle {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-inverse);
+}
+
+.errorMessage {
+  max-width: 40ch;
+  color: var(--color-text-inverse-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.errorActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-top: var(--space-sm);
+}
+
+.placeholderBadge {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.transport {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.progressGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex: 1;
+  min-width: 14rem;
+}
+
+.time {
+  font-size: var(--font-size-2xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-inverse-secondary);
+  min-width: 3.2em;
+  text-align: center;
+}
+
+.progressTrack {
+  position: relative;
+  flex: 1;
+  height: 0.75rem;
+  border-radius: var(--radius-pill);
+  background-color: rgba(247, 242, 233, 0.24);
+  overflow: visible;
+}
+
+.progressFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-text-inverse);
+  pointer-events: none;
+}
+
+/* O input cobre toda a faixa com altura de alvo de toque confortável. */
+.progressInput {
+  position: absolute;
+  inset: -1.5rem 0;
+  width: 100%;
+  height: 4rem;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+.progressInput:focus-visible {
+  opacity: 1;
+  outline: var(--border-focus-width) solid var(--color-focus-ring-inverse);
+  outline-offset: 2px;
+}
+
+.secondary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-inverse-secondary);
+}
+
+.offlineNote {
+  color: #f0c98a;
+}
+
+@media (max-width: 40rem) {
+  .transport {
+    gap: var(--space-sm);
+  }
+
+  .progressGroup {
+    order: 3;
+    width: 100%;
+    min-width: 0;
+  }
+}

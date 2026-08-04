@@ -1,0 +1,68 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+  min-height: var(--size-touch-large);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-card);
+  text-align: left;
+  box-shadow: var(--elevation-1);
+  transition:
+    transform var(--motion-fast) var(--easing-standard),
+    background-color var(--motion-fast) var(--easing-standard);
+}
+
+.card:active {
+  transform: scale(0.985);
+}
+
+.surface {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+.surface:active {
+  background-color: var(--color-background-alt);
+}
+
+.accent {
+  background-color: var(--color-surface-inverse);
+  color: var(--color-text-inverse);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 50%;
+  background-color: var(--color-action-quiet-surface);
+}
+
+.accent .icon {
+  background-color: rgba(247, 242, 233, 0.16);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+}
+
+.description {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.accent .description {
+  color: var(--color-text-inverse-secondary);
+}
