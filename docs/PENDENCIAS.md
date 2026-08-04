@@ -13,13 +13,13 @@ todos os pontos têm placeholder claramente identificado ou abstração pronta p
 | Fotografias reais | `src/assets/images/` + `IMAGE_ASSETS` | **✅ 8 fotos recebidas (3f3fc2c) e integradas** — aéreas de drone, praia e foto institucional. Mapeamento foto→seção proposto e marcado `[MAPPING A CONFIRMAR]`; faltam fotos específicas de gastronomia e acomodações |
 | Vídeo institucional e de experiências | `src/assets/videos/` + `VIDEO_ASSETS` | 3 clipes técnicos gerados apenas para validar o player |
 | Legendas (.vtt) revisadas nos 3 idiomas | `public/captions/` | Placeholders `[LEGENDA A DEFINIR]` |
-| Textos institucionais (todas as seções) | `src/data/content.ts` | `[CONTEÚDO A DEFINIR]` — **nada foi inventado** |
-| Endereço, telefone, e-mail, site | `SITE_IDENTITY.contact` | `[CONTEÚDO A DEFINIR]` |
-| Acomodações, gastronomia, comodidades, horários, preços | `CONTENT_SECTIONS` | `[CONTEÚDO A DEFINIR]` |
+| Textos institucionais (todas as seções) | `src/data/content.ts` | **✅ Compilados do site oficial** (locandadeiventi.com.br) — Sobre, estrutura, acomodações (2 suítes Frente Mar), gastronomia (Chef Léo Parente, Nau Rooftop), experiências (esportes aquáticos, Soulkite), arredores e como chegar |
+| Endereço, telefone, e-mail, site | `SITE_IDENTITY.contact` | **✅ Reais** — Av. Costeira S/N, Ilha do Guajiru/CE; +55 88 99219-1175; locanda@locandadeiventi.com.br; locandadeiventi.com.br (`hasRealData: true`) |
+| Acomodações — suítes Frente Jardim (detalhes) | `CONTENT_SECTIONS` | **Não publicados no site** — marcado `[A CONFIRMAR COM A GESTÃO]`; suítes Frente Mar (Superior/Inferior) completas |
 | Arquitetura de informação (6 seções propostas) | `CONTENT_SECTIONS` | **[A VALIDAR]** — estrutura é proposta, não especificação recebida |
-| Descritor da marca (linha sob o nome) | `SITE_IDENTITY.descriptor` | `[DESCRITOR A DEFINIR]` |
-| URLs de destino dos QR Codes | `QR_TARGETS` | `https://exemplo.invalid/...#URL-A-DEFINIR` (marcado na UI) |
-| Tradução revisada EN/IT dos textos de conteúdo | `src/data/content.ts` | Placeholders traduzidos; UI já 100% traduzida |
+| Descritor da marca (linha sob o nome) | `SITE_IDENTITY.descriptor` | **✅ "Hotel na Ilha do Guajiru"** (factual) |
+| URLs de destino dos QR Codes | `QR_TARGETS` | **✅ Reais** — site, WhatsApp (wa.me/55889921175), Instagram (@locandadeiventi) e reservas CloudBeds |
+| Tradução revisada EN/IT dos textos de conteúdo | `src/data/content.ts` | Traduções feitas a partir do conteúdo oficial **[A VALIDAR PELO RESPONSÁVEL]** |
 | Tipografia institucional | `src/styles/tokens.css` → `--font-display` / `--font-body` | Stacks do sistema **[A VALIDAR]** |
 | Paleta oficial | `src/styles/tokens.css` | Paleta neutra reversível **[A VALIDAR]** |
 

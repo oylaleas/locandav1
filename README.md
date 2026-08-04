@@ -107,26 +107,29 @@ HOME
 
 ## Substituir os assets placeholder pelo material real
 
-A **logotipia oficial já foi integrada** (4 variações em `src/assets/brand/`:
-lockup dourado/branco, lockup monocromático branco, emblema azul/dourado e um
-export menor do lockup). O `<Brandmark/>` exibe o lockup sobre a placa escura
-em superfícies claras e direto no Attract Mode; os ícones PWA/favicon foram
-regenerados a partir do emblema.
+A **logotipia oficial** e as **fotografias reais** já foram integradas
+(4 variações em `src/assets/brand/` + 8 fotos em `src/assets/images/`).
+Os **textos institucionais**, **contatos**, **QR Codes** e **acomodações**
+foram preenchidos com o conteúdo compilado do site oficial
+(locandadeiventi.com.br) em `src/data/content.ts`:
 
-As **fotografias reais** (recebidas em `3f3fc2c`) também foram integradas:
-8 fotos (aéreas de drone, praia e foto institucional) redimensionadas para o
-kiosk em `src/assets/images/` (+ `thumbs/`), registradas em `IMAGE_ASSETS`
-com `isPlaceholder: false`. O mapeamento foto→seção é uma proposta
-`[MAPPING A CONFIRMAR]` — veja `src/data/media.ts`.
+- Identidade e contato reais (endereço, WhatsApp +55 88 99219-1175, e-mail,
+  site) com `hasRealData: true`
+- QR Codes reais: site, WhatsApp (`wa.me/55889921175`), Instagram
+  (`@locandadeiventi`) e reservas CloudBeds (`hotels.cloudbeds.com/...`)
+- 6 seções institucionais com texto verdadeiro (Sobre, Acomodações com as
+  2 suítes Frente Mar detalhadas, Gastronomia com Chef Léo Parente e Nau
+  Rooftop Lounge, Experiências com esportes aquáticos e Soulkite, Arredores
+  e Como chegar)
 
 Ainda **placeholder** — para trocar:
 
 1. **Vídeos** → substitua em `src/assets/videos/`, atualize `VIDEO_ASSETS` e as legendas em
    `public/captions/`.
-2. **Textos** → `src/data/content.ts` (todos os campos com `[CONTEÚDO A DEFINIR]`).
-3. **URLs de QR** → `QR_TARGETS` em `src/data/content.ts` (`isPlaceholder: false`).
-4. Depois de trocar tudo, desligue os selos em `FEATURE_FLAGS.showPlaceholderBadges` e
-   `showPendingContentBadges` (`src/config/kiosk.ts`).
+2. **Suítes Frente Jardim** → detalhes não publicados no site; aguardando a gestão
+   (`[A CONFIRMAR]` em `src/data/content.ts`).
+3. **Fotos oficiais de gastronomia/acomodações e dos passeios** → substituir as
+   provisórias em `src/assets/images/` e `IMAGE_ASSETS`.
 
 ---
 

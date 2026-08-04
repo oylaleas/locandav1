@@ -20,8 +20,8 @@ describe('QRCodePanel', () => {
     const code = await screen.findByRole('img', { name: /Site oficial/i });
     await waitFor(() => expect(code.querySelector('svg')).toBeTruthy());
 
-    // Sinaliza claramente que a URL ainda é placeholder de desenvolvimento.
-    expect(screen.getByText(/URL real a definir/i)).toBeVisible();
+    // A URL agora é REAL (site oficial) — nenhum aviso de placeholder.
+    expect(screen.queryByText(/URL real a definir/i)).not.toBeInTheDocument();
 
     await user.click(screen.getAllByRole('button', { name: 'Fechar' })[0]);
     expect(onClose).toHaveBeenCalled();

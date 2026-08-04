@@ -15,6 +15,8 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 - [x] Aviso → "Continuar navegando" mantém a sessão
 - [x] Rota inexistente → tela 404 com saída para a Home
 - [x] Nenhuma tela sem saída (todas têm Voltar + Início na barra inferior)
+- [x] Conteúdo institucional REAL (compilado do site oficial) — identidade, contato, acomodações, gastronomia, experiências, arredores, como chegar
+- [x] QR Codes reais no handoff (site, WhatsApp, Instagram, reservas CloudBeds) — sem aviso de placeholder
 
 ## Vídeo
 
@@ -42,8 +44,8 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 - [x] Destino configurável por item (`QR_TARGETS`)
 - [x] Painel fecha por botão, toque fora e Esc
 - [x] Timeout não cria dead end (reset fecha o painel)
-- [x] URL placeholder claramente sinalizada na UI
-- [ ] URL real de produção (pendente)
+- [x] **URLs reais de produção** — site (locandadeiventi.com.br), WhatsApp (+55 88 99219-1175), Instagram (@locandadeiventi) e reservas CloudBeds
+- [x] Sem aviso de placeholder quando `isPlaceholder: false` (teste atualizado)
 
 ## PWA
 

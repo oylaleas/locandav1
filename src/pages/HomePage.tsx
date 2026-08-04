@@ -24,7 +24,9 @@ export default function HomePage() {
   const sections = getSections();
   const gallery = getMainGallery();
   const qrTarget = getQrTarget('qr-site');
+  const reservationsTarget = getQrTarget('qr-reservas');
   const [qrOpen, setQrOpen] = useState(false);
+  const [reservationsOpen, setReservationsOpen] = useState(false);
 
   const [featured, ...rest] = sections;
 
@@ -125,10 +127,18 @@ export default function HomePage() {
           {qrTarget && (
             <ActionCard
               icon="qr"
-              tone="accent"
               title={tx(qrTarget.title)}
               description={tx(qrTarget.instruction)}
               onSelect={() => setQrOpen(true)}
+            />
+          )}
+          {reservationsTarget && (
+            <ActionCard
+              icon="bed"
+              tone="accent"
+              title={tx(reservationsTarget.title)}
+              description={tx(reservationsTarget.instruction)}
+              onSelect={() => setReservationsOpen(true)}
             />
           )}
         </section>
@@ -136,6 +146,13 @@ export default function HomePage() {
 
       {qrTarget && (
         <QRCodePanel target={qrTarget} open={qrOpen} onClose={() => setQrOpen(false)} />
+      )}
+      {reservationsTarget && (
+        <QRCodePanel
+          target={reservationsTarget}
+          open={reservationsOpen}
+          onClose={() => setReservationsOpen(false)}
+        />
       )}
     </KioskLayout>
   );
