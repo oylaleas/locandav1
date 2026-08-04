@@ -41,21 +41,65 @@ export default function HomePage() {
           </div>
         </header>
 
-        {/* Acessos às novas experiências do totem — dois cards, sem
-            sobrecarregar a Home (o conteúdo vive nas próprias seções). */}
-        <section className={styles.areas} aria-label={`${t.home.wellnessCta} · ${t.home.toursCta}`}>
-          <ActionCard
-            icon="spa"
-            title={t.home.wellnessCta}
-            description={t.home.wellnessCtaDesc}
-            onSelect={() => navigation.push(ROUTES.wellnessIndex)}
-          />
-          <ActionCard
-            icon="compass"
-            title={t.home.toursCta}
-            description={t.home.toursCtaDesc}
-            onSelect={() => navigation.push(ROUTES.toursIndex)}
-          />
+        {/* LOCANDA EXPERIENCE — hub com as seis áreas principais do totem.
+            A Home funciona como ponto de partida: TOQUE → CATEGORIA → CONTEÚDO. */}
+        <section className={styles.hub} aria-labelledby="locanda-experience-titulo">
+          <div className={styles.hubHeader}>
+            <h2 id="locanda-experience-titulo" className={styles.hubTitle}>
+              {t.home.experienceHubTitle}
+            </h2>
+            <p className={styles.hubIntro}>{t.home.experienceHubIntro}</p>
+          </div>
+          <ul className={styles.hubGrid}>
+            <li>
+              <ActionCard
+                icon="wifi"
+                title={t.home.amenitiesCta}
+                description={t.home.amenitiesCtaDesc}
+                onSelect={() => navigation.push(ROUTES.contentDetail('comodidades'))}
+              />
+            </li>
+            <li>
+              <ActionCard
+                icon="cocktail"
+                title={t.home.happyHourCta}
+                description={t.home.happyHourCtaDesc}
+                onSelect={() => navigation.push(ROUTES.contentDetail('happy-hour'))}
+              />
+            </li>
+            <li>
+              <ActionCard
+                icon="bell"
+                title={t.home.onDemandCta}
+                description={t.home.onDemandCtaDesc}
+                onSelect={() => navigation.push(ROUTES.contentDetail('servicos-on-demand'))}
+              />
+            </li>
+            <li>
+              <ActionCard
+                icon="spa"
+                title={t.home.wellnessCta}
+                description={t.home.wellnessCtaDesc}
+                onSelect={() => navigation.push(ROUTES.wellnessIndex)}
+              />
+            </li>
+            <li>
+              <ActionCard
+                icon="compass"
+                title={t.home.toursCta}
+                description={t.home.toursCtaDesc}
+                onSelect={() => navigation.push(ROUTES.toursIndex)}
+              />
+            </li>
+            <li>
+              <ActionCard
+                icon="kite"
+                title={t.home.kiteCta}
+                description={t.home.kiteCtaDesc}
+                onSelect={() => navigation.push(ROUTES.contentDetail('kite-center'))}
+              />
+            </li>
+          </ul>
         </section>
 
         {featured && (

@@ -211,6 +211,37 @@ const PATHS: Record<IconName, ReactElement> = {
       <path d="M17 7.2h.01" />
     </>
   ),
+  wifi: (
+    <>
+      <path d="M4 9.8a11.5 11.5 0 0 1 16 0" />
+      <path d="M7 13a7.5 7.5 0 0 1 10 0" />
+      <path d="M10 16.2a3.5 3.5 0 0 1 4 0" />
+      <path d="M12 19.4h.01" />
+    </>
+  ),
+  cocktail: (
+    <>
+      <path d="M4 4.5h16" />
+      <path d="m12 13.5 6.5-7h-13l6.5 7Z" />
+      <path d="M12 13.5V20" />
+      <path d="M8.5 20h7" />
+      <path d="M9.5 10.5h5" />
+    </>
+  ),
+  bell: (
+    <>
+      <path d="M6 16.5v-5.2a6 6 0 0 1 12 0v5.2l1.6 2H4.4l1.6-2Z" />
+      <path d="M10 20.2a2 2 0 0 0 4 0" />
+    </>
+  ),
+  kite: (
+    <>
+      <path d="m12 3.5 7.5 9L12 20.5l-7.5-8 7.5-9Z" />
+      <path d="M4.5 12.5h15" />
+      <path d="M12 3.5v9" />
+      <path d="M12 12.5 9.5 19" />
+    </>
+  ),
 };
 
 interface IconProps {

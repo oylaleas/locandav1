@@ -34,7 +34,11 @@ export type IconName =
   | 'clock'
   | 'boat'
   | 'chat'
-  | 'instagram';
+  | 'instagram'
+  | 'wifi'
+  | 'cocktail'
+  | 'bell'
+  | 'kite';
 
 export interface QrTarget {
   id: string;

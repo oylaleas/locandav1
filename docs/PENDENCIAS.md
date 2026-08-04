@@ -34,6 +34,18 @@ todos os pontos têm placeholder claramente identificado ou abstração pronta p
 | Tradução EN/IT dos serviços | `src/data/wellness.ts` | **[TRADUÇÃO A VALIDAR PELO RESPONSÁVEL]** |
 | Foto do Espaço Onoda | `tour.coverImageId` (ou imagem dedicada) | **[ASSET A DEFINIR]** — sem imagem por enquanto (sem inventar) |
 
+### 1c. LOCANDA EXPERIENCE (hub) — implementado, pendências explícitas
+
+| Item | Onde trocar | Situação |
+| --- | --- | --- |
+| Comodidades (12 itens + aviso `*`) | `src/data/content.ts` → `comodidades` | **✅ Integrado** — PT/EN/IT; asteriscos preservados em Yoga e Funcional* e Piquenique* |
+| Serviços On Demand (7 itens + aviso) | `src/data/content.ts` → `servicos-on-demand` | **✅ Integrado** — PT/EN/IT; tarifas não inventadas |
+| Happy Hour | `src/data/content.ts` → `happy-hour` | **✅ Estrutura pronta** — horário e menu marcados `[HORÁRIO DO HAPPY HOUR A DEFINIR]` / `[MENU DO HAPPY HOUR A DEFINIR]` |
+| Kite Center | `src/data/content.ts` → `kite-center` | **✅ Estrutura pronta** — conteúdo oficial parcial (baía flat water, parceria Soulkite, guarda de equipamentos); restante `[CONTEÚDO DO KITE CENTER A DEFINIR]` |
+| Menu do Happy Hour (asset) | `src/data/content.ts` | **[MENU DO HAPPY HOUR A DEFINIR]** — vincular quando recebido |
+| Horários do Happy Hour | `src/data/content.ts` | **[HORÁRIO DO HAPPY HOUR A DEFINIR]** — nada inventado |
+| Detalhes do Kite Center (aulas/aluguel/horários/instrutores/contatos) | `src/data/content.ts` | **[CONTEÚDO DO KITE CENTER A DEFINIR]** — nada inventado |
+
 ### 1b. EXPERIÊNCIAS E PASSEIOS — recebido, pontos a validar
 
 | Item | Onde trocar | Situação |

@@ -759,6 +759,280 @@ export const CONTENT_SECTIONS: ContentSection[] = [
     qrTargetId: 'qr-contato',
     relatedSlugs: ['a-locanda'],
   },
+  {
+    slug: 'comodidades',
+    order: 7,
+    icon: 'wifi',
+    title: {
+      'pt-BR': 'Comodidades de nossos hóspedes',
+      en: 'Amenities for our guests',
+      it: 'Servizi per i nostri ospiti',
+    },
+    tagline: {
+      'pt-BR': 'Facilidades',
+      en: 'Facilities',
+      it: 'Strutture',
+    },
+    summary: {
+      'pt-BR': 'Wi-Fi, estacionamento, bar & restaurante, beach tennis, fitness, yoga e muito mais.',
+      en: 'Free Wi-Fi, parking, bar & restaurant, beach tennis, fitness, yoga and more.',
+      it: 'Wi-Fi, parcheggio, bar & ristorante, beach tennis, fitness, yoga e molto altro.',
+    },
+    heroImageId: 'img-01',
+    contentPending: false,
+    blocks: [
+      {
+        type: 'list',
+        title: {
+          'pt-BR': 'Comodidades de nossos hóspedes',
+          en: 'Amenities for our guests',
+          it: 'Servizi per i nostri ospiti',
+        },
+        items: [
+          { 'pt-BR': 'Wi-Fi gratuito', en: 'Free Wi-Fi', it: 'Wi-Fi gratuito' },
+          {
+            'pt-BR': 'Estacionamento gratuito',
+            en: 'Free Parking',
+            it: 'Parcheggio gratuito',
+          },
+          { 'pt-BR': 'Bar & Restaurante', en: 'Bar & Restaurant', it: 'Bar & Ristorante' },
+          {
+            'pt-BR': 'Quadra de Beach Tennis',
+            en: 'Beach Tennis Court',
+            it: 'Campo di beach tennis',
+          },
+          { 'pt-BR': 'Espaço Fitness', en: 'Fitness Space', it: 'Spazio fitness' },
+          {
+            'pt-BR': 'Yoga e Funcional*',
+            en: 'Yoga & Functional Training*',
+            it: 'Yoga e functional training*',
+          },
+          {
+            'pt-BR': 'Noites Cinemáticas',
+            en: 'Cinematic Nights',
+            it: 'Notti cinematografiche',
+          },
+          { 'pt-BR': 'Piquenique*', en: 'Picnic*', it: 'Picnic*' },
+          {
+            'pt-BR': 'Auxílio Beach Boy Gratuito',
+            en: 'Free Beach Boy Services',
+            it: 'Assistenza beach boy gratuita',
+          },
+          { 'pt-BR': 'Berço Gratuito', en: 'Free Baby Crib', it: 'Culla gratuita' },
+          { 'pt-BR': 'Violão', en: 'Acoustic Guitar', it: 'Chitarra acustica' },
+          {
+            'pt-BR': 'Desenhos para Colorir para Crianças',
+            en: 'Drawings for Children',
+            it: 'Disegni da colorare per bambini',
+          },
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: {
+          'pt-BR':
+            '*Atenção, alguns dos serviços descritos não são gratuitos, e têm taxas próprias definidas pelo prestador de serviço. Consulte disponibilidade e valores na recepção.',
+          en: '*Please note that some of the services above are not free. Fees are determined by each service provider. Please check availability and rates at the front desk.',
+          it: '*Attenzione: alcuni dei servizi descritti non sono gratuiti e hanno tariffe proprie definite dal fornitore del servizio. Consulta disponibilità e valori alla reception.',
+        },
+      },
+    ],
+    facts: [
+      {
+        id: 'fact-comodidades-total',
+        icon: 'check',
+        label: { 'pt-BR': 'Comodidades', en: 'Amenities', it: 'Servizi' },
+        value: { 'pt-BR': '12 itens', en: '12 items', it: '12 voci' },
+      },
+    ],
+    galleryImageIds: ['img-01', 'img-05', 'img-03'],
+    videoIds: [],
+    relatedSlugs: ['gastronomia', 'experiencias'],
+  },
+  {
+    slug: 'happy-hour',
+    order: 8,
+    icon: 'cocktail',
+    title: { 'pt-BR': 'Happy Hour', en: 'Happy Hour', it: 'Happy Hour' },
+    tagline: {
+      'pt-BR': 'Fim de tarde na Locanda',
+      en: 'Late afternoon at the Locanda',
+      it: 'Fine giornata alla Locanda',
+    },
+    summary: {
+      'pt-BR':
+        'Nosso Happy Hour acontece todas as sextas de [HORÁRIO DO HAPPY HOUR A DEFINIR] e aos sábados de [HORÁRIO DO HAPPY HOUR A DEFINIR].',
+      en: 'Our Happy Hour happens every Friday from [TIME TO BE DEFINED] and Saturdays from [TIME TO BE DEFINED].',
+      it: 'Il nostro Happy Hour si svolge ogni venerdì dalle [ORARIO DA DEFINIRE] e il sabato dalle [ORARIO DA DEFINIRE].',
+    },
+    heroImageId: 'img-06',
+    contentPending: true,
+    blocks: [
+      {
+        type: 'paragraph',
+        text: {
+          'pt-BR':
+            'Nosso Happy Hour acontece todas as sextas de [HORÁRIO DO HAPPY HOUR A DEFINIR] e aos sábados de [HORÁRIO DO HAPPY HOUR A DEFINIR].',
+          en: 'Our Happy Hour happens every Friday from [TIME TO BE DEFINED] and Saturdays from [TIME TO BE DEFINED].',
+          it: 'Il nostro Happy Hour si svolge ogni venerdì dalle [ORARIO DA DEFINIRE] e il sabato dalle [ORARIO DA DEFINIRE].',
+        },
+      },
+      {
+        type: 'paragraph',
+        text: {
+          'pt-BR': 'Confira nosso menu de Happy Hour: [MENU DO HAPPY HOUR A DEFINIR]',
+          en: 'Check out our Happy Hour menu: [HAPPY HOUR MENU TO BE DEFINED]',
+          it: 'Scopri il nostro menu dell’Happy Hour: [MENU HAPPY HOUR DA DEFINIRE]',
+        },
+      },
+    ],
+    facts: [
+      {
+        id: 'fact-happy-hour-sextas',
+        icon: 'clock',
+        label: { 'pt-BR': 'Sextas', en: 'Fridays', it: 'Venerdì' },
+        value: {
+          'pt-BR': '[HORÁRIO DO HAPPY HOUR A DEFINIR]',
+          en: '[TIME TO BE DEFINED]',
+          it: '[ORARIO DA DEFINIRE]',
+        },
+      },
+      {
+        id: 'fact-happy-hour-sabados',
+        icon: 'clock',
+        label: { 'pt-BR': 'Sábados', en: 'Saturdays', it: 'Sabato' },
+        value: {
+          'pt-BR': '[HORÁRIO DO HAPPY HOUR A DEFINIR]',
+          en: '[TIME TO BE DEFINED]',
+          it: '[ORARIO DA DEFINIRE]',
+        },
+      },
+    ],
+    galleryImageIds: ['img-06', 'img-03'],
+    videoIds: [],
+    relatedSlugs: ['gastronomia', 'a-locanda'],
+  },
+  {
+    slug: 'servicos-on-demand',
+    order: 9,
+    icon: 'bell',
+    title: {
+      'pt-BR': 'Serviços On Demand',
+      en: 'Services On Demand',
+      it: 'Servizi On Demand',
+    },
+    tagline: {
+      'pt-BR': 'Sob medida',
+      en: 'Tailored',
+      it: 'Su misura',
+    },
+    summary: {
+      'pt-BR':
+        'Decoração no quarto, transfer, babá, cabeleireira, manicure, jantar romântico e motorista particular.',
+      en: 'Room decor, transfer, babysitting, hair stylist, manicure, romantic dinner and private driver.',
+      it: 'Decorazione della camera, transfer, babysitter, parrucchiera, manicure, cena romantica e autista privato.',
+    },
+    heroImageId: 'img-07',
+    contentPending: false,
+    blocks: [
+      {
+        type: 'list',
+        title: { 'pt-BR': 'Serviços', en: 'Services', it: 'Servizi' },
+        items: [
+          { 'pt-BR': 'Decoração no Quarto', en: 'Special Room Decor', it: 'Decorazione della camera' },
+          { 'pt-BR': 'Transfer', en: 'Transfer', it: 'Transfer' },
+          { 'pt-BR': 'Babá', en: 'Babysitting', it: 'Babysitter' },
+          { 'pt-BR': 'Cabeleireira', en: 'Hair Stylist', it: 'Parrucchiera' },
+          { 'pt-BR': 'Manicure', en: 'Manicure', it: 'Manicure' },
+          { 'pt-BR': 'Jantar Romântico', en: 'Romantic Dinner', it: 'Cena romantica' },
+          { 'pt-BR': 'Motorista Particular', en: 'Private Driver', it: 'Autista privato' },
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: {
+          'pt-BR': 'Todos os serviços acima possuem tarifa definida pelo prestador de serviço.',
+          en: 'All services above are charged extra. Consult the prices at the front desk.',
+          it: 'Tutti i servizi sopra hanno una tariffa definita dal fornitore del servizio.',
+        },
+      },
+    ],
+    facts: [
+      {
+        id: 'fact-on-demand-tarifa',
+        icon: 'info',
+        label: { 'pt-BR': 'Tarifas', en: 'Rates', it: 'Tariffe' },
+        value: {
+          'pt-BR': 'Definidas pelo prestador de serviço — consulte a recepção',
+          en: 'Set by each service provider — ask at the front desk',
+          it: 'Definite dal fornitore del servizio — chiedere alla reception',
+        },
+      },
+    ],
+    galleryImageIds: ['img-07', 'img-01'],
+    videoIds: [],
+    relatedSlugs: ['a-locanda', 'gastronomia'],
+  },
+  {
+    slug: 'kite-center',
+    order: 10,
+    icon: 'kite',
+    title: { 'pt-BR': 'Kite Center', en: 'Kite Center', it: 'Kite Center' },
+    tagline: {
+      'pt-BR': 'Kitesurf na baía',
+      en: 'Kitesurf on the bay',
+      it: 'Kitesurf sulla baia',
+    },
+    summary: {
+      'pt-BR':
+        'Kitesurf na baía de águas calmas da Ilha do Guajiru, com parceria da Soulkite para aulas. [CONTEÚDO DO KITE CENTER A DEFINIR]',
+      en: 'Kitesurf on the calm-water bay of Ilha do Guajiru, with a Soulkite partnership for lessons. [KITE CENTER CONTENT TO BE DEFINED]',
+      it: 'Kitesurf sulla baia dalle acque calme dell’Ilha do Guajiru, con partnership Soulkite per le lezioni. [CONTENUTO DEL KITE CENTER DA DEFINIRE]',
+    },
+    heroImageId: 'img-03',
+    contentPending: true,
+    blocks: [
+      {
+        type: 'paragraph',
+        text: {
+          'pt-BR':
+            'A baía de águas calmas ("flat water") em frente à Locanda favorece a prática de kitesurf. A Locanda mantém parceria com a Soulkite para aulas de kitesurf e oferece espaço para guarda de equipamentos de kite e esportes aquáticos.',
+          en: 'The calm-water bay ("flat water") in front of the Locanda favours kitesurfing. The Locanda has a Soulkite partnership for kitesurf lessons and offers storage space for kite and water sports equipment.',
+          it: 'La baia dalle acque calme ("flat water") davanti alla Locanda favorisce la pratica del kitesurf. La Locanda ha una partnership con Soulkite per lezioni di kitesurf e offre spazio per custodire attrezzature di kite e sport acquatici.',
+        },
+      },
+      {
+        type: 'paragraph',
+        text: {
+          'pt-BR':
+            'Aulas, aluguel, horários, instrutores, equipamentos e contatos do Kite Center: [CONTEÚDO DO KITE CENTER A DEFINIR]',
+          en: 'Lessons, rentals, hours, instructors, equipment and contacts of the Kite Center: [KITE CENTER CONTENT TO BE DEFINED]',
+          it: 'Lezioni, noleggio, orari, istruttori, attrezzature e contatti del Kite Center: [CONTENUTO DEL KITE CENTER DA DEFINIRE]',
+        },
+      },
+    ],
+    facts: [
+      {
+        id: 'fact-kite-soulkite',
+        icon: 'kite',
+        label: { 'pt-BR': 'Aulas de kitesurf', en: 'Kitesurf lessons', it: 'Lezioni di kitesurf' },
+        value: { 'pt-BR': 'Parceria Soulkite', en: 'Soulkite partnership', it: 'Partnership Soulkite' },
+      },
+      {
+        id: 'fact-kite-guarda',
+        icon: 'check',
+        label: { 'pt-BR': 'Equipamentos', en: 'Equipment', it: 'Attrezzature' },
+        value: {
+          'pt-BR': 'Espaço para guarda de kites e equipamentos',
+          en: 'Storage for kites and equipment',
+          it: 'Spazio per custodire kite e attrezzature',
+        },
+      },
+    ],
+    galleryImageIds: ['img-03', 'img-04'],
+    videoIds: [],
+    relatedSlugs: ['experiencias', 'a-locanda'],
+  },
 ];
 
 export const GALLERIES: GalleryDefinition[] = [

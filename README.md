@@ -84,16 +84,24 @@ ATTRACT ──toque──▶ HOME ──▶ CONTEÚDOS ──▶ DETALHE ──�
    └──── RESET (inatividade, "encerrar" ou Início) ◀────────┘
 ```
 
-Áreas adicionais (mesma árvore de sessão, inatividade e reset):
+A Home funciona como HUB "LOCANDA EXPERIENCE" com as seis áreas principais
+(todas dentro da mesma árvore de sessão, inatividade e reset):
 
 ```
-HOME
-├── BEM-ESTAR ──▶ ESPAÇO ONODA ──▶ SERVIÇOS ──▶ DETALHE (modal) ──▶ CONTATO QR
-└── EXPERIÊNCIAS E PASSEIOS ──▶ LISTAGEM ──▶ DETALHE
-                                    ├── Passeio Pôr do Sol
-                                    ├── Moitas de Icaraí (Opção 1 — com barco / Opção 2 — sem barco)
-                                    └── Almofala, Ilha do Guajiru e Região
+HOME (LOCANDA EXPERIENCE)
+├── COMODIDADES ──▶ seção institucional (12 itens + aviso de tarifas)
+├── HAPPY HOUR ──▶ seção institucional (horário/menu pendentes, nada inventado)
+├── SERVIÇOS ON DEMAND ──▶ seção institucional (7 itens + aviso de tarifas)
+├── BEM-ESTAR (SPA & BELEZA) ──▶ ESPAÇO ONODA ──▶ SERVIÇOS ──▶ DETALHE (modal) ──▶ CONTATO QR
+├── EXPERIÊNCIAS E PASSEIOS ──▶ LISTAGEM ──▶ DETALHE
+│                                ├── Passeio Pôr do Sol
+│                                ├── Moitas de Icaraí (Opção 1 — com barco / Opção 2 — sem barco)
+│                                └── Almofala, Ilha do Guajiru e Região
+└── KITE CENTER ──▶ seção institucional (conteúdo oficial parcial + pendência explícita)
 ```
+
+Todas as seções novas são data-driven em `src/data/content.ts` (PT/EN/IT) e
+reutilizam `ContentDetailPage`, `KioskLayout`, QR, galeria e vídeo existentes.
 
 - **Attract Mode**: vídeo (muted/loop/playsInline/poster) com fallback automático para
   carrossel de fotografias; a camada de toque cobre a tela inteira e **nunca** depende da mídia.
