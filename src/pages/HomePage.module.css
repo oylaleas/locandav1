@@ -14,6 +14,30 @@
   padding-top: var(--space-sm);
 }
 
+.heroBrand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--space-md);
+}
+
+/* Rosa dos ventos dourada da marca ao fundo (decorativa). */
+.heroRose {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-accent-soft);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroBrand > * {
+  position: relative;
+  z-index: 1;
+}
+
 .heroText {
   display: flex;
   flex-direction: column;
@@ -22,6 +46,7 @@
 
 .welcome {
   font-size: var(--font-size-3xl);
+  color: var(--color-action-primary);
 }
 
 .intro {
@@ -43,8 +68,22 @@
 }
 
 .hubTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
   font-size: var(--font-size-xl);
   margin: 0;
+  color: var(--color-action-primary);
+}
+
+/* Risco dourado sob o título do hub — detalhe da marca. */
+.hubTitle::after {
+  content: '';
+  display: block;
+  width: 2.5rem;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--color-accent-strong), var(--palette-brand-gold-400));
 }
 
 .hubIntro {

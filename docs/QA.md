@@ -149,6 +149,17 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 - [x] Novas seções reutilizam ContentDetailPage/KioskLayout (Voltar + Início, timeout/reset herdados)
 - [x] 7 testes automatizados do hub (navegação das 6 áreas, PT→EN e EN→PT)
 
+## Identidade visual (cores da marca)
+
+- [x] Paleta extraída das logos: azul `#065895` + dourado `#f1b100` em `src/styles/tokens.css`
+- [x] Botões primários e títulos de destaque em azul da marca; accent/detalhes em dourado
+- [x] Fundos inversos (placa da marca, QR, contato) em azul profundo `#042b47`
+- [x] Attract Mode com gradiente azul profundo + brilho dourado; orbe de toque em dourado da marca
+- [x] Home com rosa dos ventos dourada ao fundo da marca; ícones de cards em azul suave
+- [x] Overlays de mídia (Modal dark, VideoPlayer) em azul profundo
+- [x] offline.html na paleta da marca
+- [x] Contraste verificado: botão azul+branco 7.4:1 · welcome 7.3:1 · accent dourado 5.3:1 · inverso 13:1 · dourado sobre azul profundo 7.7:1
+
 ## Qualidade de código
 
 - [x] TypeScript strict sem `any`

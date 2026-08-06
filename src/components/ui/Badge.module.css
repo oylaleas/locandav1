@@ -28,7 +28,7 @@
 }
 
 .inverse {
-  background-color: rgba(20, 27, 24, 0.72);
+  background-color: rgba(4, 43, 71, 0.78);
   color: var(--color-text-inverse);
   backdrop-filter: blur(6px);
 }

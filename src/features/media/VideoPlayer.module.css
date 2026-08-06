@@ -1,7 +1,7 @@
 .player {
   display: flex;
   flex-direction: column;
-  background-color: var(--palette-ink-900);
+  background-color: var(--color-media-surface);
   color: var(--color-text-inverse);
   border-radius: var(--radius-card);
   overflow: hidden;
@@ -99,7 +99,7 @@
   height: 7rem;
   border-radius: 50%;
   background-color: rgba(247, 242, 233, 0.92);
-  color: var(--palette-ink-900);
+  color: var(--color-action-primary);
   box-shadow: var(--elevation-2);
 }
 

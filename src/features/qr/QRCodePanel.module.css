@@ -8,13 +8,13 @@
   text-align: center;
 }
 
-/* Rosa dos ventos decorativa (inspirada na logo) — sutil, ao fundo. */
+/* Rosa dos ventos decorativa (inspirada na logo) — dourada da marca. */
 .watermark {
   position: absolute;
   top: var(--space-2xs);
   right: var(--space-xs);
-  color: var(--color-accent);
-  opacity: 0.14;
+  color: var(--color-accent-strong);
+  opacity: 0.24;
   pointer-events: none;
 }
 

@@ -21,7 +21,7 @@ todos os pontos têm placeholder claramente identificado ou abstração pronta p
 | URLs de destino dos QR Codes | `QR_TARGETS` | **✅ Reais** — site, WhatsApp (wa.me/55889921175), Instagram (@locandadeiventi) e reservas CloudBeds |
 | Tradução revisada EN/IT dos textos de conteúdo | `src/data/content.ts` | Traduções feitas a partir do conteúdo oficial **[A VALIDAR PELO RESPONSÁVEL]** |
 | Tipografia institucional | `src/styles/tokens.css` → `--font-display` / `--font-body` | Stacks do sistema **[A VALIDAR]** |
-| Paleta oficial | `src/styles/tokens.css` | Paleta neutra reversível **[A VALIDAR]** |
+| Paleta oficial | `src/styles/tokens.css` | **✅ Integrada** — cores extraídas das logos: azul `#065895` (ações primárias, títulos, fundos inversos) e dourado `#f1b100` (accent, orbe do Attract, detalhes); contraste verificado (≥ 4.5:1) |
 
 ### 1a. BEM-ESTAR (Espaço Onoda) — recebido, pontos a validar
 

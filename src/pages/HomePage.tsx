@@ -4,6 +4,7 @@ import { ContentCard } from '@/components/cards/ContentCard';
 import { Brandmark } from '@/components/layout/Brandmark';
 import { KioskLayout } from '@/components/layout/KioskLayout';
 import { Icon } from '@/components/ui/Icon';
+import { WindRose } from '@/components/ui/WindRose';
 import { ROUTES } from '@/config/kiosk';
 import { useKioskNavigation } from '@/app/navigation';
 import { QRCodePanel } from '@/features/qr/QRCodePanel';
@@ -34,7 +35,11 @@ export default function HomePage() {
     <KioskLayout showBack={false} showBrand={false}>
       <div className={styles.page}>
         <header className={styles.hero}>
-          <Brandmark size="md" withDescriptor />
+          <div className={styles.heroBrand}>
+            {/* Rosa dos ventos dourada (eco da logo) ao fundo da marca. */}
+            <WindRose size="clamp(13rem, 30vw, 22rem)" className={styles.heroRose} />
+            <Brandmark size="md" withDescriptor />
+          </div>
           <div className={styles.heroText}>
             <h1 className={styles.welcome}>{tx(identity.homeWelcome)}</h1>
             <p className={styles.intro}>{tx(identity.homeIntro)}</p>
