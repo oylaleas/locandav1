@@ -1,17 +1,30 @@
+/* ==========================================================================
+   HOME — menu de navegação do totem
+   PÁGINA ESTÁTICA: ocupa 100% da altura disponível e NÃO rola.
+   Animações de entrada em cascata (hero → hub → acessos) + rosa dos ventos
+   girando. Tudo neutralizado por prefers-reduced-motion (global).
+   ========================================================================== */
+
 .page {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  gap: var(--space-md);
+  height: 100%;
+  min-height: 0;
   max-width: var(--size-content-max-width);
   margin: 0 auto;
-  padding-bottom: var(--space-lg);
+  padding-bottom: var(--space-xs);
 }
+
+/* --------------------------------------------------------------- HERO */
 
 .hero {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
-  padding-top: var(--space-sm);
+  align-items: center;
+  gap: var(--space-2xs);
+  text-align: center;
+  animation: hero-in 600ms var(--easing-decelerate) both;
 }
 
 .heroBrand {
@@ -19,10 +32,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-block: var(--space-md);
+  padding-block: var(--space-2xs);
 }
 
-/* Rosa dos ventos dourada da marca ao fundo (decorativa). */
+/* Rosa dos ventos dourada da marca ao fundo (decorativa, giro lento). */
 .heroRose {
   position: absolute;
   top: 50%;
@@ -30,7 +43,7 @@
   transform: translate(-50%, -50%);
   color: var(--color-accent-soft);
   pointer-events: none;
-  z-index: 0;
+  animation: spin 90s linear infinite;
 }
 
 .heroBrand > * {
@@ -38,40 +51,38 @@
   z-index: 1;
 }
 
-.heroText {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2xs);
-}
-
 .welcome {
+  margin: 0;
   font-size: var(--font-size-3xl);
   color: var(--color-action-primary);
 }
 
 .intro {
-  font-size: var(--font-size-lg);
+  margin: 0;
+  font-size: var(--font-size-md);
   color: var(--color-text-secondary);
-  max-width: 40ch;
+  max-width: 42ch;
 }
+
+/* ---------------------------------------------------------------- HUB */
 
 .hub {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: var(--space-2xs);
 }
 
 .hubHeader {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-3xs);
+  align-items: center;
+  gap: var(--space-sm);
 }
 
 .hubTitle {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2xs);
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   margin: 0;
   color: var(--color-action-primary);
 }
@@ -86,89 +97,120 @@
   background: linear-gradient(90deg, var(--color-accent-strong), var(--palette-brand-gold-400));
 }
 
-.hubIntro {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
-  margin: 0;
-}
-
 .hubGrid {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-sm);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-@media (min-width: 75rem) {
-  .hubGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+/* Entrada em cascata (stagger) dos cards do hub. */
+.hubItem {
+  animation: item-in 520ms var(--easing-decelerate) both;
+  animation-delay: calc(140ms + var(--i, 0) * 70ms);
 }
 
-.featuredSection {
-  display: block;
+.hubCard {
+  min-height: var(--size-touch-comfort);
 }
 
-.gridSection {
+/* ------------------------------------------------------------ ACESSOS */
+
+.quick {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
 }
 
-.sectionHeader {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-md);
-}
-
-.sectionTitle {
-  font-size: var(--font-size-xl);
-}
-
-.scrollHint {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3xs);
-  font-size: var(--font-size-3xs);
-  letter-spacing: var(--letter-spacing-wide);
-  text-transform: uppercase;
-  color: var(--color-text-secondary);
-}
-
-.grid {
+.quickGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-md);
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.gridItem {
-  min-width: 0;
+.quickItem {
+  animation: item-in 520ms var(--easing-decelerate) both;
+  animation-delay: calc(300ms + var(--i, 0) * 60ms);
 }
 
-.actions {
-  display: grid;
-  gap: var(--space-md);
+.quickCard {
+  min-height: var(--size-touch-min);
 }
 
-/* Totens muito largos / landscape: três colunas mantêm o card legível. */
-@media (min-width: 75rem) {
-  .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+/* ------------------------------------------------------ KEYFRAMES */
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes item-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --------------------------------------------------- RESPONSIVIDADE */
+
+/* Telas baixas (ex.: totem em landscape / janelas pequenas):
+   compacta ainda mais para evitar rolagem. */
+@media (max-height: 52rem) {
+  .page {
+    gap: var(--space-sm);
   }
 
-  .actions {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 40rem) {
-  .grid {
-    grid-template-columns: 1fr;
+  .heroBrand {
+    padding-block: 0;
   }
 
   .welcome {
     font-size: var(--font-size-2xl);
+  }
+
+  .intro {
+    display: none;
+  }
+
+  .hubGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .quickGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .quickCard {
+    min-height: var(--size-touch-min);
+  }
+}
+
+/* Handoff mobile (muito estreito): volta a rolar — é o smartphone do
+   visitante, não o totem. */
+@media (max-width: 40rem) {
+  .page {
+    height: auto;
+  }
+
+  .hubGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .quickGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

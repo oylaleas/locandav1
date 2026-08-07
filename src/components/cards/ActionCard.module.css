@@ -67,3 +67,16 @@
 .accent .description {
   color: var(--color-text-inverse-secondary);
 }
+
+/* Só com hover disponível (desktop); no touch o feedback é o :active. */
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--elevation-2);
+  }
+
+  .card:hover .icon {
+    transform: scale(1.08);
+    transition: transform var(--motion-fast) var(--easing-standard);
+  }
+}

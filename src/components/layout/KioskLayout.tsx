@@ -80,6 +80,7 @@ export function KioskLayout({
       <main
         id="conteudo-principal"
         ref={mainRef}
+        key={location.pathname}
         className={cn(styles.main, 'scroll-area', bleed && styles.bleed)}
         tabIndex={-1}
       >

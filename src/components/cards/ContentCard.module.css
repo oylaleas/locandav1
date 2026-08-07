@@ -19,6 +19,13 @@
   box-shadow: var(--elevation-2);
 }
 
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--elevation-2);
+  }
+}
+
 /* Card em destaque (primeiro da Home) — moldura dourada da marca. */
 .featured {
   border: 2px solid var(--color-accent-soft);

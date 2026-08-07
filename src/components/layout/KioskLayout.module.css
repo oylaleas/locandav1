@@ -64,6 +64,20 @@
 .main {
   position: relative;
   padding: var(--space-lg) var(--kiosk-gutter) var(--space-2xl);
+  /* Transição de tela: fade + subida suave a cada navegação. */
+  animation: page-in var(--motion-base) var(--easing-decelerate) both;
+}
+
+/* Neutralizada globalmente por prefers-reduced-motion / data-reduced-motion. */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .bleed {

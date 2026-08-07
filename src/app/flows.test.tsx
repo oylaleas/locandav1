@@ -43,9 +43,16 @@ describe('jornada principal do totem', () => {
   it('HOME → conteúdo → detalhe → VOLTAR volta para a Home', async () => {
     const { user } = await enterFromAttract();
 
-    // O card em destaque da Home ("Quem somos · A Locanda").
+    // A Home é um menu: navega-se via "Todos os conteúdos" até o detalhe.
+    await user.click(screen.getByRole('button', { name: /Ver todos os conteúdos/i }));
+    await screen.findByRole('heading', { level: 1, name: 'Conteúdos' });
+
     await user.click(screen.getByRole('button', { name: /Quem somos/i }));
     expect(await screen.findByRole('heading', { level: 1, name: 'A Locanda' })).toBeVisible();
+
+    // Voltar retorna ao contexto anterior (índice) e depois à Home.
+    await user.click(screen.getByRole('button', { name: 'Voltar' }));
+    expect(await screen.findByRole('heading', { level: 1, name: 'Conteúdos' })).toBeVisible();
 
     await user.click(screen.getByRole('button', { name: 'Voltar' }));
     expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
@@ -66,6 +73,8 @@ describe('jornada principal do totem', () => {
   it('HOME → conteúdo → VÍDEO → fim do vídeo → QR Code', async () => {
     const { user } = await enterFromAttract();
 
+    await user.click(screen.getByRole('button', { name: /Ver todos os conteúdos/i }));
+    await screen.findByRole('heading', { level: 1, name: 'Conteúdos' });
     await user.click(screen.getByRole('button', { name: /Quem somos/i }));
     await screen.findByRole('heading', { level: 1, name: 'A Locanda' });
 
