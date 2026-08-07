@@ -16,17 +16,45 @@
   z-index: var(--z-header);
 }
 
-/* Home: cabeçalho reduzido ao indicador de conectividade. */
+/* Cabeçalho centrado quando não há marca à esquerda nem conteúdo à direita
+   além do indicador de conectividade (ex.: telas de listagem). */
+.headerCentered {
+  justify-content: center;
+  text-align: center;
+}
+
+.headerCentered .headerBrand {
+  flex: 1;
+  justify-content: center;
+}
+
+/* Home: cabeçalho reduzido ao indicador de conectividade, centralizado. */
 .headerBare {
+  justify-content: center;
   padding-bottom: 0;
   border-bottom: none;
+}
+
+.headerBare .headerBrand {
+  display: none;
+}
+
+.headerBare > *:not(.headerBrand) {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .headerBrand {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex: 1;
   gap: var(--space-md);
   min-width: 0;
+}
+
+.headerBrand + * {
+  flex-shrink: 0;
 }
 
 .headerTitles {

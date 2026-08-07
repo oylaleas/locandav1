@@ -8,6 +8,8 @@
 .page {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: var(--space-md);
   height: 100%;
   min-height: 0;
@@ -69,18 +71,21 @@
 .hub {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-2xs);
 }
 
 .hubHeader {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-sm);
 }
 
 .hubTitle {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-2xs);
   font-size: var(--font-size-lg);
   margin: 0;
@@ -101,7 +106,9 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-sm);
-  margin: 0;
+  width: 100%;
+  max-width: 58rem;
+  margin: 0 auto;
   padding: 0;
   list-style: none;
 }
@@ -121,13 +128,16 @@
 .quick {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .quickGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-xs);
-  margin: 0;
+  width: 100%;
+  max-width: 58rem;
+  margin: 0 auto;
   padding: 0;
   list-style: none;
 }

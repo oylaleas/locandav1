@@ -64,7 +64,13 @@ export function KioskLayout({
         {t.app.skipToContent}
       </a>
 
-      <header className={cn(styles.header, isHeaderBare && styles.headerBare)}>
+      <header
+        className={cn(
+          styles.header,
+          isHeaderBare && styles.headerBare,
+          !showBrand && !isHeaderBare && styles.headerCentered,
+        )}
+      >
         <div className={styles.headerBrand}>
           {showBrand && <Brandmark size="sm" />}
           {(eyebrow || title) && (
