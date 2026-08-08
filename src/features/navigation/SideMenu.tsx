@@ -7,6 +7,9 @@
      clique de novo → tl.reverse() (fecha reproduzindo ao contrário);
    - Mesmos elementos do script: #menuPanel, #btnSlider, #nav,
      .nav__link, .nav__footer-link, #menuBtn;
+   - Visibilidade do painel: ligada ao abrir (React) e desligada quando a
+     timeline termina de reverter — o FECHAMENTO mostra a animação reversa
+     completa (o painel encolhe visivelmente, não "pisca" e some);
    - Adições "inteligentes" para o totem: focus trap, Esc fecha, backdrop
      clicável, fecha no session reset e ao navegar, reduz movimento
      (durations ~0) e handoff mobile via QR.
@@ -42,6 +45,8 @@ interface BuildTimelineParams {
   links: HTMLButtonElement[];
   footerLinks: HTMLButtonElement[];
   reduced: boolean;
+  onOpen: () => void;
+  onCloseComplete: () => void;
   onReady: (tl: gsap.core.Timeline) => void;
 }
 
@@ -49,10 +54,12 @@ interface BuildTimelineParams {
  * Constrói a ÚNICA timeline pausada do menu, fiel ao script fornecido:
  * painel expande → botão desliza → nav visível → links flip 3D em cascata
  * → footer sobe com fade. Ao reverter por completo, o nav volta a ficar
- * inerte. Com "reduzir animações", tudo dura ~0 (instantâneo).
+ * inerte e o painel deixa de ser visível. Com "reduzir animações", tudo
+ * dura ~0 (instantâneo).
  */
 function buildTimeline(gsapLib: typeof import('gsap')['default'], params: BuildTimelineParams) {
-  const { panel, slider, nav, links, footerLinks, reduced, onReady } = params;
+  const { panel, slider, nav, links, footerLinks, reduced, onOpen, onCloseComplete, onReady } =
+    params;
   // "Reduzir animações" do totem: tudo instantâneo, sem quebrar o fluxo.
   const D = reduced ? 0.001 : 1;
 
@@ -63,7 +70,7 @@ function buildTimeline(gsapLib: typeof import('gsap')['default'], params: BuildT
     panel,
     {
       width: 480,
-      height: 650,
+      height: 680,
       bottom: -25,
       right: -25,
       borderRadius: 25,
@@ -76,10 +83,9 @@ function buildTimeline(gsapLib: typeof import('gsap')['default'], params: BuildT
   tl.to(slider, { top: '-100%', duration: 0.5 * D }, 0);
 
   // 👉 NAV VISÍVEL — a classe entra pouco depois do painel começar a crescer.
-  // (a visibilidade do painel em si é controlada pelo React via isOpen;
-  //  esta classe apenas libera o pointer-events dos links durante a abertura)
   tl.add(() => {
     nav.classList.add('nav--visible');
+    onOpen();
   }, 0.2);
 
   // 👉 LINKS — estado inicial (invisíveis, rotacionados 90°, abaixo).
@@ -127,9 +133,10 @@ function buildTimeline(gsapLib: typeof import('gsap')['default'], params: BuildT
     0.75,
   );
 
-  // 👉 Cleanup ao fechar: nav volta a ficar inerte (pointer-events: none).
+  // 👉 Cleanup ao fechar: nav volta a ficar inerte e o painel some.
   tl.eventCallback('onReverseComplete', () => {
     nav.classList.remove('nav--visible');
+    onCloseComplete();
   });
 
   onReady(tl);
@@ -148,10 +155,18 @@ export function SideMenu() {
   const footerListRef = useRef<HTMLUListElement>(null);
 
   const [isOpen, setIsOpen] = useState(false);
+  // Controla a classe .menu-panel--open (opacity/visibility). É desligada
+  // apenas quando a timeline termina de reverter — o fechamento é animado.
+  const [visible, setVisible] = useState(false);
   const [activeQr, setActiveQr] = useState<QrTarget | undefined>();
-  // Timeline GSAP única e pausada — em estado (não ref) para manter a
-  // análise de refs do React Compiler feliz: closures podem chamá-la.
   const [tl, setTl] = useState<gsap.core.Timeline | null>(null);
+
+  // Ref espelho do estado para o onReady da timeline (lazy import): se o
+  // visitante tocou antes do GSAP carregar, a timeline já nasce aberta.
+  const isOpenRef = useRef(false);
+  useEffect(() => {
+    isOpenRef.current = isOpen;
+  }, [isOpen]);
 
   /* ------------------------------------------------------- itens do menu */
   const mainItems: MenuItem[] = [
@@ -235,13 +250,13 @@ export function SideMenu() {
 
   const toggle = useCallback(() => {
     if (isOpen) {
-      tl?.reverse();
-      setIsOpen(false);
+      close();
     } else {
-      tl?.play();
       setIsOpen(true);
+      setVisible(true);
+      tl?.play();
     }
-  }, [isOpen, tl]);
+  }, [isOpen, tl, close]);
 
   const go = useCallback(
     (to: () => void) => {
@@ -286,7 +301,15 @@ export function SideMenu() {
         links,
         footerLinks,
         reduced: motionReduced,
-        onReady: setTl,
+        onOpen: () => setVisible(true),
+        onCloseComplete: () => setVisible(false),
+        onReady: (nextTl) => {
+          setTl(nextTl);
+          // Se o visitante tocou antes do GSAP carregar, já nasce aberto.
+          if (isOpenRef.current) {
+            nextTl.play();
+          }
+        },
       });
     });
 
@@ -356,7 +379,6 @@ export function SideMenu() {
         id="menuBtn"
         variant="quiet"
         size="md"
-        icon={isOpen ? 'close' : 'menu'}
         onClick={toggle}
         disableTapGuard
         aria-expanded={isOpen}
@@ -382,7 +404,7 @@ export function SideMenu() {
         <div
           id="menuPanel"
           ref={panelRef}
-          className={cn('menu-panel', isOpen && 'menu-panel--open')}
+          className={cn('menu-panel', visible && 'menu-panel--open')}
           role="dialog"
           aria-modal="true"
           aria-label={t.nav.menu}
@@ -404,9 +426,11 @@ export function SideMenu() {
                     onClick={() => go(item.to)}
                   >
                     <span className="nav__link--num">{String(index + 1).padStart(2, '0')}</span>
-                    <Icon name={item.icon} size="1.6rem" />
+                    <span className="nav__link--icon">
+                      <Icon name={item.icon} size="1.35rem" />
+                    </span>
                     <span className="nav__link--label">{item.label}</span>
-                    <Icon name="arrow-right" size="1.4rem" className="nav__link--arrow" />
+                    <Icon name="arrow-right" size="1.3rem" className="nav__link--arrow" />
                   </button>
                 </li>
               ))}

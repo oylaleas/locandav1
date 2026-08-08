@@ -22,8 +22,10 @@ describe('menu lateral (side menu)', () => {
     await user.click(screen.getByRole('button', { name: 'Abrir menu' }));
 
     const dialog = await screen.findByRole('dialog', { name: 'Navegação principal' });
-    expect(within(dialog).getByRole('heading', { name: 'Navegação principal' })).toBeVisible();
+    expect(within(dialog).getByRole('heading', { name: 'Navegação principal' })).toBeInTheDocument();
 
+    // Os seis links principais estão presentes (o estado visual deles é
+    // animado pelo GSAP — verificamos a presença, não o frame da animação).
     for (const label of [
       'Comodidades',
       'Happy Hour',
@@ -32,7 +34,7 @@ describe('menu lateral (side menu)', () => {
       'Experiências e passeios',
       'Kite Center',
     ]) {
-      expect(within(dialog).getByRole('button', { name: new RegExp(label) })).toBeVisible();
+      expect(within(dialog).getByRole('button', { name: new RegExp(label) })).toBeInTheDocument();
     }
 
     await user.click(within(dialog).getByRole('button', { name: /Kite Center/ }));

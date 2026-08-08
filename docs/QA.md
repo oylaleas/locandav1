@@ -164,8 +164,11 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 
 - [x] Botão "Menu" na barra de ações de TODAS as telas (todas com Voltar + Início + Menu)
 - [x] Timeline GSAP única pausada (`tl.play()`/`tl.reverse()`) — painel expande, links flip 3D em cascata, rodapé com fade
+- [x] **Fechamento animado**: a visibilidade do painel só é desligada quando a timeline termina de reverter (o menu encolhe visivelmente — não "pisca" e some)
+- [x] Painel proporcional: links compactos (72px touch), cabeçalho/rodapé alinhados, limites de segurança em telas menores (max-width/max-height)
+- [x] Botão sem ícone "trocando": apenas o rótulo desliza ("Menu" → "Fechar"), fiel ao script original
 - [x] 6 categorias + acessos rápidos + contatos (WhatsApp/Instagram/Site/Reservas) via QR de handoff
-- [x] GSAP carregado sob demanda (chunk separado, fora do bundle inicial)
+- [x] GSAP carregado sob demanda (chunk separado, fora do bundle inicial); se o visitante tocar antes de carregar, a timeline nasce aberta (ref espelho)
 - [x] Acessível: `aria-expanded`, `aria-controls`, focus trap, `Esc` fecha, devolve foco ao botão, fecha no session reset e ao navegar
 - [x] "Reduzir animações" do totem → timeline instantânea (durations ~0)
 - [x] 3 testes automatizados do menu (abrir/navegar, Esc fecha, QR do WhatsApp)
