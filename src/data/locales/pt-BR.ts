@@ -28,6 +28,9 @@ export const ptBR = {
     accessibility: 'Acessibilidade',
     close: 'Fechar',
     menu: 'Navegação principal',
+    menuLabel: 'Menu',
+    openMenu: 'Abrir menu',
+    closeMenu: 'Fechar menu',
     youAreHere: 'Você está em',
   },
   home: {
@@ -50,6 +53,8 @@ export const ptBR = {
     toursCtaDesc: 'Passeios: Pôr do Sol, Moitas de Icaraí, Almofala.',
     kiteCta: 'Kite Center',
     kiteCtaDesc: 'Kitesurf na baía de águas calmas.',
+    siteCta: 'Site oficial',
+    bookingsCta: 'Reservas',
   },
   wellness: {
     indexTitle: 'Bem-estar',

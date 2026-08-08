@@ -25,6 +25,9 @@ export const en: Dictionary = {
     accessibility: 'Accessibility',
     close: 'Close',
     menu: 'Main navigation',
+    menuLabel: 'Menu',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
     youAreHere: 'You are in',
   },
   home: {
@@ -47,6 +50,8 @@ export const en: Dictionary = {
     toursCtaDesc: 'Tours: Sunset, Moitas de Icaraí, Almofala.',
     kiteCta: 'Kite Center',
     kiteCtaDesc: 'Kitesurf on the calm-water bay.',
+    siteCta: 'Official website',
+    bookingsCta: 'Bookings',
   },
   wellness: {
     indexTitle: 'Wellness',

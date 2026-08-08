@@ -242,6 +242,13 @@ const PATHS: Record<IconName, ReactElement> = {
       <path d="M12 12.5 9.5 19" />
     </>
   ),
+  menu: (
+    <>
+      <path d="M4 7h16" />
+      <path d="M4 12h16" />
+      <path d="M4 17h16" />
+    </>
+  ),
 };
 
 interface IconProps {

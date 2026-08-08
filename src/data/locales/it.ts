@@ -25,6 +25,9 @@ export const it: Dictionary = {
     accessibility: 'Accessibilità',
     close: 'Chiudi',
     menu: 'Navigazione principale',
+    menuLabel: 'Menu',
+    openMenu: 'Apri menu',
+    closeMenu: 'Chiudi menu',
     youAreHere: 'Ti trovi in',
   },
   home: {
@@ -47,6 +50,8 @@ export const it: Dictionary = {
     toursCtaDesc: 'Tour: Tramonto, Moitas de Icaraí, Almofala.',
     kiteCta: 'Kite Center',
     kiteCtaDesc: 'Kitesurf sulla baia dalle acque calme.',
+    siteCta: 'Sito ufficiale',
+    bookingsCta: 'Prenotazioni',
   },
   wellness: {
     indexTitle: 'Benessere',
