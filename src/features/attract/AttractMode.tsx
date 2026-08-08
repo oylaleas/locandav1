@@ -116,7 +116,7 @@ export function AttractMode({ onActivate }: AttractModeProps) {
         <div className={styles.brandBlock}>
           {/* Gráfico decorativo de interação inspirado na rosa dos ventos
               da logo — NUNCA substitui o logotipo oficial (ao lado). */}
-          <WindRose size="clamp(16rem, 56vh, 30rem)" className={styles.windRose} />
+          <WindRose className={styles.windRose} />
           <Brandmark tone="dark" size="lg" withDescriptor />
           <p className={styles.subhead}>{tx(identity.attractSubhead)}</p>
         </div>
@@ -124,7 +124,7 @@ export function AttractMode({ onActivate }: AttractModeProps) {
         <div className={styles.ctaBlock}>
           <span className={styles.touchRing} aria-hidden="true">
             <span className={styles.touchPulse} />
-            <WindRose size="3.4rem" className={styles.ctaRose} />
+            <WindRose className={styles.ctaRose} />
           </span>
           <p className={styles.cta}>{tx(identity.attractCallToAction)}</p>
           <p className={styles.languages}>{t.attract.languagesAvailable}</p>

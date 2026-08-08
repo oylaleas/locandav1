@@ -1,8 +1,15 @@
 /* ==========================================================================
    HOME — menu de navegação do totem
    PÁGINA ESTÁTICA: ocupa 100% da altura disponível e NÃO rola.
-   Animações de entrada em cascata (hero → hub → acessos) + rosa dos ventos
-   girando. Tudo neutralizado por prefers-reduced-motion (global).
+   Três seções proporcionais e centralizadas (hero → hub → acessos rápidos).
+
+   Fluidez:
+   - rosa dos ventos posicionada com `inset:0 + margin:auto` (o `spin` de
+     transform NÃO sobrescreve o posicionamento) e `will-change: transform`
+     (camada própria de composição);
+   - grids com `contain: layout` (isola o layout dos cards);
+   - animações de entrada apenas com transform/opacity (composição barata),
+     neutralizadas globalmente por prefers-reduced-motion.
    ========================================================================== */
 
 .page {
@@ -10,12 +17,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--space-md);
+  gap: var(--space-lg);
   height: 100%;
   min-height: 0;
+  width: 100%;
   max-width: var(--size-content-max-width);
   margin: 0 auto;
-  padding-bottom: var(--space-xs);
+  padding-block: var(--space-sm);
+  /* Isola o layout/paint desta tela — nada aqui afeta o resto do app. */
+  contain: layout style paint;
 }
 
 /* --------------------------------------------------------------- HERO */
@@ -31,39 +41,43 @@
 
 .heroBrand {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-block: var(--space-2xs);
+  display: grid;
+  place-items: center;
+  padding-block: var(--space-xs);
 }
 
-/* Rosa dos ventos dourada da marca ao fundo (decorativa, giro lento). */
+/* Rosa dos ventos dourada da marca ao fundo (decorativa, giro lento).
+   `inset:0 + margin:auto` centraliza SEM depender de transform — o spin
+   rotaciona apenas, sem deslocar o elemento. */
 .heroRose {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  margin: auto;
+  width: clamp(10rem, 26vw, 18rem);
+  height: clamp(10rem, 26vw, 18rem);
   color: var(--color-accent-soft);
   pointer-events: none;
   animation: spin 90s linear infinite;
+  will-change: transform;
 }
 
-.heroBrand > * {
+.heroBrand > *:not(.heroRose) {
   position: relative;
   z-index: 1;
 }
 
 .welcome {
   margin: 0;
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-tight);
   color: var(--color-action-primary);
 }
 
 .intro {
   margin: 0;
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
-  max-width: 42ch;
+  max-width: 44ch;
 }
 
 /* ---------------------------------------------------------------- HUB */
@@ -72,7 +86,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-2xs);
+  gap: var(--space-sm);
+  width: 100%;
 }
 
 .hubHeader {
@@ -105,22 +120,28 @@
 .hubGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: auto;
   gap: var(--space-sm);
   width: 100%;
-  max-width: 58rem;
+  max-width: 62rem;
   margin: 0 auto;
   padding: 0;
   list-style: none;
+  /* Isola o layout dos cards — muda aqui não recalcula o resto. */
+  contain: layout style;
 }
 
-/* Entrada em cascata (stagger) dos cards do hub. */
 .hubItem {
+  display: flex;
+  min-width: 0;
   animation: item-in 520ms var(--easing-decelerate) both;
-  animation-delay: calc(140ms + var(--i, 0) * 70ms);
+  animation-delay: calc(120ms + var(--i, 0) * 70ms);
 }
 
 .hubCard {
-  min-height: var(--size-touch-comfort);
+  flex: 1;
+  width: 100%;
+  min-height: var(--size-touch-large);
 }
 
 /* ------------------------------------------------------------ ACESSOS */
@@ -129,6 +150,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .quickGrid {
@@ -136,19 +158,24 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-xs);
   width: 100%;
-  max-width: 58rem;
+  max-width: 62rem;
   margin: 0 auto;
   padding: 0;
   list-style: none;
+  contain: layout style;
 }
 
 .quickItem {
+  display: flex;
+  min-width: 0;
   animation: item-in 520ms var(--easing-decelerate) both;
-  animation-delay: calc(300ms + var(--i, 0) * 60ms);
+  animation-delay: calc(320ms + var(--i, 0) * 60ms);
 }
 
 .quickCard {
-  min-height: var(--size-touch-min);
+  flex: 1;
+  width: 100%;
+  min-height: var(--size-touch-comfort);
 }
 
 /* ------------------------------------------------------ KEYFRAMES */
@@ -175,10 +202,38 @@
   }
 }
 
-/* --------------------------------------------------- RESPONSIVIDADE */
+/* ------------------------------------------- TOTEM ALTO (ex.: 1080x1920) */
 
-/* Telas baixas (ex.: totem em landscape / janelas pequenas):
-   compacta ainda mais para evitar rolagem. */
+/* Telas altas ganham mais respiro e cards maiores — proporção equilibrada. */
+@media (min-height: 60rem) {
+  .page {
+    gap: var(--space-xl);
+    padding-block: var(--space-md);
+  }
+
+  .welcome {
+    font-size: var(--font-size-3xl);
+  }
+
+  .intro {
+    font-size: var(--font-size-md);
+  }
+
+  .hubGrid {
+    gap: var(--space-md);
+  }
+
+  .hubCard {
+    min-height: 8rem;
+  }
+
+  .quickCard {
+    min-height: 6rem;
+  }
+}
+
+/* ---------------------------------------- TELAS BAIXAS (landscape / app) */
+
 @media (max-height: 52rem) {
   .page {
     gap: var(--space-sm);
@@ -204,16 +259,21 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
+  .hubCard {
+    min-height: var(--size-touch-comfort);
+  }
+
   .quickCard {
     min-height: var(--size-touch-min);
   }
 }
 
-/* Handoff mobile (muito estreito): volta a rolar — é o smartphone do
-   visitante, não o totem. */
+/* -------------------------------------- HANDOFF MOBILE (rola, é o celular) */
+
 @media (max-width: 40rem) {
   .page {
     height: auto;
+    justify-content: flex-start;
   }
 
   .hubGrid {

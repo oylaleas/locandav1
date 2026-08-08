@@ -13,6 +13,8 @@
   position: absolute;
   top: var(--space-2xs);
   right: var(--space-xs);
+  width: 5.5rem;
+  height: 5.5rem;
   color: var(--color-accent-strong);
   opacity: 0.24;
   pointer-events: none;

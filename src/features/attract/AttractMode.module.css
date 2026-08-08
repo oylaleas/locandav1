@@ -91,8 +91,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -56%);
+  width: clamp(16rem, 56vh, 30rem);
+  height: clamp(16rem, 56vh, 30rem);
   color: rgba(241, 177, 0, 0.09);
   animation: spin 110s linear infinite;
+  will-change: transform;
 }
 
 .subhead {
@@ -138,6 +141,8 @@
 }
 
 .ctaRose {
+  width: 3.4rem;
+  height: 3.4rem;
   filter: drop-shadow(0 2px 14px rgba(241, 177, 0, 0.35));
 }
 

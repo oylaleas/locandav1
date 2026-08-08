@@ -65,7 +65,7 @@ export function QRCodePanel({ target, open, onClose }: QRCodePanelProps) {
         <div className={styles.content}>
           {/* Gráfico decorativo de interação (rosa dos ventos da logo) —
               não é logotipo. */}
-          <WindRose size="5.5rem" className={styles.watermark} />
+          <WindRose className={styles.watermark} />
           <QRCode
             key={target.url}
             value={target.url}
