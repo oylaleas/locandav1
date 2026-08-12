@@ -108,6 +108,9 @@
   --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia,
     'Times New Roman', serif;
   --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Leitura de "instrumento" — horas, valores, contatos e rumos da bússola
+     em mono, como o painel de instrumentos de um destino de vento/água. */
+  --font-data: ui-monospace, 'SF Mono', 'Cascadia Code', 'Roboto Mono', Menlo, Consolas, monospace;
 
   /* Escala fluida ancorada no viewport do totem (1080x1920 [VALIDAR NO HARDWARE REAL]).
      --font-scale é multiplicado pelo controle de acessibilidade de texto. */

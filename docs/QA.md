@@ -160,6 +160,14 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 - [x] offline.html na paleta da marca
 - [x] Contraste verificado: botão azul+branco 7.4:1 · welcome 7.3:1 · accent dourado 5.3:1 · inverso 13:1 · dourado sobre azul profundo 7.7:1
 
+## Direção de design — "Pousada dos Ventos"
+
+- [x] **Assinatura (risco assumido)**: herói da Home é um HORIZONTE de pôr do sol sobre a baía — sol dourado (rosa dos ventos) nascendo recortado sobre o mar azul profundo, com o vento riscando a cena em linhas à deriva. As duas cores da marca viram elementos do lugar (o pôr do sol da Praia da Espraiada é produto real do totem)
+- [x] Cards do hub com "tick" dourado no topo (marcador de instrumento de vento/água); risco dourado sob o título do hub (linha do horizonte)
+- [x] **Tipografia de dados**: `--font-data` (mono) para horas, valores, contatos e rumos — leitura de instrumento náutico, coerente com destino de vento/água
+- [x] Vento à deriva também no Attract Mode (coesão entre as duas telas de marca)
+- [x] Uma única assinatura; o resto quieto e disciplinado; reduced motion neutraliza tudo
+
 ## Menu lateral (side menu — GSAP)
 
 - [x] Botão "Menu" na barra de ações de TODAS as telas (todas com Voltar + Início + Menu)

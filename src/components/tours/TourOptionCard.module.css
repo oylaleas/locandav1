@@ -90,8 +90,13 @@
   color: var(--color-text-primary);
 }
 
+.infoValue:not(.price) {
+  font-family: var(--font-data);
+}
+
 .price {
   color: var(--color-accent);
+  font-family: var(--font-data);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-xl);
 }

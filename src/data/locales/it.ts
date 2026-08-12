@@ -37,6 +37,7 @@ export const it: Dictionary = {
     galleryCta: 'Vedi la galleria fotografica',
     scrollHint: 'Scorri per vedere altro',
     experienceHubTitle: 'Locanda Experience',
+    homeEyebrow: 'Ilha do Guajiru · Itarema · Ceará',
     experienceHubIntro: 'Tocca una categoria per iniziare.',
     amenitiesCta: 'Servizi',
     amenitiesCtaDesc: 'Wi-Fi, parcheggio, beach tennis, fitness e altro.',

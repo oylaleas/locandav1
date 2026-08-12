@@ -129,10 +129,20 @@ export default function HomePage() {
     <KioskLayout showBack={false} showBrand={false}>
       <div className={styles.page}>
         <header className={styles.hero}>
-          <div className={styles.heroBrand}>
-            <WindRose className={styles.heroRose} />
-            <Brandmark size="md" withDescriptor />
+          {/* HORIZONTE — o momento mais característico do lugar (pôr do sol
+              sobre a baía) literalizado com as cores da marca: sol dourado
+              (rosa dos ventos) nascendo sobre o mar azul profundo, com o
+              vento riscando a cena. A Locanda flutua no horizonte. */}
+          <div className={styles.horizon}>
+            <span className={styles.windLines} aria-hidden="true">
+              <span className={styles.windLine} />
+              <span className={styles.windLine} />
+              <span className={styles.windLine} />
+            </span>
+            <WindRose className={styles.sun} aria-hidden="true" />
+            <Brandmark tone="dark" size="lg" withDescriptor />
           </div>
+          <p className={styles.eyebrow}>{t.home.homeEyebrow}</p>
           <h1 className={styles.welcome}>{tx(identity.homeWelcome)}</h1>
           <p className={styles.intro}>{tx(identity.homeIntro)}</p>
         </header>

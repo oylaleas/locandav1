@@ -40,6 +40,7 @@ export const ptBR = {
     galleryCta: 'Ver galeria de fotos',
     scrollHint: 'Deslize para ver mais',
     experienceHubTitle: 'Locanda Experience',
+    homeEyebrow: 'Ilha do Guajiru · Itarema · Ceará',
     experienceHubIntro: 'Toque em uma categoria para começar.',
     amenitiesCta: 'Comodidades',
     amenitiesCtaDesc: 'Wi-Fi, estacionamento, beach tennis, fitness e mais.',

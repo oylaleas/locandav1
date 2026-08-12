@@ -112,6 +112,12 @@ export function AttractMode({ onActivate }: AttractModeProps) {
         </div>
       )}
 
+      <span className={styles.windLines} aria-hidden="true">
+        <span className={styles.windLine} />
+        <span className={styles.windLine} />
+        <span className={styles.windLine} />
+      </span>
+
       <div className={cn(styles.content, pressed && styles.contentPressed)}>
         <div className={styles.brandBlock}>
           {/* Gráfico decorativo de interação inspirado na rosa dos ventos
