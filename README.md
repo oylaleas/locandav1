@@ -20,8 +20,22 @@ npm run dev        # http://localhost:5173
 | `npm run preview` | Serve o build de produção (com Service Worker ativo)    |
 | `npm test`        | Testes (Vitest + Testing Library)                       |
 | `npm run lint`    | ESLint (TypeScript + regras de hooks)                   |
+| `npm run build:artifact` | Empacota o totem em UM HTML autocontido (`dist-artifact/`) |
+| `bash scripts/bundle-artifact.sh` | Gera `bundle.html` na raiz (mesmo artifact, pronto para abrir) |
 
 > O Service Worker só é registrado em **produção** (`npm run build && npm run preview`).
+
+### Artifact de arquivo único (`bundle.html`)
+
+O fluxo "Web Artifacts Builder" foi adaptado ao stack do projeto
+(`scripts/bundle-artifact.sh` usa npm + Vite + `vite-plugin-singlefile` em
+vez de pnpm + Parcel + `html-inline` — mesmo resultado, menos dependências).
+O bundle é o totem inteiro (JS, CSS, fotos e vídeos em base64) em um único
+HTML, com `HashRouter` e sem Service Worker — abre de qualquer lugar
+(`file://`, pen drive, e-mail), sem servidor. A entrada do artifact é
+`index.artifact.html` + `src/artifact-main.tsx`; o PWA de produção
+(`src/main.tsx` + `BrowserRouter` + SW) não muda. `bundle.html` e
+`dist-artifact/` são gerados (ignorados pelo git).
 
 ---
 

@@ -1,6 +1,7 @@
 node_modules
 dist
 dist-ssr
+dist-artifact
 coverage
 *.local
 .DS_Store
@@ -8,3 +9,5 @@ coverage
 .env
 .env.*
 !.env.example
+# Artifact de arquivo único — gerado por scripts/bundle-artifact.sh
+bundle.html
