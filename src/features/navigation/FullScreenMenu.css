@@ -1,0 +1,276 @@
+/* ==========================================================================
+   FULLSCREEN MENU — navegação fullscreen premium
+   --------------------------------------------------------------------------
+   CSS final da navegação reconstruída (substitui o CSS antigo por
+   completo). Organizado por camadas:
+
+     1. Toggle (hamburger → X)
+     2. Overlay / camadas de fundo (scaleY)
+     3. Painel (clip-path)
+     4. Cabeçalho / links / rodapé (SplitText mascara as linhas)
+     5. Responsive
+     6. Acessibilidade (reduced-motion, foco)
+
+   Identidade cromática da Locanda (azul profundo + dourado da marca) —
+   as camadas verdes do exemplo pertencem ao site de referência; o totem
+   é 100% baseado nas logos, conforme direção aprovada.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- 1. TOGGLE */
+
+#menuBtn.nav-toggler {
+  position: relative;
+  z-index: calc(var(--z-modal) + 1); /* acima do overlay quando aberto */
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+#menuBtn .nav-toggler__line {
+  display: block;
+  width: 1.75rem;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--color-text-primary);
+  transition:
+    transform var(--motion-fast) var(--easing-standard),
+    background-color var(--motion-fast) var(--easing-standard);
+}
+
+/* Hamburger → X: as duas linhas cruzam e encolhem (fiel ao briefing). */
+#menuBtn.nav-toggler--open .nav-toggler__line:first-child {
+  transform: translateY(4px) rotate(45deg) scaleX(0.8);
+}
+
+#menuBtn.nav-toggler--open .nav-toggler__line:last-child {
+  transform: translateY(-4px) rotate(-45deg) scaleX(0.8);
+}
+
+#menuBtn:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ----------------------------------------------------- 2. OVERLAY + CAMADAS */
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  width: 100%;
+  height: 100dvh;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--motion-fast) var(--easing-standard),
+    visibility var(--motion-fast) var(--easing-standard);
+}
+
+.menu--visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Camadas de fundo: crescem do topo em cascata (scaleY, animadas por GSAP). */
+.menu__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin: top;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.menu__bg--1 {
+  background: var(--palette-brand-blue-700);
+}
+
+.menu__bg--2 {
+  background: var(--palette-brand-blue-800);
+}
+
+.menu__bg--3 {
+  background: var(--palette-brand-blue-950);
+}
+
+/* --------------------------------------------------------------- 3. PAINEL */
+
+.menu__panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: calc(var(--space-2xl) + var(--kiosk-safe-top)) var(--kiosk-gutter)
+    calc(var(--space-xl) + var(--kiosk-safe-bottom));
+  background:
+    radial-gradient(110% 70% at 85% 0%, rgba(241, 177, 0, 0.12) 0%, rgba(4, 43, 71, 0) 48%),
+    linear-gradient(165deg, var(--palette-brand-blue-900) 0%, var(--palette-brand-blue-950) 62%, #010f1a 100%);
+  color: var(--color-text-inverse);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%); /* revelado por GSAP */
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------- 4. CONTEÚDO */
+
+.menu__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  flex-shrink: 0;
+}
+
+.menu__eyebrow {
+  font-family: var(--font-data);
+  font-size: var(--font-size-3xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: var(--palette-brand-gold-400);
+}
+
+.menu__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--font-size-2xl);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text-inverse);
+}
+
+.menu__nav {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+.menu__primary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Links primários — serif display grande (a voz da marca). */
+.menu__link--primary {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 6.5vh, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text-inverse);
+  text-decoration: none;
+  padding-block: var(--space-2xs);
+  transition: color var(--motion-fast) var(--easing-standard);
+}
+
+.menu__link--primary:active {
+  color: var(--palette-brand-gold-400);
+}
+
+.menu__link--primary:focus-visible,
+.menu__link--foot:focus-visible {
+  outline: 3px solid var(--color-focus-ring-inverse);
+  outline-offset: 4px;
+  border-radius: var(--radius-xs);
+}
+
+/* Rodapé — contatos em mono (leitura de instrumento). */
+.menu__foot {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding-top: var(--space-sm);
+  border-top: 1px solid rgba(247, 242, 233, 0.14);
+}
+
+.menu__foot-label {
+  margin: 0;
+  font-family: var(--font-data);
+  font-size: var(--font-size-3xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: var(--color-text-inverse-secondary);
+}
+
+.menu__foot-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu__link--foot {
+  display: inline-block;
+  font-family: var(--font-data);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--color-text-inverse);
+  text-decoration: none;
+  padding-block: var(--space-2xs);
+  transition: color var(--motion-fast) var(--easing-standard);
+}
+
+.menu__link--foot:active {
+  color: var(--palette-brand-gold-400);
+}
+
+/* Linhas geradas pelo SplitText — máscara de revelação. */
+.menu__line {
+  display: block;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------- 5. RESPONSIVE */
+
+@media (max-width: 40rem) {
+  .menu__panel {
+    padding: calc(var(--space-xl) + var(--kiosk-safe-top)) var(--space-lg)
+      calc(var(--space-lg) + var(--kiosk-safe-bottom));
+  }
+
+  .menu__link--primary {
+    font-size: clamp(1.6rem, 7.5vh, 2.4rem);
+  }
+
+  .menu__foot-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------------------------------------------- 6. ACESSIBILIDADE */
+
+@media (prefers-reduced-motion: reduce) {
+  #menuBtn .nav-toggler__line {
+    transition: none;
+  }
+}

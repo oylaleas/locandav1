@@ -51,7 +51,7 @@ Dependências de runtime — apenas três, todas justificadas:
 | `react`/`react-dom`| Base da aplicação                                                            |
 | `react-router-dom` | Rotas reais (`/home`, `/conteudos/:slug`, `/galeria`, `/bem-estar`, `/experiencias-e-passeios`) e handoff para mobile  |
 | `qrcode`           | Codificação QR (Reed-Solomon/máscaras) — carregada sob demanda (import dinâmico) |
-| `gsap`             | Menu lateral animado (estilo "Awwwards") — carregado sob demanda (import dinâmico, chunk separado) |
+| `gsap`             | Menu fullscreen premium (timeline + SplitText) — carregado sob demanda (imports dinâmicos, chunks separados) |
 
 Nada de biblioteca de estado global, UI kit, ícones externos ou fontes remotas
 (as fontes são stacks do sistema, o que garante funcionamento 100% offline).
@@ -118,14 +118,14 @@ HOME (LOCANDA EXPERIENCE)
 Todas as seções novas são data-driven em `src/data/content.ts` (PT/EN/IT) e
 reutilizam `ContentDetailPage`, `KioskLayout`, QR, galeria e vídeo existentes.
 
-**Menu lateral (todas as telas):** botão "Menu" na barra de ações abre um
-painel animado com GSAP (timeline única pausada — `tl.play()`/`tl.reverse()`)
-estilo "Awwwards": painel expande do canto, links entram com flip 3D em
-cascata e o rodapé sobe com fade. Inclui as 6 categorias, acessos rápidos e
-contatos (WhatsApp/Instagram/Site/Reservas) via QR de handoff. Acessível:
-`aria-expanded`, focus trap, `Esc` fecha, fecha no session reset e ao
-navegar; "reduzir animações" torna tudo instantâneo. GSAP carregado sob
-demanda (chunk separado).
+**Menu fullscreen (todas as telas):** botão hamburger na barra de ações abre
+uma navegação fullscreen premium com GSAP + SplitText (timeline única
+pausada — `tl.play()`/`tl.reverse()`): camadas de fundo em `scaleY` (azuis
+da marca), painel revelado por `clip-path` e links que sobem linha a linha
+(máscara SplitText), rodapé com contatos (WhatsApp/Instagram/Site/Reservas)
+via QR de handoff. Acessível: `aria-expanded`, focus trap, `Esc` fecha,
+fecha no session reset e ao navegar; "reduzir animações" torna tudo
+instantâneo. GSAP + SplitText carregados sob demanda (chunks separados).
 
 - **Attract Mode**: composição limpa e sem fotografias — identidade oficial
   (logo branca + rosa dos ventos decorativa) sobre fundo escuro, com orbe de

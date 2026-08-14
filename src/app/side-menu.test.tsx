@@ -34,10 +34,10 @@ describe('menu lateral (side menu)', () => {
       'Experiências e passeios',
       'Kite Center',
     ]) {
-      expect(within(dialog).getByRole('button', { name: new RegExp(label) })).toBeInTheDocument();
+      expect(within(dialog).getByRole('link', { name: new RegExp(label) })).toBeInTheDocument();
     }
 
-    await user.click(within(dialog).getByRole('button', { name: /Kite Center/ }));
+    await user.click(within(dialog).getByRole('link', { name: /Kite Center/ }));
     expect(await screen.findByRole('heading', { level: 1, name: 'Kite Center' })).toBeVisible();
     await waitMenuClosed();
   });
@@ -59,7 +59,7 @@ describe('menu lateral (side menu)', () => {
     await user.click(screen.getByRole('button', { name: 'Abrir menu' }));
     const dialog = await screen.findByRole('dialog', { name: 'Navegação principal' });
 
-    await user.click(within(dialog).getByRole('button', { name: /WhatsApp/ }));
+    await user.click(within(dialog).getByRole('link', { name: /WhatsApp/ }));
 
     const qrDialog = await screen.findByRole('dialog');
     expect(

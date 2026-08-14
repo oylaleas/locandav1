@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { AccessibilityControl } from '@/features/a11y/AccessibilityControl';
 import { OfflineIndicator } from '@/features/connectivity/OfflineIndicator';
 import { LanguageSelector } from '@/features/i18n/LanguageSelector';
-import { SideMenu } from '@/features/navigation/SideMenu';
+import { FullScreenMenu } from '@/features/navigation/FullScreenMenu';
 import { useI18n } from '@/features/i18n/useI18n';
 import { useKioskNavigation } from '@/app/navigation';
 import { cn } from '@/utils/cn';
@@ -108,7 +108,7 @@ export function KioskLayout({
         <div className={styles.actionGroup}>
           <LanguageSelector />
           <AccessibilityControl />
-          <SideMenu />
+          <FullScreenMenu />
         </div>
       </nav>
     </div>
