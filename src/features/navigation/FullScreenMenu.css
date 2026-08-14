@@ -180,11 +180,13 @@
   font-family: var(--font-display);
   font-weight: 600;
   font-size: clamp(1.9rem, 6.5vh, 3.4rem);
-  line-height: 1.08;
+  /* Altura de linha folgada: o serif tem descendentes/acentos longos e a
+     máscara do SplitText corta se o line-height for apertado (1.08). */
+  line-height: 1.22;
   letter-spacing: var(--letter-spacing-tight);
   color: var(--color-text-inverse);
   text-decoration: none;
-  padding-block: var(--space-2xs);
+  padding-block: 0.08em;
   transition: color var(--motion-fast) var(--easing-standard);
 }
 
@@ -244,10 +246,14 @@
   color: var(--palette-brand-gold-400);
 }
 
-/* Linhas geradas pelo SplitText — máscara de revelação. */
+/* Linhas geradas pelo SplitText — máscara de revelação.
+   O padding em Y dá respiro dentro da máscara: garante que nenhuma letra
+   (g, p, q, ç, acentos) seja cortada na revelação ou no estado final. */
 .menu__line {
   display: block;
   overflow: hidden;
+  padding-block: 0.16em;
+  margin-block: -0.08em;
 }
 
 /* ------------------------------------------------------------- 5. RESPONSIVE */

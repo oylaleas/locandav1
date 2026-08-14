@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Brandmark } from '@/components/layout/Brandmark';
 import { SmartImage } from '@/components/ui/SmartImage';
 import { WindRose } from '@/components/ui/WindRose';
-import { ATTRACT_SLIDE_DURATION_MS, FEATURE_FLAGS } from '@/config/kiosk';
+import { FEATURE_FLAGS } from '@/config/kiosk';
 import { useAccessibility } from '@/features/a11y/AccessibilityProvider';
 import { useI18n } from '@/features/i18n/useI18n';
 import { getAttractImages, getAttractVideo, getSiteIdentity } from '@/services/contentService';
@@ -15,15 +15,16 @@ interface AttractModeProps {
 }
 
 /**
- * ATTRACT MODE
- * --------------------------------------------------------------------------
- * Tela ociosa do totem — composição LIMPA, sem fotografias:
- * identidade oficial (logo branca) + rosa dos ventos decorativa + chamada
- * de toque ampla e elegante.
+ * ATTRACT MODE — tela ociosa do totem.
  *
- * A camada de mídia (vídeo autoplay com poster / carrossel de fotos) segue
- * preparada no código e é reativada via FEATURE_FLAGS.attractUsesMedia
- * quando o material oficial chegar.
+ * Composição ancorada na REALIDADE da Locanda: a fotografia aérea real do
+ * hotel (baía flat water) serve de fundo, sob um scrim azul profundo da
+ * marca que garante legibilidade. Sobre ela: o vento riscando a cena, a
+ * localização em mono, o lockup branco, o subhead e o orbe de toque
+ * dourado.
+ *
+ * Quando o vídeo institucional oficial chegar, FEATURE_FLAGS.attractUsesMedia
+ * + attractUsesVideo trocam a foto pelo vídeo autoplay (fallback: foto).
  *
  * O primeiro toque NUNCA depende de mídia: a camada de ativação cobre a
  * tela inteira desde o primeiro frame.
@@ -33,26 +34,18 @@ export function AttractMode({ onActivate }: AttractModeProps) {
   const { motionReduced } = useAccessibility();
   const identity = getSiteIdentity();
   const video = getAttractVideo();
-  const images = getAttractImages();
+  const [attractImage] = getAttractImages();
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoFailed, setVideoFailed] = useState(false);
-  const [slide, setSlide] = useState(0);
   const [pressed, setPressed] = useState(false);
 
-  const useMedia = FEATURE_FLAGS.attractUsesMedia;
   const useVideo =
-    useMedia && FEATURE_FLAGS.attractUsesVideo && Boolean(video) && !videoFailed && !motionReduced;
-
-  // Carrossel de imagens (apenas no modo com mídia): fallback do vídeo e
-  // opção quando o movimento é reduzido.
-  useEffect(() => {
-    if (!useMedia || useVideo || images.length <= 1) return;
-    const interval = window.setInterval(() => {
-      setSlide((current) => (current + 1) % images.length);
-    }, ATTRACT_SLIDE_DURATION_MS);
-    return () => window.clearInterval(interval);
-  }, [useMedia, useVideo, images.length]);
+    FEATURE_FLAGS.attractUsesMedia &&
+    FEATURE_FLAGS.attractUsesVideo &&
+    Boolean(video) &&
+    !videoFailed &&
+    !motionReduced;
 
   useEffect(() => {
     const element = videoRef.current;
@@ -62,7 +55,7 @@ export function AttractMode({ onActivate }: AttractModeProps) {
     const attempt = element.play();
     if (attempt && typeof attempt.catch === 'function') {
       attempt.catch(() => {
-        // Autoplay bloqueado: cai para as fotografias, sem travar nada.
+        // Autoplay bloqueado: cai para a fotografia, sem travar nada.
         setVideoFailed(true);
       });
     }
@@ -75,42 +68,35 @@ export function AttractMode({ onActivate }: AttractModeProps) {
 
   return (
     <div className={styles.root} data-surface="inverse" data-testid="attract-mode">
-      {useMedia && (
-        <div className={styles.mediaLayer} aria-hidden="true">
-          {useVideo && video ? (
-            <video
-              ref={videoRef}
-              className={styles.video}
-              src={video.src}
-              poster={video.poster}
-              muted
-              loop
-              playsInline
-              autoPlay
-              preload={video.preload}
-              disablePictureInPicture
-              onError={() => setVideoFailed(true)}
-              onStalled={() => setVideoFailed(true)}
+      <div className={styles.mediaLayer} aria-hidden="true">
+        {useVideo && video ? (
+          <video
+            ref={videoRef}
+            className={styles.video}
+            src={video.src}
+            poster={video.poster}
+            muted
+            loop
+            playsInline
+            autoPlay
+            preload={video.preload}
+            disablePictureInPicture
+            onError={() => setVideoFailed(true)}
+            onStalled={() => setVideoFailed(true)}
+          />
+        ) : (
+          attractImage && (
+            <SmartImage
+              asset={attractImage}
+              aspectRatio="auto"
+              priority
+              decorative
+              className={styles.backdropImage}
             />
-          ) : (
-            images.map((image, index) => (
-              <div
-                key={image.id}
-                className={cn(styles.slide, index === slide && styles.slideActive)}
-              >
-                <SmartImage
-                  asset={image}
-                  aspectRatio="auto"
-                  priority={index === 0}
-                  decorative
-                  className={styles.slideImage}
-                />
-              </div>
-            ))
-          )}
-          <div className={styles.scrim} />
-        </div>
-      )}
+          )
+        )}
+        <div className={styles.scrim} />
+      </div>
 
       <span className={styles.windLines} aria-hidden="true">
         <span className={styles.windLine} />
@@ -120,9 +106,7 @@ export function AttractMode({ onActivate }: AttractModeProps) {
 
       <div className={cn(styles.content, pressed && styles.contentPressed)}>
         <div className={styles.brandBlock}>
-          {/* Gráfico decorativo de interação inspirado na rosa dos ventos
-              da logo — NUNCA substitui o logotipo oficial (ao lado). */}
-          <WindRose className={styles.windRose} />
+          <p className={styles.eyebrow}>{t.home.homeEyebrow}</p>
           <Brandmark tone="dark" size="lg" withDescriptor />
           <p className={styles.subhead}>{tx(identity.attractSubhead)}</p>
         </div>
@@ -134,7 +118,7 @@ export function AttractMode({ onActivate }: AttractModeProps) {
           </span>
           <p className={styles.cta}>{tx(identity.attractCallToAction)}</p>
           <p className={styles.languages}>{t.attract.languagesAvailable}</p>
-          {useMedia && videoFailed && FEATURE_FLAGS.attractUsesVideo && (
+          {useVideo && videoFailed && (
             <p className={styles.mediaNotice}>{t.attract.videoUnavailable}</p>
           )}
         </div>
