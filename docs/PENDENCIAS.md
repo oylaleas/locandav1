@@ -10,8 +10,7 @@ todos os pontos têm placeholder claramente identificado ou abstração pronta p
 | Item | Onde trocar | Situação |
 | --- | --- | --- |
 | Logotipo oficial (PNG, 4 variações) | `src/assets/brand/` + `BRAND_ASSETS` | **✅ Recebido e integrado** — lockup dourado/branco no `<Brandmark/>` (placa escura em fundos claros, direto no Attract), emblema nos ícones PWA. Vetor SVG original continua bem-vindo para nitidez máxima em telas grandes |
-| Fotografias reais | `src/assets/images/` + `IMAGE_ASSETS` | **✅ 8 fotos recebidas (3f3fc2c) e integradas** — aéreas de drone, praia e foto institucional. Mapeamento foto→seção proposto e marcado `[MAPPING A CONFIRMAR]`; faltam fotos específicas de gastronomia e acomodações |
-| Vídeo institucional e de experiências | `src/assets/videos/` + `VIDEO_ASSETS` | 3 clipes técnicos gerados apenas para validar o player |
+| Fotografias reais | `src/assets/images/` + `IMAGE_ASSETS` | **✅ 8 fotos integradas** — aéreas de drone, praia e foto institucional. **49 fotos novas aguardando envio** (anexos não persistem no sandbox; enviar via GitHub ou link) — curadoria definida em `docs/CURADORIA.md` + `scripts/analyze-photos.py` || Vídeo institucional e de experiências | `src/assets/videos/` + `VIDEO_ASSETS` | 3 clipes técnicos gerados apenas para validar o player |
 | Legendas (.vtt) revisadas nos 3 idiomas | `public/captions/` | Placeholders `[LEGENDA A DEFINIR]` |
 | Textos institucionais (todas as seções) | `src/data/content.ts` | **✅ Compilados do site oficial** (locandadeiventi.com.br) — Sobre, estrutura, acomodações (2 suítes Frente Mar), gastronomia (Chef Léo Parente, Nau Rooftop), experiências (esportes aquáticos, Soulkite), arredores e como chegar |
 | Endereço, telefone, e-mail, site | `SITE_IDENTITY.contact` | **✅ Reais** — Av. Costeira S/N, Ilha do Guajiru/CE; +55 88 99219-1175; locanda@locandadeiventi.com.br; locandadeiventi.com.br (`hasRealData: true`) |
