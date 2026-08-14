@@ -16,7 +16,21 @@
 }
 
 .title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-tight);
   font-size: var(--font-size-3xl);
+}
+
+/* Marcador dourado acima do título — linguagem do hub (linha do horizonte). */
+.title::before {
+  content: '';
+  display: block;
+  width: 2.5rem;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--color-accent-strong), var(--palette-brand-gold-400));
+  margin: 0 auto var(--space-2xs);
 }
 
 .intro {

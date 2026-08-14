@@ -119,8 +119,27 @@
   z-index: 1;
 }
 
+/* Linha do mar — o reflexo do sol dourado na base do horizonte, com o pico
+   de brilho onde o sol toca a água (à direita). Âncora a cena do pôr do sol. */
+.horizon::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 2px;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    transparent 42%,
+    rgba(241, 177, 0, 0.65) 58%,
+    rgba(241, 177, 0, 0.25) 68%,
+    transparent 78%
+  );
+  opacity: 0.85;
+}
+
 .eyebrow {
   margin-top: var(--space-xs);
+  font-family: var(--font-data);
   font-size: var(--font-size-3xs);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-widest);

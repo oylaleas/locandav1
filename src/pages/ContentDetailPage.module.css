@@ -26,6 +26,7 @@
 }
 
 .eyebrow {
+  font-family: var(--font-data);
   font-size: var(--font-size-3xs);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-widest);
@@ -33,7 +34,11 @@
   color: var(--color-text-inverse-secondary);
 }
 
+
 .title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-tight);
   font-size: var(--font-size-3xl);
   color: var(--color-text-inverse);
 }
