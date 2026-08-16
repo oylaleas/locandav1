@@ -37,6 +37,24 @@
   width: 100%;
 }
 
+/* Fallback sem fotografia: bloco de marca com a rosa dos ventos. */
+.mediaFallback {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background:
+    radial-gradient(110% 85% at 18% 0%, rgba(20, 113, 181, 0.45) 0%, rgba(4, 43, 71, 0) 55%),
+    linear-gradient(165deg, var(--palette-brand-blue-800) 0%, var(--palette-brand-blue-950) 100%);
+}
+
+.mediaFallbackRose {
+  width: 34%;
+  max-width: 6rem;
+  height: auto;
+  color: rgba(241, 177, 0, 0.55);
+}
+
 .optionsBadge {
   position: absolute;
   top: var(--space-sm);

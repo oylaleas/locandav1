@@ -94,10 +94,13 @@ Regras de organização:
 ## Jornada implementada
 
 ```
-ATTRACT ──toque──▶ HOME ──▶ CONTEÚDOS ──▶ DETALHE ──▶ FOTOS / VÍDEO / QR
-   ▲                                                        │
-   └──── RESET (inatividade, "encerrar" ou Início) ◀────────┘
+HOME (menu inicial) ──▶ CONTEÚDOS ──▶ DETALHE ──▶ VÍDEO / QR
+   ▲                                               │
+   └──── RESET (inatividade, "encerrar" ou Início) ─┘
 ```
+
+> **Sem tela inicial (Attract Mode)** — decisão do responsável: o totem abre
+> direto no menu/Home. O reset (inatividade) também volta para a Home.
 
 A Home funciona como HUB "LOCANDA EXPERIENCE" com as seis áreas principais
 (todas dentro da mesma árvore de sessão, inatividade e reset):
@@ -127,14 +130,12 @@ via QR de handoff. Acessível: `aria-expanded`, focus trap, `Esc` fecha,
 fecha no session reset e ao navegar; "reduzir animações" torna tudo
 instantâneo. GSAP + SplitText carregados sob demanda (chunks separados).
 
-- **Attract Mode**: composição limpa e sem fotografias — identidade oficial
-  (logo branca + rosa dos ventos decorativa) sobre fundo escuro, com orbe de
-  toque amplo e chamada "Toque na tela para começar". A camada de mídia
-  (vídeo autoplay com poster / carrossel de fotos) segue preparada e é
-  reativada por `FEATURE_FLAGS.attractUsesMedia` quando o material oficial
-  chegar. A camada de toque cobre a tela inteira e **nunca** depende de mídia.
-- **Inatividade**: `90 s` → aviso com contagem de `20 s` → reset. Vídeo em reprodução suspende
-  o contador (com teto absoluto de sessão de `15 min`). Valores em `src/config/kiosk.ts`.
+- **Sem fotografias** (decisão do responsável): toda a interface é limpa de
+  imagens — cards usam o bloco de marca com a rosa dos ventos, os topo de
+  seção/passeio usam o gradiente da marca e a galeria foi removida.
+- **Inatividade**: `90 s` → aviso com contagem de `20 s` → reset (volta à Home).
+  Vídeo em reprodução suspende o contador (com teto absoluto de sessão de `15 min`).
+  Valores em `src/config/kiosk.ts`.
 - **`resetSession()`**: para vídeos, restaura mute/legendas, fecha modais e galerias, volta o
   idioma e a acessibilidade ao padrão, limpa a navegação e remonta a árvore da aplicação.
 - **Privacidade**: nada do visitante é gravado em `localStorage`/`sessionStorage`/IndexedDB.
@@ -146,7 +147,7 @@ instantâneo. GSAP + SplitText carregados sob demanda (chunks separados).
 A **logotipia oficial** e as **fotografias reais** já foram integradas
 (4 variações em `src/assets/brand/` + 8 fotos em `src/assets/images/`).
 Uso das logos: lockup colorido em superfícies claras (placa escura no
-`<Brandmark/>`), lockup branco direto no Attract Mode, emblema nos ícones
+`<Brandmark/>`), lockup branco nas superfícies escuras, emblema nos ícones
 PWA/favicon/offline. A única imagem criada além das oficiais é o gráfico
 decorativo `WindRose` (rosa dos ventos inspirada na logo), usado como marca
 d'água de interação — nunca como logotipo.
@@ -183,7 +184,7 @@ Ainda **placeholder** — para trocar:
 | Imagens           | cache-first (teto de 80 entradas)                          |
 | **Vídeos**        | **sem cache** (Range requests + risco de estourar a cota)  |
 
-Atualizações do Service Worker são aplicadas **somente quando o totem volta ao Attract Mode** —
+Atualizações do Service Worker são aplicadas **somente quando o visitante está na Home** —
 nunca no meio de uma visita.
 
 ---

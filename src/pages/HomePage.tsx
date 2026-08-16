@@ -95,12 +95,6 @@ export default function HomePage() {
         title: t.home.exploreAll,
         onSelect: () => navigation.push(ROUTES.contentIndex),
       },
-      {
-        key: 'gallery',
-        icon: 'gallery' as const,
-        title: t.home.galleryCta,
-        onSelect: () => navigation.push(ROUTES.gallery),
-      },
       ...(qrTarget
         ? [
             {

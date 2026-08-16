@@ -1,6 +1,7 @@
 import { Badge } from '@/components/ui/Badge';
 import { Icon } from '@/components/ui/Icon';
 import { SmartImage } from '@/components/ui/SmartImage';
+import { WindRose } from '@/components/ui/WindRose';
 import { FEATURE_FLAGS } from '@/config/kiosk';
 import { useI18n } from '@/features/i18n/useI18n';
 import { useTapGuard } from '@/hooks/useTapGuard';
@@ -16,7 +17,6 @@ interface ContentCardProps {
   image?: ImageAsset;
   icon?: IconName;
   hasVideo?: boolean;
-  photoCount?: number;
   pendingContent?: boolean;
   onSelect: () => void;
   /** Destaque visual (primeiro item da Home). */
@@ -36,14 +36,13 @@ export function ContentCard({
   image,
   icon,
   hasVideo = false,
-  photoCount,
   pendingContent = false,
   onSelect,
   featured = false,
   layout = 'vertical',
   priority = false,
 }: ContentCardProps) {
-  const { t, fmt } = useI18n();
+  const { t } = useI18n();
   const handleSelect = useTapGuard(onSelect);
 
   return (
@@ -57,23 +56,26 @@ export function ContentCard({
       onClick={handleSelect}
     >
       <span className={styles.media}>
-        <SmartImage
-          asset={image}
-          useThumb={!featured}
-          priority={priority}
-          aspectRatio={featured ? '16 / 10' : layout === 'horizontal' ? '1 / 1' : '4 / 3'}
-          decorative
-          className={styles.image}
-        />
+        {image ? (
+          <SmartImage
+            asset={image}
+            useThumb={!featured}
+            priority={priority}
+            aspectRatio={featured ? '16 / 10' : layout === 'horizontal' ? '1 / 1' : '4 / 3'}
+            decorative
+            className={styles.image}
+          />
+        ) : (
+          /* Sem fotografias no totem (decisão do responsável): o card usa o
+             bloco de marca com a rosa dos ventos como identidade visual. */
+          <span className={styles.mediaFallback} aria-hidden="true">
+            <WindRose className={styles.mediaFallbackRose} />
+          </span>
+        )}
         <span className={styles.mediaBadges}>
           {hasVideo && (
             <Badge tone="inverse" icon="play">
               {t.content.videoBadge}
-            </Badge>
-          )}
-          {typeof photoCount === 'number' && photoCount > 0 && (
-            <Badge tone="inverse" icon="gallery">
-              {fmt(t.content.photoCount, { count: photoCount })}
             </Badge>
           )}
           {FEATURE_FLAGS.showPlaceholderBadges && image?.isPlaceholder && (

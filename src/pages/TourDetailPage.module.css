@@ -7,22 +7,36 @@
 .hero {
   position: relative;
   isolation: isolate;
-}
-
-.heroImage {
-  width: 100%;
-}
-
-.heroOverlay {
-  position: absolute;
-  inset: auto 0 0 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-end;
   gap: var(--space-2xs);
+  min-height: clamp(10rem, 24vh, 15rem);
   padding: var(--space-2xl) var(--kiosk-gutter) var(--space-lg);
-  background: linear-gradient(180deg, rgba(15, 20, 18, 0) 0%, rgba(15, 20, 18, 0.88) 72%);
+  overflow: hidden;
+  /* Identidade de marca — sem fotografias (decisão do responsável). */
+  background:
+    radial-gradient(110% 90% at 18% 0%, rgba(20, 113, 181, 0.45) 0%, rgba(4, 43, 71, 0) 55%),
+    linear-gradient(165deg, var(--palette-brand-blue-800) 0%, var(--palette-brand-blue-950) 100%);
   color: var(--color-text-inverse);
+}
+
+/* Rosa dos ventos dourada — assinatura do topo do passeio. */
+.heroRose {
+  position: absolute;
+  right: 3%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(8rem, 16vh, 11rem);
+  height: auto;
+  color: rgba(241, 177, 0, 0.14);
+  pointer-events: none;
+}
+
+.hero > *:not(.heroRose) {
+  position: relative;
+  z-index: 1;
 }
 
 .eyebrow {
@@ -31,7 +45,7 @@
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-widest);
   text-transform: uppercase;
-  color: var(--color-text-inverse-secondary);
+  color: var(--palette-brand-gold-400);
 }
 
 

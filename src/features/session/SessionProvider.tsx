@@ -20,8 +20,7 @@ import { track } from '@/services/analytics';
 import type { SessionPhase, SessionResetReason, SessionState } from '@/types/session';
 
 export interface SessionContextValue extends SessionState {
-  beginSession: () => void;
-  /** Encerra a sessão, limpa tudo e volta ao Attract Mode. */
+  /** Encerra a sessão, limpa tudo e volta à Home (menu inicial). */
   resetSession: (reason?: SessionResetReason) => void;
   /** Resposta ao aviso de inatividade. */
   continueSession: () => void;
@@ -42,7 +41,8 @@ const ACTIVITY_EVENTS: Array<keyof DocumentEventMap> = [
 
 export function SessionProvider({ children }: { children: ReactNode }) {
   const media = useMedia();
-  const [phase, setPhase] = useState<SessionPhase>('attract');
+  // Sem Attract Mode: o totem abre direto com a sessão ativa (na Home).
+  const [phase, setPhase] = useState<SessionPhase>('active');
   const [sessionId, setSessionId] = useState(0);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [warningSecondsLeft, setWarningSecondsLeft] = useState(
@@ -52,10 +52,16 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   // Refs evitam re-render a cada toque: só o "tick" lê estes valores.
   const lastActivityRef = useRef(0);
   const warningStartedRef = useRef<number | null>(null);
-  const phaseRef = useRef<SessionPhase>('attract');
+  const phaseRef = useRef<SessionPhase>('active');
   const startedAtRef = useRef<number | null>(null);
   const sessionIdRef = useRef(0);
   const mediaPlayingRef = useRef(false);
+
+  // Início da sessão (marcado após a montagem — mantém o render puro).
+  useEffect(() => {
+    startedAtRef.current = startedAtRef.current ?? Date.now();
+    lastActivityRef.current = Date.now();
+  }, []);
 
   useEffect(() => {
     phaseRef.current = phase;
@@ -79,21 +85,6 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     lastActivityRef.current = Date.now();
   }, []);
 
-  const beginSession = useCallback(() => {
-    lastActivityRef.current = Date.now();
-    warningStartedRef.current = null;
-    setPhase((current) => {
-      if (current === 'active') return current;
-      return 'active';
-    });
-    setStartedAt((current) => current ?? Date.now());
-    setSessionId((current) => {
-      const next = current + 1;
-      track({ name: 'session_start', sessionId: next });
-      return next;
-    });
-  }, []);
-
   const resetSession = useCallback((reason: SessionResetReason = 'manual') => {
     const started = startedAtRef.current;
     track({
@@ -104,14 +95,15 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     });
 
     // Ordem importa: primeiro as features limpam (mídia, idioma, overlays),
-    // depois voltamos à fase de Attract.
+    // depois a árvore é remontada (sessionId++) e a sessão recomeça na Home.
     emitSessionReset(reason);
 
     warningStartedRef.current = null;
     lastActivityRef.current = Date.now();
     setWarningSecondsLeft(Math.ceil(WARNING_DURATION_MS / 1000));
-    setStartedAt(null);
-    setPhase('attract');
+    setStartedAt(Date.now());
+    setSessionId((current) => current + 1);
+    setPhase('active');
   }, []);
 
   const continueSession = useCallback(() => {
@@ -153,8 +145,6 @@ export function SessionProvider({ children }: { children: ReactNode }) {
    *  - AVISO sem resposta por WARNING_DURATION_MS → RESET → ATTRACT
    */
   useEffect(() => {
-    if (phase === 'attract') return;
-
     const interval = window.setInterval(() => {
       const now = Date.now();
 
@@ -192,21 +182,11 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       sessionId,
       startedAt,
       warningSecondsLeft,
-      beginSession,
       resetSession,
       continueSession,
       noteActivity,
     }),
-    [
-      phase,
-      sessionId,
-      startedAt,
-      warningSecondsLeft,
-      beginSession,
-      resetSession,
-      continueSession,
-      noteActivity,
-    ],
+    [phase, sessionId, startedAt, warningSecondsLeft, resetSession, continueSession, noteActivity],
   );
 
   return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;

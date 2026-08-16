@@ -14,7 +14,7 @@
    Quando existir CMS/API, apenas o service muda — a UI não.
    ========================================================================== */
 
-import type { ContentSection, GalleryDefinition, QrTarget, SiteIdentity } from '@/types/content';
+import type { ContentSection, QrTarget, SiteIdentity } from '@/types/content';
 
 export const SITE_IDENTITY: SiteIdentity = {
   name: 'Locanda dei Venti',
@@ -1035,15 +1035,3 @@ export const CONTENT_SECTIONS: ContentSection[] = [
   },
 ];
 
-export const GALLERIES: GalleryDefinition[] = [
-  {
-    id: 'gallery-principal',
-    title: { 'pt-BR': 'Galeria', en: 'Gallery', it: 'Galleria' },
-    description: {
-      'pt-BR': 'Imagens da Locanda dei Venti — fotos reais recebidas.',
-      en: 'Images of Locanda dei Venti — real photographs received.',
-      it: 'Immagini della Locanda dei Venti — fotografie reali ricevute.',
-    },
-    imageIds: ['img-01', 'img-05', 'img-02', 'img-06', 'img-03', 'img-04', 'img-07', 'img-attract'],
-  },
-];

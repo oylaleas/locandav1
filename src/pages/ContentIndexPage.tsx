@@ -4,7 +4,7 @@ import { EmptyState } from '@/components/states/StateMessage';
 import { ROUTES } from '@/config/kiosk';
 import { useKioskNavigation } from '@/app/navigation';
 import { useI18n } from '@/features/i18n/useI18n';
-import { getImage, getSections } from '@/services/contentService';
+import { getSections } from '@/services/contentService';
 import styles from './ContentIndexPage.module.css';
 
 export default function ContentIndexPage() {
@@ -32,9 +32,7 @@ export default function ContentIndexPage() {
                   eyebrow={tx(section.tagline)}
                   icon={section.icon}
                   description={tx(section.summary)}
-                  image={getImage(section.heroImageId)}
                   hasVideo={section.videoIds.length > 0}
-                  photoCount={section.galleryImageIds.length}
                   pendingContent={section.contentPending}
                   onSelect={() => navigation.push(ROUTES.contentDetail(section.slug))}
                 />

@@ -16,9 +16,8 @@ vi.mock('@/config/kiosk', async (importOriginal) => {
 });
 
 async function enterFromAttract() {
+  // Sem tela inicial: o totem abre direto no menu (Home).
   const { user } = renderWithProviders(<AppShell />, '/home');
-  const activate = await screen.findByTestId('attract-activate');
-  await user.click(activate);
   await screen.findByRole('heading', { name: 'Bem-vindo' });
   return { user };
 }
@@ -28,16 +27,13 @@ describe('jornada principal do totem', () => {
     window.history.replaceState({}, '', '/home');
   });
 
-  it('ATTRACT → primeiro toque → HOME', async () => {
-    expect.hasAssertions();
+  it('abre direto na HOME (sem tela inicial)', async () => {
     const { user } = renderWithProviders(<AppShell />, '/home');
 
-    expect(await screen.findByTestId('attract-mode')).toBeInTheDocument();
-
-    await user.click(screen.getByTestId('attract-activate'));
-
+    // Sem Attract Mode: o totem já nasce no menu inicial.
     expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
     expect(screen.queryByTestId('attract-mode')).not.toBeInTheDocument();
+    void user;
   });
 
   it('HOME → conteúdo → detalhe → VOLTAR volta para a Home', async () => {
@@ -107,19 +103,8 @@ describe('jornada principal do totem', () => {
     expect(await screen.findByRole('heading', { level: 1, name: 'Acomodações' })).toBeVisible();
   });
 
-  it('HOME → galeria → VOLTAR volta para a Home', async () => {
-    const { user } = await enterFromAttract();
-
-    await user.click(screen.getByRole('button', { name: /Ver galeria de fotos/i }));
-    expect(await screen.findByRole('heading', { level: 1, name: 'Galeria' })).toBeVisible();
-
-    await user.click(screen.getByRole('button', { name: 'Voltar' }));
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
-  });
-
   it('rota inexistente oferece saída para a Home', async () => {
     const { user } = renderWithProviders(<AppShell />, '/rota-inexistente');
-    await user.click(await screen.findByTestId('attract-activate'));
 
     await user.click(await screen.findByRole('button', { name: 'Início' }));
     expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
@@ -135,13 +120,15 @@ describe('jornada principal do totem', () => {
     expect(document.documentElement.lang).toBe('en');
   });
 
-  it('INATIVIDADE → AVISO → sem resposta → RESET → ATTRACT', async () => {
+  it('INATIVIDADE → AVISO → sem resposta → RESET → HOME (sem Attract)', async () => {
     await enterFromAttract();
 
     const warning = await screen.findByRole('heading', { name: 'Você ainda está aí?' }, { timeout: 3000 });
     expect(warning).toBeVisible();
 
-    expect(await screen.findByTestId('attract-mode', undefined, { timeout: 3000 })).toBeVisible();
+    // O reset volta ao estado inicial: a Home (a tela inicial foi removida).
+    expect(await screen.findByRole('heading', { name: 'Bem-vindo' }, { timeout: 3000 })).toBeVisible();
+    expect(screen.queryByTestId('attract-mode')).not.toBeInTheDocument();
   });
 
   it('AVISO → "Continuar navegando" mantém a sessão ativa', async () => {

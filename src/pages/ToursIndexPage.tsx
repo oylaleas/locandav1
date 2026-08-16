@@ -28,11 +28,10 @@ export default function ToursIndexPage() {
           <EmptyState message={t.tours.empty} onAction={navigation.home} />
         ) : (
           <ul className={styles.list}>
-            {tours.map((tour, index) => (
+            {tours.map((tour) => (
               <li key={tour.id}>
                 <TourCard
                   tour={tour}
-                  priority={index === 0}
                   onSelect={() => navigation.push(ROUTES.tourDetail(tour.slug))}
                 />
               </li>

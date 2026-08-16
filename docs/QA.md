@@ -5,13 +5,13 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 
 ## Funcionalidade / jornada (critério de pronto)
 
-- [x] ATTRACT → toque → HOME (`flows.test.tsx`)
+- [x] Totem abre DIRETO na Home — sem tela inicial (decisão do responsável)
 - [x] HOME → conteúdo → detalhe → VOLTAR → HOME
 - [x] HOME → índice de conteúdos → detalhe
 - [x] Detalhe → vídeo → fim do vídeo → QR → fechar → Início
 - [x] HOME → galeria → VOLTAR → HOME (rota lazy)
 - [x] Galeria → visualizador → próximo/anterior → fechar
-- [x] Inatividade → aviso → sem resposta → reset → Attract
+- [x] Inatividade → aviso → sem resposta → reset → Home
 - [x] Aviso → "Continuar navegando" mantém a sessão
 - [x] Rota inexistente → tela 404 com saída para a Home
 - [x] Nenhuma tela sem saída (todas têm Voltar + Início na barra inferior)
@@ -20,7 +20,7 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 
 ## Vídeo
 
-- [x] Attract Mode limpo sem fotos (decisão do responsável) — identidade + chamada de toque; mídia reativável via `FEATURE_FLAGS.attractUsesMedia`
+- [x] Sem tela inicial: o totem abre direto na Home (decisão do responsável)
 - [x] Poster sempre presente (nunca área preta)
 - [x] Play / Pause
 - [x] Estado de áudio textual ("Sem som"/"Com som"), não só ícone
@@ -33,7 +33,7 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 - [x] Replay e Close
 - [x] Somente um player ativo por vez (teste automatizado)
 - [x] Reset da sessão para o vídeo e restaura mute/legendas
-- [x] `preload="none"` nos vídeos de conteúdo (`metadata` só no Attract)
+- [x] `preload="none"` nos vídeos de conteúdo
 - [~] Fullscreen (implementado por CSS, sem Fullscreen API) — validar no navegador do totem
 
 ## QR Code
@@ -54,7 +54,7 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 - [x] Ícones 64/180/192/512 + maskable 512 (emblema oficial azul/dourado sobre fundo branco, fiel à logo)
 - [x] Service Worker com políticas separadas (shell / estáticos / imagens / vídeos)
 - [x] Fallback offline (`offline.html`)
-- [x] Atualização aplicada apenas no Attract Mode
+- [x] Atualização aplicada apenas quando o visitante está na Home
 - [x] Registro somente em produção
 - [x] Ícones definitivos com o logotipo oficial (emblema em `src/assets/brand/logo-1.png`)
 - [~] Instalação/startup no dispositivo real
@@ -154,7 +154,7 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 - [x] Paleta extraída das logos: azul `#065895` + dourado `#f1b100` em `src/styles/tokens.css`
 - [x] Botões primários e títulos de destaque em azul da marca; accent/detalhes em dourado
 - [x] Fundos inversos (placa da marca, QR, contato) em azul profundo `#042b47`
-- [x] Attract Mode com gradiente azul profundo + brilho dourado; orbe de toque em dourado da marca
+- [x] Superfícies de marca em azul profundo + dourado (hero, orbe, cards)
 - [x] Home com rosa dos ventos dourada ao fundo da marca; ícones de cards em azul suave
 - [x] Overlays de mídia (Modal dark, VideoPlayer) em azul profundo
 - [x] offline.html na paleta da marca
@@ -165,7 +165,7 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 - [x] **Assinatura (risco assumido)**: herói da Home é um HORIZONTE de pôr do sol sobre a baía — sol dourado (rosa dos ventos) nascendo recortado sobre o mar azul profundo, com o vento riscando a cena em linhas à deriva. As duas cores da marca viram elementos do lugar (o pôr do sol da Praia da Espraiada é produto real do totem)
 - [x] Cards do hub com "tick" dourado no topo (marcador de instrumento de vento/água); risco dourado sob o título do hub (linha do horizonte)
 - [x] **Tipografia de dados**: `--font-data` (mono) para horas, valores, contatos e rumos — leitura de instrumento náutico, coerente com destino de vento/água
-- [x] Vento à deriva também no Attract Mode (coesão entre as duas telas de marca)
+- [x] Sem fotografias em toda a interface (cards com bloco de marca + rosa dos ventos; galeria removida)
 - [x] Uma única assinatura; o resto quieto e disciplinado; reduced motion neutraliza tudo
 
 ## Menu fullscreen (GSAP + SplitText — reconstrução profissional)

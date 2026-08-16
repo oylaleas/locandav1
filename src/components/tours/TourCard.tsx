@@ -1,9 +1,8 @@
 import { Badge } from '@/components/ui/Badge';
 import { Icon } from '@/components/ui/Icon';
-import { SmartImage } from '@/components/ui/SmartImage';
+import { WindRose } from '@/components/ui/WindRose';
 import { useI18n } from '@/features/i18n/useI18n';
 import { useTapGuard } from '@/hooks/useTapGuard';
-import { getImage } from '@/services/contentService';
 import { formatTourPrice } from '@/services/toursService';
 import type { Tour } from '@/types/tours';
 import { cn } from '@/utils/cn';
@@ -13,8 +12,6 @@ interface TourCardProps {
   tour: Tour;
   onSelect: () => void;
   className?: string;
-  /** Imagens fora da dobra carregam sob demanda. */
-  priority?: boolean;
 }
 
 /**
@@ -22,10 +19,9 @@ interface TourCardProps {
  * Exibe: foto de capa, título, resumo, horário/valor (quando únicos) ou
  * contagem de opções (quando o passeio possui opções).
  */
-export function TourCard({ tour, onSelect, className, priority = false }: TourCardProps) {
+export function TourCard({ tour, onSelect, className }: TourCardProps) {
   const { t, tx, fmt } = useI18n();
   const handleSelect = useTapGuard(onSelect);
-  const cover = getImage(tour.coverImageId);
   const hasOptions = Boolean(tour.options && tour.options.length > 0);
 
   return (
@@ -35,14 +31,11 @@ export function TourCard({ tour, onSelect, className, priority = false }: TourCa
       onClick={handleSelect}
     >
       <span className={styles.media}>
-        <SmartImage
-          asset={cover}
-          useThumb={false}
-          priority={priority}
-          aspectRatio="16 / 9"
-          decorative
-          className={styles.image}
-        />
+        {/* Sem fotografias no totem (decisão do responsável) — a rosa dos
+            ventos da marca é a identidade do passeio. */}
+        <span className={styles.mediaFallback} aria-hidden="true">
+          <WindRose className={styles.mediaFallbackRose} />
+        </span>
         {hasOptions && (
           <Badge tone="inverse" icon="compass" className={styles.optionsBadge}>
             {fmt(t.tours.optionsBadge, { count: tour.options!.length })}

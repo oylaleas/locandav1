@@ -1,32 +1,28 @@
-import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Badge } from '@/components/ui/Badge';
 import { Icon } from '@/components/ui/Icon';
-import { SmartImage } from '@/components/ui/SmartImage';
+import { WindRose } from '@/components/ui/WindRose';
 import { TourOptionCard } from '@/components/tours/TourOptionCard';
 import { KioskLayout } from '@/components/layout/KioskLayout';
 import { ErrorState } from '@/components/states/StateMessage';
-import { GalleryGrid } from '@/features/gallery/GalleryGrid';
-import { GalleryViewer } from '@/features/gallery/GalleryViewer';
 import { VideoPlayer } from '@/features/media/VideoPlayer';
 import { useI18n } from '@/features/i18n/useI18n';
 import { useKioskNavigation } from '@/app/navigation';
-import { getImage, getImages, getVideo } from '@/services/contentService';
+import { getVideo } from '@/services/contentService';
 import { formatTourPrice, getTourBySlug } from '@/services/toursService';
 import { cn } from '@/utils/cn';
 import styles from './TourDetailPage.module.css';
 
 /**
  * DETALHE DO PASSEIO — hierarquia:
- * FOTO/VÍDEO → NOME → RESUMO → HORÁRIO → VALOR → ROTEIRO → INCLUI/NÃO INCLUI
- * → GALERIA/VÍDEO → VOLTAR.
+ * NOME → RESUMO → HORÁRIO → VALOR → ROTEIRO → INCLUI/NÃO INCLUI → VÍDEO.
+ * Sem fotografias (decisão do responsável): o topo usa a identidade da
+ * marca (rosa dos ventos) em vez de foto de capa.
  */
 export default function TourDetailPage() {
   const { t, tx, fmt } = useI18n();
   const navigation = useKioskNavigation();
   const { slug } = useParams();
   const tour = getTourBySlug(slug);
-  const [viewerIndex, setViewerIndex] = useState<number | null>(null);
 
   if (!tour) {
     return (
@@ -36,8 +32,6 @@ export default function TourDetailPage() {
     );
   }
 
-  const cover = getImage(tour.coverImageId);
-  const galleryImages = getImages(tour.galleryImageIds ?? []);
   const video = getVideo(tour.videoId);
   const hasOptions = Boolean(tour.options && tour.options.length > 0);
 
@@ -45,28 +39,13 @@ export default function TourDetailPage() {
     <KioskLayout title={tx(tour.title)} eyebrow={t.nav.youAreHere} bleed>
       <article className={styles.page}>
         <header className={styles.hero}>
-          <SmartImage
-            asset={cover}
-            useThumb={false}
-            priority
-            aspectRatio="16 / 9"
-            decorative
-            className={styles.heroImage}
-          />
-          <div className={styles.heroOverlay}>
-            <p className={styles.eyebrow}>{t.tours.indexTitle}</p>
-            <h1 className={styles.title}>{tx(tour.title)}</h1>
-          </div>
+          <WindRose className={styles.heroRose} aria-hidden="true" />
+          <p className={styles.eyebrow}>{t.tours.indexTitle}</p>
+          <h1 className={styles.title}>{tx(tour.title)}</h1>
         </header>
 
         <div className={styles.body}>
           <p className={styles.summary}>{tx(tour.shortDescription)}</p>
-
-          {tour.mediaPending && (
-            <Badge tone="neutral" icon="gallery" className={styles.mediaPending}>
-              {t.tours.mediaPendingNote}
-            </Badge>
-          )}
 
           {!hasOptions && tour.schedule && (
             <section className={styles.info} aria-label={t.tours.schedule}>
@@ -177,26 +156,8 @@ export default function TourDetailPage() {
             </section>
           )}
 
-          {galleryImages.length > 0 && (
-            <section className={styles.gallery} aria-labelledby="fotos-titulo">
-              <h2 id="fotos-titulo" className={styles.sectionTitle}>
-                {t.tours.photosTitle}
-              </h2>
-              <p className={styles.sectionIntro}>{t.tours.galleryIntro}</p>
-              <GalleryGrid images={galleryImages} onSelect={(index) => setViewerIndex(index)} />
-            </section>
-          )}
         </div>
       </article>
-
-      {viewerIndex !== null && (
-        <GalleryViewer
-          images={galleryImages}
-          startIndex={viewerIndex}
-          galleryId={`tour-${tour.id}`}
-          onClose={() => setViewerIndex(null)}
-        />
-      )}
     </KioskLayout>
   );
 }

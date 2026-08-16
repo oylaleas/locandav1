@@ -4,9 +4,8 @@ import { AppShell } from '@/app/AppShell';
 import { renderWithProviders } from '@/test/renderApp';
 
 async function enterFromAttract() {
+  // Sem tela inicial: o totem abre direto no menu (Home).
   const { user } = renderWithProviders(<AppShell />, '/home');
-  const activate = await screen.findByTestId('attract-activate');
-  await user.click(activate);
   await screen.findByRole('heading', { name: 'Bem-vindo' });
   return { user };
 }
