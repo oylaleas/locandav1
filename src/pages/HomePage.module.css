@@ -109,6 +109,66 @@
   min-height: clamp(6rem, 15vh, 10rem);
 }
 
+/* ------------------------------------------------------------------ VÍDEO */
+
+/* Card de vídeo institucional — mesma largura de coluna dos outros itens;
+   ocupa 2 linhas para acomodar a proporção vertical 9:16 sem esmagar o
+   player nem quebrar o grid (mosaico equilibrado). */
+.videoItem {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  grid-row: span 2;
+  animation: item-in 520ms var(--easing-decelerate) both;
+  animation-delay: calc(100ms + var(--i, 0) * 70ms);
+}
+
+.videoCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(20, 113, 181, 0.45) 0%, rgba(4, 43, 71, 0) 55%),
+    linear-gradient(165deg, var(--palette-brand-blue-800) 0%, var(--palette-brand-blue-950) 100%);
+  box-shadow: var(--elevation-1);
+}
+
+.videoHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-bottom: 1px solid rgba(247, 242, 233, 0.14);
+}
+
+.videoTitle {
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--color-text-inverse);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.videoWrapper {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  aspect-ratio: 9 / 16;
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* ------------------------------------------------------ KEYFRAMES */
 
 @keyframes item-in {
@@ -151,6 +211,16 @@
 
   .hubIntro {
     display: none;
+  }
+
+  /* Em telas baixas o vídeo ocupa 1 linha — o player se adapta ao
+     container (letterbox) sem estourar o grid. */
+  .videoItem {
+    grid-row: span 1;
+  }
+
+  .videoWrapper {
+    aspect-ratio: auto;
   }
 }
 

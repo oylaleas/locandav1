@@ -39,6 +39,8 @@ export const it: Dictionary = {
     experienceHubTitle: 'Locanda Experience',
     homeEyebrow: 'Ilha do Guajiru · Itarema · Ceará',
     experienceHubIntro: 'Tocca una categoria per iniziare.',
+    videoCardTitle: 'Un giorno alla Locanda',
+    videoCardBadge: 'Video',
     amenitiesCta: 'Servizi',
     amenitiesCtaDesc: 'Wi-Fi, parcheggio, beach tennis, fitness e altro.',
     happyHourCta: 'Happy Hour',

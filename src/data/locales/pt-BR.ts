@@ -42,6 +42,8 @@ export const ptBR = {
     experienceHubTitle: 'Locanda Experience',
     homeEyebrow: 'Ilha do Guajiru · Itarema · Ceará',
     experienceHubIntro: 'Toque em uma categoria para começar.',
+    videoCardTitle: 'Um dia na Locanda',
+    videoCardBadge: 'Vídeo',
     amenitiesCta: 'Comodidades',
     amenitiesCtaDesc: 'Wi-Fi, estacionamento, beach tennis, fitness e mais.',
     happyHourCta: 'Happy Hour',
