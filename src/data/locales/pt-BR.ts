@@ -54,7 +54,7 @@ export const ptBR = {
     wellnessCtaDesc: 'SPA & Beleza — Espaço Onoda: massagem & acupuntura.',
     toursCta: 'Experiências e passeios',
     toursCtaDesc: 'Passeios: Pôr do Sol, Moitas de Icaraí, Almofala.',
-    kiteCta: 'Kite Center',
+    kiteCta: 'Isla Kite Center',
     kiteCtaDesc: 'Kitesurf na baía de águas calmas.',
     siteCta: 'Site oficial',
     bookingsCta: 'Reservas',

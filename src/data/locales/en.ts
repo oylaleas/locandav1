@@ -51,7 +51,7 @@ export const en: Dictionary = {
     wellnessCtaDesc: 'SPA & Beauty — Espaço Onoda: massage & acupuncture.',
     toursCta: 'Experiences and tours',
     toursCtaDesc: 'Tours: Sunset, Moitas de Icaraí, Almofala.',
-    kiteCta: 'Kite Center',
+    kiteCta: 'Isla Kite Center',
     kiteCtaDesc: 'Kitesurf on the calm-water bay.',
     siteCta: 'Official website',
     bookingsCta: 'Bookings',

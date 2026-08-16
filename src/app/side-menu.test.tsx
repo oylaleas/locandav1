@@ -31,13 +31,13 @@ describe('menu lateral (side menu)', () => {
       'Serviços On Demand',
       'Bem-estar',
       'Experiências e passeios',
-      'Kite Center',
+      'Isla Kite Center',
     ]) {
       expect(within(dialog).getByRole('link', { name: new RegExp(label) })).toBeInTheDocument();
     }
 
-    await user.click(within(dialog).getByRole('link', { name: /Kite Center/ }));
-    expect(await screen.findByRole('heading', { level: 1, name: 'Kite Center' })).toBeVisible();
+    await user.click(within(dialog).getByRole('link', { name: /Isla Kite Center/ }));
+    expect(await screen.findByRole('heading', { level: 1, name: 'Isla Kite Center' })).toBeVisible();
     await waitMenuClosed();
   });
 

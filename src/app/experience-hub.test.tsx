@@ -72,15 +72,31 @@ describe('hub Locanda Experience (6 categorias)', () => {
     expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 
-  it('HOME → HAPPY HOUR → horários pendentes explícitos (nada inventado) → VOLTAR', async () => {
+  it('HOME → HAPPY HOUR → horários e itens reais do menu → VOLTAR', async () => {
     const { user } = await enterFromAttract();
 
     await user.click(within(hubRegion()).getByRole('button', { name: /Happy Hour/i }));
     expect(await screen.findByRole('heading', { level: 1, name: 'Happy Hour' })).toBeVisible();
 
-    // Nenhum horário fictício: apenas o marcador interno de pendência.
-    expect(screen.getAllByText('[HORÁRIO DO HAPPY HOUR A DEFINIR]').length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/MENU DO HAPPY HOUR A DEFINIR/).length).toBeGreaterThan(0);
+    // Horários reais (Sexta 18h–21h / Sábado 16h–20h).
+    expect(screen.getByText('Sexta-feira · 18h às 21h')).toBeVisible();
+    expect(screen.getByText('Sábado · 16h às 20h')).toBeVisible();
+
+    // Itens do menu com os valores informados.
+    for (const item of [
+      'Balde de Heineken 330ml — R$ 48',
+      'Balde de Stella Artois 330ml — R$ 48',
+      'Caipirinha Ypióca (1 sabor) — R$ 11',
+      'Taça de espumante — R$ 17',
+      'Bons Ventos — R$ 20',
+      'Croquetes de arraia — R$ 25',
+      'Toasts de carne de sol — R$ 25',
+    ]) {
+      expect(screen.getByText(item)).toBeVisible();
+    }
+
+    // Nenhum placeholder de pendência restante.
+    expect(screen.queryByText(/HORÁRIO DO HAPPY HOUR A DEFINIR/)).not.toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Voltar' }));
     expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
@@ -112,14 +128,16 @@ describe('hub Locanda Experience (6 categorias)', () => {
     expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 
-  it('HOME → KITE CENTER → conteúdo oficial parcial + pendência explícita → VOLTAR', async () => {
+  it('HOME → ISLA KITE CENTER → nome da parceria + pendência explícita → VOLTAR', async () => {
     const { user } = await enterFromAttract();
 
-    await user.click(within(hubRegion()).getByRole('button', { name: /Kite Center/i }));
-    expect(await screen.findByRole('heading', { level: 1, name: 'Kite Center' })).toBeVisible();
+    await user.click(within(hubRegion()).getByRole('button', { name: /Isla Kite Center/i }));
+    expect(
+      await screen.findByRole('heading', { level: 1, name: 'Isla Kite Center' }),
+    ).toBeVisible();
 
-    // Conteúdo oficial já existente no projeto (site oficial).
-    expect(screen.getAllByText(/Soulkite/i).length).toBeGreaterThan(0);
+    // Nome da parceria (informado pelo responsável).
+    expect(screen.getAllByText(/Isla Kite Center/i).length).toBeGreaterThan(0);
     // Pendência explícita — nada inventado (aparece no resumo e no corpo).
     expect(screen.getAllByText(/\[CONTEÚDO DO KITE CENTER A DEFINIR\]/i).length).toBeGreaterThan(0);
 

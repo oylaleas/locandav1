@@ -8,16 +8,17 @@ import { useI18n } from '@/features/i18n/useI18n';
 import styles from './HomePage.module.css';
 
 /**
- * Vídeo institucional da Home (embed Vimeo).
+ * Vídeo institucional em destaque (embed Vimeo).
+ *
+ * O vídeo de apresentação ocupa a própria coluna, AO LADO do grid de
+ * categorias — maior, como protagonista visual da Home.
  *
  * Considerações responsáveis:
  * - é um iframe de terceiros (Vimeo) — única exceção de requisição externa
  *   do totem, pedida explicitamente; o fundo do card usa a identidade da
- *   marca para manter a coerência visual mesmo se o player não carregar
- *   (offline);
- * - o player se adapta ao container (o vídeo original é vertical 9:16);
- * - acessível: `title` + `aria-label` no container; `loading="lazy"` para
- *   não carregar antes da Home ser vista.
+ *   marca para manter a coerência mesmo se o player não carregar (offline);
+ * - `loading="lazy"` para não carregar antes da Home ser vista;
+ * - acessível: `title` + `aria-label` no container.
  */
 function HomeVideoCard() {
   const { t } = useI18n();
@@ -46,17 +47,15 @@ function HomeVideoCard() {
 /**
  * HOME — menu de navegação do totem ("Locanda Experience").
  *
- * PÁGINA ESTÁTICA: hub com as seis áreas principais + o vídeo institucional
- * (ordem visual: Comodidades → Vídeo → Bem-estar → …), centralizado e sem
- * rolagem.
+ * PÁGINA ESTÁTICA: o vídeo institucional de apresentação em destaque ao
+ * lado (coluna própria) e o hub com as seis áreas principais. Centralizado
+ * e sem rolagem.
  */
 export default function HomePage() {
   const { t } = useI18n();
   const navigation = useKioskNavigation();
 
-  /* LOCANDA EXPERIENCE — as seis áreas principais do totem.
-     Ordem ajustada: Comodidades e Bem-estar ficam adjacentes (com o vídeo
-     entre eles no grid), depois Happy Hour, On Demand, Tours e Kite. */
+  /* LOCANDA EXPERIENCE — as seis áreas principais do totem. */
   const hubItems = useMemo(
     () => [
       {
@@ -65,13 +64,6 @@ export default function HomePage() {
         title: t.home.amenitiesCta,
         description: t.home.amenitiesCtaDesc,
         onSelect: () => navigation.push(ROUTES.contentDetail('comodidades')),
-      },
-      {
-        key: 'wellness',
-        icon: 'spa' as const,
-        title: t.home.wellnessCta,
-        description: t.home.wellnessCtaDesc,
-        onSelect: () => navigation.push(ROUTES.wellnessIndex),
       },
       {
         key: 'happy-hour',
@@ -86,6 +78,13 @@ export default function HomePage() {
         title: t.home.onDemandCta,
         description: t.home.onDemandCtaDesc,
         onSelect: () => navigation.push(ROUTES.contentDetail('servicos-on-demand')),
+      },
+      {
+        key: 'wellness',
+        icon: 'spa' as const,
+        title: t.home.wellnessCta,
+        description: t.home.wellnessCtaDesc,
+        onSelect: () => navigation.push(ROUTES.wellnessIndex),
       },
       {
         key: 'tours',
@@ -115,35 +114,27 @@ export default function HomePage() {
             </h1>
             <p className={styles.hubIntro}>{t.home.experienceHubIntro}</p>
           </div>
-          <ul className={styles.hubGrid}>
-            {hubItems.slice(0, 1).map((item, index) => (
-              <li key={item.key} className={styles.hubItem} style={{ '--i': index } as CSSProperties}>
-                <ActionCard
-                  icon={item.icon}
-                  title={item.title}
-                  description={item.description}
-                  onSelect={item.onSelect}
-                  className={styles.hubCard}
-                />
-              </li>
-            ))}
-            {/* Vídeo institucional — ordem visual: Comodidades → Vídeo → Bem-estar.
-                O card ocupa 2 linhas do grid (proporção vertical 9:16). */}
-            <li key="video" className={styles.videoItem} style={{ '--i': 1 } as CSSProperties}>
+
+          <div className={styles.homeMain}>
+            {/* Vídeo institucional em destaque — coluna própria ao lado. */}
+            <div className={styles.videoColumn}>
               <HomeVideoCard />
-            </li>
-            {hubItems.slice(1).map((item, index) => (
-              <li key={item.key} className={styles.hubItem} style={{ '--i': index + 2 } as CSSProperties}>
-                <ActionCard
-                  icon={item.icon}
-                  title={item.title}
-                  description={item.description}
-                  onSelect={item.onSelect}
-                  className={styles.hubCard}
-                />
-              </li>
-            ))}
-          </ul>
+            </div>
+
+            <ul className={styles.hubGrid}>
+              {hubItems.map((item, index) => (
+                <li key={item.key} className={styles.hubItem} style={{ '--i': index } as CSSProperties}>
+                  <ActionCard
+                    icon={item.icon}
+                    title={item.title}
+                    description={item.description}
+                    onSelect={item.onSelect}
+                    className={styles.hubCard}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
       </div>
     </KioskLayout>

@@ -12,7 +12,7 @@ todos os pontos têm placeholder claramente identificado ou abstração pronta p
 | Logotipo oficial (PNG, 4 variações) | `src/assets/brand/` + `BRAND_ASSETS` | **✅ Recebido e integrado** — lockup dourado/branco no `<Brandmark/>` (placa escura em fundos claros, direto no Attract), emblema nos ícones PWA. Vetor SVG original continua bem-vindo para nitidez máxima em telas grandes |
 | Fotografias reais | `src/assets/images/` + `IMAGE_ASSETS` | **✅ 8 fotos integradas** — aéreas de drone, praia e foto institucional. **49 fotos novas aguardando envio** (anexos não persistem no sandbox; enviar via GitHub ou link) — curadoria definida em `docs/CURADORIA.md` + `scripts/analyze-photos.py` || Vídeo institucional e de experiências | `src/assets/videos/` + `VIDEO_ASSETS` | 3 clipes técnicos gerados apenas para validar o player |
 | Legendas (.vtt) revisadas nos 3 idiomas | `public/captions/` | Placeholders `[LEGENDA A DEFINIR]` |
-| Textos institucionais (todas as seções) | `src/data/content.ts` | **✅ Compilados do site oficial** (locandadeiventi.com.br) — Sobre, estrutura, acomodações (2 suítes Frente Mar), gastronomia (Chef Léo Parente, Nau Rooftop), experiências (esportes aquáticos, Soulkite), arredores e como chegar |
+| Textos institucionais (todas as seções) | `src/data/content.ts` | **✅ Compilados do site oficial** (locandadeiventi.com.br) — Sobre, estrutura, acomodações (2 suítes Frente Mar), gastronomia (Chef Léo Parente, Nau Rooftop), experiências (esportes aquáticos, Isla Kite Center), arredores e como chegar |
 | Endereço, telefone, e-mail, site | `SITE_IDENTITY.contact` | **✅ Reais** — Av. Costeira S/N, Ilha do Guajiru/CE; +55 88 99219-1175; locanda@locandadeiventi.com.br; locandadeiventi.com.br (`hasRealData: true`) |
 | Acomodações — suítes Frente Jardim (detalhes) | `CONTENT_SECTIONS` | **Não publicados no site** — marcado `[A CONFIRMAR COM A GESTÃO]`; suítes Frente Mar (Superior/Inferior) completas |
 | Arquitetura de informação (6 seções propostas) | `CONTENT_SECTIONS` | **[A VALIDAR]** — estrutura é proposta, não especificação recebida |
@@ -39,10 +39,10 @@ todos os pontos têm placeholder claramente identificado ou abstração pronta p
 | --- | --- | --- |
 | Comodidades (12 itens + aviso `*`) | `src/data/content.ts` → `comodidades` | **✅ Integrado** — PT/EN/IT; asteriscos preservados em Yoga e Funcional* e Piquenique* |
 | Serviços On Demand (7 itens + aviso) | `src/data/content.ts` → `servicos-on-demand` | **✅ Integrado** — PT/EN/IT; tarifas não inventadas |
-| Happy Hour | `src/data/content.ts` → `happy-hour` | **✅ Estrutura pronta** — horário e menu marcados `[HORÁRIO DO HAPPY HOUR A DEFINIR]` / `[MENU DO HAPPY HOUR A DEFINIR]` |
-| Kite Center | `src/data/content.ts` → `kite-center` | **✅ Estrutura pronta** — conteúdo oficial parcial (baía flat water, parceria Soulkite, guarda de equipamentos); restante `[CONTEÚDO DO KITE CENTER A DEFINIR]` |
-| Menu do Happy Hour (asset) | `src/data/content.ts` | **[MENU DO HAPPY HOUR A DEFINIR]** — vincular quando recebido |
-| Horários do Happy Hour | `src/data/content.ts` | **[HORÁRIO DO HAPPY HOUR A DEFINIR]** — nada inventado |
+| Happy Hour | `src/data/content.ts` → `happy-hour` | **✅ Conteúdo real recebido** — Sexta 18h–21h (Balde Heineken/Stella R$ 48) · Sábado 16h–20h (Caipirinha R$ 11, Espumante R$ 17, Bons Ventos R$ 20, Croquetes R$ 25, Toasts R$ 25) |
+| Kite Center | `src/data/content.ts` → `kite-center` | **✅ Nome da parceria recebido: Isla Kite Center** — conteúdo oficial parcial (baía flat water, parceria Isla Kite Center, guarda de equipamentos); restante `[CONTEÚDO DO KITE CENTER A DEFINIR]` |
+| Cardápio impresso/foto do Happy Hour | `src/data/content.ts` | **[MENU DO HAPPY HOUR A DEFINIR]** — os itens e preços já estão no totem; asset visual opcional |
+| Horários do Happy Hour | `src/data/content.ts` | **✅ Sexta 18h–21h · Sábado 16h–20h** (recebidos) |
 | Detalhes do Kite Center (aulas/aluguel/horários/instrutores/contatos) | `src/data/content.ts` | **[CONTEÚDO DO KITE CENTER A DEFINIR]** — nada inventado |
 
 ### 1b. EXPERIÊNCIAS E PASSEIOS — recebido, pontos a validar

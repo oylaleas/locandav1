@@ -6,7 +6,7 @@
    valores são os publicados oficialmente.
 
    🔤  EN/IT: traduções do conteúdo original em pt-BR, preservando os fatos.
-       Nomes próprios (Chef Léo Parente, Soulkite, Nau Rooftop Lounge, nomes
+       Nomes próprios (Chef Léo Parente, Isla Kite Center, Nau Rooftop Lounge, nomes
        de praias/locais) são mantidos em todos os idiomas.
    📌  Pontos marcados [A CONFIRMAR] / [A VALIDAR] não foram inventados.
 
@@ -560,9 +560,9 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         type: 'paragraph',
         text: {
           'pt-BR':
-            'A Locanda mantém parceria com a Soulkite para aulas de kitesurf e oferece espaço para guarda de equipamentos de kite e esportes aquáticos.',
-          en: 'The Locanda has a partnership with Soulkite for kitesurf lessons and offers storage space for kite and water sports equipment.',
-          it: 'La Locanda ha una partnership con Soulkite per lezioni di kitesurf e offre spazio per custodire attrezzature di kite e sport acquatici.',
+            'A Locanda mantém parceria com o Isla Kite Center para aulas de kitesurf e oferece espaço para guarda de equipamentos de kite e esportes aquáticos.',
+          en: 'The Locanda has a partnership with Isla Kite Center for kitesurf lessons and offers storage space for kite and water sports equipment.',
+          it: 'La Locanda ha una partnership con Isla Kite Center per lezioni di kitesurf e offre spazio per custodire attrezzature di kite e sport acquatici.',
         },
       },
       {
@@ -601,7 +601,7 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         id: 'fact-experiencias-soulkite',
         icon: 'info',
         label: { 'pt-BR': 'Aulas de kitesurf', en: 'Kitesurf lessons', it: 'Lezioni di kitesurf' },
-        value: { 'pt-BR': 'Parceria Soulkite', en: 'Soulkite partnership', it: 'Partnership Soulkite' },
+        value: { 'pt-BR': 'Isla Kite Center', en: 'Isla Kite Center', it: 'Isla Kite Center' },
       },
     ],
     galleryImageIds: ['img-03', 'img-04'],
@@ -861,29 +861,31 @@ export const CONTENT_SECTIONS: ContentSection[] = [
     },
     summary: {
       'pt-BR':
-        'Nosso Happy Hour acontece todas as sextas de [HORÁRIO DO HAPPY HOUR A DEFINIR] e aos sábados de [HORÁRIO DO HAPPY HOUR A DEFINIR].',
-      en: 'Our Happy Hour happens every Friday from [TIME TO BE DEFINED] and Saturdays from [TIME TO BE DEFINED].',
-      it: 'Il nostro Happy Hour si svolge ogni venerdì dalle [ORARIO DA DEFINIRE] e il sabato dalle [ORARIO DA DEFINIRE].',
+        'Happy Hour na Locanda: sextas das 18h às 21h e sábados das 16h às 20h.',
+      en: 'Happy Hour at the Locanda: Fridays 6 pm to 9 pm and Saturdays 4 pm to 8 pm.',
+      it: 'Happy Hour alla Locanda: venerdì dalle 18 alle 21 e sabato dalle 16 alle 20.',
     },
     heroImageId: 'img-06',
-    contentPending: true,
+    contentPending: false,
     blocks: [
       {
-        type: 'paragraph',
-        text: {
-          'pt-BR':
-            'Nosso Happy Hour acontece todas as sextas de [HORÁRIO DO HAPPY HOUR A DEFINIR] e aos sábados de [HORÁRIO DO HAPPY HOUR A DEFINIR].',
-          en: 'Our Happy Hour happens every Friday from [TIME TO BE DEFINED] and Saturdays from [TIME TO BE DEFINED].',
-          it: 'Il nostro Happy Hour si svolge ogni venerdì dalle [ORARIO DA DEFINIRE] e il sabato dalle [ORARIO DA DEFINIRE].',
-        },
+        type: 'list',
+        title: { 'pt-BR': 'Sexta-feira · 18h às 21h', en: 'Friday · 6 pm to 9 pm', it: 'Venerdì · 18-21' },
+        items: [
+          { 'pt-BR': 'Balde de Heineken 330ml — R$ 48', en: 'Heineken bucket 330ml — R$ 48', it: 'Secchiello Heineken 330ml — R$ 48' },
+          { 'pt-BR': 'Balde de Stella Artois 330ml — R$ 48', en: 'Stella Artois bucket 330ml — R$ 48', it: 'Secchiello Stella Artois 330ml — R$ 48' },
+        ],
       },
       {
-        type: 'paragraph',
-        text: {
-          'pt-BR': 'Confira nosso menu de Happy Hour: [MENU DO HAPPY HOUR A DEFINIR]',
-          en: 'Check out our Happy Hour menu: [HAPPY HOUR MENU TO BE DEFINED]',
-          it: 'Scopri il nostro menu dell’Happy Hour: [MENU HAPPY HOUR DA DEFINIRE]',
-        },
+        type: 'list',
+        title: { 'pt-BR': 'Sábado · 16h às 20h', en: 'Saturday · 4 pm to 8 pm', it: 'Sabato · 16-20' },
+        items: [
+          { 'pt-BR': 'Caipirinha Ypióca (1 sabor) — R$ 11', en: 'Ypióca caipirinha (1 flavour) — R$ 11', it: 'Caipirinha Ypióca (1 gusto) — R$ 11' },
+          { 'pt-BR': 'Taça de espumante — R$ 17', en: 'Glass of sparkling wine — R$ 17', it: 'Calice di spumante — R$ 17' },
+          { 'pt-BR': 'Bons Ventos — R$ 20', en: 'Bons Ventos — R$ 20', it: 'Bons Ventos — R$ 20' },
+          { 'pt-BR': 'Croquetes de arraia — R$ 25', en: 'Stingray croquettes — R$ 25', it: 'Crocchette di razza — R$ 25' },
+          { 'pt-BR': 'Toasts de carne de sol — R$ 25', en: 'Sun-dried beef toasts — R$ 25', it: 'Toast di carne secca — R$ 25' },
+        ],
       },
     ],
     facts: [
@@ -891,21 +893,13 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         id: 'fact-happy-hour-sextas',
         icon: 'clock',
         label: { 'pt-BR': 'Sextas', en: 'Fridays', it: 'Venerdì' },
-        value: {
-          'pt-BR': '[HORÁRIO DO HAPPY HOUR A DEFINIR]',
-          en: '[TIME TO BE DEFINED]',
-          it: '[ORARIO DA DEFINIRE]',
-        },
+        value: { 'pt-BR': '18h às 21h', en: '6 pm to 9 pm', it: '18-21' },
       },
       {
         id: 'fact-happy-hour-sabados',
         icon: 'clock',
         label: { 'pt-BR': 'Sábados', en: 'Saturdays', it: 'Sabato' },
-        value: {
-          'pt-BR': '[HORÁRIO DO HAPPY HOUR A DEFINIR]',
-          en: '[TIME TO BE DEFINED]',
-          it: '[ORARIO DA DEFINIRE]',
-        },
+        value: { 'pt-BR': '16h às 20h', en: '4 pm to 8 pm', it: '16-20' },
       },
     ],
     galleryImageIds: ['img-06', 'img-03'],
@@ -977,7 +971,7 @@ export const CONTENT_SECTIONS: ContentSection[] = [
     slug: 'kite-center',
     order: 10,
     icon: 'kite',
-    title: { 'pt-BR': 'Kite Center', en: 'Kite Center', it: 'Kite Center' },
+    title: { 'pt-BR': 'Isla Kite Center', en: 'Isla Kite Center', it: 'Isla Kite Center' },
     tagline: {
       'pt-BR': 'Kitesurf na baía',
       en: 'Kitesurf on the bay',
@@ -985,9 +979,9 @@ export const CONTENT_SECTIONS: ContentSection[] = [
     },
     summary: {
       'pt-BR':
-        'Kitesurf na baía de águas calmas da Ilha do Guajiru, com parceria da Soulkite para aulas. [CONTEÚDO DO KITE CENTER A DEFINIR]',
-      en: 'Kitesurf on the calm-water bay of Ilha do Guajiru, with a Soulkite partnership for lessons. [KITE CENTER CONTENT TO BE DEFINED]',
-      it: 'Kitesurf sulla baia dalle acque calme dell’Ilha do Guajiru, con partnership Soulkite per le lezioni. [CONTENUTO DEL KITE CENTER DA DEFINIRE]',
+        'Kitesurf na baía de águas calmas da Ilha do Guajiru, com o Isla Kite Center. [CONTEÚDO DO KITE CENTER A DEFINIR]',
+      en: 'Kitesurf on the calm-water bay of Ilha do Guajiru, with Isla Kite Center. [KITE CENTER CONTENT TO BE DEFINED]',
+      it: 'Kitesurf sulla baia dalle acque calme dell’Ilha do Guajiru, con Isla Kite Center. [CONTENUTO DEL KITE CENTER DA DEFINIRE]',
     },
     heroImageId: 'img-03',
     contentPending: true,
@@ -996,18 +990,18 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         type: 'paragraph',
         text: {
           'pt-BR':
-            'A baía de águas calmas ("flat water") em frente à Locanda favorece a prática de kitesurf. A Locanda mantém parceria com a Soulkite para aulas de kitesurf e oferece espaço para guarda de equipamentos de kite e esportes aquáticos.',
-          en: 'The calm-water bay ("flat water") in front of the Locanda favours kitesurfing. The Locanda has a Soulkite partnership for kitesurf lessons and offers storage space for kite and water sports equipment.',
-          it: 'La baia dalle acque calme ("flat water") davanti alla Locanda favorisce la pratica del kitesurf. La Locanda ha una partnership con Soulkite per lezioni di kitesurf e offre spazio per custodire attrezzature di kite e sport acquatici.',
+            'A baía de águas calmas ("flat water") em frente à Locanda favorece a prática de kitesurf. A Locanda mantém parceria com o Isla Kite Center para aulas de kitesurf e oferece espaço para guarda de equipamentos de kite e esportes aquáticos.',
+          en: 'The calm-water bay ("flat water") in front of the Locanda favours kitesurfing. The Locanda has a partnership with Isla Kite Center for kitesurf lessons and offers storage space for kite and water sports equipment.',
+          it: 'La baia dalle acque calme ("flat water") davanti alla Locanda favorisce la pratica del kitesurf. La Locanda ha una partnership con Isla Kite Center per lezioni di kitesurf e offre spazio per custodire attrezzature di kite e sport acquatici.',
         },
       },
       {
         type: 'paragraph',
         text: {
           'pt-BR':
-            'Aulas, aluguel, horários, instrutores, equipamentos e contatos do Kite Center: [CONTEÚDO DO KITE CENTER A DEFINIR]',
-          en: 'Lessons, rentals, hours, instructors, equipment and contacts of the Kite Center: [KITE CENTER CONTENT TO BE DEFINED]',
-          it: 'Lezioni, noleggio, orari, istruttori, attrezzature e contatti del Kite Center: [CONTENUTO DEL KITE CENTER DA DEFINIRE]',
+            'Aulas, aluguel, horários, instrutores, equipamentos e contatos do Isla Kite Center: [CONTEÚDO DO KITE CENTER A DEFINIR]',
+          en: 'Lessons, rentals, hours, instructors, equipment and contacts of Isla Kite Center: [KITE CENTER CONTENT TO BE DEFINED]',
+          it: 'Lezioni, noleggio, orari, istruttori, attrezzature e contatti di Isla Kite Center: [CONTENUTO DEL KITE CENTER DA DEFINIRE]',
         },
       },
     ],
@@ -1016,7 +1010,7 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         id: 'fact-kite-soulkite',
         icon: 'kite',
         label: { 'pt-BR': 'Aulas de kitesurf', en: 'Kitesurf lessons', it: 'Lezioni di kitesurf' },
-        value: { 'pt-BR': 'Parceria Soulkite', en: 'Soulkite partnership', it: 'Partnership Soulkite' },
+        value: { 'pt-BR': 'Isla Kite Center', en: 'Isla Kite Center', it: 'Isla Kite Center' },
       },
       {
         id: 'fact-kite-guarda',
