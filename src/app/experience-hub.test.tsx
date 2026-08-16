@@ -13,7 +13,7 @@ vi.mock('@/config/kiosk', async (importOriginal) => {
 async function enterFromAttract() {
   // Sem tela inicial: o totem abre direto no menu (Home).
   const { user } = renderWithProviders(<AppShell />, '/home');
-  await screen.findByRole('heading', { name: 'Bem-vindo' });
+  await screen.findByRole('heading', { name: 'Locanda Experience' });
   return { user };
 }
 
@@ -69,7 +69,7 @@ describe('hub Locanda Experience (6 categorias)', () => {
     expect(screen.getByText(/alguns dos serviços descritos não são gratuitos/i)).toBeVisible();
 
     await user.click(screen.getByRole('button', { name: 'Voltar' }));
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 
   it('HOME → HAPPY HOUR → horários pendentes explícitos (nada inventado) → VOLTAR', async () => {
@@ -83,7 +83,7 @@ describe('hub Locanda Experience (6 categorias)', () => {
     expect(screen.getAllByText(/MENU DO HAPPY HOUR A DEFINIR/).length).toBeGreaterThan(0);
 
     await user.click(screen.getByRole('button', { name: 'Voltar' }));
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 
   it('HOME → SERVIÇOS ON DEMAND → 7 itens + aviso de tarifa → VOLTAR', async () => {
@@ -109,7 +109,7 @@ describe('hub Locanda Experience (6 categorias)', () => {
     expect(screen.getByText(/tarifa definida pelo prestador de serviço/i)).toBeVisible();
 
     await user.click(screen.getByRole('button', { name: 'Voltar' }));
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 
   it('HOME → KITE CENTER → conteúdo oficial parcial + pendência explícita → VOLTAR', async () => {
@@ -124,7 +124,7 @@ describe('hub Locanda Experience (6 categorias)', () => {
     expect(screen.getAllByText(/\[CONTEÚDO DO KITE CENTER A DEFINIR\]/i).length).toBeGreaterThan(0);
 
     await user.click(screen.getByRole('button', { name: 'Voltar' }));
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 });
 

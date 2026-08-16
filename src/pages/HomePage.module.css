@@ -1,16 +1,8 @@
 /* ==========================================================================
    HOME — menu de navegação do totem
-   PÁGINA ESTÁTICA: ocupa 100% da altura disponível e NÃO rola.
-
-   CONCEITO — "Pousada dos Ventos": o herói é um HORIZONTE de pôr do sol
-   sobre a baía (as duas cores da marca como elementos do lugar): o sol
-   dourado (rosa dos ventos) nasce sobre o mar azul profundo e o vento
-   risca a cena. Abaixo, o hub de navegação em cards "de instrumento"
-   (tick dourado no topo, dados em mono). Uma única assinatura; o resto
-   quieto e disciplinado.
-
-   Fluidez: camadas próprias de composição (will-change), animações só com
-   transform/opacity, tudo neutralizado por prefers-reduced-motion (global).
+   PÁGINA ESTÁTICA: apenas o hub com as seis áreas principais, centralizado,
+   proporcional e sem rolagem (bloco do topo removido a pedido do
+   responsável).
    ========================================================================== */
 
 .page {
@@ -18,147 +10,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(1.25rem, 3.2vh, 2.25rem);
   height: 100%;
   min-height: 0;
   width: 100%;
   max-width: var(--size-content-max-width);
   margin: 0 auto;
-  padding-block: var(--space-sm);
+  padding-block: var(--space-md);
   contain: layout style paint;
-}
-
-/* --------------------------------------------------------------- HERO */
-
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-2xs);
-  text-align: center;
-  width: 100%;
-  animation: hero-in 600ms var(--easing-decelerate) both;
-}
-
-/* Horizonte: mar azul profundo em painel arredondado, largura casada
-   com o hub abaixo. */
-.horizon {
-  position: relative;
-  width: 100%;
-  max-width: 62rem;
-  overflow: hidden;
-  border-radius: var(--radius-panel);
-  display: grid;
-  place-items: center;
-  padding: clamp(1.75rem, 5vh, 3.5rem) var(--space-lg);
-  background:
-    radial-gradient(120% 90% at 20% 0%, rgba(20, 113, 181, 0.45) 0%, rgba(4, 43, 71, 0) 52%),
-    linear-gradient(180deg, #0a3a63 0%, var(--palette-brand-blue-900) 46%, var(--palette-brand-blue-950) 100%);
-  border: 1px solid rgba(241, 177, 0, 0.28);
-  box-shadow: 0 18px 48px rgba(1, 26, 44, 0.35);
-  isolation: isolate;
-}
-
-/* Sol dourado (rosa dos ventos) nascendo sobre a linha do mar — recortado
-   na base, como um pôr do sol real. */
-.sun {
-  position: absolute;
-  right: 6%;
-  bottom: -34%;
-  width: clamp(8rem, 15vh, 13rem);
-  height: clamp(8rem, 15vh, 13rem);
-  color: var(--palette-brand-gold-400);
-  opacity: 0.88;
-  pointer-events: none;
-  filter: drop-shadow(0 0 44px rgba(241, 177, 0, 0.4));
-  animation: sun-rise 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
-  will-change: transform;
-}
-
-/* O vento riscando o horizonte — linhas claras à deriva (muito sutil). */
-.windLines {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.windLine {
-  position: absolute;
-  left: -25%;
-  height: 2px;
-  border-radius: var(--radius-pill);
-  background: linear-gradient(90deg, transparent, rgba(247, 242, 233, 0.3), transparent);
-  opacity: 0.55;
-  animation: wind-drift var(--dur, 10s) linear infinite;
-  will-change: transform;
-}
-
-.windLine:nth-child(1) {
-  top: 20%;
-  width: 24%;
-  --dur: 9s;
-}
-
-.windLine:nth-child(2) {
-  top: 46%;
-  width: 15%;
-  --dur: 14s;
-  animation-delay: -6s;
-}
-
-.windLine:nth-child(3) {
-  top: 68%;
-  width: 27%;
-  --dur: 11s;
-  animation-delay: -3s;
-}
-
-.horizon > *:not(.windLines):not(.sun) {
-  position: relative;
-  z-index: 1;
-}
-
-/* Linha do mar — o reflexo do sol dourado na base do horizonte, com o pico
-   de brilho onde o sol toca a água (à direita). Âncora a cena do pôr do sol. */
-.horizon::after {
-  content: '';
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 2px;
-  z-index: 2;
-  background: linear-gradient(
-    90deg,
-    transparent 42%,
-    rgba(241, 177, 0, 0.65) 58%,
-    rgba(241, 177, 0, 0.25) 68%,
-    transparent 78%
-  );
-  opacity: 0.85;
-}
-
-.eyebrow {
-  margin-top: var(--space-xs);
-  font-family: var(--font-data);
-  font-size: var(--font-size-3xs);
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: var(--letter-spacing-widest);
-  text-transform: uppercase;
-  color: var(--color-text-secondary);
-}
-
-.welcome {
-  margin: 0;
-  font-size: var(--font-size-2xl);
-  line-height: var(--line-height-tight);
-  color: var(--color-action-primary);
-}
-
-.intro {
-  margin: 0;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  max-width: 44ch;
 }
 
 /* ---------------------------------------------------------------- HUB */
@@ -167,23 +25,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-sm);
+  gap: clamp(1rem, 2.6vh, 1.75rem);
   width: 100%;
 }
 
 .hubHeader {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-sm);
+  gap: var(--space-2xs);
+  text-align: center;
 }
 
 .hubTitle {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: var(--space-2xs);
-  font-size: var(--font-size-lg);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-tight);
+  font-size: var(--font-size-3xl);
   margin: 0;
   color: var(--color-action-primary);
 }
@@ -196,13 +57,21 @@
   height: 4px;
   border-radius: var(--radius-pill);
   background: linear-gradient(90deg, var(--color-accent-strong), var(--palette-brand-gold-400));
+  margin: var(--space-2xs) auto 0;
+}
+
+.hubIntro {
+  margin: 0;
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  max-width: 44ch;
 }
 
 .hubGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-rows: auto;
-  gap: var(--space-sm);
+  gap: clamp(0.9rem, 2.2vh, 1.5rem);
   width: 100%;
   max-width: 62rem;
   margin: 0 auto;
@@ -211,14 +80,13 @@
   contain: layout style;
 }
 
-/* Card "de instrumento": tick dourado no topo (medida), como o marcador
-   de um instrumento de vento/água. */
+/* Card "de instrumento": tick dourado no topo (medida). */
 .hubItem {
   position: relative;
   display: flex;
   min-width: 0;
   animation: item-in 520ms var(--easing-decelerate) both;
-  animation-delay: calc(120ms + var(--i, 0) * 70ms);
+  animation-delay: calc(100ms + var(--i, 0) * 70ms);
 }
 
 .hubItem::before {
@@ -237,22 +105,11 @@
 .hubCard {
   flex: 1;
   width: 100%;
-  /* Proporcional à viewport: em qualquer altura, a grade inteira cabe. */
-  min-height: clamp(5.5rem, 12vh, 8.5rem);
+  /* Proporcional à viewport: a grade inteira cabe em qualquer altura. */
+  min-height: clamp(6rem, 15vh, 10rem);
 }
 
 /* ------------------------------------------------------ KEYFRAMES */
-
-@keyframes hero-in {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
 
 @keyframes item-in {
   from {
@@ -265,76 +122,35 @@
   }
 }
 
-@keyframes sun-rise {
-  from {
-    transform: translateY(64px) scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: none;
-    opacity: 0.88;
-  }
-}
-
-@keyframes wind-drift {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(150vw);
-  }
-}
-
 /* ------------------------------------------- TOTEM ALTO (ex.: 1080x1920) */
 
 @media (min-height: 60rem) {
-  .page {
-    gap: var(--space-xl);
-    padding-block: var(--space-md);
-  }
-
-  .welcome {
-    font-size: var(--font-size-3xl);
-  }
-
-  .intro {
-    font-size: var(--font-size-md);
-  }
-
   .hubGrid {
-    gap: var(--space-md);
+    gap: clamp(1rem, 2.6vh, 1.75rem);
   }
 
   .hubCard {
-    min-height: clamp(6rem, 13vh, 8.5rem);
+    min-height: clamp(7rem, 17vh, 11rem);
+  }
+
+  .hubTitle {
+    font-size: var(--font-size-4xl);
   }
 }
 
 /* ---------------------------------------- TELAS BAIXAS (landscape / app) */
 
 @media (max-height: 52rem) {
-  .page {
-    gap: var(--space-sm);
-  }
-
-  .horizon {
-    padding-block: clamp(1.25rem, 4vh, 2.5rem);
-  }
-
-  .welcome {
-    font-size: var(--font-size-2xl);
-  }
-
-  .intro {
-    display: none;
-  }
-
   .hubGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .hubCard {
-    min-height: clamp(4.5rem, 10vh, 6rem);
+    min-height: clamp(4.5rem, 11vh, 6.5rem);
+  }
+
+  .hubIntro {
+    display: none;
   }
 }
 
@@ -344,10 +160,6 @@
   .page {
     height: auto;
     justify-content: flex-start;
-  }
-
-  .horizon {
-    border-radius: var(--radius-card);
   }
 
   .hubGrid {

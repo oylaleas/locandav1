@@ -6,7 +6,7 @@ import { renderWithProviders } from '@/test/renderApp';
 async function enterFromAttract() {
   // Sem tela inicial: o totem abre direto no menu (Home).
   const { user } = renderWithProviders(<AppShell />, '/home');
-  await screen.findByRole('heading', { name: 'Bem-vindo' });
+  await screen.findByRole('heading', { name: 'Locanda Experience' });
   return { user };
 }
 

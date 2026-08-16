@@ -18,7 +18,7 @@ vi.mock('@/config/kiosk', async (importOriginal) => {
 async function enterFromAttract() {
   // Sem tela inicial: o totem abre direto no menu (Home).
   const { user } = renderWithProviders(<AppShell />, '/home');
-  await screen.findByRole('heading', { name: 'Bem-vindo' });
+  await screen.findByRole('heading', { name: 'Locanda Experience' });
   return { user };
 }
 
@@ -31,7 +31,7 @@ describe('jornada principal do totem', () => {
     const { user } = renderWithProviders(<AppShell />, '/home');
 
     // Sem Attract Mode: o totem já nasce no menu inicial.
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
     expect(screen.queryByTestId('attract-mode')).not.toBeInTheDocument();
     void user;
   });
@@ -46,7 +46,7 @@ describe('jornada principal do totem', () => {
     ).toBeVisible();
 
     await user.click(screen.getByRole('button', { name: 'Voltar' }));
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 
   it('abre e fecha o painel de QR Code (via menu fullscreen) sem dead end', async () => {
@@ -85,14 +85,14 @@ describe('jornada principal do totem', () => {
 
     // Voltar ao Início interrompe a mídia e limpa o contexto.
     await user.click(screen.getByRole('button', { name: 'Início' }));
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 
   it('rota inexistente oferece saída para a Home', async () => {
     const { user } = renderWithProviders(<AppShell />, '/rota-inexistente');
 
     await user.click(await screen.findByRole('button', { name: 'Início' }));
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 
   it('troca de idioma mantém o visitante na mesma tela', async () => {
@@ -101,7 +101,7 @@ describe('jornada principal do totem', () => {
     await user.click(screen.getByRole('button', { name: /PT/ }));
     await user.click(await screen.findByRole('button', { name: 'English' }));
 
-    expect(await screen.findByRole('heading', { name: 'Welcome' })).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
     expect(document.documentElement.lang).toBe('en');
   });
 
@@ -112,7 +112,7 @@ describe('jornada principal do totem', () => {
     expect(warning).toBeVisible();
 
     // O reset volta ao estado inicial: a Home (a tela inicial foi removida).
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' }, { timeout: 3000 })).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' }, { timeout: 3000 })).toBeVisible();
     expect(screen.queryByTestId('attract-mode')).not.toBeInTheDocument();
   });
 
@@ -123,6 +123,6 @@ describe('jornada principal do totem', () => {
     await user.click(screen.getByRole('button', { name: 'Continuar navegando' }));
 
     expect(screen.queryByRole('heading', { name: 'Você ainda está aí?' })).not.toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
+    expect(screen.getByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 });
