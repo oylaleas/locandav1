@@ -70,12 +70,15 @@
 
 .homeMain {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
   gap: clamp(1.25rem, 3vw, 2.5rem);
   width: 100%;
   max-width: 76rem;
   margin: 0 auto;
+  min-height: 0;
+  /* Nunca excede a tela: o vídeo escala pela altura e os cards seguem. */
+  max-height: 100%;
 }
 
 /* ------------------------------------------------------------------ VÍDEO */
@@ -84,15 +87,20 @@
 .videoColumn {
   flex: 0 0 auto;
   display: flex;
-  width: clamp(300px, 34vw, 460px);
+  /* Altura proporcional à tela — nunca estoura; a largura deriva do 9:16. */
+  height: min(72vh, 880px);
 }
 
 .videoWrapper {
   position: relative;
-  width: 100%;
-  /* Sem bordas, sem raio, sem fundo: o vídeo toca sozinho, direto. */
+  /* Largura derivada da altura (aspect 9:16) — escala com a tela. */
+  height: 100%;
+  width: auto;
   aspect-ratio: 9 / 16;
+  /* Bordinhas redondinhas, como as dos cards/botões. */
+  border-radius: var(--radius-card);
   overflow: hidden;
+  background: var(--color-media-surface);
 }
 
 .videoWrapper iframe {
@@ -109,6 +117,7 @@
 .hubGrid {
   flex: 1;
   min-width: 0;
+  min-height: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-rows: 1fr; /* preenche a altura do vídeo ao lado */
@@ -144,7 +153,7 @@
 .hubCard {
   flex: 1;
   width: 100%;
-  min-height: 0;
+  min-height: clamp(3.5rem, 9vh, 6rem);
 }
 
 /* ------------------------------------------------------ KEYFRAMES */
@@ -168,7 +177,7 @@
   }
 
   .videoColumn {
-    width: clamp(340px, 38vw, 520px);
+    height: min(74vh, 940px);
   }
 
   .homeMain {
@@ -184,7 +193,7 @@
   }
 
   .videoColumn {
-    width: clamp(220px, 24vw, 320px);
+    height: min(64vh, 420px);
   }
 
   .homeMain {
@@ -201,7 +210,13 @@
   }
 
   .videoColumn {
-    width: min(100%, 340px);
+    height: auto;
+    width: min(100%, 320px);
+  }
+
+  .videoWrapper {
+    height: auto;
+    width: 100%;
   }
 
   .hubGrid {
@@ -211,7 +226,7 @@
   }
 
   .hubCard {
-    min-height: clamp(5rem, 12vh, 7.5rem);
+    min-height: clamp(4.5rem, 11vh, 7rem);
   }
 }
 

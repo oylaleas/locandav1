@@ -20,12 +20,12 @@ function HomeVideoCard() {
   return (
     <div className={styles.videoWrapper} aria-label={t.home.videoCardTitle}>
       <iframe
-        src="https://player.vimeo.com/video/1218674025?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0&dnt=1"
+        src="https://player.vimeo.com/video/1218674025?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0&dnt=1"
         title={t.home.videoCardTitle}
         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
-        loading="lazy"
+        loading="eager"
       />
     </div>
   );
