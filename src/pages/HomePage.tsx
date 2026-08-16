@@ -1,6 +1,5 @@
 import { useMemo, type CSSProperties } from 'react';
 import { ActionCard } from '@/components/cards/ActionCard';
-import { Badge } from '@/components/ui/Badge';
 import { KioskLayout } from '@/components/layout/KioskLayout';
 import { ROUTES } from '@/config/kiosk';
 import { useKioskNavigation } from '@/app/navigation';
@@ -8,38 +7,26 @@ import { useI18n } from '@/features/i18n/useI18n';
 import styles from './HomePage.module.css';
 
 /**
- * Vídeo institucional em destaque (embed Vimeo).
- *
- * O vídeo de apresentação ocupa a própria coluna, AO LADO do grid de
- * categorias — maior, como protagonista visual da Home.
+ * Vídeo institucional em destaque (embed Vimeo) — tocando sozinho, sem
+ * bordas nem cabeçalho, ocupando a coluna própria ao lado do grid.
  *
  * Considerações responsáveis:
- * - é um iframe de terceiros (Vimeo) — única exceção de requisição externa
- *   do totem, pedida explicitamente; o fundo do card usa a identidade da
- *   marca para manter a coerência mesmo se o player não carregar (offline);
- * - `loading="lazy"` para não carregar antes da Home ser vista;
- * - acessível: `title` + `aria-label` no container.
+ * - iframe de terceiros (Vimeo), única exceção externa pedida; `loading="lazy"`
+ *   para não carregar antes da Home ser vista;
+ * - acessível: `title` no iframe + `aria-label` no container.
  */
 function HomeVideoCard() {
   const { t } = useI18n();
   return (
-    <div className={styles.videoCard}>
-      <header className={styles.videoHead}>
-        <Badge tone="inverse" icon="play">
-          {t.home.videoCardBadge}
-        </Badge>
-        <span className={styles.videoTitle}>{t.home.videoCardTitle}</span>
-      </header>
-      <div className={styles.videoWrapper} aria-label={t.home.videoCardTitle}>
-        <iframe
-          src="https://player.vimeo.com/video/1218674025?badge=0&autopause=0&player_id=0&app_id=58479"
-          title={t.home.videoCardTitle}
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
-          loading="lazy"
-        />
-      </div>
+    <div className={styles.videoWrapper} aria-label={t.home.videoCardTitle}>
+      <iframe
+        src="https://player.vimeo.com/video/1218674025?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0&dnt=1"
+        title={t.home.videoCardTitle}
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+        loading="lazy"
+      />
     </div>
   );
 }

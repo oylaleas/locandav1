@@ -87,41 +87,12 @@
   width: clamp(300px, 34vw, 460px);
 }
 
-.videoCard {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border-radius: var(--radius-panel);
-  overflow: hidden;
-  background:
-    radial-gradient(120% 90% at 20% 0%, rgba(20, 113, 181, 0.45) 0%, rgba(4, 43, 71, 0) 55%),
-    linear-gradient(165deg, var(--palette-brand-blue-800) 0%, var(--palette-brand-blue-950) 100%);
-  box-shadow: var(--elevation-2);
-}
-
-.videoHead {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2xs);
-  padding: var(--space-xs) var(--space-sm);
-  border-bottom: 1px solid rgba(247, 242, 233, 0.14);
-}
-
-.videoTitle {
-  font-family: var(--font-display);
-  font-size: var(--font-size-md);
-  font-weight: 600;
-  color: var(--color-text-inverse);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .videoWrapper {
   position: relative;
-  flex: 1;
-  min-height: 0;
+  width: 100%;
+  /* Sem bordas, sem raio, sem fundo: o vídeo toca sozinho, direto. */
   aspect-ratio: 9 / 16;
+  overflow: hidden;
 }
 
 .videoWrapper iframe {
