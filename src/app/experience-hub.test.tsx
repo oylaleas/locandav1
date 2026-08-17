@@ -102,7 +102,7 @@ describe('hub Locanda Experience (6 categorias)', () => {
     expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 
-  it('HOME → SERVIÇOS ON DEMAND → 7 itens + aviso de tarifa → VOLTAR', async () => {
+  it('HOME → SERVIÇOS ON DEMAND → 6 itens + aviso de tarifa → VOLTAR', async () => {
     const { user } = await enterFromAttract();
 
     await user.click(within(hubRegion()).getByRole('button', { name: /Serviços On Demand/i }));
@@ -111,13 +111,12 @@ describe('hub Locanda Experience (6 categorias)', () => {
     ).toBeVisible();
 
     for (const item of [
-      'Decoração no Quarto',
       'Transfer',
       'Babá',
-      'Cabeleireira',
-      'Manicure',
       'Jantar Romântico',
-      'Motorista Particular',
+      'Piquenique',
+      'Serviços de beleza — Manicure, cabeleireiro, maquiador',
+      'Eventos privativos',
     ]) {
       expect(screen.getByText(item)).toBeVisible();
     }

@@ -234,4 +234,81 @@ export const TOURS: Tour[] = [
     mediaPending: true,
     notes: 'Cover/galeria provisórias. [ASSET DO PASSEIO A DEFINIR] [VALIDAR GRAFIA: Guajiru]',
   },
+
+  {
+    id: 'tour-barco-na-ilha',
+    slug: 'barco-na-ilha',
+    title: {
+      'pt-BR': 'Barco na Ilha',
+      en: 'Boat around the Island',
+      it: 'Barca intorno all’Isola',
+    },
+    shortDescription: {
+      'pt-BR': 'Passeio de barco explorando a Ilha do Guajiru e seus arredores.',
+      en: 'Boat trip exploring Ilha do Guajiru and its surroundings.',
+      it: 'Giro in barca alla scoperta dell’Ilha do Guajiru e dei suoi dintorni.',
+    },
+    mediaPending: true,
+    notes: '[ASSET DO PASSEIO A DEFINIR] [INFORMAÇÃO A DEFINIR: roteiro, horário, valor]',
+  },
+  {
+    id: 'tour-buggy',
+    slug: 'buggy',
+    title: { 'pt-BR': 'Buggy', en: 'Buggy', it: 'Buggy' },
+    shortDescription: {
+      'pt-BR': 'Passeios de buggy pelas praias e trilhas da região.',
+      en: 'Buggy rides along the region’s beaches and trails.',
+      it: 'Gite in buggy tra le spiagge e i sentieri della regione.',
+    },
+    mediaPending: true,
+    notes: '[ASSET DO PASSEIO A DEFINIR] [INFORMAÇÃO A DEFINIR: roteiro, horário, valor]',
+  },
+  {
+    id: 'tour-quadriciclo-utv',
+    slug: 'quadriciclo-utv',
+    title: { 'pt-BR': 'Quadriciclo & UTV', en: 'Quad Bike & UTV', it: 'Quad & UTV' },
+    shortDescription: {
+      'pt-BR': 'Trilhas de quadriciclo e UTV pela Ilha do Guajiru e arredores.',
+      en: 'Quad bike and UTV trails through Ilha do Guajiru and surroundings.',
+      it: 'Sentieri in quad e UTV attraverso l’Ilha do Guajiru e dintorni.',
+    },
+    mediaPending: true,
+    notes: '[ASSET DO PASSEIO A DEFINIR] [INFORMAÇÃO A DEFINIR: roteiro, horário, valor]',
+  },
+  {
+    id: 'tour-cavalo',
+    slug: 'cavalo',
+    title: { 'pt-BR': 'Cavalo', en: 'Horseback', it: 'Cavallo' },
+    shortDescription: {
+      'pt-BR': 'Passeios a cavalo pela ilha, praias e trilhas da região.',
+      en: 'Horseback rides across the island, beaches and regional trails.',
+      it: 'Passeggiate a cavallo per l’isola, le spiagge e i sentieri della regione.',
+    },
+    mediaPending: true,
+    notes: '[ASSET DO PASSEIO A DEFINIR] [INFORMAÇÃO A DEFINIR: roteiro, horário, valor]',
+  },
+  {
+    id: 'tour-caiaque-porto-dos-barcos',
+    slug: 'caiaque-porto-dos-barcos',
+    title: { 'pt-BR': 'Caiaque no Porto dos Barcos', en: 'Kayak at Porto dos Barcos', it: 'Kayak al Porto dos Barcos' },
+    shortDescription: {
+      'pt-BR': 'Remada de caiaque saindo do Porto dos Barcos pelas águas calmas.',
+      en: 'Kayak paddle from Porto dos Barcos through the calm waters.',
+      it: 'Pagaia in kayak da Porto dos Barcos tra le acque calme.',
+    },
+    mediaPending: true,
+    notes: '[ASSET DO PASSEIO A DEFINIR] [INFORMAÇÃO A DEFINIR: roteiro, horário, valor]',
+  },
+  {
+    id: 'tour-fatbike',
+    slug: 'fatbike-na-ilha',
+    title: { 'pt-BR': 'FatBike na Ilha', en: 'FatBike on the Island', it: 'FatBike sull’Isola' },
+    shortDescription: {
+      'pt-BR': 'Pedaladas de FatBike pela areia e trilhas da Ilha do Guajiru.',
+      en: 'FatBike rides across the sand and trails of Ilha do Guajiru.',
+      it: 'Passeggiate in FatBike sulla sabbia e sui sentieri dell’Ilha do Guajiru.',
+    },
+    mediaPending: true,
+    notes: '[ASSET DO PASSEIO A DEFINIR] [INFORMAÇÃO A DEFINIR: roteiro, horário, valor]',
+  },
 ];

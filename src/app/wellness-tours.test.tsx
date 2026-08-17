@@ -91,7 +91,7 @@ describe('experiências e passeios', () => {
     window.history.replaceState({}, '', '/home');
   });
 
-  it('HOME → EXPERIÊNCIAS → lista os três passeios', async () => {
+  it('HOME → EXPERIÊNCIAS → lista os passeios (roteiros + atividades)', async () => {
     const { user } = await enterFromAttract();
 
     await user.click(screen.getByRole('button', { name: /Experiências e passeios/i }));
@@ -99,11 +99,24 @@ describe('experiências e passeios', () => {
       await screen.findByRole('heading', { level: 1, name: 'Experiências e passeios' }),
     ).toBeVisible();
 
+    // Roteiros detalhados.
     expect(screen.getByRole('button', { name: /Passeio Pôr do Sol/i })).toBeVisible();
     expect(screen.getByRole('button', { name: /Moitas de Icaraí/i })).toBeVisible();
     expect(
       screen.getByRole('button', { name: /Almofala, Ilha do Guajiru e Região/i }),
     ).toBeVisible();
+
+    // Atividades (informadas pelo responsável, sem valores inventados).
+    for (const name of [
+      /Barco na Ilha/i,
+      /Buggy/i,
+      /Quadriciclo & UTV/i,
+      /Cavalo/i,
+      /Caiaque no Porto dos Barcos/i,
+      /FatBike na Ilha/i,
+    ]) {
+      expect(screen.getByRole('button', { name })).toBeVisible();
+    }
   });
 
   it('PASSEIO PÔR DO SOL → horário 15:30–18:30 e R$ 370', async () => {

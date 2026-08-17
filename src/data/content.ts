@@ -922,9 +922,9 @@ export const CONTENT_SECTIONS: ContentSection[] = [
     },
     summary: {
       'pt-BR':
-        'Decoração no quarto, transfer, babá, cabeleireira, manicure, jantar romântico e motorista particular.',
-      en: 'Room decor, transfer, babysitting, hair stylist, manicure, romantic dinner and private driver.',
-      it: 'Decorazione della camera, transfer, babysitter, parrucchiera, manicure, cena romantica e autista privato.',
+        'Transfer, babá, jantar romântico, piquenique, serviços de beleza e eventos privativos.',
+      en: 'Transfer, babysitting, romantic dinner, picnic, beauty services and private events.',
+      it: 'Transfer, babysitter, cena romantica, picnic, servizi di bellezza ed eventi privati.',
     },
     heroImageId: 'img-07',
     contentPending: false,
@@ -933,13 +933,16 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         type: 'list',
         title: { 'pt-BR': 'Serviços', en: 'Services', it: 'Servizi' },
         items: [
-          { 'pt-BR': 'Decoração no Quarto', en: 'Special Room Decor', it: 'Decorazione della camera' },
           { 'pt-BR': 'Transfer', en: 'Transfer', it: 'Transfer' },
           { 'pt-BR': 'Babá', en: 'Babysitting', it: 'Babysitter' },
-          { 'pt-BR': 'Cabeleireira', en: 'Hair Stylist', it: 'Parrucchiera' },
-          { 'pt-BR': 'Manicure', en: 'Manicure', it: 'Manicure' },
           { 'pt-BR': 'Jantar Romântico', en: 'Romantic Dinner', it: 'Cena romantica' },
-          { 'pt-BR': 'Motorista Particular', en: 'Private Driver', it: 'Autista privato' },
+          { 'pt-BR': 'Piquenique', en: 'Picnic', it: 'Picnic' },
+          {
+            'pt-BR': 'Serviços de beleza — Manicure, cabeleireiro, maquiador',
+            en: 'Beauty services — Manicure, hair stylist, makeup artist',
+            it: 'Servizi di bellezza — Manicure, parrucchiere, truccatore',
+          },
+          { 'pt-BR': 'Eventos privativos', en: 'Private events', it: 'Eventi privati' },
         ],
       },
       {
@@ -979,29 +982,60 @@ export const CONTENT_SECTIONS: ContentSection[] = [
     },
     summary: {
       'pt-BR':
-        'Kitesurf na baía de águas calmas da Ilha do Guajiru, com o Isla Kite Center. [CONTEÚDO DO KITE CENTER A DEFINIR]',
-      en: 'Kitesurf on the calm-water bay of Ilha do Guajiru, with Isla Kite Center. [KITE CENTER CONTENT TO BE DEFINED]',
-      it: 'Kitesurf sulla baia dalle acque calme dell’Ilha do Guajiru, con Isla Kite Center. [CONTENUTO DEL KITE CENTER DA DEFINIRE]',
+        'Aulas de kitesurf e wingfoil, aluguel de equipamento, supervisão, downwinds e loja — com o Isla Kite Center.',
+      en: 'Kitesurf and wingfoil lessons, equipment rental, supervision, downwinds and shop — with Isla Kite Center.',
+      it: 'Lezioni di kitesurf e wingfoil, noleggio attrezzature, supervisione, downwinds e negozio — con Isla Kite Center.',
     },
     heroImageId: 'img-03',
-    contentPending: true,
+    contentPending: false,
     blocks: [
       {
         type: 'paragraph',
         text: {
           'pt-BR':
-            'A baía de águas calmas ("flat water") em frente à Locanda favorece a prática de kitesurf. A Locanda mantém parceria com o Isla Kite Center para aulas de kitesurf e oferece espaço para guarda de equipamentos de kite e esportes aquáticos.',
-          en: 'The calm-water bay ("flat water") in front of the Locanda favours kitesurfing. The Locanda has a partnership with Isla Kite Center for kitesurf lessons and offers storage space for kite and water sports equipment.',
-          it: 'La baia dalle acque calme ("flat water") davanti alla Locanda favorisce la pratica del kitesurf. La Locanda ha una partnership con Isla Kite Center per lezioni di kitesurf e offre spazio per custodire attrezzature di kite e sport acquatici.',
+            'A baía de águas calmas ("flat water") em frente à Locanda favorece a prática de kitesurf e wingfoil. A Locanda mantém parceria com o Isla Kite Center, que oferece:',
+          en: 'The calm-water bay ("flat water") in front of the Locanda favours kitesurfing and wingfoiling. The Locanda has a partnership with Isla Kite Center, which offers:',
+          it: 'La baia dalle acque calme ("flat water") davanti alla Locanda favorisce kitesurf e wingfoil. La Locanda ha una partnership con Isla Kite Center, che offre:',
         },
+      },
+      {
+        type: 'list',
+        title: { 'pt-BR': 'Serviços', en: 'Services', it: 'Servizi' },
+        items: [
+          {
+            'pt-BR': 'Aulas de Kitesurf e Wingfoil',
+            en: 'Kitesurf and Wingfoil lessons',
+            it: 'Lezioni di kitesurf e wingfoil',
+          },
+          {
+            'pt-BR': 'Aluguel de equipamento',
+            en: 'Equipment rental',
+            it: 'Noleggio attrezzature',
+          },
+          {
+            'pt-BR': 'Supervisão',
+            en: 'Supervision',
+            it: 'Supervisione',
+          },
+          {
+            'pt-BR': 'Downwinds',
+            en: 'Downwinds',
+            it: 'Downwinds',
+          },
+          {
+            'pt-BR': 'Loja de equipamentos e roupas',
+            en: 'Equipment and clothing shop',
+            it: 'Negozio di attrezzature e abbigliamento',
+          },
+        ],
       },
       {
         type: 'paragraph',
         text: {
           'pt-BR':
-            'Aulas, aluguel, horários, instrutores, equipamentos e contatos do Isla Kite Center: [CONTEÚDO DO KITE CENTER A DEFINIR]',
-          en: 'Lessons, rentals, hours, instructors, equipment and contacts of Isla Kite Center: [KITE CENTER CONTENT TO BE DEFINED]',
-          it: 'Lezioni, noleggio, orari, istruttori, attrezzature e contatti di Isla Kite Center: [CONTENUTO DEL KITE CENTER DA DEFINIRE]',
+            'Horários, valores, instrutores e contatos do Isla Kite Center: [CONTEÚDO DO KITE CENTER A DEFINIR]',
+          en: 'Hours, rates, instructors and contacts of Isla Kite Center: [KITE CENTER CONTENT TO BE DEFINED]',
+          it: 'Orari, tariffe, istruttori e contatti di Isla Kite Center: [CONTENUTO DEL KITE CENTER DA DEFINIRE]',
         },
       },
     ],
