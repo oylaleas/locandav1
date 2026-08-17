@@ -6,17 +6,13 @@ import { StateMessage } from '@/components/states/StateMessage';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
-import { SmartImage } from '@/components/ui/SmartImage';
+import { WindRose } from '@/components/ui/WindRose';
 import { FEATURE_FLAGS, ROUTES } from '@/config/kiosk';
 import { useKioskNavigation } from '@/app/navigation';
-import { GalleryGrid } from '@/features/gallery/GalleryGrid';
-import { GalleryViewer } from '@/features/gallery/GalleryViewer';
 import { useI18n } from '@/features/i18n/useI18n';
 import { VideoPlayer } from '@/features/media/VideoPlayer';
 import { QRCodePanel } from '@/features/qr/QRCodePanel';
 import {
-  getImage,
-  getImages,
   getQrTarget,
   getRelatedSections,
   getSectionBySlug,
@@ -65,7 +61,6 @@ export default function ContentDetailPage() {
   const { t, tx } = useI18n();
   const navigation = useKioskNavigation();
   const [qrOpen, setQrOpen] = useState(false);
-  const [viewerIndex, setViewerIndex] = useState<number | null>(null);
 
   const section = getSectionBySlug(slug);
 
@@ -85,8 +80,6 @@ export default function ContentDetailPage() {
     );
   }
 
-  const hero = getImage(section.heroImageId);
-  const galleryImages = getImages(section.galleryImageIds);
   const videos = getVideos(section.videoIds);
   const qrTarget = getQrTarget(section.qrTargetId);
   const related = getRelatedSections(section);
@@ -95,16 +88,16 @@ export default function ContentDetailPage() {
     <KioskLayout title={tx(section.title)} eyebrow={tx(section.tagline)} bleed>
       <article className={styles.page}>
         <header className={styles.hero}>
-          <SmartImage asset={hero} aspectRatio="16 / 9" priority decorative className={styles.heroImage} />
-          <div className={styles.heroOverlay}>
-            <p className={styles.eyebrow}>{tx(section.tagline)}</p>
-            <h1 className={styles.title}>{tx(section.title)}</h1>
-            {FEATURE_FLAGS.showPendingContentBadges && section.contentPending && (
-              <Badge tone="warning" icon="alert">
-                {t.badges.pendingContent}
-              </Badge>
-            )}
-          </div>
+          {/* Identidade de marca no topo — sem fotografias (decisão do
+              responsável). A rosa dos ventos é a assinatura visual. */}
+          <WindRose className={styles.heroRose} aria-hidden="true" />
+          <p className={styles.eyebrow}>{tx(section.tagline)}</p>
+          <h1 className={styles.title}>{tx(section.title)}</h1>
+          {FEATURE_FLAGS.showPendingContentBadges && section.contentPending && (
+            <Badge tone="warning" icon="alert">
+              {t.badges.pendingContent}
+            </Badge>
+          )}
         </header>
 
         <div className={styles.body}>
@@ -153,16 +146,6 @@ export default function ContentDetailPage() {
             </section>
           )}
 
-          {galleryImages.length > 0 && (
-            <section className={styles.gallery} aria-labelledby={`fotos-${section.slug}`}>
-              <h2 id={`fotos-${section.slug}`} className={styles.sectionTitle}>
-                {t.content.photos}
-              </h2>
-              <p className={styles.sectionIntro}>{t.gallery.intro}</p>
-              <GalleryGrid images={galleryImages} onSelect={(index) => setViewerIndex(index)} />
-            </section>
-          )}
-
           {qrTarget && (
             <section className={styles.qrSection} aria-labelledby={`qr-${section.slug}`}>
               <div>
@@ -190,7 +173,6 @@ export default function ContentDetailPage() {
                       title={tx(item.title)}
                       eyebrow={tx(item.tagline)}
                       icon={item.icon}
-                      image={getImage(item.heroImageId)}
                       hasVideo={item.videoIds.length > 0}
                       onSelect={() => navigation.push(ROUTES.contentDetail(item.slug))}
                     />
@@ -201,15 +183,6 @@ export default function ContentDetailPage() {
           )}
         </div>
       </article>
-
-      {viewerIndex !== null && (
-        <GalleryViewer
-          images={galleryImages}
-          startIndex={viewerIndex}
-          galleryId={`section-${section.slug}`}
-          onClose={() => setViewerIndex(null)}
-        />
-      )}
 
       {qrTarget && (
         <QRCodePanel target={qrTarget} open={qrOpen} onClose={() => setQrOpen(false)} />

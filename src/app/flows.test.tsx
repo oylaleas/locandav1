@@ -16,10 +16,9 @@ vi.mock('@/config/kiosk', async (importOriginal) => {
 });
 
 async function enterFromAttract() {
+  // Sem tela inicial: o totem abre direto no menu (Home).
   const { user } = renderWithProviders(<AppShell />, '/home');
-  const activate = await screen.findByTestId('attract-activate');
-  await user.click(activate);
-  await screen.findByRole('heading', { name: 'Bem-vindo' });
+  await screen.findByRole('heading', { name: 'Locanda Experience' });
   return { user };
 }
 
@@ -28,46 +27,47 @@ describe('jornada principal do totem', () => {
     window.history.replaceState({}, '', '/home');
   });
 
-  it('ATTRACT → primeiro toque → HOME', async () => {
-    expect.hasAssertions();
+  it('abre direto na HOME (sem tela inicial)', async () => {
     const { user } = renderWithProviders(<AppShell />, '/home');
 
-    expect(await screen.findByTestId('attract-mode')).toBeInTheDocument();
-
-    await user.click(screen.getByTestId('attract-activate'));
-
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
+    // Sem Attract Mode: o totem já nasce no menu inicial.
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
     expect(screen.queryByTestId('attract-mode')).not.toBeInTheDocument();
+    void user;
   });
 
-  it('HOME → conteúdo → detalhe → VOLTAR volta para a Home', async () => {
+  it('HOME → hub → detalhe → VOLTAR volta para a Home', async () => {
     const { user } = await enterFromAttract();
 
-    // O card em destaque da Home ("Quem somos · A Locanda").
-    await user.click(screen.getByRole('button', { name: /Quem somos/i }));
-    expect(await screen.findByRole('heading', { level: 1, name: 'A Locanda' })).toBeVisible();
+    // A Home é o hub: um card leva direto ao detalhe da categoria.
+    await user.click(screen.getByRole('button', { name: /Comodidades/i }));
+    expect(
+      await screen.findByRole('heading', { level: 1, name: 'Comodidades de nossos hóspedes' }),
+    ).toBeVisible();
 
     await user.click(screen.getByRole('button', { name: 'Voltar' }));
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 
-  it('abre e fecha o painel de QR Code sem deixar dead end', async () => {
+  it('abre e fecha o painel de QR Code (via menu fullscreen) sem dead end', async () => {
     const { user } = await enterFromAttract();
 
-    await user.click(screen.getByRole('button', { name: /Leve a Locanda com você/i }));
+    // O QR agora é acessado pelo rodapé do menu fullscreen (handoff).
+    await user.click(screen.getByRole('button', { name: /Abrir menu/i }));
+    const menu = await screen.findByRole('dialog', { name: 'Navegação principal' });
+    await user.click(within(menu).getByRole('link', { name: /WhatsApp/ }));
 
-    const dialog = await screen.findByRole('dialog');
+    const dialog = await screen.findByRole('dialog', { name: /Fale com a Locanda/ });
     expect(within(dialog).getByText(/Destino/i)).toBeVisible();
 
     await user.click(within(dialog).getAllByRole('button', { name: 'Fechar' })[0]);
-    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByRole('dialog', { name: /Fale com a Locanda/ })).not.toBeInTheDocument());
   });
 
-  it('HOME → conteúdo → VÍDEO → fim do vídeo → QR Code', async () => {
-    const { user } = await enterFromAttract();
-
-    await user.click(screen.getByRole('button', { name: /Quem somos/i }));
-    await screen.findByRole('heading', { level: 1, name: 'A Locanda' });
+  it('DETALHE (com vídeo) → fim do vídeo → QR Code', async () => {
+    // Seção com vídeo: Experiências (acessível pelo hub e relacionadas).
+    const { user } = renderWithProviders(<AppShell />, '/conteudos/experiencias');
+    await screen.findByRole('heading', { level: 1, name: 'Experiências' });
 
     await user.click(screen.getByRole('button', { name: /Assistir ao vídeo/ }));
     expect(screen.getByTestId('video-player')).toHaveAttribute('data-state', 'playing');
@@ -85,35 +85,14 @@ describe('jornada principal do totem', () => {
 
     // Voltar ao Início interrompe a mídia e limpa o contexto.
     await user.click(screen.getByRole('button', { name: 'Início' }));
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
-  });
-
-  it('HOME → índice de conteúdos → detalhe', async () => {
-    const { user } = await enterFromAttract();
-
-    await user.click(screen.getByRole('button', { name: /Ver todos os conteúdos/i }));
-    expect(await screen.findByRole('heading', { level: 1, name: 'Conteúdos' })).toBeVisible();
-
-    await user.click(screen.getByRole('button', { name: /Onde descansar/i }));
-    expect(await screen.findByRole('heading', { level: 1, name: 'Acomodações' })).toBeVisible();
-  });
-
-  it('HOME → galeria → VOLTAR volta para a Home', async () => {
-    const { user } = await enterFromAttract();
-
-    await user.click(screen.getByRole('button', { name: /Ver galeria de fotos/i }));
-    expect(await screen.findByRole('heading', { level: 1, name: 'Galeria' })).toBeVisible();
-
-    await user.click(screen.getByRole('button', { name: 'Voltar' }));
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 
   it('rota inexistente oferece saída para a Home', async () => {
     const { user } = renderWithProviders(<AppShell />, '/rota-inexistente');
-    await user.click(await screen.findByTestId('attract-activate'));
 
     await user.click(await screen.findByRole('button', { name: 'Início' }));
-    expect(await screen.findByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 
   it('troca de idioma mantém o visitante na mesma tela', async () => {
@@ -122,17 +101,19 @@ describe('jornada principal do totem', () => {
     await user.click(screen.getByRole('button', { name: /PT/ }));
     await user.click(await screen.findByRole('button', { name: 'English' }));
 
-    expect(await screen.findByRole('heading', { name: 'Welcome' })).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
     expect(document.documentElement.lang).toBe('en');
   });
 
-  it('INATIVIDADE → AVISO → sem resposta → RESET → ATTRACT', async () => {
+  it('INATIVIDADE → AVISO → sem resposta → RESET → HOME (sem Attract)', async () => {
     await enterFromAttract();
 
     const warning = await screen.findByRole('heading', { name: 'Você ainda está aí?' }, { timeout: 3000 });
     expect(warning).toBeVisible();
 
-    expect(await screen.findByTestId('attract-mode', undefined, { timeout: 3000 })).toBeVisible();
+    // O reset volta ao estado inicial: a Home (a tela inicial foi removida).
+    expect(await screen.findByRole('heading', { name: 'Locanda Experience' }, { timeout: 3000 })).toBeVisible();
+    expect(screen.queryByTestId('attract-mode')).not.toBeInTheDocument();
   });
 
   it('AVISO → "Continuar navegando" mantém a sessão ativa', async () => {
@@ -142,6 +123,6 @@ describe('jornada principal do totem', () => {
     await user.click(screen.getByRole('button', { name: 'Continuar navegando' }));
 
     expect(screen.queryByRole('heading', { name: 'Você ainda está aí?' })).not.toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Bem-vindo' })).toBeVisible();
+    expect(screen.getByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 });

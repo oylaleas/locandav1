@@ -5,6 +5,12 @@ import { cn } from '@/utils/cn';
 import styles from './Brandmark.module.css';
 
 interface BrandmarkProps {
+  /**
+   * Superfície onde a marca é exibida:
+   * - `light` — fundo claro (Home, cabeçalho): o lockup tem wordmark BRANCO,
+   *   então é exibido dentro de uma placa escura para manter a legibilidade.
+   * - `dark` — fundo escuro (Attract Mode): o lockup é exibido diretamente.
+   */
   tone?: 'light' | 'dark';
   size?: 'sm' | 'md' | 'lg';
   /** Mostra o descritor sob o nome (Attract Mode / Home). */
@@ -15,10 +21,11 @@ interface BrandmarkProps {
 /**
  * Marca da Locanda dei Venti.
  *
- * [A VALIDAR] O logotipo oficial ainda não foi disponibilizado no repositório.
- * Assim que o arquivo existir, basta apontar BRAND_ASSETS.logoSrc em
- * src/data/media.ts — este componente passa a exibir a imagem e o fallback
- * tipográfico deixa de ser usado, sem alterações em nenhuma tela.
+ * Apenas as LOGOS OFICIAIS (src/assets/brand/) são usadas:
+ * - superfície clara (Home, cabeçalho) → lockup colorido dentro da placa
+ *   escura (o wordmark é branco e exige fundo escuro para leitura);
+ * - superfície escura (Attract Mode) → lockup monocromático branco, direto.
+ * O fallback tipográfico abaixo só existe caso BRAND_ASSETS seja removido.
  */
 export function Brandmark({
   tone = 'light',
@@ -29,12 +36,42 @@ export function Brandmark({
   const { tx } = useI18n();
 
   if (BRAND_ASSETS.logoSrc) {
+    const onDarkSurface = tone === 'dark';
+    // Logo oficial para a superfície: branca em fundos escuros, colorida em
+    // fundos claros (sobre a placa). Nunca inventamos uma variação nova.
+    const logo = onDarkSurface ? BRAND_ASSETS.logoSrcWhite : BRAND_ASSETS.logoSrc;
+    const width = onDarkSurface ? BRAND_ASSETS.logoWidthWhite : BRAND_ASSETS.logoWidth;
+    const height = onDarkSurface ? BRAND_ASSETS.logoHeightWhite : BRAND_ASSETS.logoHeight;
+    const alt = onDarkSurface ? BRAND_ASSETS.logoAltWhite : BRAND_ASSETS.logoAlt;
+
     return (
-      <img
-        src={BRAND_ASSETS.logoSrc}
-        alt={BRAND_ASSETS.logoAlt}
-        className={cn(styles.logo, styles[size], className)}
-      />
+      <span
+        className={cn(
+          styles.brand,
+          styles[size],
+          !onDarkSurface && styles.plate,
+          className,
+        )}
+      >
+        <img
+          src={logo}
+          alt={alt}
+          width={width}
+          height={height}
+          className={styles.logo}
+        />
+        {withDescriptor && (
+          <span
+            className={cn(
+              styles.descriptor,
+              styles[size],
+              onDarkSurface && styles.descriptorOnDark,
+            )}
+          >
+            {tx(SITE_IDENTITY.descriptor)}
+          </span>
+        )}
+      </span>
     );
   }
 

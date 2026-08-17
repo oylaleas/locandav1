@@ -15,9 +15,6 @@ function Harness() {
     <div>
       <span data-testid="language">{language}</span>
       <span data-testid="phase">{session.phase}</span>
-      <button type="button" onClick={() => session.beginSession()}>
-        iniciar
-      </button>
       <button type="button" onClick={() => session.resetSession('manual')}>
         encerrar
       </button>
@@ -27,10 +24,10 @@ function Harness() {
 }
 
 describe('resetSession()', () => {
-  it('para o vídeo, restaura o áudio padrão, o idioma e volta ao Attract Mode', async () => {
+  it('para o vídeo, restaura o áudio padrão, o idioma e volta à Home (sem Attract)', async () => {
     const { user } = renderWithProviders(<Harness />);
 
-    await user.click(screen.getByRole('button', { name: 'iniciar' }));
+    // Sem Attract Mode: a sessão já nasce ativa.
     expect(screen.getByTestId('phase')).toHaveTextContent('active');
 
     // Visitante reproduz o vídeo e liga o som.
@@ -41,7 +38,8 @@ describe('resetSession()', () => {
 
     await user.click(screen.getByRole('button', { name: 'encerrar' }));
 
-    expect(screen.getByTestId('phase')).toHaveTextContent('attract');
+    // O reset volta ao estado ativo (a Home é o estado inicial) e limpa tudo.
+    expect(screen.getByTestId('phase')).toHaveTextContent('active');
     expect(screen.getByTestId('video-player')).toHaveAttribute('data-state', 'idle');
     expect(screen.getByRole('button', { name: 'Sem som' })).toBeVisible();
     expect(screen.getByTestId('language')).toHaveTextContent('pt-BR');

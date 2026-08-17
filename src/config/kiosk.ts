@@ -41,9 +41,6 @@ export const INACTIVITY_TICK_MS = 1_000;
 /** Anti toque-repetido: ignora reentradas da mesma ação nesta janela. */
 export const TAP_GUARD_MS = 400;
 
-/** Duração de cada slide do Attract Mode quando não há vídeo disponível. */
-export const ATTRACT_SLIDE_DURATION_MS = 9_000;
-
 /** Idioma padrão restaurado a cada nova sessão. */
 export const DEFAULT_LANGUAGE: LanguageCode = 'pt-BR';
 
@@ -71,8 +68,6 @@ export const FEATURE_FLAGS = {
   showPendingContentBadges: true,
   /** Registra o Service Worker (apenas em produção). */
   enableServiceWorker: import.meta.env.PROD,
-  /** Attract Mode tenta reproduzir vídeo; cai para imagem se falhar. */
-  attractUsesVideo: true,
 };
 
 /**
@@ -82,5 +77,8 @@ export const ROUTES = {
   home: '/home',
   contentIndex: '/conteudos',
   contentDetail: (slug: string) => `/conteudos/${slug}`,
-  gallery: '/galeria',
+  wellnessIndex: '/bem-estar',
+  wellnessPartner: (partnerId: string) => `/bem-estar/${partnerId}`,
+  toursIndex: '/experiencias-e-passeios',
+  tourDetail: (slug: string) => `/experiencias-e-passeios/${slug}`,
 } as const;

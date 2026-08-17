@@ -16,17 +16,45 @@
   z-index: var(--z-header);
 }
 
-/* Home: cabeçalho reduzido ao indicador de conectividade. */
+/* Cabeçalho centrado quando não há marca à esquerda nem conteúdo à direita
+   além do indicador de conectividade (ex.: telas de listagem). */
+.headerCentered {
+  justify-content: center;
+  text-align: center;
+}
+
+.headerCentered .headerBrand {
+  flex: 1;
+  justify-content: center;
+}
+
+/* Home: cabeçalho reduzido ao indicador de conectividade, centralizado. */
 .headerBare {
+  justify-content: center;
   padding-bottom: 0;
   border-bottom: none;
+}
+
+.headerBare .headerBrand {
+  display: none;
+}
+
+.headerBare > *:not(.headerBrand) {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .headerBrand {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex: 1;
   gap: var(--space-md);
   min-width: 0;
+}
+
+.headerBrand + * {
+  flex-shrink: 0;
 }
 
 .headerTitles {
@@ -45,6 +73,7 @@
 }
 
 .eyebrow {
+  font-family: var(--font-data);
   font-size: var(--font-size-3xs);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-widest);
@@ -64,6 +93,20 @@
 .main {
   position: relative;
   padding: var(--space-lg) var(--kiosk-gutter) var(--space-2xl);
+  /* Transição de tela: fade + subida suave a cada navegação. */
+  animation: page-in var(--motion-base) var(--easing-decelerate) both;
+}
+
+/* Neutralizada globalmente por prefers-reduced-motion / data-reduced-motion. */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .bleed {

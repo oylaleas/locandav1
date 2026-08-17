@@ -1,0 +1,140 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  max-width: var(--size-content-max-width);
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: var(--space-2xs);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.title {
+  font-size: var(--font-size-3xl);
+  margin: 0;
+}
+
+.tagline {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-style: italic;
+  color: var(--color-accent);
+  margin: 0;
+}
+
+.description {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+  max-width: 55ch;
+  margin: 0;
+}
+
+.services {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-xl);
+  margin: 0;
+}
+
+.sectionIntro {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-xs);
+}
+
+.servicesList {
+  display: grid;
+  gap: var(--space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  padding: var(--space-xl);
+  border-radius: var(--radius-panel);
+  background-color: var(--color-surface-inverse);
+  color: var(--color-text-inverse);
+}
+
+.contactText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  min-width: 0;
+}
+
+.contact .sectionTitle {
+  color: var(--color-text-inverse);
+}
+
+.contact .sectionIntro {
+  color: var(--color-text-inverse-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.contactList {
+  display: grid;
+  gap: var(--space-2xs);
+  margin: 0;
+}
+
+.contactRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.contactLabel {
+  font-size: var(--font-size-3xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: var(--color-text-inverse-secondary);
+}
+
+.contactValue {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-family: var(--font-data);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-inverse);
+}
+
+.contactActions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+@media (min-width: 75rem) {
+  .servicesList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

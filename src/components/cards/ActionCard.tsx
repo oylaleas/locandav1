@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Icon } from '@/components/ui/Icon';
 import { useTapGuard } from '@/hooks/useTapGuard';
 import type { IconName } from '@/types/content';
@@ -14,7 +15,7 @@ interface ActionCardProps {
 }
 
 /** Card de navegação/ação sem fotografia (galeria, QR, contato). */
-export function ActionCard({
+export const ActionCard = memo(function ActionCard({
   icon,
   title,
   description,
@@ -40,4 +41,4 @@ export function ActionCard({
       <Icon name="arrow-right" size="1.5rem" />
     </button>
   );
-}
+});

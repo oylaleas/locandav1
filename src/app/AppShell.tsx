@@ -1,10 +1,9 @@
-import { Suspense, lazy, useCallback, useEffect, useRef, useState } from 'react';
+import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { ErrorBoundary } from './ErrorBoundary';
 import { useKioskNavigation } from './navigation';
 import { ErrorState, LoadingState } from '@/components/states/StateMessage';
 import { ROUTES } from '@/config/kiosk';
-import { AttractMode } from '@/features/attract/AttractMode';
 import { useI18n } from '@/features/i18n/useI18n';
 import { useSession } from '@/features/session/SessionProvider';
 import { TimeoutModal } from '@/features/session/TimeoutModal';
@@ -16,7 +15,10 @@ import styles from './AppShell.module.css';
 const HomePage = lazy(() => import('@/pages/HomePage'));
 const ContentIndexPage = lazy(() => import('@/pages/ContentIndexPage'));
 const ContentDetailPage = lazy(() => import('@/pages/ContentDetailPage'));
-const GalleryPage = lazy(() => import('@/pages/GalleryPage'));
+const WellnessIndexPage = lazy(() => import('@/pages/WellnessIndexPage'));
+const WellnessPartnerPage = lazy(() => import('@/pages/WellnessPartnerPage'));
+const ToursIndexPage = lazy(() => import('@/pages/ToursIndexPage'));
+const TourDetailPage = lazy(() => import('@/pages/TourDetailPage'));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
 
 function ScreenViewTracker() {
@@ -31,11 +33,12 @@ export function AppShell() {
   const { t } = useI18n();
   const session = useSession();
   const navigation = useKioskNavigation();
+  const location = useLocation();
   const [updateReady, setUpdateReady] = useState<(() => void) | null>(null);
   const applyUpdateRef = useRef<(() => void) | null>(null);
 
   // Atualizações do Service Worker nunca interrompem uma visita: aplicamos
-  // apenas quando o totem volta ao Attract Mode (ninguém usando).
+  // apenas quando o visitante está na Home (momento de "descanso").
   useEffect(() => {
     onServiceWorkerUpdate((apply) => {
       applyUpdateRef.current = apply;
@@ -44,19 +47,13 @@ export function AppShell() {
   }, []);
 
   useEffect(() => {
-    if (session.phase === 'attract' && updateReady && applyUpdateRef.current) {
+    if (location.pathname === ROUTES.home && updateReady && applyUpdateRef.current) {
       const apply = applyUpdateRef.current;
       applyUpdateRef.current = null;
       setUpdateReady(null);
       apply();
     }
-  }, [session.phase, updateReady]);
-
-  const isAttract = session.phase === 'attract';
-
-  const handleActivate = useCallback(() => {
-    session.beginSession();
-  }, [session]);
+  }, [location.pathname, updateReady]);
 
   return (
     <div className={styles.root}>
@@ -64,15 +61,10 @@ export function AppShell() {
 
       {/*
         A árvore da aplicação é remontada a cada sessão (key = sessionId):
-        garante que nenhum estado temporário do visitante anterior sobreviva.
-        Durante o Attract Mode ela fica inerte (sem foco, sem leitura por AT).
+        garante que nenhum estado temporário do visitante anterior sobreviva
+        ao reset (inatividade, "encerrar", Início).
       */}
-      <div
-        key={session.sessionId}
-        className={styles.appLayer}
-        aria-hidden={isAttract || undefined}
-        inert={isAttract}
-      >
+      <div key={session.sessionId} className={styles.appLayer}>
         <ErrorBoundary
           scope="app-shell"
           fallback={(retry) => (
@@ -93,14 +85,15 @@ export function AppShell() {
               <Route path={ROUTES.home} element={<HomePage />} />
               <Route path={ROUTES.contentIndex} element={<ContentIndexPage />} />
               <Route path={`${ROUTES.contentIndex}/:slug`} element={<ContentDetailPage />} />
-              <Route path={ROUTES.gallery} element={<GalleryPage />} />
+              <Route path={ROUTES.wellnessIndex} element={<WellnessIndexPage />} />
+              <Route path={`${ROUTES.wellnessIndex}/:partnerId`} element={<WellnessPartnerPage />} />
+              <Route path={ROUTES.toursIndex} element={<ToursIndexPage />} />
+              <Route path={`${ROUTES.toursIndex}/:slug`} element={<TourDetailPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
         </ErrorBoundary>
       </div>
-
-      {isAttract && <AttractMode onActivate={handleActivate} />}
 
       <TimeoutModal />
     </div>

@@ -1,98 +1,260 @@
+/* ==========================================================================
+   HOME — menu de navegação do totem
+   PÁGINA ESTÁTICA: vídeo institucional em destaque AO LADO do hub com as
+   seis áreas principais. Centralizado, proporcional e sem rolagem.
+   ========================================================================== */
+
 .page {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
   max-width: var(--size-content-max-width);
   margin: 0 auto;
-  padding-bottom: var(--space-lg);
+  padding-block: var(--space-md);
+  contain: layout style paint;
 }
 
-.hero {
+/* ---------------------------------------------------------------- HUB */
+
+.hub {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
-  padding-top: var(--space-sm);
+  align-items: center;
+  gap: clamp(1rem, 2.6vh, 1.75rem);
+  width: 100%;
 }
 
-.heroText {
+.hubHeader {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-2xs);
+  text-align: center;
 }
 
-.welcome {
-  font-size: var(--font-size-3xl);
-}
-
-.intro {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-secondary);
-  max-width: 40ch;
-}
-
-.featuredSection {
-  display: block;
-}
-
-.gridSection {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.sectionHeader {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-md);
-}
-
-.sectionTitle {
-  font-size: var(--font-size-xl);
-}
-
-.scrollHint {
+.hubTitle {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-3xs);
-  font-size: var(--font-size-3xs);
-  letter-spacing: var(--letter-spacing-wide);
-  text-transform: uppercase;
-  color: var(--color-text-secondary);
+  gap: var(--space-2xs);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-tight);
+  font-size: var(--font-size-3xl);
+  margin: 0;
+  color: var(--color-action-primary);
 }
 
-.grid {
+/* Risco dourado sob o título do hub — linha do horizonte. */
+.hubTitle::after {
+  content: '';
+  display: block;
+  width: 2.5rem;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--color-accent-strong), var(--palette-brand-gold-400));
+  margin: var(--space-2xs) auto 0;
+}
+
+.hubIntro {
+  margin: 0;
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  max-width: 44ch;
+}
+
+/* ------------------------------------------------- LADO A LADO (vídeo + hub) */
+
+.homeMain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  width: 100%;
+  max-width: 76rem;
+  margin: 0 auto;
+  min-height: 0;
+  /* Nunca excede a tela: o vídeo escala pela altura e os cards seguem. */
+  max-height: 100%;
+}
+
+/* ------------------------------------------------------------------ VÍDEO */
+
+/* Coluna do vídeo institucional — destaque, proporção vertical 9:16. */
+.videoColumn {
+  flex: 0 0 auto;
+  display: flex;
+  /* Altura proporcional à tela — nunca estoura; a largura deriva do 9:16. */
+  height: min(72vh, 880px);
+}
+
+.videoWrapper {
+  position: relative;
+  /* Largura derivada da altura (aspect 9:16) — escala com a tela. */
+  height: 100%;
+  width: auto;
+  aspect-ratio: 9 / 16;
+  /* Bordinhas redondinhas, como as dos cards/botões. */
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--color-media-surface);
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  /* Reforço: o iframe em si não recebe ponteiro (o escudo captura tudo). */
+  pointer-events: none;
+}
+
+/* Escudo invisível: cobre o vídeo por completo e bloqueia qualquer
+   interação (pausar, som, controles, fullscreen, cliques). */
+.videoShield {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: transparent;
+  cursor: default;
+}
+
+/* ------------------------------------------------------------- CARDS (hub) */
+
+.hubGrid {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-md);
+  grid-auto-rows: 1fr; /* preenche a altura do vídeo ao lado */
+  gap: clamp(0.9rem, 2.2vh, 1.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  contain: layout style;
 }
 
-.gridItem {
+/* Card "de instrumento": tick dourado no topo (medida). */
+.hubItem {
+  position: relative;
+  display: flex;
   min-width: 0;
+  animation: item-in 520ms var(--easing-decelerate) both;
+  animation-delay: calc(100ms + var(--i, 0) * 70ms);
 }
 
-.actions {
-  display: grid;
-  gap: var(--space-md);
+.hubItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 2.5rem;
+  height: 3px;
+  border-radius: 0 0 var(--radius-pill) var(--radius-pill);
+  background: linear-gradient(90deg, var(--color-accent-strong), var(--palette-brand-gold-400));
 }
 
-/* Totens muito largos / landscape: três colunas mantêm o card legível. */
-@media (min-width: 75rem) {
-  .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+.hubCard {
+  flex: 1;
+  width: 100%;
+  min-height: clamp(3.5rem, 9vh, 6rem);
+}
+
+/* ------------------------------------------------------ KEYFRAMES */
+
+@keyframes item-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ------------------------------------------- TOTEM ALTO (ex.: 1080x1920) */
+
+@media (min-height: 60rem) {
+  .hubTitle {
+    font-size: var(--font-size-4xl);
   }
 
-  .actions {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .videoColumn {
+    height: min(74vh, 940px);
+  }
+
+  .homeMain {
+    gap: clamp(1.5rem, 3.4vw, 3rem);
   }
 }
+
+/* ---------------------------------------- TELAS BAIXAS (landscape / app) */
+
+@media (max-height: 52rem) {
+  .hubIntro {
+    display: none;
+  }
+
+  .videoColumn {
+    height: min(64vh, 420px);
+  }
+
+  .homeMain {
+    gap: clamp(1rem, 2.4vw, 1.75rem);
+  }
+}
+
+/* ------------------- ESTREITO (empilha: vídeo em cima, cards embaixo) */
+
+@media (max-width: 60rem) {
+  .homeMain {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .videoColumn {
+    height: auto;
+    width: min(100%, 320px);
+  }
+
+  .videoWrapper {
+    height: auto;
+    width: 100%;
+  }
+
+  .hubGrid {
+    width: 100%;
+    max-width: 44rem;
+    grid-auto-rows: auto;
+  }
+
+  .hubCard {
+    min-height: clamp(4.5rem, 11vh, 7rem);
+  }
+}
+
+/* -------------------------------------- HANDOFF MOBILE (rola, é o celular) */
 
 @media (max-width: 40rem) {
-  .grid {
+  .page {
+    height: auto;
+    justify-content: flex-start;
+  }
+
+  .hubGrid {
     grid-template-columns: 1fr;
   }
 
-  .welcome {
-    font-size: var(--font-size-2xl);
+  .videoColumn {
+    width: min(100%, 280px);
   }
 }

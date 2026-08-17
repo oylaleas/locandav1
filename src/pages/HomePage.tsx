@@ -1,125 +1,134 @@
-import { useState } from 'react';
+import { useMemo, type CSSProperties } from 'react';
 import { ActionCard } from '@/components/cards/ActionCard';
-import { ContentCard } from '@/components/cards/ContentCard';
-import { Brandmark } from '@/components/layout/Brandmark';
 import { KioskLayout } from '@/components/layout/KioskLayout';
-import { Icon } from '@/components/ui/Icon';
 import { ROUTES } from '@/config/kiosk';
 import { useKioskNavigation } from '@/app/navigation';
-import { QRCodePanel } from '@/features/qr/QRCodePanel';
 import { useI18n } from '@/features/i18n/useI18n';
-import {
-  getImage,
-  getMainGallery,
-  getQrTarget,
-  getSections,
-  getSiteIdentity,
-} from '@/services/contentService';
 import styles from './HomePage.module.css';
 
-export default function HomePage() {
-  const { t, tx } = useI18n();
-  const navigation = useKioskNavigation();
-  const identity = getSiteIdentity();
-  const sections = getSections();
-  const gallery = getMainGallery();
-  const qrTarget = getQrTarget('qr-site');
-  const [qrOpen, setQrOpen] = useState(false);
+/**
+ * Vídeo institucional em destaque (embed Vimeo) — tocando sozinho, sem
+ * bordas nem cabeçalho, ocupando a coluna própria ao lado do grid.
+ *
+ * Considerações responsáveis:
+ * - iframe de terceiros (Vimeo), única exceção externa pedida; `loading="lazy"`
+ *   para não carregar antes da Home ser vista;
+ * - acessível: `title` no iframe + `aria-label` no container.
+ */
+function HomeVideoCard() {
+  const { t } = useI18n();
+  return (
+    <div className={styles.videoWrapper} aria-label={t.home.videoCardTitle}>
+      <iframe
+        src="https://player.vimeo.com/video/1218674025?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&keyboard=0&title=0&byline=0&portrait=0&dnt=1"
+        title={t.home.videoCardTitle}
+        allow="autoplay; encrypted-media; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        tabIndex={-1}
+      />
+      {/*
+        Escudo invisível sobre o player: nenhum toque/clique chega ao
+        Vimeo — impossível pausar, dar play, ligar o som ou abrir tela
+        cheia. O vídeo é ambiente de apresentação, não conteúdo interativo.
+      */}
+      <span className={styles.videoShield} aria-hidden="true" />
+    </div>
+  );
+}
 
-  const [featured, ...rest] = sections;
+/**
+ * HOME — menu de navegação do totem ("Locanda Experience").
+ *
+ * PÁGINA ESTÁTICA: o vídeo institucional de apresentação em destaque ao
+ * lado (coluna própria) e o hub com as seis áreas principais. Centralizado
+ * e sem rolagem.
+ */
+export default function HomePage() {
+  const { t } = useI18n();
+  const navigation = useKioskNavigation();
+
+  /* LOCANDA EXPERIENCE — as seis áreas principais do totem. */
+  const hubItems = useMemo(
+    () => [
+      {
+        key: 'amenities',
+        icon: 'wifi' as const,
+        title: t.home.amenitiesCta,
+        description: t.home.amenitiesCtaDesc,
+        onSelect: () => navigation.push(ROUTES.contentDetail('comodidades')),
+      },
+      {
+        key: 'happy-hour',
+        icon: 'cocktail' as const,
+        title: t.home.happyHourCta,
+        description: t.home.happyHourCtaDesc,
+        onSelect: () => navigation.push(ROUTES.contentDetail('happy-hour')),
+      },
+      {
+        key: 'on-demand',
+        icon: 'bell' as const,
+        title: t.home.onDemandCta,
+        description: t.home.onDemandCtaDesc,
+        onSelect: () => navigation.push(ROUTES.contentDetail('servicos-on-demand')),
+      },
+      {
+        key: 'wellness',
+        icon: 'spa' as const,
+        title: t.home.wellnessCta,
+        description: t.home.wellnessCtaDesc,
+        onSelect: () => navigation.push(ROUTES.wellnessIndex),
+      },
+      {
+        key: 'tours',
+        icon: 'compass' as const,
+        title: t.home.toursCta,
+        description: t.home.toursCtaDesc,
+        onSelect: () => navigation.push(ROUTES.toursIndex),
+      },
+      {
+        key: 'kite',
+        icon: 'kite' as const,
+        title: t.home.kiteCta,
+        description: t.home.kiteCtaDesc,
+        onSelect: () => navigation.push(ROUTES.contentDetail('kite-center')),
+      },
+    ],
+    [t, navigation],
+  );
 
   return (
     <KioskLayout showBack={false} showBrand={false}>
       <div className={styles.page}>
-        <header className={styles.hero}>
-          <Brandmark size="md" withDescriptor />
-          <div className={styles.heroText}>
-            <h1 className={styles.welcome}>{tx(identity.homeWelcome)}</h1>
-            <p className={styles.intro}>{tx(identity.homeIntro)}</p>
-          </div>
-        </header>
-
-        {featured && (
-          <section aria-labelledby="destaque-titulo" className={styles.featuredSection}>
-            <h2 id="destaque-titulo" className="visually-hidden">
-              {tx(featured.title)}
-            </h2>
-            <ContentCard
-              featured
-              priority
-              title={tx(featured.title)}
-              eyebrow={tx(featured.tagline)}
-              icon={featured.icon}
-              description={tx(featured.summary)}
-              image={getImage(featured.heroImageId)}
-              hasVideo={featured.videoIds.length > 0}
-              photoCount={featured.galleryImageIds.length}
-              pendingContent={featured.contentPending}
-              onSelect={() => navigation.push(ROUTES.contentDetail(featured.slug))}
-            />
-          </section>
-        )}
-
-        <section aria-labelledby="secoes-titulo" className={styles.gridSection}>
-          <div className={styles.sectionHeader}>
-            <h2 id="secoes-titulo" className={styles.sectionTitle}>
-              {t.content.indexTitle}
-            </h2>
-            <span className={styles.scrollHint}>
-              <Icon name="chevron-down" size="1.1rem" />
-              {t.home.scrollHint}
-            </span>
+        <section className={styles.hub} aria-labelledby="locanda-experience-titulo">
+          <div className={styles.hubHeader}>
+            <h1 id="locanda-experience-titulo" className={styles.hubTitle}>
+              {t.home.experienceHubTitle}
+            </h1>
+            <p className={styles.hubIntro}>{t.home.experienceHubIntro}</p>
           </div>
 
-          <ul className={styles.grid}>
-            {rest.map((section) => (
-              <li key={section.slug} className={styles.gridItem}>
-                <ContentCard
-                  title={tx(section.title)}
-                  eyebrow={tx(section.tagline)}
-                  icon={section.icon}
-                  description={tx(section.summary)}
-                  image={getImage(section.heroImageId)}
-                  hasVideo={section.videoIds.length > 0}
-                  photoCount={section.galleryImageIds.length}
-                  pendingContent={section.contentPending}
-                  onSelect={() => navigation.push(ROUTES.contentDetail(section.slug))}
-                />
-              </li>
-            ))}
-          </ul>
-        </section>
+          <div className={styles.homeMain}>
+            {/* Vídeo institucional em destaque — coluna própria ao lado. */}
+            <div className={styles.videoColumn}>
+              <HomeVideoCard />
+            </div>
 
-        <section aria-label={t.nav.menu} className={styles.actions}>
-          <ActionCard
-            icon="info"
-            title={t.home.exploreAll}
-            description={t.content.indexIntro}
-            onSelect={() => navigation.push(ROUTES.contentIndex)}
-          />
-          {gallery && (
-            <ActionCard
-              icon="gallery"
-              title={t.home.galleryCta}
-              description={tx(gallery.description)}
-              onSelect={() => navigation.push(ROUTES.gallery)}
-            />
-          )}
-          {qrTarget && (
-            <ActionCard
-              icon="qr"
-              tone="accent"
-              title={tx(qrTarget.title)}
-              description={tx(qrTarget.instruction)}
-              onSelect={() => setQrOpen(true)}
-            />
-          )}
+            <ul className={styles.hubGrid}>
+              {hubItems.map((item, index) => (
+                <li key={item.key} className={styles.hubItem} style={{ '--i': index } as CSSProperties}>
+                  <ActionCard
+                    icon={item.icon}
+                    title={item.title}
+                    description={item.description}
+                    onSelect={item.onSelect}
+                    className={styles.hubCard}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
       </div>
-
-      {qrTarget && (
-        <QRCodePanel target={qrTarget} open={qrOpen} onClose={() => setQrOpen(false)} />
-      )}
     </KioskLayout>
   );
 }

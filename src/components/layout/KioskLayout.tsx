@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { AccessibilityControl } from '@/features/a11y/AccessibilityControl';
 import { OfflineIndicator } from '@/features/connectivity/OfflineIndicator';
 import { LanguageSelector } from '@/features/i18n/LanguageSelector';
+import { FullScreenMenu } from '@/features/navigation/FullScreenMenu';
 import { useI18n } from '@/features/i18n/useI18n';
 import { useKioskNavigation } from '@/app/navigation';
 import { cn } from '@/utils/cn';
@@ -64,7 +65,13 @@ export function KioskLayout({
         {t.app.skipToContent}
       </a>
 
-      <header className={cn(styles.header, isHeaderBare && styles.headerBare)}>
+      <header
+        className={cn(
+          styles.header,
+          isHeaderBare && styles.headerBare,
+          !showBrand && !isHeaderBare && styles.headerCentered,
+        )}
+      >
         <div className={styles.headerBrand}>
           {showBrand && <Brandmark size="sm" />}
           {(eyebrow || title) && (
@@ -80,6 +87,7 @@ export function KioskLayout({
       <main
         id="conteudo-principal"
         ref={mainRef}
+        key={location.pathname}
         className={cn(styles.main, 'scroll-area', bleed && styles.bleed)}
         tabIndex={-1}
       >
@@ -100,6 +108,7 @@ export function KioskLayout({
         <div className={styles.actionGroup}>
           <LanguageSelector />
           <AccessibilityControl />
+          <FullScreenMenu />
         </div>
       </nav>
     </div>

@@ -11,6 +11,27 @@
 
 :root {
   /* ---------------------------------------------------------------- PALETA */
+  /* Paleta da MARCA (extraída das logos oficiais):
+     azul #065895 (rosa dos ventos/texto do emblema) + dourado #f1b100
+     (anel da rosa dos ventos). São as cores centrais do totem. */
+  --palette-brand-blue-950: #011a2c;
+  --palette-brand-blue-900: #042b47;
+  --palette-brand-blue-800: #05406b;
+  --palette-brand-blue-700: #065895; /* azul da marca */
+  --palette-brand-blue-600: #1471b5;
+  --palette-brand-blue-500: #3d8fc9;
+  --palette-brand-blue-200: #c4dcf0;
+  --palette-brand-blue-100: #e7f1f9;
+  --palette-brand-blue-050: #f3f8fc;
+
+  --palette-brand-gold-700: #8a6400; /* dourado escuro — texto sobre claro */
+  --palette-brand-gold-600: #a87d00;
+  --palette-brand-gold-500: #d99f00;
+  --palette-brand-gold-400: #f1b100; /* dourado da marca */
+  --palette-brand-gold-200: #f8d97c;
+  --palette-brand-gold-100: #fdf3d7; /* fundo dourado suave */
+
+  /* Paleta neutra de apoio (tom de areia/verde, calor do litoral). */
   --palette-ink-900: #141b18;
   --palette-ink-800: #1b2320;
   --palette-ink-700: #2c3733;
@@ -31,9 +52,6 @@
   --palette-olive-600: #45543f;
   --palette-olive-500: #55684f;
 
-  --palette-brass-600: #8c6c2a;
-  --palette-brass-500: #b08c3f;
-
   --palette-danger-600: #8e2f22;
   --palette-danger-100: #f6e3df;
   --palette-success-600: #2f6b4a;
@@ -43,9 +61,10 @@
   --color-background-alt: var(--palette-ivory-200);
   --color-surface: var(--palette-ivory-050);
   --color-surface-strong: var(--palette-sand-300);
-  --color-surface-inverse: var(--palette-ink-800);
-  --color-surface-scrim: rgba(20, 27, 24, 0.72);
-  --color-surface-scrim-strong: rgba(20, 27, 24, 0.92);
+  --color-surface-inverse: var(--palette-brand-blue-900);
+  --color-surface-inverse-strong: var(--palette-brand-blue-950);
+  --color-surface-scrim: rgba(4, 43, 71, 0.74);
+  --color-surface-scrim-strong: rgba(1, 26, 44, 0.94);
 
   --color-text-primary: var(--palette-ink-800);
   --color-text-secondary: var(--palette-ink-500);
@@ -53,8 +72,9 @@
   --color-text-inverse-secondary: rgba(247, 242, 233, 0.78);
   --color-text-on-action: #ffffff;
 
-  --color-action-primary: var(--palette-clay-600);
-  --color-action-primary-pressed: #783c25;
+  /* Ações: primária = AZUL DA MARCA; destaque/detalhe = DOURADO DA MARCA. */
+  --color-action-primary: var(--palette-brand-blue-700);
+  --color-action-primary-pressed: var(--palette-brand-blue-800);
   --color-action-secondary: var(--palette-ink-800);
   --color-action-secondary-pressed: var(--palette-ink-900);
   --color-action-quiet-surface: rgba(27, 35, 32, 0.06);
@@ -62,19 +82,25 @@
   --color-action-disabled-surface: rgba(27, 35, 32, 0.08);
   --color-action-disabled-text: rgba(27, 35, 32, 0.42);
 
-  --color-accent: var(--palette-brass-600);
-  --color-accent-soft: var(--palette-sand-300);
+  --color-accent: var(--palette-brand-gold-700);
+  --color-accent-strong: var(--palette-brand-gold-500);
+  --color-accent-soft: var(--palette-brand-gold-100);
+  /* Azul suave da marca — fundos de ícones/grupos de destaque. */
+  --color-brand-soft: var(--palette-brand-blue-100);
 
   --color-border-subtle: rgba(27, 35, 32, 0.12);
   --color-border-strong: rgba(27, 35, 32, 0.28);
   --color-border-inverse: rgba(247, 242, 233, 0.32);
 
-  --color-focus-ring: #0f5f8f;
-  --color-focus-ring-inverse: #ffd88a;
+  --color-focus-ring: var(--palette-brand-blue-700);
+  --color-focus-ring-inverse: var(--palette-brand-gold-400);
 
   --color-danger: var(--palette-danger-600);
   --color-danger-surface: var(--palette-danger-100);
   --color-success: var(--palette-success-600);
+
+  /* Superfície de mídia (player, overlays escuros) — azul profundo da marca. */
+  --color-media-surface: var(--palette-brand-blue-950);
 
   /* ----------------------------------------------------------- TIPOGRAFIA */
   /* [A VALIDAR] tipografia institucional oficial. Usamos stacks do sistema
@@ -82,6 +108,9 @@
   --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia,
     'Times New Roman', serif;
   --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Leitura de "instrumento" — horas, valores, contatos e rumos da bússola
+     em mono, como o painel de instrumentos de um destino de vento/água. */
+  --font-data: ui-monospace, 'SF Mono', 'Cascadia Code', 'Roboto Mono', Menlo, Consolas, monospace;
 
   /* Escala fluida ancorada no viewport do totem (1080x1920 [VALIDAR NO HARDWARE REAL]).
      --font-scale é multiplicado pelo controle de acessibilidade de texto. */
@@ -203,8 +232,8 @@
   --color-text-inverse: #ffffff;
   --color-text-inverse-secondary: #ffffff;
 
-  --color-action-primary: #6d2f16;
-  --color-action-primary-pressed: #4d1f0d;
+  --color-action-primary: var(--palette-brand-blue-700);
+  --color-action-primary-pressed: var(--palette-brand-blue-800);
   --color-action-secondary: #000000;
   --color-action-quiet-surface: #ebebeb;
   --color-action-quiet-surface-pressed: #d4d4d4;

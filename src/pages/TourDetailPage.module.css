@@ -1,0 +1,241 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: var(--space-2xs);
+  min-height: clamp(10rem, 24vh, 15rem);
+  padding: var(--space-2xl) var(--kiosk-gutter) var(--space-lg);
+  overflow: hidden;
+  /* Identidade de marca — sem fotografias (decisão do responsável). */
+  background:
+    radial-gradient(110% 90% at 18% 0%, rgba(20, 113, 181, 0.45) 0%, rgba(4, 43, 71, 0) 55%),
+    linear-gradient(165deg, var(--palette-brand-blue-800) 0%, var(--palette-brand-blue-950) 100%);
+  color: var(--color-text-inverse);
+}
+
+/* Rosa dos ventos dourada — assinatura do topo do passeio. */
+.heroRose {
+  position: absolute;
+  right: 3%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(8rem, 16vh, 11rem);
+  height: auto;
+  color: rgba(241, 177, 0, 0.14);
+  pointer-events: none;
+}
+
+.hero > *:not(.heroRose) {
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  font-family: var(--font-data);
+  font-size: var(--font-size-3xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: var(--palette-brand-gold-400);
+}
+
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-tight);
+  font-size: var(--font-size-3xl);
+  color: var(--color-text-inverse);
+  margin: 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  width: 100%;
+  max-width: var(--size-content-max-width);
+  margin: 0 auto;
+  padding: 0 var(--kiosk-gutter);
+}
+
+.summary {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+  margin: 0;
+  max-width: var(--size-reading-max-width);
+}
+
+.mediaPending {
+  align-self: flex-start;
+}
+
+.info {
+  padding: var(--space-lg);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+  box-shadow: var(--elevation-1);
+}
+
+.infoList {
+  display: grid;
+  gap: var(--space-md);
+  margin: 0;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+}
+
+.infoLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-size: var(--font-size-3xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.infoValue {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.infoValue:not(.price) {
+  font-family: var(--font-data);
+}
+
+.price {
+  color: var(--color-accent);
+  font-family: var(--font-data);
+  font-weight: var(--font-weight-bold);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.optionsList {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.sectionTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-size: var(--font-size-xl);
+  margin: 0;
+}
+
+.sectionIntro {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 55ch;
+}
+
+.titleIcon {
+  color: var(--color-accent);
+}
+
+.route {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.routeList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.routeItem {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  padding-left: var(--space-2xs);
+}
+
+.lists {
+  display: grid;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+  box-shadow: var(--elevation-1);
+}
+
+.plainList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  margin: var(--space-xs) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+}
+
+.excluded {
+  color: var(--color-text-secondary);
+}
+
+.check {
+  flex-shrink: 0;
+  color: var(--color-success);
+  margin-top: 0.15em;
+}
+
+.close {
+  flex-shrink: 0;
+  color: var(--color-danger);
+  margin-top: 0.15em;
+}
+
+.videos,
+.gallery {
+  display: block;
+}
+
+@media (min-width: 75rem) {
+  .infoList {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .optionsList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .lists {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

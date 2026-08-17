@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
 import { StateMessage } from '@/components/states/StateMessage';
+import { WindRose } from '@/components/ui/WindRose';
 import { FEATURE_FLAGS } from '@/config/kiosk';
 import { useI18n } from '@/features/i18n/useI18n';
 import { subscribeToSessionReset } from '@/features/session/resetBus';
@@ -62,6 +63,9 @@ export function QRCodePanel({ target, open, onClose }: QRCodePanelProps) {
         />
       ) : (
         <div className={styles.content}>
+          {/* Gráfico decorativo de interação (rosa dos ventos da logo) —
+              não é logotipo. */}
+          <WindRose className={styles.watermark} />
           <QRCode
             key={target.url}
             value={target.url}

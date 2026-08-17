@@ -30,7 +30,7 @@
 }
 
 .panelDark {
-  background-color: var(--palette-ink-900);
+  background-color: var(--color-media-surface);
   color: var(--color-text-inverse);
 }
 

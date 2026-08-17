@@ -1,11 +1,13 @@
 /**
  * Ciclo de vida da sessão do totem.
  *
- * attract  → ninguém interagindo; Attract Mode em tela cheia
- * active   → visitante navegando
+ * active   → visitante navegando (estado inicial — o totem abre direto na Home)
  * warning  → inatividade detectada; aviso com contagem regressiva
+ *
+ * A tela inicial (Attract Mode) foi removida por decisão do responsável:
+ * o totem abre diretamente no menu/Home.
  */
-export type SessionPhase = 'attract' | 'active' | 'warning';
+export type SessionPhase = 'active' | 'warning';
 
 export type SessionResetReason =
   | 'inactivity-timeout'
