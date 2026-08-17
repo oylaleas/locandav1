@@ -20,13 +20,18 @@ function HomeVideoCard() {
   return (
     <div className={styles.videoWrapper} aria-label={t.home.videoCardTitle}>
       <iframe
-        src="https://player.vimeo.com/video/1218674025?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0&dnt=1"
+        src="https://player.vimeo.com/video/1218674025?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&keyboard=0&title=0&byline=0&portrait=0&dnt=1"
         title={t.home.videoCardTitle}
-        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+        allow="autoplay; encrypted-media; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-        loading="eager"
+        tabIndex={-1}
       />
+      {/*
+        Escudo invisível sobre o player: nenhum toque/clique chega ao
+        Vimeo — impossível pausar, dar play, ligar o som ou abrir tela
+        cheia. O vídeo é ambiente de apresentação, não conteúdo interativo.
+      */}
+      <span className={styles.videoShield} aria-hidden="true" />
     </div>
   );
 }
