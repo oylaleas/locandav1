@@ -30,6 +30,7 @@ export function AccessibilityControl({ compact = false }: { compact?: boolean })
         size={compact ? 'sm' : 'md'}
         icon="accessibility"
         iconOnly={compact}
+        wrapLabel
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
       >

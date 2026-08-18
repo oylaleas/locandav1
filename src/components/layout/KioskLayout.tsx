@@ -97,11 +97,17 @@ export function KioskLayout({
       <nav className={styles.actionBar} aria-label={t.nav.menu}>
         <div className={styles.actionGroup}>
           {showBack && (
-            <Button variant="secondary" size="lg" icon="arrow-left" onClick={onBack ?? navigation.back}>
+            <Button
+              variant="secondary"
+              size="lg"
+              icon="arrow-left"
+              wrapLabel
+              onClick={onBack ?? navigation.back}
+            >
               {t.nav.back}
             </Button>
           )}
-          <Button variant="primary" size="lg" icon="home" onClick={navigation.home}>
+          <Button variant="primary" size="lg" icon="home" wrapLabel onClick={navigation.home}>
             {t.nav.home}
           </Button>
         </div>
