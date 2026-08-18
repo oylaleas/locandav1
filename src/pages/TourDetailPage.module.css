@@ -75,6 +75,7 @@
   font-size: var(--font-size-3xl);
   color: var(--color-text-inverse);
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .body {

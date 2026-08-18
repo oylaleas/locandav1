@@ -55,6 +55,7 @@
   letter-spacing: var(--letter-spacing-tight);
   font-size: var(--font-size-3xl);
   color: var(--color-text-inverse);
+  overflow-wrap: anywhere;
 }
 
 .body {

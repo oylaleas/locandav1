@@ -38,6 +38,7 @@
 
 .hubTitle {
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
   gap: var(--space-2xs);
   font-family: var(--font-display);
@@ -46,6 +47,7 @@
   font-size: var(--font-size-3xl);
   margin: 0;
   color: var(--color-action-primary);
+  text-wrap: balance;
 }
 
 /* Risco dourado sob o título do hub — linha do horizonte. */
@@ -88,7 +90,7 @@
   flex: 0 0 auto;
   display: flex;
   /* Altura proporcional à tela — nunca estoura; a largura deriva do 9:16. */
-  height: min(72vh, 880px);
+  height: min(72dvh, 880px);
 }
 
 .videoWrapper {
@@ -189,7 +191,7 @@
   }
 
   .videoColumn {
-    height: min(74vh, 940px);
+    height: min(74dvh, 940px);
   }
 
   .homeMain {
@@ -213,7 +215,7 @@
   }
 
   .videoColumn {
-    height: min(62vh, 380px);
+    height: min(62dvh, 380px);
   }
 
   .homeMain {
@@ -227,7 +229,7 @@
 
 @media (max-height: 40rem) {
   .videoColumn {
-    height: min(58vh, 280px);
+    height: min(58dvh, 280px);
   }
 }
 

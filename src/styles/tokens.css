@@ -115,7 +115,7 @@
   /* Escala fluida ancorada no viewport do totem (1080x1920 [VALIDAR NO HARDWARE REAL]).
      --font-scale é multiplicado pelo controle de acessibilidade de texto. */
   --font-scale: 1;
-  --font-root: clamp(16px, 0.6vw + 0.62vh, 26px);
+  --font-root: clamp(16px, 0.6vw + 0.62dvh, 26px);
 
   --font-size-3xs: calc(0.72rem * var(--font-scale));
   --font-size-2xs: calc(0.8rem * var(--font-scale));

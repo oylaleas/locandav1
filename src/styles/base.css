@@ -12,6 +12,8 @@ html,
 body,
 #root {
   height: 100%;
+  min-height: 100dvh;
+  max-width: 100%;
 }
 
 html {
@@ -19,6 +21,7 @@ html {
   /* Kiosk: evita a sensação de "navegador exposto" no overscroll. */
   overscroll-behavior: none;
   -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -31,6 +34,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overscroll-behavior: none;
+  overflow-x: clip;
 }
 
 /* Em modo totem removemos o realce azul de toque do WebKit e a seleção

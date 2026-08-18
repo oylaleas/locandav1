@@ -114,6 +114,7 @@
   line-height: var(--line-height-snug);
   letter-spacing: var(--letter-spacing-tight);
   color: var(--color-text-primary);
+  overflow-wrap: anywhere;
 }
 
 .description {
