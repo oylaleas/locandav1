@@ -107,6 +107,17 @@
   }
 }
 
+/* Landscape baixo: não força 2 linhas de 100% — os cards acompanham o conteúdo. */
+@media (max-height: 40rem) {
+  .page {
+    height: auto;
+  }
+
+  .grid {
+    grid-template-rows: none;
+  }
+}
+
 /* -------------------------------------- ESTREITO / HANDOFF MOBILE */
 
 @media (max-width: 64rem) {

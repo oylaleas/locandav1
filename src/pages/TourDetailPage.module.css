@@ -12,7 +12,7 @@
   align-items: flex-start;
   justify-content: flex-end;
   gap: var(--space-2xs);
-  min-height: clamp(10rem, 24vh, 15rem);
+  min-height: clamp(10rem, 24dvh, 15rem);
   padding: var(--space-2xl) var(--kiosk-gutter) var(--space-lg);
   overflow: hidden;
   background:
@@ -306,7 +306,7 @@
 
 @media (max-width: 48rem) {
   .hero {
-    min-height: clamp(8rem, 22vh, 12rem);
+    min-height: clamp(8rem, 22dvh, 12rem);
     padding: var(--space-xl) var(--kiosk-gutter) var(--space-md);
   }
 
