@@ -25,16 +25,13 @@ describe('bem-estar (Espaço Onoda)', () => {
     expect(screen.queryByText('Massagem Relaxante')).not.toBeInTheDocument();
 
     await user.click(wellnessCta);
-    expect(await screen.findByRole('heading', { level: 1, name: 'Bem-estar' })).toBeVisible();
+    expect(await screen.findByRole('heading', { level: 1, name: 'Espaço Onoda' })).toBeVisible();
   });
 
-  it('BEM-ESTAR → ESPAÇO ONODA → listagem de serviços → detalhe → fechar', async () => {
+  it('BEM-ESTAR abre direto o Espaço Onoda → serviços → detalhe → fechar', async () => {
     const { user } = await enterFromAttract();
 
     await user.click(screen.getByRole('button', { name: /Bem-estar/i }));
-    await screen.findByRole('heading', { level: 1, name: 'Bem-estar' });
-
-    await user.click(screen.getByRole('button', { name: /Espaço Onoda/i }));
     await screen.findByRole('heading', { level: 1, name: 'Espaço Onoda' });
 
     // Os 8 serviços estão listados como cards.
@@ -61,8 +58,6 @@ describe('bem-estar (Espaço Onoda)', () => {
     const { user } = await enterFromAttract();
 
     await user.click(screen.getByRole('button', { name: /Bem-estar/i }));
-    await screen.findByRole('heading', { level: 1, name: 'Bem-estar' });
-    await user.click(screen.getByRole('button', { name: /Espaço Onoda/i }));
     await screen.findByRole('heading', { level: 1, name: 'Espaço Onoda' });
 
     await user.click(screen.getByRole('button', { name: /Wellness Day/i }));
@@ -75,8 +70,6 @@ describe('bem-estar (Espaço Onoda)', () => {
     const { user } = await enterFromAttract();
 
     await user.click(screen.getByRole('button', { name: /Bem-estar/i }));
-    await screen.findByRole('heading', { level: 1, name: 'Bem-estar' });
-    await user.click(screen.getByRole('button', { name: /Espaço Onoda/i }));
     await screen.findByRole('heading', { level: 1, name: 'Espaço Onoda' });
 
     await user.click(screen.getByRole('button', { name: 'WhatsApp' }));

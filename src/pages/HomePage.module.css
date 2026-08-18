@@ -204,26 +204,58 @@
     display: none;
   }
 
+  .page {
+    padding-block: var(--space-xs);
+  }
+
+  .hub {
+    gap: clamp(0.6rem, 1.6vh, 1rem);
+  }
+
   .videoColumn {
-    height: min(64vh, 420px);
+    height: min(62vh, 380px);
   }
 
   .homeMain {
-    gap: clamp(1rem, 2.4vw, 1.75rem);
+    gap: clamp(0.85rem, 2vw, 1.5rem);
+  }
+
+  .hubCard {
+    min-height: clamp(3.25rem, 8vh, 5rem);
+  }
+}
+
+@media (max-height: 40rem) {
+  .videoColumn {
+    height: min(58vh, 280px);
+  }
+}
+
+/* ------------------- MÉDIO: vídeo menor, cards ainda ao lado */
+
+@media (max-width: 72rem) and (min-width: 56.01rem) {
+  .videoColumn {
+    height: min(64vh, 560px);
   }
 }
 
 /* ------------------- ESTREITO (empilha: vídeo em cima, cards embaixo) */
 
-@media (max-width: 60rem) {
+@media (max-width: 56rem) {
+  .page {
+    height: auto;
+    justify-content: flex-start;
+  }
+
   .homeMain {
     flex-direction: column;
     align-items: center;
+    max-height: none;
   }
 
   .videoColumn {
     height: auto;
-    width: min(100%, 320px);
+    width: min(100%, 220px);
   }
 
   .videoWrapper {
@@ -238,16 +270,15 @@
   }
 
   .hubCard {
-    min-height: clamp(4.5rem, 11vh, 7rem);
+    min-height: clamp(4.25rem, 10vh, 6.5rem);
   }
 }
 
 /* -------------------------------------- HANDOFF MOBILE (rola, é o celular) */
 
 @media (max-width: 40rem) {
-  .page {
-    height: auto;
-    justify-content: flex-start;
+  .hubTitle {
+    font-size: var(--font-size-2xl);
   }
 
   .hubGrid {
@@ -255,6 +286,6 @@
   }
 
   .videoColumn {
-    width: min(100%, 280px);
+    width: min(42vw, 180px);
   }
 }

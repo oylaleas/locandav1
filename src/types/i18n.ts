@@ -1,5 +1,5 @@
 /** Idiomas suportados pelo totem. */
-export const LANGUAGE_CODES = ['pt-BR', 'en', 'it'] as const;
+export const LANGUAGE_CODES = ['pt-BR', 'en', 'it', 'es'] as const;
 
 export type LanguageCode = (typeof LANGUAGE_CODES)[number];
 

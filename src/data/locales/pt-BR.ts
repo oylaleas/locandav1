@@ -16,7 +16,7 @@ export const ptBR = {
   attract: {
     touchToStart: 'Toque na tela para começar',
     touchAnywhere: 'Toque em qualquer lugar',
-    languagesAvailable: 'Disponível em Português, English e Italiano',
+    languagesAvailable: 'Disponível em Português, English, Italiano e Español',
     videoUnavailable: 'Exibindo imagem — vídeo indisponível no momento',
   },
   nav: {

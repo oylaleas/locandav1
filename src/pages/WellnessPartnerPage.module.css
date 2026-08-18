@@ -133,8 +133,43 @@
   flex-wrap: wrap;
 }
 
-@media (min-width: 75rem) {
+@media (min-width: 48rem) {
   .servicesList {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 48rem) {
+  .page {
+    gap: var(--space-lg);
+  }
+
+  .icon {
+    width: 3.75rem;
+    height: 3.75rem;
+  }
+
+  .title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .contact {
+    padding: var(--space-lg);
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contactActions {
+    width: 100%;
+  }
+
+  .contactActions > * {
+    flex: 1 1 auto;
+  }
+}
+
+@media (max-width: 30rem) {
+  .contactActions {
+    flex-direction: column;
   }
 }

@@ -183,4 +183,25 @@
   .body {
     padding: var(--space-xs) var(--space-sm) var(--space-sm);
   }
+
+  .media,
+  .image {
+    min-height: 5.5rem;
+  }
+
+  .mediaIcon {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+@media (max-width: 40rem) {
+  .media,
+  .image {
+    min-height: 8rem;
+  }
+
+  .title {
+    font-size: var(--font-size-lg);
+  }
 }

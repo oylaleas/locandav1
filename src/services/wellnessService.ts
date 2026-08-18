@@ -9,8 +9,15 @@
 import { WELLNESS_PARTNERS } from '@/data/wellness';
 import type { WellnessPartner, WellnessService } from '@/types/wellness';
 
+export const DEFAULT_WELLNESS_PARTNER_ID = 'espaco-onoda';
+
 export function getWellnessPartners(): WellnessPartner[] {
   return WELLNESS_PARTNERS;
+}
+
+/** Parceiro principal — hoje o único (Espaço Onoda). */
+export function getPrimaryWellnessPartner(): WellnessPartner | undefined {
+  return WELLNESS_PARTNERS[0];
 }
 
 export function getWellnessPartner(id: string | undefined): WellnessPartner | undefined {

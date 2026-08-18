@@ -212,7 +212,22 @@
   /* --------------------------------------------------------- LAYOUT KIOSK */
   --kiosk-safe-top: env(safe-area-inset-top, 0px);
   --kiosk-safe-bottom: env(safe-area-inset-bottom, 0px);
-  --kiosk-gutter: clamp(1.25rem, 3.5vw, 3.5rem);
+  --kiosk-gutter: clamp(1rem, 3.2vw, 3.5rem);
+}
+
+@media (max-width: 40rem) {
+  :root {
+    --kiosk-gutter: 1rem;
+    --size-touch-min: 3.75rem;
+    --size-touch-comfort: 4.5rem;
+    --size-touch-large: 5.25rem;
+  }
+}
+
+@media (max-height: 44rem) {
+  :root {
+    --kiosk-gutter: clamp(0.85rem, 2.4vw, 2rem);
+  }
 }
 
 /* --------------------------------------------------------------------------

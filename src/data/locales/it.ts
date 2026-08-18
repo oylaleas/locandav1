@@ -13,7 +13,7 @@ export const it: Dictionary = {
   attract: {
     touchToStart: 'Tocca lo schermo per iniziare',
     touchAnywhere: 'Tocca in qualsiasi punto',
-    languagesAvailable: 'Disponibile in Português, English e Italiano',
+    languagesAvailable: 'Disponibile in Português, English, Italiano e Español',
     videoUnavailable: 'Immagine in mostra — video non disponibile ora',
   },
   nav: {

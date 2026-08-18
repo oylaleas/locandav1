@@ -1,3 +1,4 @@
+import { Navigate } from 'react-router-dom';
 import { ActionCard } from '@/components/cards/ActionCard';
 import { KioskLayout } from '@/components/layout/KioskLayout';
 import { EmptyState } from '@/components/states/StateMessage';
@@ -8,13 +9,17 @@ import { getWellnessPartners } from '@/services/wellnessService';
 import styles from './WellnessIndexPage.module.css';
 
 /**
- * BEM-ESTAR — listagem de espaços (hoje: Espaço Onoda).
- * A Home oferece apenas o acesso; o conteúdo completo vive aqui.
+ * BEM-ESTAR — se houver um único espaço (hoje: Espaço Onoda),
+ * entra direto nele. A listagem só aparece se existirem vários parceiros.
  */
 export default function WellnessIndexPage() {
   const { t, tx } = useI18n();
   const navigation = useKioskNavigation();
   const partners = getWellnessPartners();
+
+  if (partners.length === 1) {
+    return <Navigate to={ROUTES.wellnessPartner(partners[0].id)} replace />;
+  }
 
   return (
     <KioskLayout title={t.wellness.indexTitle} eyebrow={t.nav.youAreHere}>

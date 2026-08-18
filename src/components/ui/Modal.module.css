@@ -57,6 +57,31 @@
   padding: var(--space-lg) var(--space-lg) var(--space-md);
 }
 
+@media (max-width: 40rem) {
+  .overlay {
+    padding: var(--space-sm);
+    align-items: flex-end;
+  }
+
+  .panel,
+  .md,
+  .lg {
+    width: 100%;
+    max-height: min(90vh, 40rem);
+    border-radius: var(--radius-panel) var(--radius-panel) var(--radius-md) var(--radius-md);
+  }
+
+  .header,
+  .body,
+  .footer {
+    padding-inline: var(--space-md);
+  }
+
+  .title {
+    font-size: var(--font-size-xl);
+  }
+}
+
 .headings {
   display: flex;
   flex-direction: column;

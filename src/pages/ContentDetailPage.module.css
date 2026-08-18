@@ -221,12 +221,31 @@
   gap: var(--space-md);
 }
 
-@media (min-width: 75rem) {
+@media (min-width: 48rem) {
   .factList {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .relatedList {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 48rem) {
+  .hero {
+    min-height: clamp(8rem, 22vh, 12rem);
+    padding: var(--space-xl) var(--kiosk-gutter) var(--space-md);
+  }
+
+  .title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .body {
+    gap: var(--space-lg);
+  }
+
+  .qrSection {
+    padding: var(--space-md);
   }
 }
