@@ -91,7 +91,7 @@ describe('experiências e passeios', () => {
     window.history.replaceState({}, '', '/home');
   });
 
-  it('HOME → EXPERIÊNCIAS → lista os passeios (roteiros + atividades)', async () => {
+  it('HOME → EXPERIÊNCIAS → vitrine 3×2 com as seis experiências', async () => {
     const { user } = await enterFromAttract();
 
     await user.click(screen.getByRole('button', { name: /Experiências e passeios/i }));
@@ -99,77 +99,68 @@ describe('experiências e passeios', () => {
       await screen.findByRole('heading', { level: 1, name: 'Experiências e passeios' }),
     ).toBeVisible();
 
-    // Roteiros detalhados.
-    expect(screen.getByRole('button', { name: /Passeio Pôr do Sol/i })).toBeVisible();
-    expect(screen.getByRole('button', { name: /Moitas de Icaraí/i })).toBeVisible();
-    expect(
-      screen.getByRole('button', { name: /Almofala, Ilha do Guajiru e Região/i }),
-    ).toBeVisible();
-
-    // Atividades (informadas pelo responsável, sem valores inventados).
     for (const name of [
-      /Barco na Ilha/i,
-      /Buggy/i,
-      /Quadriciclo & UTV/i,
-      /Cavalo/i,
-      /Caiaque no Porto dos Barcos/i,
-      /FatBike na Ilha/i,
+      'Barco na Ilha',
+      'Buggy',
+      'Quadriciclo & UTV',
+      'Cavalo',
+      'Caiaque no Porto dos Barcos',
+      'FatBike na Ilha',
     ]) {
-      expect(screen.getByRole('button', { name })).toBeVisible();
+      expect(screen.getByRole('button', { name: new RegExp(`^${name}\\.`) })).toBeVisible();
     }
   });
 
-  it('PASSEIO PÔR DO SOL → horário 15:30–18:30 e R$ 370', async () => {
+  it('BARCO NA ILHA → detalhe sem dados inventados + solicitar reserva', async () => {
     const { user } = await enterFromAttract();
 
     await user.click(screen.getByRole('button', { name: /Experiências e passeios/i }));
     await screen.findByRole('heading', { level: 1, name: 'Experiências e passeios' });
 
-    await user.click(screen.getByRole('button', { name: /Passeio Pôr do Sol/i }));
+    await user.click(screen.getByRole('button', { name: /^Barco na Ilha\./ }));
+    expect(await screen.findByRole('heading', { level: 1, name: 'Barco na Ilha' })).toBeVisible();
+
+    expect(screen.getByText(/explorando a Ilha do Guajiru/i)).toBeVisible();
+    expect(screen.queryByText(/R\$/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/HORÁRIO/i)).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Solicitar reserva' }));
+    const dialog = await screen.findByRole('dialog');
+    expect(within(dialog).getByRole('img', { name: /WhatsApp — \+55 88 99219-1175/ })).toBeVisible();
+  });
+
+  it('PASSEIO PÔR DO SOL → horário 15:30–18:30 e R$ 370', async () => {
+    const { user } = renderWithProviders(<AppShell />, '/experiencias-e-passeios/por-do-sol');
     expect(await screen.findByRole('heading', { level: 1, name: 'Passeio Pôr do Sol' })).toBeVisible();
 
     expect(screen.getByText('15:30 às 18:30')).toBeVisible();
     expect(screen.getByText('R$ 370')).toBeVisible();
-    // Aparece no resumo e no roteiro — o fato está preservado.
     expect(screen.getAllByText(/Praia da Espraiada/i).length).toBeGreaterThan(0);
+    void user;
   });
 
   it('MOITAS DE ICARAÍ → comparação clara entre Opção 1 (com barco) e Opção 2 (sem barco)', async () => {
-    const { user } = await enterFromAttract();
-
-    await user.click(screen.getByRole('button', { name: /Experiências e passeios/i }));
-    await screen.findByRole('heading', { level: 1, name: 'Experiências e passeios' });
-
-    await user.click(screen.getByRole('button', { name: /Moitas de Icaraí/i }));
+    renderWithProviders(<AppShell />, '/experiencias-e-passeios/moitas-de-icarai');
     expect(await screen.findByRole('heading', { level: 1, name: 'Moitas de Icaraí' })).toBeVisible();
 
-    // Diferenciação explícita por TEXTO (nunca apenas por cor).
     expect(screen.getByText('Opção 1 — Com passeio de barco')).toBeVisible();
     expect(screen.getByText('Opção 2 — Sem passeio de barco')).toBeVisible();
 
-    // Horários e valores exatos.
     expect(screen.getByText('09:00 às 16:00')).toBeVisible();
     expect(screen.getByText('09:00 às 14:30')).toBeVisible();
     expect(screen.getByText('R$ 800')).toBeVisible();
     expect(screen.getByText('R$ 650')).toBeVisible();
     expect(screen.getByText('Buggy para até 4 pessoas.')).toBeVisible();
 
-    // Detalhes factuais da Opção 1.
     expect(screen.getAllByText(/Rio Aracati Açu/i).length).toBeGreaterThan(0);
     expect(screen.getByText('Túnel do Amor')).toBeVisible();
     expect(screen.getByText('Ilha das Ostras')).toBeVisible();
     expect(screen.getByText('Parada para almoço')).toBeVisible();
-    // A Opção 2 marca explicitamente o que não inclui.
     expect(screen.getByText('Não inclui: Passeio de barco')).toBeVisible();
   });
 
   it('ALMOFALA / ILHA DO GUAJIRU E REGIÃO → 09:00–13:30 e R$ 500', async () => {
-    const { user } = await enterFromAttract();
-
-    await user.click(screen.getByRole('button', { name: /Experiências e passeios/i }));
-    await screen.findByRole('heading', { level: 1, name: 'Experiências e passeios' });
-
-    await user.click(screen.getByRole('button', { name: /Almofala, Ilha do Guajiru e Região/i }));
+    renderWithProviders(<AppShell />, '/experiencias-e-passeios/almofala-guajiru-regiao');
     expect(
       await screen.findByRole('heading', { level: 1, name: 'Almofala, Ilha do Guajiru e Região' }),
     ).toBeVisible();
@@ -185,8 +176,8 @@ describe('experiências e passeios', () => {
     await user.click(screen.getByRole('button', { name: /Experiências e passeios/i }));
     await screen.findByRole('heading', { level: 1, name: 'Experiências e passeios' });
 
-    await user.click(screen.getByRole('button', { name: /Passeio Pôr do Sol/i }));
-    await screen.findByRole('heading', { level: 1, name: 'Passeio Pôr do Sol' });
+    await user.click(screen.getByRole('button', { name: /^Barco na Ilha\./ }));
+    await screen.findByRole('heading', { level: 1, name: 'Barco na Ilha' });
 
     await user.click(screen.getByRole('button', { name: 'Voltar' }));
     expect(

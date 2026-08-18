@@ -15,11 +15,30 @@
   min-height: clamp(10rem, 24vh, 15rem);
   padding: var(--space-2xl) var(--kiosk-gutter) var(--space-lg);
   overflow: hidden;
-  /* Identidade de marca — sem fotografias (decisão do responsável). */
   background:
     radial-gradient(110% 90% at 18% 0%, rgba(20, 113, 181, 0.45) 0%, rgba(4, 43, 71, 0) 55%),
     linear-gradient(165deg, var(--palette-brand-blue-800) 0%, var(--palette-brand-blue-950) 100%);
   color: var(--color-text-inverse);
+}
+
+.heroImage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  height: 100%;
+}
+
+.heroHasMedia::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 43, 71, 0.28) 0%,
+    rgba(4, 43, 71, 0.78) 100%
+  );
+  pointer-events: none;
 }
 
 /* Rosa dos ventos dourada — assinatura do topo do passeio. */
@@ -34,7 +53,7 @@
   pointer-events: none;
 }
 
-.hero > *:not(.heroRose) {
+.hero > *:not(.heroRose):not(.heroImage) {
   position: relative;
   z-index: 1;
 }

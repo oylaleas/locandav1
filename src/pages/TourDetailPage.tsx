@@ -1,28 +1,43 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Icon } from '@/components/ui/Icon';
+import { Button } from '@/components/ui/Button';
 import { WindRose } from '@/components/ui/WindRose';
 import { TourOptionCard } from '@/components/tours/TourOptionCard';
 import { KioskLayout } from '@/components/layout/KioskLayout';
 import { ErrorState } from '@/components/states/StateMessage';
 import { VideoPlayer } from '@/features/media/VideoPlayer';
+import { QRCodePanel } from '@/features/qr/QRCodePanel';
 import { useI18n } from '@/features/i18n/useI18n';
 import { useKioskNavigation } from '@/app/navigation';
-import { getVideo } from '@/services/contentService';
+import { getQrTarget, getVideo } from '@/services/contentService';
 import { formatTourPrice, getTourBySlug } from '@/services/toursService';
+import type { IconName } from '@/types/content';
 import { cn } from '@/utils/cn';
 import styles from './TourDetailPage.module.css';
 
+interface Fact {
+  key: string;
+  icon?: IconName;
+  label: string;
+  value: string;
+  emphasize?: boolean;
+}
+
 /**
  * DETALHE DO PASSEIO — hierarquia:
- * NOME → RESUMO → HORÁRIO → VALOR → ROTEIRO → INCLUI/NÃO INCLUI → VÍDEO.
- * Sem fotografias (decisão do responsável): o topo usa a identidade da
- * marca (rosa dos ventos) em vez de foto de capa.
+ * NOME → RESUMO → LOCAL / DURAÇÃO / DISPONIBILIDADE / VALOR →
+ * ROTEIRO → INCLUI → INFORMAÇÕES IMPORTANTES → VÍDEO (se houver) → RESERVA.
+ *
+ * Campos sem dado cadastrado simplesmente não aparecem — nada é inventado.
+ * O bloco de vídeo só monta quando `videoId` existir (pronto para o futuro).
  */
 export default function TourDetailPage() {
   const { t, tx, fmt } = useI18n();
   const navigation = useKioskNavigation();
   const { slug } = useParams();
   const tour = getTourBySlug(slug);
+  const [reserveOpen, setReserveOpen] = useState(false);
 
   if (!tour) {
     return (
@@ -33,7 +48,48 @@ export default function TourDetailPage() {
   }
 
   const video = getVideo(tour.videoId);
+  const reservation = getQrTarget(tour.reservationQrId ?? 'qr-contato');
   const hasOptions = Boolean(tour.options && tour.options.length > 0);
+
+  const facts: Fact[] = [];
+  if (tour.location) {
+    facts.push({
+      key: 'location',
+      icon: 'map-pin',
+      label: t.tours.location,
+      value: tx(tour.location),
+    });
+  }
+  if (tour.duration) {
+    facts.push({ key: 'duration', icon: 'clock', label: t.tours.duration, value: tx(tour.duration) });
+  }
+  if (!hasOptions && tour.schedule) {
+    facts.push({
+      key: 'schedule',
+      icon: 'clock',
+      label: t.tours.schedule,
+      value: fmt(t.tours.scheduleRange, { start: tour.schedule.start, end: tour.schedule.end }),
+    });
+  }
+  if (tour.availability) {
+    facts.push({
+      key: 'availability',
+      icon: 'clock',
+      label: t.tours.availability,
+      value: tx(tour.availability),
+    });
+  }
+  if (!hasOptions && tour.price !== undefined) {
+    facts.push({
+      key: 'price',
+      label: t.tours.price,
+      value: formatTourPrice(tour.price, tour.currency ?? 'BRL'),
+      emphasize: true,
+    });
+  }
+  if (!hasOptions && tour.capacity) {
+    facts.push({ key: 'capacity', label: t.tours.capacity, value: tx(tour.capacity) });
+  }
 
   return (
     <KioskLayout title={tx(tour.title)} eyebrow={t.nav.youAreHere} bleed>
@@ -45,37 +101,22 @@ export default function TourDetailPage() {
         </header>
 
         <div className={styles.body}>
-          <p className={styles.summary}>{tx(tour.shortDescription)}</p>
+          <p className={styles.summary}>{tx(tour.description ?? tour.shortDescription)}</p>
 
-          {!hasOptions && tour.schedule && (
-            <section className={styles.info} aria-label={t.tours.schedule}>
+          {facts.length > 0 && (
+            <section className={styles.info} aria-label={t.content.details}>
               <dl className={styles.infoList}>
-                <div className={styles.infoItem}>
-                  <dt className={styles.infoLabel}>
-                    <Icon name="clock" size="1.15rem" />
-                    {t.tours.schedule}
-                  </dt>
-                  <dd className={styles.infoValue}>
-                    {fmt(t.tours.scheduleRange, {
-                      start: tour.schedule.start,
-                      end: tour.schedule.end,
-                    })}
-                  </dd>
-                </div>
-                {tour.price !== undefined && (
-                  <div className={styles.infoItem}>
-                    <dt className={styles.infoLabel}>{t.tours.price}</dt>
-                    <dd className={cn(styles.infoValue, styles.price)}>
-                      {formatTourPrice(tour.price, tour.currency ?? 'BRL')}
+                {facts.map((fact) => (
+                  <div key={fact.key} className={styles.infoItem}>
+                    <dt className={styles.infoLabel}>
+                      {fact.icon && <Icon name={fact.icon} size="1.15rem" />}
+                      {fact.label}
+                    </dt>
+                    <dd className={cn(styles.infoValue, fact.emphasize && styles.price)}>
+                      {fact.value}
                     </dd>
                   </div>
-                )}
-                {tour.capacity && (
-                  <div className={styles.infoItem}>
-                    <dt className={styles.infoLabel}>{t.tours.capacity}</dt>
-                    <dd className={styles.infoValue}>{tx(tour.capacity)}</dd>
-                  </div>
-                )}
+                ))}
               </dl>
             </section>
           )}
@@ -147,6 +188,23 @@ export default function TourDetailPage() {
             </div>
           )}
 
+          {tour.importantInfo && tour.importantInfo.length > 0 && (
+            <section className={styles.important} aria-labelledby="info-importante-titulo">
+              <h2 id="info-importante-titulo" className={styles.sectionTitle}>
+                <Icon name="info" size="1.15rem" className={styles.titleIcon} />
+                {t.tours.importantInfo}
+              </h2>
+              <ul className={styles.plainList}>
+                {tour.importantInfo.map((item) => (
+                  <li key={tx(item)} className={styles.listItem}>
+                    <Icon name="alert" size="1.1rem" className={styles.alert} />
+                    {tx(item)}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           {video && (
             <section className={styles.videos} aria-labelledby="videos-titulo">
               <h2 id="videos-titulo" className={styles.sectionTitle}>
@@ -156,8 +214,34 @@ export default function TourDetailPage() {
             </section>
           )}
 
+          {reservation && (
+            <section className={styles.reserve} aria-labelledby="reserva-titulo">
+              <div className={styles.reserveText}>
+                <h2 id="reserva-titulo" className={styles.sectionTitle}>
+                  {t.tours.requestReservation}
+                </h2>
+                <p className={styles.sectionIntro}>{t.tours.reserveIntro}</p>
+              </div>
+              <Button
+                variant="inverse"
+                size="lg"
+                icon="chat"
+                onClick={() => setReserveOpen(true)}
+              >
+                {t.tours.requestReservation}
+              </Button>
+            </section>
+          )}
         </div>
       </article>
+
+      {reservation && (
+        <QRCodePanel
+          target={reservation}
+          open={reserveOpen}
+          onClose={() => setReserveOpen(false)}
+        />
+      )}
     </KioskLayout>
   );
 }

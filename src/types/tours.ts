@@ -1,3 +1,4 @@
+import type { IconName } from './content';
 import type { LocalizedText } from './i18n';
 
 export interface TourSchedule {
@@ -38,10 +39,18 @@ export interface Tour {
   title: LocalizedText;
   shortDescription: LocalizedText;
   description?: LocalizedText;
+  /** Ícone de identificação no card (nunca substitui o nome). */
+  icon?: IconName;
   schedule?: TourSchedule;
   price?: number;
   currency?: 'BRL';
   capacity?: LocalizedText;
+  /** Onde a experiência acontece — só quando informado. */
+  location?: LocalizedText;
+  /** Tempo estimado da atividade — só quando informado. */
+  duration?: LocalizedText;
+  /** Dias e horários de funcionamento — só quando informado. */
+  availability?: LocalizedText;
   /** Linha de partida do roteiro (ex.: 'Saída da Ilha do Guajiru'). */
   routeIntro?: LocalizedText;
   /** Paradas/trechos em sequência. */
@@ -50,9 +59,13 @@ export interface Tour {
   options?: TourOption[];
   includes?: LocalizedText[];
   excludes?: LocalizedText[];
+  /** Restrições e recomendações — só quando informadas. */
+  importantInfo?: LocalizedText[];
   coverImageId?: string;
   galleryImageIds?: string[];
   videoId?: string;
+  /** QR de handoff para reserva (id em QR_TARGETS). Sem id, a UI usa o WhatsApp da Locanda. */
+  reservationQrId?: string;
   /** true enquanto não houver fotos/vídeo oficiais do passeio. */
   mediaPending: boolean;
   /** Observações internas ([VALIDAR GRAFIA] / [INFORMAÇÃO A DEFINIR]). */
