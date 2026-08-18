@@ -85,7 +85,18 @@ export default function ContentDetailPage() {
   const related = getRelatedSections(section);
 
   return (
-    <KioskLayout title={tx(section.title)} eyebrow={tx(section.tagline)} bleed>
+    <KioskLayout
+      title={tx(section.title)}
+      eyebrow={tx(section.tagline)}
+      bleed
+      contextActions={
+        qrTarget ? (
+          <Button variant="inverse" size="lg" icon="qr" wrapLabel onClick={() => setQrOpen(true)}>
+            {t.content.qrCta}
+          </Button>
+        ) : undefined
+      }
+    >
       <article className={styles.page}>
         <header className={styles.hero}>
           {/* Identidade de marca no topo — sem fotografias (decisão do
@@ -103,9 +114,6 @@ export default function ContentDetailPage() {
         <div className={styles.body}>
           <section className={styles.textBlock} aria-label={t.content.about}>
             <p className={styles.summary}>{tx(section.summary)}</p>
-            {section.blocks.map((block, index) => (
-              <BlockRenderer key={index} block={block} tx={tx} />
-            ))}
           </section>
 
           {section.facts.length > 0 && (
@@ -126,6 +134,12 @@ export default function ContentDetailPage() {
               </dl>
             </section>
           )}
+
+          <section className={styles.textBlock} aria-label={t.content.about}>
+            {section.blocks.map((block, index) => (
+              <BlockRenderer key={index} block={block} tx={tx} />
+            ))}
+          </section>
 
           {videos.length > 0 && (
             <section className={styles.videos} aria-labelledby={`videos-${section.slug}`}>

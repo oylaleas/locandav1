@@ -92,7 +92,18 @@ export default function TourDetailPage() {
   }
 
   return (
-    <KioskLayout title={tx(tour.title)} eyebrow={t.nav.youAreHere} bleed>
+    <KioskLayout
+      title={tx(tour.title)}
+      eyebrow={t.nav.youAreHere}
+      bleed
+      contextActions={
+        reservation ? (
+          <Button variant="inverse" size="lg" icon="chat" wrapLabel onClick={() => setReserveOpen(true)}>
+            {t.tours.requestReservation}
+          </Button>
+        ) : undefined
+      }
+    >
       <article className={styles.page}>
         <header className={styles.hero}>
           <WindRose className={styles.heroRose} aria-hidden="true" />
@@ -215,22 +226,7 @@ export default function TourDetailPage() {
           )}
 
           {reservation && (
-            <section className={styles.reserve} aria-labelledby="reserva-titulo">
-              <div className={styles.reserveText}>
-                <h2 id="reserva-titulo" className={styles.sectionTitle}>
-                  {t.tours.requestReservation}
-                </h2>
-                <p className={styles.sectionIntro}>{t.tours.reserveIntro}</p>
-              </div>
-              <Button
-                variant="inverse"
-                size="lg"
-                icon="chat"
-                onClick={() => setReserveOpen(true)}
-              >
-                {t.tours.requestReservation}
-              </Button>
-            </section>
+            <p className={styles.reserveHint}>{t.tours.reserveIntro}</p>
           )}
         </div>
       </article>

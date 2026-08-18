@@ -36,7 +36,26 @@ export default function WellnessPartnerPage() {
   const selectedService = getWellnessService(partner, selectedServiceId);
 
   return (
-    <KioskLayout title={tx(partner.name)} eyebrow={tx(partner.tagline)}>
+    <KioskLayout
+      title={tx(partner.name)}
+      eyebrow={tx(partner.tagline)}
+      contextActions={
+        <>
+          {partner.qrTargets.map((target) => (
+            <Button
+              key={target.id}
+              variant="inverse"
+              size="lg"
+              wrapLabel
+              icon={target.id.includes('instagram') ? 'instagram' : 'chat'}
+              onClick={() => setActiveQr(target)}
+            >
+              {target.id.includes('instagram') ? t.wellness.instagram : t.wellness.whatsapp}
+            </Button>
+          ))}
+        </>
+      }
+    >
       <div className={styles.page}>
         <header className={styles.header}>
           <span className={styles.icon}>
@@ -45,6 +64,16 @@ export default function WellnessPartnerPage() {
           <h1 className={styles.title}>{tx(partner.name)}</h1>
           <p className={styles.tagline}>{tx(partner.tagline)}</p>
           <p className={styles.description}>{tx(partner.description)}</p>
+          <dl className={styles.contactList}>
+            <div className={styles.contactRow}>
+              <dt className={styles.contactLabel}>{t.wellness.whatsapp}</dt>
+              <dd className={styles.contactValue}>{partner.contact.whatsapp}</dd>
+            </div>
+            <div className={styles.contactRow}>
+              <dt className={styles.contactLabel}>{t.wellness.instagram}</dt>
+              <dd className={styles.contactValue}>{partner.contact.instagram}</dd>
+            </div>
+          </dl>
         </header>
 
         <section className={styles.services} aria-labelledby="servicos-titulo">
@@ -64,38 +93,6 @@ export default function WellnessPartnerPage() {
           </ul>
         </section>
 
-        <section className={styles.contact} aria-labelledby="contato-titulo">
-          <div className={styles.contactText}>
-            <h2 id="contato-titulo" className={styles.sectionTitle}>
-              {t.wellness.contactTitle}
-            </h2>
-            <p className={styles.sectionIntro}>{t.wellness.contactIntro}</p>
-            <dl className={styles.contactList}>
-              <div className={styles.contactRow}>
-                <dt className={styles.contactLabel}>{t.wellness.whatsapp}</dt>
-                <dd className={styles.contactValue}>{partner.contact.whatsapp}</dd>
-              </div>
-              <div className={styles.contactRow}>
-                <dt className={styles.contactLabel}>{t.wellness.instagram}</dt>
-                <dd className={styles.contactValue}>{partner.contact.instagram}</dd>
-              </div>
-            </dl>
-          </div>
-
-          <div className={styles.contactActions}>
-            {partner.qrTargets.map((target) => (
-              <Button
-                key={target.id}
-                variant="inverse"
-                size="lg"
-                icon={target.id.includes('instagram') ? 'instagram' : 'chat'}
-                onClick={() => setActiveQr(target)}
-              >
-                {target.id.includes('instagram') ? t.wellness.instagram : t.wellness.whatsapp}
-              </Button>
-            ))}
-          </div>
-        </section>
       </div>
 
       <ServiceDetailModal

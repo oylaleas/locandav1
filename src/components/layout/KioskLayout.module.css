@@ -130,6 +130,27 @@
   padding: 0 0 var(--space-2xl);
 }
 
+.footerStack {
+  display: flex;
+  flex-direction: column;
+  z-index: var(--z-actionbar);
+}
+
+.contextBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--kiosk-gutter);
+  background-color: var(--color-surface-inverse);
+  color: var(--color-text-inverse);
+}
+
+.contextBar > * {
+  flex: 0 1 auto;
+}
+
 .actionBar {
   display: flex;
   align-items: center;
@@ -153,6 +174,15 @@
 
 /* Telas pequenas (handoff mobile): a barra vira duas linhas compactas. */
 @media (max-width: 48rem) {
+  .contextBar {
+    padding-inline: var(--space-sm);
+    justify-content: stretch;
+  }
+
+  .contextBar > * {
+    flex: 1 1 auto;
+  }
+
   .actionBar {
     gap: var(--space-2xs);
     padding-inline: var(--space-sm);
