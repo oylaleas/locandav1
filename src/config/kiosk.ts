@@ -79,6 +79,8 @@ export const ROUTES = {
   contentDetail: (slug: string) => `/conteudos/${slug}`,
   wellnessIndex: '/bem-estar',
   wellnessPartner: (partnerId: string) => `/bem-estar/${partnerId}`,
+  /** Único espaço cadastrado hoje — a Home vai direto para ele. */
+  wellnessHome: '/bem-estar/espaco-onoda',
   toursIndex: '/experiencias-e-passeios',
   tourDetail: (slug: string) => `/experiencias-e-passeios/${slug}`,
 } as const;

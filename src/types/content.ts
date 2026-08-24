@@ -39,7 +39,12 @@ export type IconName =
   | 'cocktail'
   | 'bell'
   | 'kite'
-  | 'menu';
+  | 'menu'
+  | 'buggy'
+  | 'atv'
+  | 'horse'
+  | 'kayak'
+  | 'bike';
 
 export interface QrTarget {
   id: string;

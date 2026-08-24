@@ -12,14 +12,33 @@
   align-items: flex-start;
   justify-content: flex-end;
   gap: var(--space-2xs);
-  min-height: clamp(10rem, 24vh, 15rem);
+  min-height: clamp(10rem, 24dvh, 15rem);
   padding: var(--space-2xl) var(--kiosk-gutter) var(--space-lg);
   overflow: hidden;
-  /* Identidade de marca — sem fotografias (decisão do responsável). */
   background:
     radial-gradient(110% 90% at 18% 0%, rgba(20, 113, 181, 0.45) 0%, rgba(4, 43, 71, 0) 55%),
     linear-gradient(165deg, var(--palette-brand-blue-800) 0%, var(--palette-brand-blue-950) 100%);
   color: var(--color-text-inverse);
+}
+
+.heroImage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  height: 100%;
+}
+
+.heroHasMedia::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 43, 71, 0.28) 0%,
+    rgba(4, 43, 71, 0.78) 100%
+  );
+  pointer-events: none;
 }
 
 /* Rosa dos ventos dourada — assinatura do topo do passeio. */
@@ -34,7 +53,7 @@
   pointer-events: none;
 }
 
-.hero > *:not(.heroRose) {
+.hero > *:not(.heroRose):not(.heroImage) {
   position: relative;
   z-index: 1;
 }
@@ -56,6 +75,7 @@
   font-size: var(--font-size-3xl);
   color: var(--color-text-inverse);
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .body {
@@ -225,7 +245,30 @@
   display: block;
 }
 
-@media (min-width: 75rem) {
+.important {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+  box-shadow: var(--elevation-1);
+}
+
+.alert {
+  flex-shrink: 0;
+  color: var(--color-accent);
+  margin-top: 0.15em;
+}
+
+.reserveHint {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  max-width: 46ch;
+}
+
+@media (min-width: 48rem) {
   .infoList {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -237,5 +280,26 @@
 
   .lists {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 48rem) {
+  .hero {
+    min-height: clamp(8rem, 22dvh, 12rem);
+    padding: var(--space-xl) var(--kiosk-gutter) var(--space-md);
+  }
+
+  .title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .body {
+    gap: var(--space-lg);
+  }
+
+  .reserve {
+    padding: var(--space-md);
+    flex-direction: column;
+    align-items: stretch;
   }
 }

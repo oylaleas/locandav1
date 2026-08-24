@@ -115,7 +115,7 @@
   /* Escala fluida ancorada no viewport do totem (1080x1920 [VALIDAR NO HARDWARE REAL]).
      --font-scale é multiplicado pelo controle de acessibilidade de texto. */
   --font-scale: 1;
-  --font-root: clamp(16px, 0.6vw + 0.62vh, 26px);
+  --font-root: clamp(16px, 0.6vw + 0.62dvh, 26px);
 
   --font-size-3xs: calc(0.72rem * var(--font-scale));
   --font-size-2xs: calc(0.8rem * var(--font-scale));
@@ -212,7 +212,22 @@
   /* --------------------------------------------------------- LAYOUT KIOSK */
   --kiosk-safe-top: env(safe-area-inset-top, 0px);
   --kiosk-safe-bottom: env(safe-area-inset-bottom, 0px);
-  --kiosk-gutter: clamp(1.25rem, 3.5vw, 3.5rem);
+  --kiosk-gutter: clamp(1rem, 3.2vw, 3.5rem);
+}
+
+@media (max-width: 40rem) {
+  :root {
+    --kiosk-gutter: 1rem;
+    --size-touch-min: 3.75rem;
+    --size-touch-comfort: 4.5rem;
+    --size-touch-large: 5.25rem;
+  }
+}
+
+@media (max-height: 44rem) {
+  :root {
+    --kiosk-gutter: clamp(0.85rem, 2.4vw, 2rem);
+  }
 }
 
 /* --------------------------------------------------------------------------

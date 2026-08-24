@@ -192,4 +192,19 @@ describe('PT → EN', () => {
     expect(within(hubRegion()).getByRole('button', { name: /Comodidades/i })).toBeVisible();
     expect(within(hubRegion()).queryByRole('button', { name: /Amenities/i })).not.toBeInTheDocument();
   });
+
+  it('PT → ES traduz o hub para espanhol', async () => {
+    const { user } = await enterFromAttract();
+
+    await user.click(screen.getByRole('button', { name: 'PT' }));
+    const dialog = await screen.findByRole('dialog');
+    await user.click(within(dialog).getByRole('button', { name: 'Español' }));
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+
+    const hub = hubRegion();
+    expect(within(hub).getByRole('button', { name: /Comodidades/i })).toBeVisible();
+    expect(within(hub).getByRole('button', { name: /Bienestar/i })).toBeVisible();
+    expect(within(hub).getByRole('button', { name: /Experiencias y paseos/i })).toBeVisible();
+    expect(within(hub).queryByRole('button', { name: /Bem-estar/i })).not.toBeInTheDocument();
+  });
 });

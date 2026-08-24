@@ -160,3 +160,12 @@
 .wrapLabel .label {
   white-space: normal;
 }
+
+/* Celular: o lg do totem (~88px) come a barra. Mantém alvo ≥ 60px. */
+@media (max-width: 40rem) {
+  .lg:not(.iconOnly) {
+    min-height: var(--size-touch-min);
+    padding-inline: var(--space-md);
+    font-size: var(--font-size-md);
+  }
+}

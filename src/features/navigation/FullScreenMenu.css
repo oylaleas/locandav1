@@ -179,7 +179,7 @@
   display: block;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.9rem, 6.5vh, 3.4rem);
+  font-size: clamp(1.9rem, 6.5dvh, 3.4rem);
   /* Altura de linha folgada: o serif tem descendentes/acentos longos e a
      máscara do SplitText corta se o line-height for apertado (1.08). */
   line-height: 1.22;
@@ -265,7 +265,7 @@
   }
 
   .menu__link--primary {
-    font-size: clamp(1.6rem, 7.5vh, 2.4rem);
+    font-size: clamp(1.6rem, 7.5dvh, 2.4rem);
   }
 
   .menu__foot-list {

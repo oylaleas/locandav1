@@ -1,23 +1,17 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ContentCard } from '@/components/cards/ContentCard';
 import { KioskLayout } from '@/components/layout/KioskLayout';
 import { StateMessage } from '@/components/states/StateMessage';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { WindRose } from '@/components/ui/WindRose';
-import { FEATURE_FLAGS, ROUTES } from '@/config/kiosk';
+import { FEATURE_FLAGS } from '@/config/kiosk';
 import { useKioskNavigation } from '@/app/navigation';
 import { useI18n } from '@/features/i18n/useI18n';
 import { VideoPlayer } from '@/features/media/VideoPlayer';
 import { QRCodePanel } from '@/features/qr/QRCodePanel';
-import {
-  getQrTarget,
-  getRelatedSections,
-  getSectionBySlug,
-  getVideos,
-} from '@/services/contentService';
+import { getQrTarget, getSectionBySlug, getVideos } from '@/services/contentService';
 import type { ContentBlock } from '@/types/content';
 import type { PartialLocalizedText } from '@/types/i18n';
 import styles from './ContentDetailPage.module.css';
@@ -82,10 +76,20 @@ export default function ContentDetailPage() {
 
   const videos = getVideos(section.videoIds);
   const qrTarget = getQrTarget(section.qrTargetId);
-  const related = getRelatedSections(section);
 
   return (
-    <KioskLayout title={tx(section.title)} eyebrow={tx(section.tagline)} bleed>
+    <KioskLayout
+      title={tx(section.title)}
+      eyebrow={tx(section.tagline)}
+      bleed
+      contextActions={
+        qrTarget ? (
+          <Button variant="inverse" size="lg" icon="qr" wrapLabel onClick={() => setQrOpen(true)}>
+            {t.content.qrCta}
+          </Button>
+        ) : undefined
+      }
+    >
       <article className={styles.page}>
         <header className={styles.hero}>
           {/* Identidade de marca no topo — sem fotografias (decisão do
@@ -108,25 +112,6 @@ export default function ContentDetailPage() {
             ))}
           </section>
 
-          {section.facts.length > 0 && (
-            <section className={styles.facts} aria-labelledby={`facts-${section.slug}`}>
-              <h2 id={`facts-${section.slug}`} className={styles.sectionTitle}>
-                {t.content.details}
-              </h2>
-              <dl className={styles.factList}>
-                {section.facts.map((fact) => (
-                  <div key={fact.id} className={styles.fact}>
-                    <dt className={styles.factLabel}>
-                      {fact.icon && <Icon name={fact.icon} size="1.15rem" />}
-                      {tx(fact.label)}
-                    </dt>
-                    <dd className={styles.factValue}>{tx(fact.value)}</dd>
-                  </div>
-                ))}
-              </dl>
-            </section>
-          )}
-
           {videos.length > 0 && (
             <section className={styles.videos} aria-labelledby={`videos-${section.slug}`}>
               <h2 id={`videos-${section.slug}`} className={styles.sectionTitle}>
@@ -146,41 +131,7 @@ export default function ContentDetailPage() {
             </section>
           )}
 
-          {qrTarget && (
-            <section className={styles.qrSection} aria-labelledby={`qr-${section.slug}`}>
-              <div>
-                <h2 id={`qr-${section.slug}`} className={styles.sectionTitle}>
-                  {t.content.qrSection}
-                </h2>
-                <p className={styles.sectionIntro}>{tx(qrTarget.instruction)}</p>
-              </div>
-              <Button variant="primary" size="lg" icon="qr" onClick={() => setQrOpen(true)}>
-                {t.content.qrCta}
-              </Button>
-            </section>
-          )}
 
-          {related.length > 0 && (
-            <section className={styles.related} aria-labelledby={`relacionados-${section.slug}`}>
-              <h2 id={`relacionados-${section.slug}`} className={styles.sectionTitle}>
-                {t.content.related}
-              </h2>
-              <ul className={styles.relatedList}>
-                {related.map((item) => (
-                  <li key={item.slug}>
-                    <ContentCard
-                      layout="horizontal"
-                      title={tx(item.title)}
-                      eyebrow={tx(item.tagline)}
-                      icon={item.icon}
-                      hasVideo={item.videoIds.length > 0}
-                      onSelect={() => navigation.push(ROUTES.contentDetail(item.slug))}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
         </div>
       </article>
 

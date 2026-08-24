@@ -76,7 +76,7 @@ export default function HomePage() {
         icon: 'spa' as const,
         title: t.home.wellnessCta,
         description: t.home.wellnessCtaDesc,
-        onSelect: () => navigation.push(ROUTES.wellnessIndex),
+        onSelect: () => navigation.push(ROUTES.wellnessHome),
       },
       {
         key: 'tours',

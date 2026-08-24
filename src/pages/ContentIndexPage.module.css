@@ -48,8 +48,14 @@
   margin: 0 auto;
 }
 
-@media (min-width: 75rem) {
+@media (min-width: 48rem) {
   .list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 40rem) {
+  .title {
+    font-size: var(--font-size-2xl);
   }
 }

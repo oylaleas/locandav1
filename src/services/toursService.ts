@@ -6,7 +6,7 @@
    pode ler CMS/API mantendo as assinaturas.
    ========================================================================== */
 
-import { TOURS } from '@/data/tours';
+import { SHOWCASE_TOUR_SLUGS, TOURS } from '@/data/tours';
 import type { Tour, TourOption } from '@/types/tours';
 
 /** Formata o valor na moeda exibida (ex.: 370 → "R$ 370"). */
@@ -17,6 +17,13 @@ export function formatTourPrice(price: number, currency: 'BRL' = 'BRL'): string 
 
 export function getTours(): Tour[] {
   return TOURS;
+}
+
+/** As seis experiências da vitrine (grade 3×2). */
+export function getShowcaseTours(): Tour[] {
+  return SHOWCASE_TOUR_SLUGS.map((slug) => TOURS.find((tour) => tour.slug === slug)).filter(
+    (tour): tour is Tour => Boolean(tour),
+  );
 }
 
 export function getTourBySlug(slug: string | undefined): Tour | undefined {

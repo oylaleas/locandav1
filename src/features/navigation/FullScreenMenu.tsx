@@ -88,7 +88,7 @@ export function FullScreenMenu() {
     {
       key: 'wellness',
       label: t.home.wellnessCta,
-      onSelect: () => navigation.push(ROUTES.wellnessIndex),
+      onSelect: () => navigation.push(ROUTES.wellnessHome),
     },
     {
       key: 'tours',

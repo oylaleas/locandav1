@@ -53,6 +53,7 @@ export const IMAGE_ASSETS = {
       'pt-BR': 'Vista aérea da propriedade da Locanda dei Venti.',
       en: 'Aerial view of the Locanda dei Venti property.',
       it: "Veduta aerea della proprietà della Locanda dei Venti.",
+      es: "Vista aérea de la propiedad de Locanda dei Venti.",
     },
   },
   'img-01': {
@@ -69,6 +70,7 @@ export const IMAGE_ASSETS = {
       'pt-BR': 'Área externa da Locanda dei Venti.',
       en: 'Outdoor area of the Locanda dei Venti.',
       it: "Area esterna della Locanda dei Venti.",
+      es: "Área exterior de Locanda dei Venti.",
     },
   },
   'img-02': {
@@ -85,6 +87,7 @@ export const IMAGE_ASSETS = {
       'pt-BR': 'Vista aérea dos arredores da Locanda dei Venti.',
       en: 'Aerial view of the surroundings of the Locanda dei Venti.',
       it: "Veduta aerea dei dintorni della Locanda dei Venti.",
+      es: "Vista aérea de los alrededores de Locanda dei Venti.",
     },
   },
   'img-03': {
@@ -101,6 +104,7 @@ export const IMAGE_ASSETS = {
       'pt-BR': 'Praia e mar na região da Locanda dei Venti.',
       en: 'Beach and sea in the Locanda dei Venti region.',
       it: "Spiaggia e mare nella regione della Locanda dei Venti.",
+      es: "Playa y mar en la región de Locanda dei Venti.",
     },
   },
   'img-04': {
@@ -117,6 +121,7 @@ export const IMAGE_ASSETS = {
       'pt-BR': 'Vista aérea do entorno da Locanda dei Venti.',
       en: 'Aerial view of the area around the Locanda dei Venti.',
       it: "Veduta aerea dell'area intorno alla Locanda dei Venti.",
+      es: "Vista aérea del entorno de Locanda dei Venti.",
     },
   },
   'img-05': {
@@ -133,6 +138,7 @@ export const IMAGE_ASSETS = {
       'pt-BR': 'Vista panorâmica aérea da propriedade da Locanda dei Venti.',
       en: 'Panoramic aerial view of the Locanda dei Venti property.',
       it: "Veduta aerea panoramica della proprietà della Locanda dei Venti.",
+      es: "Vista aérea panorámica de la propiedad de Locanda dei Venti.",
     },
   },
   'img-06': {
@@ -150,6 +156,7 @@ export const IMAGE_ASSETS = {
       'pt-BR': 'Praia na região da Locanda dei Venti.',
       en: 'Beach in the Locanda dei Venti region.',
       it: "Spiaggia nella regione della Locanda dei Venti.",
+      es: "Playa en la región de Locanda dei Venti.",
     },
   },
   'img-07': {
@@ -166,6 +173,7 @@ export const IMAGE_ASSETS = {
       'pt-BR': 'Dunas e vegetação na região da Locanda dei Venti.',
       en: 'Dunes and vegetation in the Locanda dei Venti region.',
       it: "Dune e vegetazione nella regione della Locanda dei Venti.",
+      es: "Dunas y vegetación en la región de Locanda dei Venti.",
     },
   },
   'img-video-poster': {
@@ -182,6 +190,7 @@ export const IMAGE_ASSETS = {
       'pt-BR': 'Abertura do vídeo institucional — área externa da Locanda dei Venti.',
       en: 'Opening frame of the institutional video — outdoor area of the Locanda dei Venti.',
       it: "Apertura del video istituzionale — area esterna della Locanda dei Venti.",
+      es: "Apertura del video institucional — área exterior de Locanda dei Venti.",
     },
   },
 } as const satisfies Record<string, ImageAsset>;
@@ -218,6 +227,7 @@ export const VIDEO_ASSETS = {
       'pt-BR': 'Ambientação — Locanda dei Venti',
       en: 'Ambience — Locanda dei Venti',
       it: 'Atmosfera — Locanda dei Venti',
+      es: 'Ambiente — Locanda dei Venti',
     },
     captions: [],
     /**
@@ -240,11 +250,13 @@ export const VIDEO_ASSETS = {
       'pt-BR': 'Vídeo institucional [VÍDEO A DEFINIR]',
       en: 'Institutional video [VIDEO TO BE DEFINED]',
       it: 'Video istituzionale [VIDEO DA DEFINIRE]',
+      es: 'Video institucional [VIDEO POR DEFINIR]',
     },
     description: {
       'pt-BR': 'Clipe técnico de demonstração usado enquanto o vídeo oficial não é fornecido.',
       en: 'Technical demo clip used until the official video is provided.',
       it: 'Clip tecnica di prova usata finché il video ufficiale non sarà fornito.',
+      es: 'Clip técnico de demostración usado mientras no llega el video oficial.',
     },
     captions: captionsFor('placeholder-institucional'),
     preload: 'none',
@@ -263,6 +275,7 @@ export const VIDEO_ASSETS = {
       'pt-BR': 'Experiências [VÍDEO A DEFINIR]',
       en: 'Experiences [VIDEO TO BE DEFINED]',
       it: 'Esperienze [VIDEO DA DEFINIRE]',
+      es: 'Experiencias [VIDEO POR DEFINIR]',
     },
     captions: captionsFor('placeholder-experiencia'),
     preload: 'none',

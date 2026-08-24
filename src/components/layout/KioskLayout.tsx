@@ -27,6 +27,11 @@ interface KioskLayoutProps {
   onBack?: () => void;
   /** Remove o padding padrão do conteúdo (páginas com mídia sangrando). */
   bleed?: boolean;
+  /**
+   * Ação contextual da tela (reservar, WhatsApp, QR).
+   * Fica sempre visível acima da navegação — o hóspede não precisa rolar.
+   */
+  contextActions?: ReactNode;
 }
 
 /**
@@ -44,6 +49,7 @@ export function KioskLayout({
   showBrand = true,
   onBack,
   bleed = false,
+  contextActions,
 }: KioskLayoutProps) {
   const { t } = useI18n();
   const navigation = useKioskNavigation();
@@ -94,14 +100,26 @@ export function KioskLayout({
         {children}
       </main>
 
+      <div className={styles.footerStack}>
+        {contextActions && (
+          <div className={styles.contextBar} data-context-actions>
+            {contextActions}
+          </div>
+        )}
       <nav className={styles.actionBar} aria-label={t.nav.menu}>
         <div className={styles.actionGroup}>
           {showBack && (
-            <Button variant="secondary" size="lg" icon="arrow-left" onClick={onBack ?? navigation.back}>
+            <Button
+              variant="secondary"
+              size="lg"
+              icon="arrow-left"
+              wrapLabel
+              onClick={onBack ?? navigation.back}
+            >
               {t.nav.back}
             </Button>
           )}
-          <Button variant="primary" size="lg" icon="home" onClick={navigation.home}>
+          <Button variant="primary" size="lg" icon="home" wrapLabel onClick={navigation.home}>
             {t.nav.home}
           </Button>
         </div>
@@ -111,6 +129,7 @@ export function KioskLayout({
           <FullScreenMenu />
         </div>
       </nav>
+      </div>
     </div>
   );
 }

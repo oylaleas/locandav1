@@ -3,14 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <!--
-      Kiosk: viewport travado. O zoom por pinça é substituído pelo controle de
-      acessibilidade interno (tamanho de texto + alto contraste), padrão usual
-      em totens públicos. [VALIDAR NO HARDWARE REAL]
+      Viewport fluido: zoom do sistema permitido (WCAG 1.4.4). No totem o
+      painel Acessibilidade continua sendo o controle principal de leitura.
+      viewport-fit=cover respeita notch / Dynamic Island / home indicator.
     -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#065895" />
     <meta name="color-scheme" content="light" />
     <meta name="description" content="Totem interativo da Locanda dei Venti." />
