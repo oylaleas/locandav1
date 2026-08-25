@@ -127,7 +127,7 @@ describe('hub Locanda Experience (6 categorias)', () => {
     expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 
-  it('HOME → ISLA KITE CENTER → contatos informativos → VOLTAR', async () => {
+  it('HOME → ISLA KITE CENTER → QR de WhatsApp e Instagram → VOLTAR', async () => {
     const { user } = await enterFromAttract();
 
     await user.click(within(hubRegion()).getByRole('button', { name: /Isla Kite Center/i }));
@@ -135,11 +135,23 @@ describe('hub Locanda Experience (6 categorias)', () => {
       await screen.findByRole('heading', { level: 1, name: 'Isla Kite Center' }),
     ).toBeVisible();
 
-    expect(screen.getAllByText(/Isla Kite Center/i).length).toBeGreaterThan(0);
-    expect(screen.getByRole('heading', { level: 3, name: 'Contatos' })).toBeVisible();
-    expect(screen.getByText('WhatsApp: (88) 9987-7973')).toBeVisible();
-    expect(screen.getByText('Instagram: @islakitecenter')).toBeVisible();
-    expect(screen.getByText(/consultar horários, valores e reservas/i)).toBeVisible();
+    expect(screen.getByRole('heading', { level: 2, name: 'Contato' })).toBeVisible();
+    expect(screen.getByText('(88) 9987-7973')).toBeVisible();
+    expect(screen.getByText('@islakitecenter')).toBeVisible();
+
+    await user.click(screen.getByRole('button', { name: 'WhatsApp' }));
+    let dialog = await screen.findByRole('dialog', { name: 'WhatsApp do Isla Kite Center' });
+    expect(
+      await within(dialog).findByRole('img', { name: /WhatsApp — \(88\) 9987-7973/ }),
+    ).toBeVisible();
+    await user.click(within(dialog).getAllByRole('button', { name: 'Fechar' })[0]);
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+
+    await user.click(screen.getByRole('button', { name: 'Instagram' }));
+    dialog = await screen.findByRole('dialog', { name: 'Instagram do Isla Kite Center' });
+    expect(await within(dialog).findByRole('img', { name: /Instagram — @islakitecenter/ })).toBeVisible();
+    await user.click(within(dialog).getAllByRole('button', { name: 'Fechar' })[0]);
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
 
     await user.click(screen.getByRole('button', { name: 'Voltar' }));
     expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();

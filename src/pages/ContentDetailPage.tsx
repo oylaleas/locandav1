@@ -16,7 +16,7 @@ import {
   getSectionBySlug,
   getVideos,
 } from '@/services/contentService';
-import type { ContentBlock } from '@/types/content';
+import type { ContentBlock, QrTarget } from '@/types/content';
 import type { PartialLocalizedText } from '@/types/i18n';
 import styles from './ContentDetailPage.module.css';
 
@@ -59,6 +59,7 @@ export default function ContentDetailPage() {
   const { t, tx } = useI18n();
   const navigation = useKioskNavigation();
   const [qrOpen, setQrOpen] = useState(false);
+  const [activeContactQr, setActiveContactQr] = useState<QrTarget | undefined>();
 
   const section = getSectionBySlug(slug);
 
@@ -80,6 +81,11 @@ export default function ContentDetailPage() {
 
   const videos = getVideos(section.videoIds);
   const qrTarget = getQrTarget(section.qrTargetId);
+  const contactChannels = (section.contact?.channels ?? []).flatMap((channel) => {
+    const target = getQrTarget(channel.qrTargetId);
+
+    return target ? [{ ...channel, target }] : [];
+  });
 
   return (
     <KioskLayout title={tx(section.title)} eyebrow={tx(section.tagline)} bleed>
@@ -124,6 +130,39 @@ export default function ContentDetailPage() {
             </section>
           )}
 
+          {section.contact && contactChannels.length > 0 && (
+            <section className={styles.contact} aria-labelledby={`contato-${section.slug}`}>
+              <div className={styles.contactText}>
+                <h2 id={`contato-${section.slug}`} className={styles.sectionTitle}>
+                  {tx(section.contact.title)}
+                </h2>
+                <p className={styles.sectionIntro}>{tx(section.contact.intro)}</p>
+                <dl className={styles.contactList}>
+                  {contactChannels.map((channel) => (
+                    <div key={channel.id} className={styles.contactRow}>
+                      <dt className={styles.contactLabel}>{tx(channel.label)}</dt>
+                      <dd className={styles.contactValue}>{tx(channel.value)}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+
+              <div className={styles.contactActions}>
+                {contactChannels.map((channel) => (
+                  <Button
+                    key={channel.id}
+                    variant="inverse"
+                    size="lg"
+                    icon={channel.icon}
+                    onClick={() => setActiveContactQr(channel.target)}
+                  >
+                    {tx(channel.label)}
+                  </Button>
+                ))}
+              </div>
+            </section>
+          )}
+
           {videos.length > 0 && (
             <section className={styles.videos} aria-labelledby={`videos-${section.slug}`}>
               <h2 id={`videos-${section.slug}`} className={styles.sectionTitle}>
@@ -163,6 +202,13 @@ export default function ContentDetailPage() {
 
       {qrTarget && (
         <QRCodePanel target={qrTarget} open={qrOpen} onClose={() => setQrOpen(false)} />
+      )}
+      {activeContactQr && (
+        <QRCodePanel
+          target={activeContactQr}
+          open={Boolean(activeContactQr)}
+          onClose={() => setActiveContactQr(undefined)}
+        />
       )}
     </KioskLayout>
   );

@@ -139,6 +139,47 @@ export const QR_TARGETS: QrTarget[] = [
       it: 'Instagram — @locandadeiventi',
     },
   },
+  // Destinos derivados dos contatos presentes na versão de produção f77570b.
+  {
+    id: 'isla-kite-whatsapp',
+    url: 'https://wa.me/558899877973',
+    isPlaceholder: false,
+    title: {
+      'pt-BR': 'WhatsApp do Isla Kite Center',
+      en: 'Isla Kite Center on WhatsApp',
+      it: 'WhatsApp di Isla Kite Center',
+    },
+    instruction: {
+      'pt-BR': 'Aponte a câmera do seu celular para abrir a conversa.',
+      en: 'Point your phone camera at the code to open the chat.',
+      it: 'Inquadra il codice con la fotocamera per aprire la chat.',
+    },
+    destinationLabel: {
+      'pt-BR': 'WhatsApp — (88) 9987-7973',
+      en: 'WhatsApp — +55 88 9987-7973',
+      it: 'WhatsApp — +55 88 9987-7973',
+    },
+  },
+  {
+    id: 'isla-kite-instagram',
+    url: 'https://instagram.com/islakitecenter',
+    isPlaceholder: false,
+    title: {
+      'pt-BR': 'Instagram do Isla Kite Center',
+      en: 'Isla Kite Center on Instagram',
+      it: 'Instagram di Isla Kite Center',
+    },
+    instruction: {
+      'pt-BR': 'Aponte a câmera do seu celular para abrir o perfil.',
+      en: 'Point your phone camera at the code to open the profile.',
+      it: 'Inquadra il codice con la fotocamera per aprire il profilo.',
+    },
+    destinationLabel: {
+      'pt-BR': 'Instagram — @islakitecenter',
+      en: 'Instagram — @islakitecenter',
+      it: 'Instagram — @islakitecenter',
+    },
+  },
   {
     id: 'qr-reservas',
     url: 'https://hotels.cloudbeds.com/pt-br/reservas/1qdfuA',
@@ -999,28 +1040,43 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         ],
       },
       {
-        type: 'list',
-        title: { 'pt-BR': 'Contatos', en: 'Contacts', it: 'Contatti' },
-        items: [
-          {
-            'pt-BR': 'WhatsApp: (88) 9987-7973',
-            en: 'WhatsApp: +55 88 9987-7973',
-            it: 'WhatsApp: +55 88 9987-7973',
-          },
-          {
-            'pt-BR': 'Instagram: @islakitecenter',
-            en: 'Instagram: @islakitecenter',
-            it: 'Instagram: @islakitecenter',
-          },
-          {
-            'pt-BR': 'Consultar horários, valores e reservas pelos contatos acima.',
-            en: 'Contact us for schedules, rates and bookings.',
-            it: 'Contattare per orari, tariffe e prenotazioni.',
-          },
-        ],
+        type: 'paragraph',
+        text: {
+          'pt-BR': 'Escaneie um dos QR Codes abaixo para falar com o Isla Kite Center.',
+          en: 'Scan one of the QR codes below to contact Isla Kite Center.',
+          it: 'Scansiona uno dei QR code qui sotto per contattare Isla Kite Center.',
+        },
       },
     ],
     facts: [],
+    contact: {
+      title: { 'pt-BR': 'Contato', en: 'Contact', it: 'Contatti' },
+      intro: {
+        'pt-BR': 'Leve os contatos do Isla Kite Center para o seu celular.',
+        en: 'Take Isla Kite Center’s contact details to your phone.',
+        it: 'Porta i contatti di Isla Kite Center sul tuo telefono.',
+      },
+      channels: [
+        {
+          id: 'isla-kite-whatsapp',
+          label: { 'pt-BR': 'WhatsApp', en: 'WhatsApp', it: 'WhatsApp' },
+          value: {
+            'pt-BR': '(88) 9987-7973',
+            en: '+55 88 9987-7973',
+            it: '+55 88 9987-7973',
+          },
+          icon: 'chat',
+          qrTargetId: 'isla-kite-whatsapp',
+        },
+        {
+          id: 'isla-kite-instagram',
+          label: { 'pt-BR': 'Instagram', en: 'Instagram', it: 'Instagram' },
+          value: { 'pt-BR': '@islakitecenter', en: '@islakitecenter', it: '@islakitecenter' },
+          icon: 'instagram',
+          qrTargetId: 'isla-kite-instagram',
+        },
+      ],
+    },
     galleryImageIds: ['img-03', 'img-04'],
     videoIds: [],
     relatedSlugs: ['experiencias', 'a-locanda'],
