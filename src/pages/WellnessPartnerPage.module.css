@@ -70,6 +70,69 @@
   list-style: none;
 }
 
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  padding: var(--space-xl);
+  border-radius: var(--radius-panel);
+  background-color: var(--color-surface-inverse);
+  color: var(--color-text-inverse);
+}
+
+.contactText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  min-width: 0;
+}
+
+.contact .sectionTitle {
+  color: var(--color-text-inverse);
+}
+
+.contact .sectionIntro {
+  color: var(--color-text-inverse-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.contactList {
+  display: grid;
+  gap: var(--space-2xs);
+  margin: 0;
+}
+
+.contactRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.contactLabel {
+  font-size: var(--font-size-3xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: var(--color-text-inverse-secondary);
+}
+
+.contactValue {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-family: var(--font-data);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-inverse);
+}
+
+.contactActions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
 @media (min-width: 75rem) {
   .servicesList {
     grid-template-columns: repeat(2, minmax(0, 1fr));
