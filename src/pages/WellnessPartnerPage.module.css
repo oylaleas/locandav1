@@ -62,12 +62,72 @@
   margin: 0 0 var(--space-xs);
 }
 
-.servicesList {
-  display: grid;
+/* -------------------------------------------------- CARROSSEL DE SERVIÇOS */
+
+.servicesCarousel {
+  position: relative;
+  display: flex;
+  align-items: stretch;
   gap: var(--space-md);
-  margin: 0;
-  padding: 0;
-  list-style: none;
+}
+
+.servicesCarouselTrack {
+  display: flex;
+  gap: var(--space-md);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: var(--space-sm) 0;
+  flex: 1;
+}
+
+.servicesCarouselTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.serviceCardWrapper {
+  flex: 0 0 auto;
+  width: clamp(16rem, 40vw, 28rem);
+  scroll-snap-align: start;
+}
+
+.carouselBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-action-primary);
+  color: var(--color-text-on-action);
+  cursor: pointer;
+  z-index: 2;
+  transition:
+    transform var(--motion-fast) var(--easing-standard),
+    background-color var(--motion-fast) var(--easing-standard);
+}
+
+.carouselBtn:active {
+  transform: scale(0.95);
+  background: var(--color-action-primary-pressed);
+}
+
+.carouselBtn:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.carouselBtnLeft {
+  align-self: center;
+  margin-right: var(--space-xs);
+}
+
+.carouselBtnRight {
+  align-self: center;
+  margin-left: var(--space-xs);
 }
 
 .contact {

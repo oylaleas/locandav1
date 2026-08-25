@@ -70,6 +70,8 @@ export const en: Dictionary = {
     contactIntro: 'Take the contact to your phone.',
     whatsapp: 'WhatsApp',
     instagram: 'Instagram',
+    carouselPrev: 'Previous service',
+    carouselNext: 'Next service',
   },
   tours: {
     indexTitle: 'Experiences and tours',

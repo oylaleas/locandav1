@@ -73,6 +73,8 @@ export const ptBR = {
     contactIntro: 'Leve o contato para o seu celular.',
     whatsapp: 'WhatsApp',
     instagram: 'Instagram',
+    carouselPrev: 'Serviço anterior',
+    carouselNext: 'Próximo serviço',
   },
   tours: {
     indexTitle: 'Experiências e passeios',
