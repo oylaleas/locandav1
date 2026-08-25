@@ -139,6 +139,47 @@ export const QR_TARGETS: QrTarget[] = [
       it: 'Instagram — @locandadeiventi',
     },
   },
+  // Contatos oficiais do parceiro, confirmados em islakitecenter.com.br em 25/08/2026.
+  {
+    id: 'isla-kite-whatsapp',
+    url: 'https://wa.me/5588999877973',
+    isPlaceholder: false,
+    title: {
+      'pt-BR': 'WhatsApp do Isla Kite Center',
+      en: 'Isla Kite Center on WhatsApp',
+      it: 'WhatsApp di Isla Kite Center',
+    },
+    instruction: {
+      'pt-BR': 'Aponte a câmera do seu celular para abrir a conversa.',
+      en: 'Point your phone camera at the code to open the chat.',
+      it: 'Inquadra il codice con la fotocamera per aprire la chat.',
+    },
+    destinationLabel: {
+      'pt-BR': 'WhatsApp — +55 (88) 99987-7973',
+      en: 'WhatsApp — +55 (88) 99987-7973',
+      it: 'WhatsApp — +55 (88) 99987-7973',
+    },
+  },
+  {
+    id: 'isla-kite-instagram',
+    url: 'https://instagram.com/islakitecenter',
+    isPlaceholder: false,
+    title: {
+      'pt-BR': 'Instagram do Isla Kite Center',
+      en: 'Isla Kite Center on Instagram',
+      it: 'Instagram di Isla Kite Center',
+    },
+    instruction: {
+      'pt-BR': 'Aponte a câmera do seu celular para abrir o perfil.',
+      en: 'Point your phone camera at the code to open the profile.',
+      it: 'Inquadra il codice con la fotocamera per aprire il profilo.',
+    },
+    destinationLabel: {
+      'pt-BR': 'Instagram — @islakitecenter',
+      en: 'Instagram — @islakitecenter',
+      it: 'Instagram — @islakitecenter',
+    },
+  },
   {
     id: 'qr-reservas',
     url: 'https://hotels.cloudbeds.com/pt-br/reservas/1qdfuA',
@@ -1033,9 +1074,9 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         type: 'paragraph',
         text: {
           'pt-BR':
-            'Horários, valores, instrutores e contatos do Isla Kite Center: [CONTEÚDO DO KITE CENTER A DEFINIR]',
-          en: 'Hours, rates, instructors and contacts of Isla Kite Center: [KITE CENTER CONTENT TO BE DEFINED]',
-          it: 'Orari, tariffe, istruttori e contatti di Isla Kite Center: [CONTENUTO DEL KITE CENTER DA DEFINIRE]',
+            'Para saber horários, valores, instrutores e agendamentos, fale diretamente com o Isla Kite Center pelos contatos abaixo.',
+          en: 'For schedules, rates, instructors and bookings, contact Isla Kite Center directly using the contacts below.',
+          it: 'Per orari, tariffe, istruttori e prenotazioni, contatta direttamente Isla Kite Center tramite i contatti qui sotto.',
         },
       },
     ],
@@ -1057,6 +1098,34 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         },
       },
     ],
+    contact: {
+      title: {
+        'pt-BR': 'Contato',
+        en: 'Contact',
+        it: 'Contatti',
+      },
+      intro: {
+        'pt-BR': 'Leve o contato do Isla Kite Center para o seu celular.',
+        en: 'Take Isla Kite Center’s contact details to your phone.',
+        it: 'Porta i contatti di Isla Kite Center sul tuo telefono.',
+      },
+      methods: [
+        {
+          id: 'isla-kite-whatsapp',
+          label: { 'pt-BR': 'WhatsApp', en: 'WhatsApp', it: 'WhatsApp' },
+          value: '+55 (88) 99987-7973',
+          icon: 'chat',
+          qrTargetId: 'isla-kite-whatsapp',
+        },
+        {
+          id: 'isla-kite-instagram',
+          label: { 'pt-BR': 'Instagram', en: 'Instagram', it: 'Instagram' },
+          value: '@islakitecenter',
+          icon: 'instagram',
+          qrTargetId: 'isla-kite-instagram',
+        },
+      ],
+    },
     galleryImageIds: ['img-03', 'img-04'],
     videoIds: [],
     relatedSlugs: ['experiencias', 'a-locanda'],
