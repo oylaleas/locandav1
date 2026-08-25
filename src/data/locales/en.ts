@@ -92,6 +92,7 @@ export const en: Dictionary = {
     empty: 'There are no tours registered yet.',
     carouselPrev: 'Previous tour',
     carouselNext: 'Next tour',
+    priceNote: 'Tour prices available upon request at the reception.',
   },
   content: {
     indexTitle: 'Sections',

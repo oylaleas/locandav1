@@ -382,6 +382,21 @@
   height: 2rem;
 }
 
+/* -------------------------------------------------- NOTA DE PREÇOS */
+
+.priceNote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  margin-top: var(--space-lg);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-pill);
+  background: var(--color-background-alt);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
 /* ------------------------------------------- TOTEM ALTO (ex.: 1080x1920) */
 
 @media (min-height: 60rem) {

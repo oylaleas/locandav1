@@ -95,6 +95,7 @@ export const ptBR = {
     empty: 'Ainda não há passeios cadastrados.',
     carouselPrev: 'Passeio anterior',
     carouselNext: 'Próximo passeio',
+    priceNote: 'Valores dos passeios sob consulta na recepção.',
   },
   content: {
     indexTitle: 'Conteúdos',

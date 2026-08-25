@@ -98,6 +98,10 @@ export default function ToursIndexPage() {
                 />
               </section>
             )}
+            <p className={styles.priceNote}>
+              <Icon name="info" size="1.1rem" />
+              {t.tours.priceNote}
+            </p>
           </>
         )}
       </div>
