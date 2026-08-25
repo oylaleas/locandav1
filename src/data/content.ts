@@ -934,18 +934,7 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         },
       },
     ],
-    facts: [
-      {
-        id: 'fact-on-demand-tarifa',
-        icon: 'info',
-        label: { 'pt-BR': 'Tarifas', en: 'Rates', it: 'Tariffe' },
-        value: {
-          'pt-BR': 'Definidas pelo prestador de serviço — consulte a recepção',
-          en: 'Set by each service provider — ask at the front desk',
-          it: 'Definite dal fornitore del servizio — chiedere alla reception',
-        },
-      },
-    ],
+    facts: [],
     galleryImageIds: ['img-07', 'img-01'],
     videoIds: [],
     relatedSlugs: ['a-locanda'],
