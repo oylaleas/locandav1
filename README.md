@@ -115,7 +115,7 @@ HOME (LOCANDA EXPERIENCE)
 │                                ├── Passeio Pôr do Sol
 │                                ├── Moitas de Icaraí (Opção 1 — com barco / Opção 2 — sem barco)
 │                                └── Almofala, Ilha do Guajiru e Região
-└── KITE CENTER ──▶ seção institucional (conteúdo oficial parcial + pendência explícita)
+└── KITE CENTER ──▶ seção institucional ──▶ contatos QR (WhatsApp / Instagram)
 ```
 
 Todas as seções novas são data-driven em `src/data/content.ts` (PT/EN/IT) e

@@ -144,7 +144,7 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 - [x] Comodidades: 12 itens + aviso com asteriscos preservados (Yoga e Funcional*, Piquenique*) — PT/EN/IT
 - [x] Happy Hour: frase oficial com horários marcados `[HORÁRIO DO HAPPY HOUR A DEFINIR]` + ação do menu `[MENU DO HAPPY HOUR A DEFINIR]` — nada inventado
 - [x] Serviços On Demand: 7 itens + aviso "tarifa definida pelo prestador" — PT/EN/IT
-- [x] Kite Center: conteúdo oficial parcial (flat water, Soulkite, guarda de equipamentos) + `[CONTEÚDO DO KITE CENTER A DEFINIR]`
+- [x] Kite Center: conteúdo institucional + QR de WhatsApp (88) 9987-7973 e Instagram (@islakitecenter), no mesmo fluxo totem → celular do Espaço Onoda
 - [x] Seletor PT/EN altera hub E conteúdo (testado), não só títulos
 - [x] Novas seções reutilizam ContentDetailPage/KioskLayout (Voltar + Início, timeout/reset herdados)
 - [x] 7 testes automatizados do hub (navegação das 6 áreas, PT→EN e EN→PT)

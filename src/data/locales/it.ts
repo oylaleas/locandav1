@@ -70,6 +70,8 @@ export const it: Dictionary = {
     contactIntro: 'Porta i contatti sul tuo telefono.',
     whatsapp: 'WhatsApp',
     instagram: 'Instagram',
+    carouselPrev: 'Servizio precedente',
+    carouselNext: 'Prossimo servizio',
   },
   tours: {
     indexTitle: 'Esperienze e tour',
@@ -90,6 +92,9 @@ export const it: Dictionary = {
     optionsBadge: '{count} opzioni',
     mediaPendingNote: 'Immagini provvisorie — in attesa del materiale ufficiale del tour.',
     empty: 'Non ci sono ancora tour registrati.',
+    carouselPrev: 'Tour precedente',
+    carouselNext: 'Prossimo tour',
+    priceNote: 'I prezzi dei tour sono su richiesta alla reception.',
   },
   content: {
     indexTitle: 'Contenuti',
