@@ -1008,24 +1008,7 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         },
       },
     ],
-    facts: [
-      {
-        id: 'fact-kite-soulkite',
-        icon: 'kite',
-        label: { 'pt-BR': 'Aulas de kitesurf', en: 'Kitesurf lessons', it: 'Lezioni di kitesurf' },
-        value: { 'pt-BR': 'Isla Kite Center', en: 'Isla Kite Center', it: 'Isla Kite Center' },
-      },
-      {
-        id: 'fact-kite-guarda',
-        icon: 'check',
-        label: { 'pt-BR': 'Equipamentos', en: 'Equipment', it: 'Attrezzature' },
-        value: {
-          'pt-BR': 'Espaço para guarda de kites e equipamentos',
-          en: 'Storage for kites and equipment',
-          it: 'Spazio per custodire kite e attrezzature',
-        },
-      },
-    ],
+    facts: [],
     galleryImageIds: ['img-03', 'img-04'],
     videoIds: [],
     relatedSlugs: ['experiencias', 'a-locanda'],
