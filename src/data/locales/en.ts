@@ -90,6 +90,8 @@ export const en: Dictionary = {
     optionsBadge: '{count} options',
     mediaPendingNote: 'Provisional images — awaiting the official tour material.',
     empty: 'There are no tours registered yet.',
+    carouselPrev: 'Previous tour',
+    carouselNext: 'Next tour',
   },
   content: {
     indexTitle: 'Sections',

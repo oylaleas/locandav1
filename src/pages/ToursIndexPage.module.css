@@ -249,24 +249,84 @@
   margin: 0 auto;
 }
 
-.activitiesGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.7rem, 1.8vh, 1rem);
-}
+/* -------------------------------------------------- CARROSSEL DE ATIVIDADES */
 
-.activityCard {
+.carousel {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
+  gap: var(--space-md);
+}
+
+.carouselTrack {
+  display: flex;
+  gap: clamp(1rem, 2vh, 1.5rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: var(--space-sm) 0;
+  flex: 1;
+}
+
+.carouselTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.carouselBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-action-primary);
+  color: var(--color-text-on-action);
+  cursor: pointer;
+  z-index: 2;
+  transition:
+    transform var(--motion-fast) var(--easing-standard),
+    background-color var(--motion-fast) var(--easing-standard);
+}
+
+.carouselBtn:active {
+  transform: scale(0.95);
+  background: var(--color-action-primary-pressed);
+}
+
+.carouselBtn:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.carouselBtnLeft {
+  margin-right: var(--space-xs);
+}
+
+.carouselBtnRight {
+  margin-left: var(--space-xs);
+}
+
+/* ---------------------------------------- CAROUSEL CARD (dentro do carrossel) */
+
+.activityCard {
+  flex: 0 0 auto;
+  width: clamp(14rem, 28vw, 20rem);
+  min-height: 8rem;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-xl);
   border: none;
   border-radius: var(--radius-card);
   background: var(--color-surface);
-  box-shadow: var(--elevation-1);
+  box-shadow: var(--elevation-2);
   color: var(--color-text-primary);
   text-align: left;
   cursor: pointer;
+  scroll-snap-align: start;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   transition:
@@ -287,7 +347,8 @@
 .activityText {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  justify-content: center;
+  gap: var(--space-2xs);
   flex: 1;
   min-width: 0;
 }
@@ -295,23 +356,28 @@
 .activityName {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-lg);
+  white-space: normal;
+  word-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.2;
 }
 
 .activityDesc {
-  font-size: var(--font-size-2xs);
+  font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 1;
-  line-clamp: 1;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
 .activityArrow {
   flex: 0 0 auto;
   color: var(--color-accent);
+  align-self: center;
 }
 
 /* ------------------------------------------- TOTEM ALTO (ex.: 1080x1920) */

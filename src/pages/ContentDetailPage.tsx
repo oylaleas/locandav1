@@ -1,20 +1,18 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ContentCard } from '@/components/cards/ContentCard';
 import { KioskLayout } from '@/components/layout/KioskLayout';
 import { StateMessage } from '@/components/states/StateMessage';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { WindRose } from '@/components/ui/WindRose';
-import { FEATURE_FLAGS, ROUTES } from '@/config/kiosk';
+import { FEATURE_FLAGS } from '@/config/kiosk';
 import { useKioskNavigation } from '@/app/navigation';
 import { useI18n } from '@/features/i18n/useI18n';
 import { VideoPlayer } from '@/features/media/VideoPlayer';
 import { QRCodePanel } from '@/features/qr/QRCodePanel';
 import {
   getQrTarget,
-  getRelatedSections,
   getSectionBySlug,
   getVideos,
 } from '@/services/contentService';
@@ -82,7 +80,6 @@ export default function ContentDetailPage() {
 
   const videos = getVideos(section.videoIds);
   const qrTarget = getQrTarget(section.qrTargetId);
-  const related = getRelatedSections(section);
 
   return (
     <KioskLayout title={tx(section.title)} eyebrow={tx(section.tagline)} bleed>
@@ -160,27 +157,7 @@ export default function ContentDetailPage() {
             </section>
           )}
 
-          {related.length > 0 && (
-            <section className={styles.related} aria-labelledby={`relacionados-${section.slug}`}>
-              <h2 id={`relacionados-${section.slug}`} className={styles.sectionTitle}>
-                {t.content.related}
-              </h2>
-              <ul className={styles.relatedList}>
-                {related.map((item) => (
-                  <li key={item.slug}>
-                    <ContentCard
-                      layout="horizontal"
-                      title={tx(item.title)}
-                      eyebrow={tx(item.tagline)}
-                      icon={item.icon}
-                      hasVideo={item.videoIds.length > 0}
-                      onSelect={() => navigation.push(ROUTES.contentDetail(item.slug))}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
+
         </div>
       </article>
 

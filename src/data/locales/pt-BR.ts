@@ -93,6 +93,8 @@ export const ptBR = {
     optionsBadge: '{count} opções',
     mediaPendingNote: 'Imagens provisórias — aguardando o material oficial do passeio.',
     empty: 'Ainda não há passeios cadastrados.',
+    carouselPrev: 'Passeio anterior',
+    carouselNext: 'Próximo passeio',
   },
   content: {
     indexTitle: 'Conteúdos',
