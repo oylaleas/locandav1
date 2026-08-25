@@ -837,14 +837,7 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         },
       },
     ],
-    facts: [
-      {
-        id: 'fact-comodidades-total',
-        icon: 'check',
-        label: { 'pt-BR': 'Comodidades', en: 'Amenities', it: 'Servizi' },
-        value: { 'pt-BR': '12 itens', en: '12 items', it: '12 voci' },
-      },
-    ],
+    facts: [],
     galleryImageIds: ['img-01', 'img-05', 'img-03'],
     videoIds: [],
     relatedSlugs: ['experiencias'],
