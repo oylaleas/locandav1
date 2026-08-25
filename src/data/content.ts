@@ -255,7 +255,7 @@ export const CONTENT_SECTIONS: ContentSection[] = [
     galleryImageIds: ['img-01', 'img-05', 'img-02'],
     videoIds: ['video-institucional'],
     qrTargetId: 'qr-site',
-    relatedSlugs: ['acomodacoes', 'gastronomia'],
+    relatedSlugs: ['acomodacoes'],
   },
   {
     slug: 'acomodacoes',
@@ -837,17 +837,10 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         },
       },
     ],
-    facts: [
-      {
-        id: 'fact-comodidades-total',
-        icon: 'check',
-        label: { 'pt-BR': 'Comodidades', en: 'Amenities', it: 'Servizi' },
-        value: { 'pt-BR': '12 itens', en: '12 items', it: '12 voci' },
-      },
-    ],
+    facts: [],
     galleryImageIds: ['img-01', 'img-05', 'img-03'],
     videoIds: [],
-    relatedSlugs: ['gastronomia', 'experiencias'],
+    relatedSlugs: ['experiencias'],
   },
   {
     slug: 'happy-hour',
@@ -888,23 +881,10 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         ],
       },
     ],
-    facts: [
-      {
-        id: 'fact-happy-hour-sextas',
-        icon: 'clock',
-        label: { 'pt-BR': 'Sextas', en: 'Fridays', it: 'Venerdì' },
-        value: { 'pt-BR': '18h às 21h', en: '6 pm to 9 pm', it: '18-21' },
-      },
-      {
-        id: 'fact-happy-hour-sabados',
-        icon: 'clock',
-        label: { 'pt-BR': 'Sábados', en: 'Saturdays', it: 'Sabato' },
-        value: { 'pt-BR': '16h às 20h', en: '4 pm to 8 pm', it: '16-20' },
-      },
-    ],
+    facts: [],
     galleryImageIds: ['img-06', 'img-03'],
     videoIds: [],
-    relatedSlugs: ['gastronomia', 'a-locanda'],
+    relatedSlugs: ['a-locanda'],
   },
   {
     slug: 'servicos-on-demand',
@@ -954,21 +934,10 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         },
       },
     ],
-    facts: [
-      {
-        id: 'fact-on-demand-tarifa',
-        icon: 'info',
-        label: { 'pt-BR': 'Tarifas', en: 'Rates', it: 'Tariffe' },
-        value: {
-          'pt-BR': 'Definidas pelo prestador de serviço — consulte a recepção',
-          en: 'Set by each service provider — ask at the front desk',
-          it: 'Definite dal fornitore del servizio — chiedere alla reception',
-        },
-      },
-    ],
+    facts: [],
     galleryImageIds: ['img-07', 'img-01'],
     videoIds: [],
-    relatedSlugs: ['a-locanda', 'gastronomia'],
+    relatedSlugs: ['a-locanda'],
   },
   {
     slug: 'kite-center',
@@ -1039,24 +1008,7 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         },
       },
     ],
-    facts: [
-      {
-        id: 'fact-kite-soulkite',
-        icon: 'kite',
-        label: { 'pt-BR': 'Aulas de kitesurf', en: 'Kitesurf lessons', it: 'Lezioni di kitesurf' },
-        value: { 'pt-BR': 'Isla Kite Center', en: 'Isla Kite Center', it: 'Isla Kite Center' },
-      },
-      {
-        id: 'fact-kite-guarda',
-        icon: 'check',
-        label: { 'pt-BR': 'Equipamentos', en: 'Equipment', it: 'Attrezzature' },
-        value: {
-          'pt-BR': 'Espaço para guarda de kites e equipamentos',
-          en: 'Storage for kites and equipment',
-          it: 'Spazio per custodire kite e attrezzature',
-        },
-      },
-    ],
+    facts: [],
     galleryImageIds: ['img-03', 'img-04'],
     videoIds: [],
     relatedSlugs: ['experiencias', 'a-locanda'],

@@ -73,6 +73,8 @@ export const ptBR = {
     contactIntro: 'Leve o contato para o seu celular.',
     whatsapp: 'WhatsApp',
     instagram: 'Instagram',
+    carouselPrev: 'Serviço anterior',
+    carouselNext: 'Próximo serviço',
   },
   tours: {
     indexTitle: 'Experiências e passeios',
@@ -93,6 +95,9 @@ export const ptBR = {
     optionsBadge: '{count} opções',
     mediaPendingNote: 'Imagens provisórias — aguardando o material oficial do passeio.',
     empty: 'Ainda não há passeios cadastrados.',
+    carouselPrev: 'Passeio anterior',
+    carouselNext: 'Próximo passeio',
+    priceNote: 'Valores dos passeios sob consulta na recepção.',
   },
   content: {
     indexTitle: 'Conteúdos',
