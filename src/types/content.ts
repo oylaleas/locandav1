@@ -55,23 +55,6 @@ export interface QrTarget {
   destinationLabel: LocalizedText;
 }
 
-/** Um canal de contato que abre um QR de handoff para o celular. */
-export interface ContactQrMethod {
-  id: string;
-  label: LocalizedText;
-  /** Número, @handle ou outro dado curto que aparece na tela do totem. */
-  value: string;
-  icon: Extract<IconName, 'chat' | 'instagram'>;
-  qrTargetId: string;
-}
-
-/** Bloco de contato reutilizável em uma seção institucional. */
-export interface ContactQrSection {
-  title: LocalizedText;
-  intro: LocalizedText;
-  methods: ContactQrMethod[];
-}
-
 export interface FactItem {
   id: string;
   label: LocalizedText;
@@ -112,10 +95,7 @@ export interface ContentSection {
   facts: FactItem[];
   galleryImageIds: string[];
   videoIds: string[];
-  /** Handoff único para site, reservas etc. */
   qrTargetId?: string;
-  /** Canais de contato com QR próprios (ex.: WhatsApp e Instagram de um parceiro). */
-  contact?: ContactQrSection;
   relatedSlugs: string[];
   /** Conteúdo textual ainda não fornecido pela Locanda. */
   contentPending: boolean;

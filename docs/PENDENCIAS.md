@@ -40,10 +40,10 @@ todos os pontos têm placeholder claramente identificado ou abstração pronta p
 | Comodidades (12 itens + aviso `*`) | `src/data/content.ts` → `comodidades` | **✅ Integrado** — PT/EN/IT; asteriscos preservados em Yoga e Funcional* e Piquenique* |
 | Serviços On Demand (6 itens + aviso) | `src/data/content.ts` → `servicos-on-demand` | **✅ Atualizado com a lista real recebida** — Transfer, Babá, Jantar Romântico, Piquenique, Serviços de beleza (manicure/cabeleireiro/maquiador), Eventos privativos; tarifas não inventadas |
 | Happy Hour | `src/data/content.ts` → `happy-hour` | **✅ Conteúdo real recebido** — Sexta 18h–21h (Balde Heineken/Stella R$ 48) · Sábado 16h–20h (Caipirinha R$ 11, Espumante R$ 17, Bons Ventos R$ 20, Croquetes R$ 25, Toasts R$ 25) |
-| Kite Center | `src/data/content.ts` → `kite-center` | **✅ Serviços e contatos integrados** — Isla Kite Center: aulas de Kitesurf/Wingfoil, aluguel, supervisão, downwinds e loja; QR reais para WhatsApp (+55 88 99987-7973) e Instagram (@islakitecenter) |
+| Kite Center | `src/data/content.ts` → `kite-center` | **✅ Conteúdo real recebido** — Isla Kite Center: Aulas de Kitesurf e Wingfoil, Aluguel de equipamento, Supervisão, Downwinds, Loja de equipamentos e roupas; falta horários/valores/contatos `[CONTEÚDO DO KITE CENTER A DEFINIR]` |
 | Cardápio impresso/foto do Happy Hour | `src/data/content.ts` | **[MENU DO HAPPY HOUR A DEFINIR]** — os itens e preços já estão no totem; asset visual opcional |
 | Horários do Happy Hour | `src/data/content.ts` | **✅ Sexta 18h–21h · Sábado 16h–20h** (recebidos) |
-| Detalhes do Kite Center (horários/valores/instrutores) | `src/data/content.ts` | **[A VALIDAR]** — o visitante é direcionado pelos QR reais para confirmação e agendamento; a página não replica esses detalhes |
+| Detalhes do Kite Center (horários/valores/instrutores/contatos) | `src/data/content.ts` | **[CONTEÚDO DO KITE CENTER A DEFINIR]** — serviços já recebidos; valores/horários/contatos pendentes |
 
 ### 1b. EXPERIÊNCIAS E PASSEIOS — recebido, pontos a validar
 
