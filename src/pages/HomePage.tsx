@@ -4,6 +4,7 @@ import { KioskLayout } from '@/components/layout/KioskLayout';
 import { ROUTES } from '@/config/kiosk';
 import { useKioskNavigation } from '@/app/navigation';
 import { useI18n } from '@/features/i18n/useI18n';
+import { Icon } from '@/components/ui/Icon';
 import styles from './HomePage.module.css';
 
 /**
@@ -43,6 +44,33 @@ function HomeVideoCard() {
  * lado (coluna própria) e o hub com as seis áreas principais. Centralizado
  * e sem rolagem.
  */
+
+/** Card especial para Isla Kite Center com contatos visíveis. */
+function KiteCard({ onSelect }: { onSelect: () => void }) {
+  const { t } = useI18n();
+  const handleSelect = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onSelect();
+  };
+  return (
+    <button type="button" className={styles.kiteCard} onClick={handleSelect}>
+      <span className={styles.kiteIcon}>
+        <Icon name="kite" size="2rem" />
+      </span>
+      <span className={styles.kiteText}>
+        <span className={styles.kiteTitle}>{t.home.kiteCta}</span>
+        <span className={styles.kiteContacts}>
+          <span className={styles.kiteContact}>
+            <Icon name="chat" size="1rem" />
+            {t.home.kiteCtaDesc}
+          </span>
+        </span>
+        <span className={styles.kiteContactHint}>{t.home.kiteCtaContact}</span>
+      </span>
+      <Icon name="arrow-right" size="1.5rem" className={styles.kiteArrow} />
+    </button>
+  );
+}
 export default function HomePage() {
   const { t } = useI18n();
   const navigation = useKioskNavigation();
@@ -85,13 +113,6 @@ export default function HomePage() {
         description: t.home.toursCtaDesc,
         onSelect: () => navigation.push(ROUTES.toursIndex),
       },
-      {
-        key: 'kite',
-        icon: 'kite' as const,
-        title: t.home.kiteCta,
-        description: t.home.kiteCtaDesc,
-        onSelect: () => navigation.push(ROUTES.contentDetail('kite-center')),
-      },
     ],
     [t, navigation],
   );
@@ -125,6 +146,9 @@ export default function HomePage() {
                   />
                 </li>
               ))}
+              <li className={styles.hubItem} style={{ '--i': hubItems.length } as CSSProperties}>
+                <KiteCard onSelect={() => navigation.push(ROUTES.contentDetail('kite-center'))} />
+              </li>
             </ul>
           </div>
         </section>
