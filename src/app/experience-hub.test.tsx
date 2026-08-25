@@ -127,7 +127,7 @@ describe('hub Locanda Experience (6 categorias)', () => {
     expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
   });
 
-  it('HOME → ISLA KITE CENTER → nome da parceria + pendência explícita → VOLTAR', async () => {
+  it('HOME → ISLA KITE CENTER → contatos informativos → VOLTAR', async () => {
     const { user } = await enterFromAttract();
 
     await user.click(within(hubRegion()).getByRole('button', { name: /Isla Kite Center/i }));
@@ -135,10 +135,11 @@ describe('hub Locanda Experience (6 categorias)', () => {
       await screen.findByRole('heading', { level: 1, name: 'Isla Kite Center' }),
     ).toBeVisible();
 
-    // Nome da parceria (informado pelo responsável).
     expect(screen.getAllByText(/Isla Kite Center/i).length).toBeGreaterThan(0);
-    // Pendência explícita — nada inventado (aparece no resumo e no corpo).
-    expect(screen.getAllByText(/\[CONTEÚDO DO KITE CENTER A DEFINIR\]/i).length).toBeGreaterThan(0);
+    expect(screen.getByRole('heading', { level: 3, name: 'Contatos' })).toBeVisible();
+    expect(screen.getByText('WhatsApp: (88) 9987-7973')).toBeVisible();
+    expect(screen.getByText('Instagram: @islakitecenter')).toBeVisible();
+    expect(screen.getByText(/consultar horários, valores e reservas/i)).toBeVisible();
 
     await user.click(screen.getByRole('button', { name: 'Voltar' }));
     expect(await screen.findByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
