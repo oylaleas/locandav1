@@ -13,7 +13,9 @@
   justify-content: flex-end;
   gap: var(--space-2xs);
   min-height: clamp(10rem, 24vh, 15rem);
-  padding: var(--space-2xl) var(--kiosk-gutter) var(--space-lg);
+  min-height: clamp(10rem, 24dvh, 15rem);
+  padding: var(--space-2xl) var(--kiosk-inset-inline-end) var(--space-lg)
+    var(--kiosk-inset-inline-start);
   overflow: hidden;
   /* Identidade de marca — sem fotografias (decisão do responsável). */
   background:
@@ -63,9 +65,10 @@
   flex-direction: column;
   gap: var(--space-xl);
   width: 100%;
+  min-width: 0;
   max-width: var(--size-content-max-width);
   margin: 0 auto;
-  padding: 0 var(--kiosk-gutter);
+  padding: 0 var(--kiosk-inset-inline-end) 0 var(--kiosk-inset-inline-start);
 }
 
 .summary {
@@ -111,8 +114,10 @@
 }
 
 .infoValue {
+  min-width: 0;
   margin: 0;
   font-size: var(--font-size-xl);
+  overflow-wrap: anywhere;
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
 }

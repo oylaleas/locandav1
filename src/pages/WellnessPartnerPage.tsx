@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useId, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Icon } from '@/components/ui/Icon';
 import { Button } from '@/components/ui/Button';
@@ -7,6 +7,7 @@ import { ErrorState } from '@/components/states/StateMessage';
 import { ServiceCard } from '@/components/wellness/ServiceCard';
 import { ServiceDetailModal } from '@/features/wellness/ServiceDetailModal';
 import { QRCodePanel } from '@/features/qr/QRCodePanel';
+import { useAccessibility } from '@/features/a11y/AccessibilityProvider';
 import { useI18n } from '@/features/i18n/useI18n';
 import { useKioskNavigation } from '@/app/navigation';
 import { getWellnessPartner, getWellnessService } from '@/services/wellnessService';
@@ -24,14 +25,16 @@ function ServicesCarousel({
   onSelect: (serviceId: string) => void;
 }) {
   const { t } = useI18n();
+  const { motionReduced } = useAccessibility();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const carouselId = useId();
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const scrollAmount = scrollRef.current.clientWidth * 0.8;
       scrollRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth',
+        behavior: motionReduced ? 'auto' : 'smooth',
       });
     }
   };
@@ -42,12 +45,19 @@ function ServicesCarousel({
         type="button"
         className={cn(styles.carouselBtn, styles.carouselBtnLeft)}
         onClick={() => scroll('left')}
+        aria-controls={carouselId}
         aria-label={t.wellness.carouselPrev}
       >
         <Icon name="arrow-left" size="1.5rem" />
       </button>
 
-      <div className={styles.servicesCarouselTrack} ref={scrollRef}>
+      <div
+        id={carouselId}
+        className={styles.servicesCarouselTrack}
+        ref={scrollRef}
+        role="region"
+        aria-label={t.wellness.servicesTitle}
+      >
         {services.map((service) => (
           <div key={service.id} className={styles.serviceCardWrapper}>
             <ServiceCard
@@ -62,6 +72,7 @@ function ServicesCarousel({
         type="button"
         className={cn(styles.carouselBtn, styles.carouselBtnRight)}
         onClick={() => scroll('right')}
+        aria-controls={carouselId}
         aria-label={t.wellness.carouselNext}
       >
         <Icon name="arrow-right" size="1.5rem" />

@@ -13,8 +13,8 @@
   width: 100%;
   max-width: var(--size-content-max-width);
   margin: 0 auto;
-  min-height: 0;
-  height: 100%;
+  min-width: 0;
+  min-height: 100%;
   contain: layout style;
 }
 
@@ -256,17 +256,22 @@
   display: flex;
   align-items: center;
   gap: var(--space-md);
+  min-width: 0;
 }
 
 .carouselTrack {
   display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
   gap: clamp(1rem, 2vw, 1.25rem);
   overflow-x: auto;
+  overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--space-2xs);
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding: var(--space-md) 0;
-  flex: 1;
+  touch-action: pan-x pan-y;
 }
 
 .carouselTrack::-webkit-scrollbar {
@@ -440,10 +445,6 @@
 /* -------------------------------------- ESTREITO / HANDOFF MOBILE */
 
 @media (max-width: 60rem) {
-  .page {
-    height: auto;
-  }
-
   .routes {
     grid-template-columns: 1fr;
   }
@@ -454,5 +455,39 @@
 
   .activitiesGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 40rem) {
+  .page {
+    gap: var(--space-md);
+  }
+
+  .carousel {
+    gap: var(--space-2xs);
+  }
+
+  .carouselTrack {
+    gap: var(--space-sm);
+  }
+
+  .carouselBtn {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .activityCard {
+    width: min(82vw, 20rem);
+    min-height: 8rem;
+    padding: var(--space-lg);
+  }
+
+  .activityName {
+    font-size: var(--font-size-lg);
+  }
+
+  .priceNote {
+    margin-top: var(--space-sm);
+    text-align: center;
   }
 }

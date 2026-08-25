@@ -166,8 +166,8 @@ describe('PT → EN', () => {
   it('a troca de idioma altera o hub e o conteúdo, não só os títulos', async () => {
     const { user } = await enterFromAttract();
 
-    // Abre o seletor de idioma (botão com o shortLabel atual "PT").
-    await user.click(screen.getByRole('button', { name: 'PT' }));
+    // O rótulo acessível inclui função e idioma atual.
+    await user.click(screen.getByRole('button', { name: 'Idioma: PT' }));
     const dialog = await screen.findByRole('dialog');
     await user.click(within(dialog).getByRole('button', { name: 'English' }));
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
@@ -191,13 +191,13 @@ describe('PT → EN', () => {
   it('EN → PT restaura o idioma padrão', async () => {
     const { user } = await enterFromAttract();
 
-    await user.click(screen.getByRole('button', { name: 'PT' }));
+    await user.click(screen.getByRole('button', { name: 'Idioma: PT' }));
     let dialog = await screen.findByRole('dialog');
     await user.click(within(dialog).getByRole('button', { name: 'English' }));
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
     expect(within(hubRegion()).getByRole('button', { name: /Amenities/i })).toBeVisible();
 
-    await user.click(screen.getByRole('button', { name: 'EN' }));
+    await user.click(screen.getByRole('button', { name: 'Language: EN' }));
     dialog = await screen.findByRole('dialog');
     await user.click(within(dialog).getByRole('button', { name: 'Português' }));
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());

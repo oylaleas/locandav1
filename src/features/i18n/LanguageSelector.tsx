@@ -4,12 +4,17 @@ import { Modal } from '@/components/ui/Modal';
 import { useI18n } from '@/features/i18n/useI18n';
 import styles from './LanguageSelector.module.css';
 
+interface LanguageSelectorProps {
+  compact?: boolean;
+  className?: string;
+}
+
 /**
  * Seletor de idioma.
  * Usa os NOMES dos idiomas (não bandeiras) e mantém o visitante exatamente na
  * mesma tela após a troca — o contexto é preservado.
  */
-export function LanguageSelector({ compact = false }: { compact?: boolean }) {
+export function LanguageSelector({ compact = false, className }: LanguageSelectorProps) {
   const { t, language, languages, setLanguage } = useI18n();
   const [open, setOpen] = useState(false);
   const current = languages.find((item) => item.code === language);
@@ -17,10 +22,12 @@ export function LanguageSelector({ compact = false }: { compact?: boolean }) {
   return (
     <>
       <Button
+        className={className}
         variant="quiet"
         size={compact ? 'sm' : 'md'}
         icon="globe"
         onClick={() => setOpen(true)}
+        aria-label={`${t.nav.language}: ${current?.shortLabel ?? t.nav.language}`}
         aria-haspopup="dialog"
       >
         {current?.shortLabel ?? t.nav.language}

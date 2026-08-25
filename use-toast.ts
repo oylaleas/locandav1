@@ -15,7 +15,9 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement
 }
 
-const actionTypes = {
+// Mantido como mapa de tipos; o prefixo evita que o lint trate o valor como
+// runtime ocioso neste helper legado.
+const _actionTypes = {
   ADD_TOAST: "ADD_TOAST",
   UPDATE_TOAST: "UPDATE_TOAST",
   DISMISS_TOAST: "DISMISS_TOAST",
@@ -29,7 +31,7 @@ function genId() {
   return count.toString()
 }
 
-type ActionType = typeof actionTypes
+type ActionType = typeof _actionTypes
 
 type Action =
   | {

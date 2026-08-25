@@ -111,12 +111,17 @@ const Carousel = React.forwardRef<
         return
       }
 
-      onSelect(api)
-      api.on("reInit", onSelect)
-      api.on("select", onSelect)
+      // Agenda a leitura inicial para depois do commit. Isso evita disparar
+      // setState de consumidores durante a própria fase de effect do React.
+      const frame = window.requestAnimationFrame(() => onSelect(api))
+      const handleSelect = () => onSelect(api)
+      api.on("reInit", handleSelect)
+      api.on("select", handleSelect)
 
       return () => {
-        api?.off("select", onSelect)
+        window.cancelAnimationFrame(frame)
+        api.off("reInit", handleSelect)
+        api.off("select", handleSelect)
       }
     }, [api, onSelect])
 

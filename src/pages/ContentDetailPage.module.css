@@ -13,7 +13,9 @@
   justify-content: flex-end;
   gap: var(--space-2xs);
   min-height: clamp(10rem, 26vh, 16rem);
-  padding: var(--space-2xl) var(--kiosk-gutter) var(--space-lg);
+  min-height: clamp(10rem, 26dvh, 16rem);
+  padding: var(--space-2xl) var(--kiosk-inset-inline-end) var(--space-lg)
+    var(--kiosk-inset-inline-start);
   overflow: hidden;
   /* Identidade de marca — sem fotografias (decisão do responsável). */
   background:
@@ -62,9 +64,10 @@
   flex-direction: column;
   gap: var(--space-xl);
   width: 100%;
+  min-width: 0;
   max-width: var(--size-content-max-width);
   margin: 0 auto;
-  padding: 0 var(--kiosk-gutter);
+  padding: 0 var(--kiosk-inset-inline-end) 0 var(--kiosk-inset-inline-start);
 }
 
 .textBlock {
@@ -279,6 +282,20 @@
   display: flex;
   gap: var(--space-sm);
   flex-wrap: wrap;
+}
+
+@media (max-width: 40rem) {
+  .contact {
+    padding: var(--space-lg);
+  }
+
+  .contactActions {
+    width: 100%;
+  }
+
+  .contactActions > * {
+    flex: 1 1 12rem;
+  }
 }
 
 .relatedList {

@@ -210,9 +210,17 @@
   --z-critical: 900;
 
   /* --------------------------------------------------------- LAYOUT KIOSK */
+  /* A unidade dinâmica evita a área fantasma deixada pelo browser chrome em
+     WebViews/PWAs. Declaramos 100vh primeiro como fallback para engines antigas. */
+  --kiosk-viewport-height: 100vh;
+  --kiosk-viewport-height: 100dvh;
   --kiosk-safe-top: env(safe-area-inset-top, 0px);
+  --kiosk-safe-right: env(safe-area-inset-right, 0px);
   --kiosk-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --kiosk-safe-left: env(safe-area-inset-left, 0px);
   --kiosk-gutter: clamp(1.25rem, 3.5vw, 3.5rem);
+  --kiosk-inset-inline-start: max(var(--kiosk-gutter), var(--kiosk-safe-left));
+  --kiosk-inset-inline-end: max(var(--kiosk-gutter), var(--kiosk-safe-right));
 }
 
 /* --------------------------------------------------------------------------

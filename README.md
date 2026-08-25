@@ -194,4 +194,5 @@ nunca no meio de uma visita.
 - `docs/PENDENCIAS.md` — o que depende de conteúdo real, hardware e backend futuro.
 - `docs/QA.md` — checklists de QA (vídeo, QR, PWA, sessão, acessibilidade, touch, performance).
 - `docs/CURADORIA.md` — sistema visual da fotografia (classificação A–E, narrativa, ritmo, grid).
+- `docs/RESPONSIVIDADE.md` — auditoria de viewport, touch, PWA, modais, carrosséis e matriz de validação responsiva.
 - `scripts/analyze-photos.py` — curadoria técnica automática das fotos (`python3 scripts/analyze-photos.py <pasta>`).

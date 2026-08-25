@@ -5,7 +5,12 @@ import { useAccessibility, type TextScale } from '@/features/a11y/AccessibilityP
 import { useI18n } from '@/features/i18n/useI18n';
 import styles from './AccessibilityControl.module.css';
 
-export function AccessibilityControl({ compact = false }: { compact?: boolean }) {
+interface AccessibilityControlProps {
+  compact?: boolean;
+  className?: string;
+}
+
+export function AccessibilityControl({ compact = false, className }: AccessibilityControlProps) {
   const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const {
@@ -26,11 +31,13 @@ export function AccessibilityControl({ compact = false }: { compact?: boolean })
   return (
     <>
       <Button
+        className={className}
         variant="quiet"
         size={compact ? 'sm' : 'md'}
         icon="accessibility"
         iconOnly={compact}
         onClick={() => setOpen(true)}
+        aria-label={t.nav.accessibility}
         aria-haspopup="dialog"
       >
         {compact ? t.nav.accessibility : t.nav.accessibility}

@@ -15,6 +15,7 @@
   position: fixed;
   inset: 0;
   z-index: var(--z-overlay);
+  min-height: var(--kiosk-viewport-height);
   border-radius: 0;
   justify-content: center;
   background-color: #000000;
@@ -198,6 +199,12 @@
   gap: var(--space-sm);
   padding: var(--space-md);
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+.expanded .controls {
+  padding:
+    var(--space-md) max(var(--space-md), var(--kiosk-safe-right))
+    max(var(--space-md), var(--kiosk-safe-bottom)) max(var(--space-md), var(--kiosk-safe-left));
 }
 
 .transport {
