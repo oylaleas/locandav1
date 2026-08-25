@@ -999,13 +999,25 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         ],
       },
       {
-        type: 'paragraph',
-        text: {
-          'pt-BR':
-            'Horários, valores, instrutores e contatos do Isla Kite Center: [CONTEÚDO DO KITE CENTER A DEFINIR]',
-          en: 'Hours, rates, instructors and contacts of Isla Kite Center: [KITE CENTER CONTENT TO BE DEFINED]',
-          it: 'Orari, tariffe, istruttori e contatti di Isla Kite Center: [CONTENUTO DEL KITE CENTER DA DEFINIRE]',
-        },
+        type: 'list',
+        title: { 'pt-BR': 'Contatos', en: 'Contacts', it: 'Contatti' },
+        items: [
+          {
+            'pt-BR': 'WhatsApp: (88) 9987-7973',
+            en: 'WhatsApp: +55 88 9987-7973',
+            it: 'WhatsApp: +55 88 9987-7973',
+          },
+          {
+            'pt-BR': 'Instagram: @islakitecenter',
+            en: 'Instagram: @islakitecenter',
+            it: 'Instagram: @islakitecenter',
+          },
+          {
+            'pt-BR': 'Consultar horários, valores e reservas pelos contatos acima.',
+            en: 'Contact us for schedules, rates and bookings.',
+            it: 'Contattare per orari, tariffe e prenotazioni.',
+          },
+        ],
       },
     ],
     facts: [],
