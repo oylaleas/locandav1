@@ -11,6 +11,7 @@ import { FEATURE_FLAGS, ROUTES } from '@/config/kiosk';
 import { useKioskNavigation } from '@/app/navigation';
 import { useI18n } from '@/features/i18n/useI18n';
 import { VideoPlayer } from '@/features/media/VideoPlayer';
+import { ContactQrSection } from '@/features/qr/ContactQrSection';
 import { QRCodePanel } from '@/features/qr/QRCodePanel';
 import {
   getQrTarget,
@@ -82,6 +83,21 @@ export default function ContentDetailPage() {
 
   const videos = getVideos(section.videoIds);
   const qrTarget = getQrTarget(section.qrTargetId);
+  const contactMethods = (section.contact?.methods ?? []).flatMap((method) => {
+    const target = getQrTarget(method.qrTargetId);
+
+    return target
+      ? [
+          {
+            id: method.id,
+            label: tx(method.label),
+            value: method.value,
+            icon: method.icon,
+            target,
+          },
+        ]
+      : [];
+  });
   const related = getRelatedSections(section);
 
   return (
@@ -125,6 +141,15 @@ export default function ContentDetailPage() {
                 ))}
               </dl>
             </section>
+          )}
+
+          {section.contact && contactMethods.length > 0 && (
+            <ContactQrSection
+              headingId={`contato-${section.slug}`}
+              title={tx(section.contact.title)}
+              intro={tx(section.contact.intro)}
+              methods={contactMethods}
+            />
           )}
 
           {videos.length > 0 && (
