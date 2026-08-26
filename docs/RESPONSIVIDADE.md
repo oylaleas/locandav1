@@ -160,9 +160,9 @@ A implementação foi analisada para as seguintes famílias de viewport:
 - `src/features/navigation/FullScreenMenu.css`,
   `src/features/media/VideoPlayer.module.css`, `src/components/ui/SmartImage.*`
   e `public/offline.html` — overlays, mídia e fallback PWA.
-- `vite.config.ts`, `vite.artifact.config.ts`, `index*.html`, `public/sw.js` e
-  `package.json` — baseline Android/Chromium antigo, bundle legacy e atualização
-  do app shell.
+- `vite.config.ts`, `vite.artifact.config.ts`, `index*.html`, `public/sw.js`,
+  `vercel.json`, `src/app/App.tsx` e `package.json` — baseline Android/Chromium
+  antigo, bundle legacy, HashRouter e atualização do app shell.
 - `carousel.tsx` e `use-toast.ts` — qualidade de lint.
 - `docs/RESPONSIVIDADE.md` — este relatório.
 

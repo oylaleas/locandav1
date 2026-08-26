@@ -10,6 +10,7 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 - [x] HOME → índice de conteúdos → detalhe
 - [x] Detalhe → vídeo → fim do vídeo → QR → fechar → Início
 - [x] HOME → galeria → VOLTAR → HOME (rota lazy)
+- [x] Refresh de rota interna via HashRouter (`/#/conteudos/...`) não depende de rewrite do servidor
 - [x] Galeria → visualizador → próximo/anterior → fechar
 - [x] Inatividade → aviso → sem resposta → reset → Home
 - [x] Aviso → "Continuar navegando" mantém a sessão

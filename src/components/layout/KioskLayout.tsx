@@ -61,7 +61,16 @@ export function KioskLayout({
 
   return (
     <div className={styles.shell}>
-      <a className="skip-link" href="#conteudo-principal">
+      {/* HashRouter usa # para a rota; evitamos que o skip link sobrescreva a
+          navegação atual e movemos o foco diretamente para o conteúdo. */}
+      <a
+        className="skip-link"
+        href="#conteudo-principal"
+        onClick={(event) => {
+          event.preventDefault();
+          mainRef.current?.focus();
+        }}
+      >
         {t.app.skipToContent}
       </a>
 

@@ -33,9 +33,10 @@ vez de pnpm + Parcel + `html-inline` — mesmo resultado, menos dependências).
 O bundle é o totem inteiro (JS, CSS, fotos e vídeos em base64) em um único
 HTML, com `HashRouter` e sem Service Worker — abre de qualquer lugar
 (`file://`, pen drive, e-mail), sem servidor. A entrada do artifact é
-`index.artifact.html` + `src/artifact-main.tsx`; o PWA de produção
-(`src/main.tsx` + `BrowserRouter` + SW) não muda. `bundle.html` e
-`dist-artifact/` são gerados (ignorados pelo git).
+`index.artifact.html` + `src/artifact-main.tsx`; o PWA de produção também usa
+`HashRouter` + Service Worker para que recarregamentos de rotas não dependam
+na configuração do servidor. `bundle.html` e `dist-artifact/` são gerados
+(ignorados pelo git).
 
 ---
 
