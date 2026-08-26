@@ -40,6 +40,27 @@ describe('hub Locanda Experience (6 categorias)', () => {
     expect(within(hub).getByRole('button', { name: /Kite Center/i })).toBeVisible();
   });
 
+  it('HOME em landscape monta o vídeo institucional ao lado do hub', async () => {
+    const originalMatchMedia = window.matchMedia;
+    window.matchMedia = vi.fn((query: string) => ({
+      matches: query.includes('orientation: landscape'),
+      media: query,
+      onchange: null,
+      addEventListener: () => undefined,
+      removeEventListener: () => undefined,
+      addListener: () => undefined,
+      removeListener: () => undefined,
+      dispatchEvent: () => false,
+    })) as typeof window.matchMedia;
+
+    try {
+      await enterFromAttract();
+      expect(await screen.findByTitle('Um dia na Locanda')).toBeVisible();
+    } finally {
+      window.matchMedia = originalMatchMedia;
+    }
+  });
+
   it('HOME → COMODIDADES → 12 itens + aviso de tarifas → VOLTAR', async () => {
     const { user } = await enterFromAttract();
 

@@ -187,7 +187,7 @@
   }
 }
 
-/* ------------------------------------------- TOTEM ALTO (ex.: 1080x1920) */
+/* --------------------- PAINEL ALTO (fallback portrait / desktop alto) */
 
 @media (min-height: 60rem) {
   .hubTitle {
@@ -205,37 +205,75 @@
 }
 
 /* ---------------------------------------- TELAS BAIXAS (landscape / app) */
-/* O vídeo da Home é ambiente, não interação. Em landscape baixo ele roubava
-   a maior parte do viewport e empurrava os seis destinos para um scroll
-   vertical. Priorizamos as ações do totem e refluímos o grid para 3 × 2. */
-@media (max-height: 52rem) and (min-width: 60.0625rem) {
+/* A prioridade operacional é horizontal. Em vez de esconder o vídeo em
+   1024×600 / 1280×720, reduzimos sua altura e o apresentamos em 16:9 ao lado
+   do hub. Assim o vídeo continua visível e os seis destinos permanecem
+   alcançáveis sem uma composição quebrada. */
+@media (max-height: 52rem) and (orientation: landscape) {
   .page {
     justify-content: flex-start;
   }
 
-  .hubIntro,
-  .videoColumn {
+  .hubIntro {
     display: none;
   }
 
+  .videoColumn {
+    height: min(42vh, 20rem);
+    height: min(42dvh, 20rem);
+  }
+
+  .videoWrapper {
+    width: 18rem;
+  }
+
+  @supports (aspect-ratio: 16 / 9) {
+    .videoWrapper {
+      width: auto;
+      aspect-ratio: 16 / 9;
+    }
+  }
+
   .homeMain {
+    gap: clamp(0.75rem, 2vw, 1.5rem);
     max-width: 84rem;
   }
 
   .hubGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-auto-rows: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
   }
 
   .hubCard {
-    min-height: clamp(4.25rem, 14vh, 6.25rem);
-    min-height: clamp(4.25rem, 14dvh, 6.25rem);
+    min-height: clamp(4.25rem, 13vh, 5rem);
+    min-height: clamp(4.25rem, 13dvh, 5rem);
+    gap: var(--space-sm);
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  /* A prioridade do modo horizontal é navegação rápida + vídeo. Reduzimos
+     apenas a densidade visual dos cards, nunca a área clicável do card. */
+  .hubCard > span:first-child {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .hubCard > span:nth-child(2) {
+    gap: 0;
+  }
+
+  .hubCard > span:nth-child(2) > span:last-child {
+    display: none;
+  }
+
+  .hubCard > svg {
+    width: 1.25rem;
+    height: 1.25rem;
   }
 }
 
-/* ------------------- ESTREITO: o hub é prioritário; vídeo vertical seria
-   maior do que o viewport e obrigaria três ou mais dobras de scroll. */
-@media (max-width: 60rem) {
+/* Em portrait estreito, o vídeo vertical não faz parte da primeira dobra. */
+@media (max-width: 60rem) and (orientation: portrait) {
   .page {
     justify-content: flex-start;
   }

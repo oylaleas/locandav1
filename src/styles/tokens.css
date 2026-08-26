@@ -112,8 +112,9 @@
      em mono, como o painel de instrumentos de um destino de vento/água. */
   --font-data: ui-monospace, 'SF Mono', 'Cascadia Code', 'Roboto Mono', Menlo, Consolas, monospace;
 
-  /* Escala fluida ancorada no viewport do totem (1080x1920 [VALIDAR NO HARDWARE REAL]).
-     --font-scale é multiplicado pelo controle de acessibilidade de texto. */
+  /* Escala fluida ancorada no viewport prioritário landscape (1920x1080;
+     M7 3G Plus: 1024x600 [VALIDAR NO HARDWARE REAL]). --font-scale é
+     multiplicado pelo controle de acessibilidade de texto. */
   --font-scale: 1;
   /* Fallback explícito para Chromium antigo (Android 8.1/Go), que não
      entende clamp(). A declaração fluida prevalece onde houver suporte. */

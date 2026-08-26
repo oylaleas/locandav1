@@ -6,20 +6,20 @@ import { useKioskNavigation } from '@/app/navigation';
 import { useI18n } from '@/features/i18n/useI18n';
 import styles from './HomePage.module.css';
 
-const AMBIENT_VIDEO_QUERY = '(min-width: 60.0625rem) and (min-height: 52.0625rem)';
-
-type LowMemoryNavigator = Navigator & { deviceMemory?: number };
+/* A prioridade de operação é landscape: o vídeo deve estar presente nessa
+   composição, inclusive em tablets 1024×600. Em portrait compacto, o hub
+   continua priorizado para não criar uma tela excessivamente longa. */
+const AMBIENT_VIDEO_QUERY = '(orientation: landscape), (min-width: 60.0625rem)';
 
 function canRenderAmbientVideo(): boolean {
-  if (typeof window === 'undefined' || !window.matchMedia) return false;
-  const memory = (navigator as LowMemoryNavigator).deviceMemory;
-  return (memory === undefined || memory > 1) && window.matchMedia(AMBIENT_VIDEO_QUERY).matches;
+  return typeof window !== 'undefined' && Boolean(window.matchMedia) &&
+    window.matchMedia(AMBIENT_VIDEO_QUERY).matches;
 }
 
 /**
- * O vídeo da Home é puramente ambiental. Não vale competir por CPU/RAM com a
- * navegação em tablets Go de 1 GB ou em viewports onde a própria composição o
- * oculta. A checagem também evita baixar o iframe do Vimeo sem necessidade.
+ * Monta o iframe somente quando ele fará parte da composição visível. Isso
+ * evita trabalho desnecessário em portrait compacto sem retirar o vídeo da
+ * experiência horizontal, que é a prioridade do totem.
  */
 function useAmbientVideoEnabled() {
   const [enabled, setEnabled] = useState(canRenderAmbientVideo);
@@ -52,9 +52,8 @@ function HomeVideoCard() {
   return (
     <div className={styles.videoWrapper} aria-label={t.home.videoCardTitle}>
       <iframe
-        src="https://player.vimeo.com/video/1218674025?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&keyboard=0&title=0&byline=0&portrait=0&dnt=1"
+        src="https://player.vimeo.com/video/1218674025?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&keyboard=0&title=0&byline=0&portrait=0&playsinline=1&dnt=1"
         title={t.home.videoCardTitle}
-        loading="lazy"
         allow="autoplay; encrypted-media; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
         tabIndex={-1}
@@ -142,8 +141,8 @@ export default function HomePage() {
           </div>
 
           <div className={styles.homeMain}>
-            {/* Em tablets Go/viewport compacto não montamos o iframe ambiental:
-                a navegação permanece o primeiro trabalho do hardware. */}
+            {/* O vídeo integra a composição horizontal; em portrait compacto
+                ele não é montado para preservar a navegação acima da dobra. */}
             {ambientVideoEnabled && (
               <div className={styles.videoColumn}>
                 <HomeVideoCard />

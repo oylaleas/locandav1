@@ -28,12 +28,12 @@ com TypeScript, build de produção, ESLint e Vitest.
 | Estilos | CSS Modules + tokens CSS globais (`src/styles/tokens.css`) |
 | Estado de sessão | Providers locais para idioma, acessibilidade, mídia e inatividade |
 | Componentes principais | `KioskLayout`, `Button`, `Modal`, cards, carrosséis, player, QR handoff |
-| Orientação instalada | `portrait` no manifest (intencional para o hardware principal) |
+| Orientação instalada | `landscape` no manifest (prioridade operacional do totem) |
 | Container queries | Avaliadas; não necessárias nesta etapa, pois os componentes críticos já conhecem a região de layout e refluem por largura/altura do viewport |
 
-O manifest permanece em portrait porque esta é a orientação declarada do produto.
-As correções de layout, contudo, evitam pressupor portrait quando o app é aberto
-em browser, WebView ou preview landscape.
+O manifest passa a priorizar landscape para que a instalação PWA do tablet não
+trave a experiência em retrato. As correções mantêm um fallback responsivo em
+portrait quando o app é aberto em browser, WebView ou preview.
 
 ## Problemas encontrados e priorização
 
@@ -47,7 +47,7 @@ baseline auditada.
 | Problema | Causa | Impacto | Correção |
 | --- | --- | --- | --- |
 | Viewport podia depender de `height: 100%` | App shell não usava unidade dinâmica centralizada | Área útil errada com browser chrome/standalone | Shell, root e overlays passam a usar `100dvh` com fallback para `100vh` |
-| Home podia exigir scroll excessivo em telas estreitas ou landscape baixo | Vídeo vertical decorativo permanecia na composição antes dos cards | Destinos interativos eram empurrados abaixo da dobra | Vídeo é ocultado nos cenários compactos; grid prioriza 2 ou 3 colunas conforme espaço |
+| Home podia exigir scroll excessivo em telas estreitas ou landscape baixo | Vídeo vertical decorativo permanecia na composição antes dos cards | Destinos interativos eram empurrados abaixo da dobra | Em landscape baixo o vídeo é mantido em 16:9 com altura compacta; em portrait estreito o hub segue prioritário |
 | Barra de ações inferior podia reflowar sem previsibilidade | Flex sem trilhas e grupos sem `min-width: 0` | Risco de botões cortados ou overflow em 320 px | Layout por grid, grupos refluíveis, controles utilitários compactos em telas estreitas |
 | Carrosséis podiam propagar overflow para a página | Tracks flexíveis não declaravam `min-width: 0`; cards têm largura mínima | Possível scroll horizontal global e área de swipe ruim | Tracks isolam o scroll horizontal, usam `touch-action: pan-x pan-y` e responsividade própria |
 | Modal usava `92vh` e não considerava as quatro safe areas | Altura estática e padding parcial | Conteúdo/rodapé podia ficar escondido em WebViews | Overlay e painel usam viewport dinâmico, safe areas laterais e rodapé adaptável |
@@ -94,10 +94,10 @@ baseline auditada.
 
 ### Home e grids
 
-- A Home mantém vídeo + grid em painéis amplos e altos.
-- Em `max-height: 52rem` com largura ampla, o vídeo decorativo sai da composição
-  e os seis destinos usam um grid 3 × 2.
-- Em `max-width: 60rem`, o vídeo vertical também sai da composição para não criar
+- A Home mantém vídeo + grid em painéis amplos e em toda a composição landscape.
+- Em `max-height: 52rem` com orientação landscape, o vídeo continua visível em
+  16:9 e altura compacta, ao lado do grid 2 × 3.
+- Em portrait estreito, o vídeo vertical sai da primeira dobra para não criar
   múltiplas dobras de scroll; os destinos mantêm prioridade.
 - Cards horizontais passam para pilha em `max-width: 34rem`.
 
@@ -128,8 +128,8 @@ A implementação foi analisada para as seguintes famílias de viewport:
 | Família | Exemplos | Estratégia aplicada |
 | --- | --- | --- |
 | Handoff estreito | 320×568, 360×640, 390×844, 414×896 | Barra em duas linhas, utilidades compactas, cards em pilha, modal adaptável |
-| Tablet/portrait | 600×800, 768×1024, 800×1280, 1080×1920, 1200×1920 | Grid fluido, conteúdo rolável no painel central, vídeo da Home só quando há espaço |
-| Landscape baixo | 1024×768, 1280×720, 1280×800, 1366×768 | Vídeo decorativo da Home removido; grid 3×2 e espaçamentos verticais reduzidos |
+| Tablet/portrait (fallback) | 600×800, 768×1024, 800×1280, 1080×1920, 1200×1920 | Grid fluido e conteúdo rolável; não é a orientação operacional prioritária |
+| Landscape prioritário | 1024×600, 1024×768, 1280×720, 1280×800, 1366×768 | Vídeo da Home mantido em 16:9 compacto ao lado do grid 2×3; espaçamentos verticais reduzidos |
 | Desktop amplo | 1440×900, 1600×900, 1920×1080, 1920×1200 | Vídeo + grid, largura máxima de leitura e cards preservada |
 | Painéis grandes | 2160×1920, 2160×3840 | Tokens fluidos com limite superior, grids com `minmax`, sem dependência de pixel físico |
 
@@ -139,7 +139,7 @@ A implementação foi analisada para as seguintes famílias de viewport:
 | --- | --- | --- |
 | `KioskLayout` | Viewport dinâmico, ação inferior responsiva, safe areas | Validar alcance físico no totem real |
 | `Modal` / QR / timeout | Altura segura, scroll interno e rodapé adaptável | Validar com acessibilidade XL em hardware real |
-| Home | Vídeo deixa de competir com ações em pouco espaço | Decidir com a operação se vídeo deve aparecer em tablets estreitos |
+| Home | Vídeo priorizado em landscape e grid preservado; portrait estreito prioriza navegação | Validar a reprodução do Vimeo no navegador real do tablet |
 | Carrosséis | Swipe isolado, setas acessíveis, reduced motion | Validar sensibilidade de swipe no painel final |
 | Menu fullscreen | Safe areas, lista rolável, quebra de títulos | Validar animação GSAP em GPU do totem |
 | Player | Controles seguros no fullscreen e reflow em mobile | Vídeos reais ainda dependem de material/codec final |
@@ -186,8 +186,8 @@ Android Go/Chromium antigos:
 - fallback visual orienta a atualizar o navegador se nem o bundle legacy puder
   iniciar;
 - imagens e player têm fallback de proporção quando `aspect-ratio` não existe;
-- o iframe ambiental do Vimeo não é montado em viewport compacto nem quando o
-  navegador informa `deviceMemory <= 1`, protegendo tablets de 1 GB de RAM;
+- o iframe ambiental do Vimeo é priorizado em orientação landscape; em portrait
+  compacto ele não é montado para preservar a navegação acima da dobra;
 - o Service Worker foi versionado para `v2`, forçando a renovação do app shell
   em instalações existentes.
 
@@ -198,7 +198,7 @@ Android Go/Chromium antigos:
 ## Riscos residuais e recomendações
 
 1. **Hardware real:** testar leitura, tamanho físico de toque, brilho/reflexo e
-   alcance em 1080×1920 e no equipamento definitivo.
+   alcance em landscape, especialmente no M7 3G Plus (1024×600) e em 1920×1080.
 2. **Viewport real:** validar Chrome kiosk, Edge kiosk e WebView do fornecedor;
    este ambiente não oferece esses navegadores em modo gráfico.
 3. **PWA instalado:** validar a atualização do Service Worker e as safe areas

@@ -7,12 +7,16 @@
 
 import type { LanguageCode } from '@/types/i18n';
 
-/** Resolução de referência usada no design. [VALIDAR NO HARDWARE REAL] */
+/**
+ * Referência operacional: o totem passa a priorizar landscape. O M7 3G Plus
+ * trabalha em 1024×600, enquanto painéis maiores costumam usar 1920×1080.
+ * A interface continua responsiva fora desta referência. [VALIDAR NO HARDWARE REAL]
+ */
 export const KIOSK_VIEWPORT = {
-  width: 1080,
-  height: 1920,
-  orientation: 'portrait' as const,
-  note: '[VALIDAR NO HARDWARE REAL] — hardware definitivo ainda não especificado.',
+  width: 1920,
+  height: 1080,
+  orientation: 'landscape' as const,
+  note: '[VALIDAR NO HARDWARE REAL] — landscape é a orientação prioritária; validar rotação bloqueada no equipamento final.',
 };
 
 /**

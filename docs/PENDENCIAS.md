@@ -63,7 +63,7 @@ todos os pontos têm placeholder claramente identificado ou abstração pronta p
 
 | Item | Onde | Observação |
 | --- | --- | --- |
-| Resolução/orientação do totem | `src/config/kiosk.ts` → `KIOSK_VIEWPORT` | Assumido 1080×1920 retrato **[VALIDAR NO HARDWARE REAL]** |
+| Resolução/orientação do totem | `src/config/kiosk.ts` → `KIOSK_VIEWPORT` | **Landscape prioritário** — referência 1920×1080; validar no M7 3G Plus (1024×600) e no hardware final |
 | Altura física / alcance do usuário | `KioskLayout` (barra de ações inferior) | Decisão ergonômica a confirmar in loco |
 | Escala tipográfica (`--font-root`) | `src/styles/tokens.css` | Ajustar após teste de leitura à distância real |
 | Autoplay de vídeo com áudio | `AttractMode` / `VideoPlayer` | Depende da política do navegador do kiosk; já há fallback |

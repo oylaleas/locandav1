@@ -402,7 +402,7 @@
   font-size: var(--font-size-sm);
 }
 
-/* ------------------------------------------- TOTEM ALTO (ex.: 1080x1920) */
+/* --------------------- PAINEL ALTO (fallback portrait / desktop alto) */
 
 @media (min-height: 60rem) {
   .title {
