@@ -4,6 +4,8 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-xs);
+  min-width: 0;
+  max-width: 100%;
   min-height: var(--size-touch-min);
   padding: 0 var(--space-lg);
   border-radius: var(--radius-pill);
@@ -152,9 +154,9 @@
 }
 
 .label {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
 }
 
 .wrapLabel .label {

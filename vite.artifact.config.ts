@@ -20,8 +20,10 @@ export default defineConfig({
     alias: { '@': srcPath },
   },
   build: {
-    target: 'es2022',
-    cssTarget: 'chrome110',
+    // Mantém o artifact file:// no mesmo baseline do PWA instalado, inclusive
+    // em tablets Android 8.1/Chromium antigos.
+    target: 'chrome64',
+    cssTarget: 'chrome64',
     outDir: 'dist-artifact',
     sourcemap: false,
     // Apenas a entrada do artifact (não o PWA normal).

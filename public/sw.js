@@ -15,7 +15,9 @@
          adicione a URL em VIDEO_PRECACHE_ALLOWLIST.
    ========================================================================== */
 
-const VERSION = 'v1';
+// v2 invalida o shell anterior para que tablets com PWA já instalado baixem
+// os bundles compatíveis com Android/Chromium antigos nesta próxima visita.
+const VERSION = 'v2';
 const SHELL_CACHE = `ldv-shell-${VERSION}`;
 const STATIC_CACHE = `ldv-static-${VERSION}`;
 const IMAGE_CACHE = `ldv-images-${VERSION}`;

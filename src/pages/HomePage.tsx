@@ -1,4 +1,4 @@
-import { useMemo, type CSSProperties } from 'react';
+import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { ActionCard } from '@/components/cards/ActionCard';
 import { KioskLayout } from '@/components/layout/KioskLayout';
 import { ROUTES } from '@/config/kiosk';
@@ -6,14 +6,46 @@ import { useKioskNavigation } from '@/app/navigation';
 import { useI18n } from '@/features/i18n/useI18n';
 import styles from './HomePage.module.css';
 
+const AMBIENT_VIDEO_QUERY = '(min-width: 60.0625rem) and (min-height: 52.0625rem)';
+
+type LowMemoryNavigator = Navigator & { deviceMemory?: number };
+
+function canRenderAmbientVideo(): boolean {
+  if (typeof window === 'undefined' || !window.matchMedia) return false;
+  const memory = (navigator as LowMemoryNavigator).deviceMemory;
+  return (memory === undefined || memory > 1) && window.matchMedia(AMBIENT_VIDEO_QUERY).matches;
+}
+
+/**
+ * O vídeo da Home é puramente ambiental. Não vale competir por CPU/RAM com a
+ * navegação em tablets Go de 1 GB ou em viewports onde a própria composição o
+ * oculta. A checagem também evita baixar o iframe do Vimeo sem necessidade.
+ */
+function useAmbientVideoEnabled() {
+  const [enabled, setEnabled] = useState(canRenderAmbientVideo);
+
+  useEffect(() => {
+    if (!window.matchMedia) return undefined;
+    const query = window.matchMedia(AMBIENT_VIDEO_QUERY);
+    const update = () => setEnabled(canRenderAmbientVideo());
+    update();
+
+    // Chrome antigo usa addListener; browsers modernos usam addEventListener.
+    if (query.addEventListener) {
+      query.addEventListener('change', update);
+      return () => query.removeEventListener('change', update);
+    }
+
+    query.addListener(update);
+    return () => query.removeListener(update);
+  }, []);
+
+  return enabled;
+}
+
 /**
  * Vídeo institucional em destaque (embed Vimeo) — tocando sozinho, sem
  * bordas nem cabeçalho, ocupando a coluna própria ao lado do grid.
- *
- * Considerações responsáveis:
- * - iframe de terceiros (Vimeo), única exceção externa pedida; `loading="lazy"`
- *   para não carregar antes da Home ser vista;
- * - acessível: `title` no iframe + `aria-label` no container.
  */
 function HomeVideoCard() {
   const { t } = useI18n();
@@ -22,6 +54,7 @@ function HomeVideoCard() {
       <iframe
         src="https://player.vimeo.com/video/1218674025?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&keyboard=0&title=0&byline=0&portrait=0&dnt=1"
         title={t.home.videoCardTitle}
+        loading="lazy"
         allow="autoplay; encrypted-media; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
         tabIndex={-1}
@@ -46,6 +79,7 @@ function HomeVideoCard() {
 export default function HomePage() {
   const { t } = useI18n();
   const navigation = useKioskNavigation();
+  const ambientVideoEnabled = useAmbientVideoEnabled();
 
   /* LOCANDA EXPERIENCE — as seis áreas principais do totem. */
   const hubItems = useMemo(
@@ -76,7 +110,7 @@ export default function HomePage() {
         icon: 'spa' as const,
         title: t.home.wellnessCta,
         description: t.home.wellnessCtaDesc,
-        onSelect: () => navigation.push(ROUTES.wellnessIndex),
+        onSelect: () => navigation.push(ROUTES.wellnessPartner('espaco-onoda')),
       },
       {
         key: 'tours',
@@ -108,10 +142,13 @@ export default function HomePage() {
           </div>
 
           <div className={styles.homeMain}>
-            {/* Vídeo institucional em destaque — coluna própria ao lado. */}
-            <div className={styles.videoColumn}>
-              <HomeVideoCard />
-            </div>
+            {/* Em tablets Go/viewport compacto não montamos o iframe ambiental:
+                a navegação permanece o primeiro trabalho do hardware. */}
+            {ambientVideoEnabled && (
+              <div className={styles.videoColumn}>
+                <HomeVideoCard />
+              </div>
+            )}
 
             <ul className={styles.hubGrid}>
               {hubItems.map((item, index) => (

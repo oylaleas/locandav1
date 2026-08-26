@@ -11,18 +11,26 @@
 html,
 body,
 #root {
-  height: 100%;
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  min-height: var(--kiosk-viewport-height);
 }
 
 html {
   font-size: var(--font-root);
-  /* Kiosk: evita a sensação de "navegador exposto" no overscroll. */
+  /* O documento nunca é a área rolável do totem: cada tela usa seu próprio
+     painel de leitura. `clip` é só uma proteção para que um filho defeituoso
+     não crie scroll lateral do navegador. */
+  overflow-x: hidden; /* fallback para Chromium anterior a overflow: clip */
+  overflow-x: clip;
   overscroll-behavior: none;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
+  overflow: hidden;
   background-color: var(--color-background);
   color: var(--color-text-primary);
   font-family: var(--font-body);
@@ -31,6 +39,10 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overscroll-behavior: none;
+}
+
+#root {
+  block-size: var(--kiosk-viewport-height);
 }
 
 /* Em modo totem removemos o realce azul de toque do WebKit e a seleção
@@ -75,6 +87,17 @@ h6 {
 
 p {
   margin: 0;
+}
+
+/* Dados operacionais, nomes de parceiros e traduções podem ter comprimentos
+   muito diferentes. A quebra só acontece quando necessária, sem permitir que
+   uma única palavra estoure o card ou o modal. */
+p,
+li,
+dd,
+dt,
+blockquote {
+  overflow-wrap: anywhere;
 }
 
 ul,

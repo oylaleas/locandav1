@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Icon } from '@/components/ui/Icon';
 import { Button } from '@/components/ui/Button';
@@ -7,11 +7,79 @@ import { ErrorState } from '@/components/states/StateMessage';
 import { ServiceCard } from '@/components/wellness/ServiceCard';
 import { ServiceDetailModal } from '@/features/wellness/ServiceDetailModal';
 import { QRCodePanel } from '@/features/qr/QRCodePanel';
+import { useAccessibility } from '@/features/a11y/AccessibilityProvider';
 import { useI18n } from '@/features/i18n/useI18n';
 import { useKioskNavigation } from '@/app/navigation';
 import { getWellnessPartner, getWellnessService } from '@/services/wellnessService';
 import type { QrTarget } from '@/types/content';
+import type { WellnessService } from '@/types/wellness';
+import { cn } from '@/utils/cn';
 import styles from './WellnessPartnerPage.module.css';
+
+/** Carrossel de serviços com navegação por setas. */
+function ServicesCarousel({
+  services,
+  onSelect,
+}: {
+  services: WellnessService[];
+  onSelect: (serviceId: string) => void;
+}) {
+  const { t } = useI18n();
+  const { motionReduced } = useAccessibility();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const carouselId = useId();
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = scrollRef.current.clientWidth * 0.8;
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: motionReduced ? 'auto' : 'smooth',
+      });
+    }
+  };
+
+  return (
+    <div className={styles.servicesCarousel}>
+      <button
+        type="button"
+        className={cn(styles.carouselBtn, styles.carouselBtnLeft)}
+        onClick={() => scroll('left')}
+        aria-controls={carouselId}
+        aria-label={t.wellness.carouselPrev}
+      >
+        <Icon name="arrow-left" size="1.5rem" />
+      </button>
+
+      <div
+        id={carouselId}
+        className={styles.servicesCarouselTrack}
+        ref={scrollRef}
+        role="region"
+        aria-label={t.wellness.servicesTitle}
+      >
+        {services.map((service) => (
+          <div key={service.id} className={styles.serviceCardWrapper}>
+            <ServiceCard
+              service={service}
+              onSelect={() => onSelect(service.id)}
+            />
+          </div>
+        ))}
+      </div>
+
+      <button
+        type="button"
+        className={cn(styles.carouselBtn, styles.carouselBtnRight)}
+        onClick={() => scroll('right')}
+        aria-controls={carouselId}
+        aria-label={t.wellness.carouselNext}
+      >
+        <Icon name="arrow-right" size="1.5rem" />
+      </button>
+    </div>
+  );
+}
 
 /**
  * ESPAÇO ONODA — detalhe do espaço de bem-estar:
@@ -52,16 +120,10 @@ export default function WellnessPartnerPage() {
             {t.wellness.servicesTitle}
           </h2>
           <p className={styles.sectionIntro}>{t.wellness.servicesIntro}</p>
-          <ul className={styles.servicesList}>
-            {partner.services.map((service) => (
-              <li key={service.id}>
-                <ServiceCard
-                  service={service}
-                  onSelect={() => setSelectedServiceId(service.id)}
-                />
-              </li>
-            ))}
-          </ul>
+          <ServicesCarousel
+            services={partner.services}
+            onSelect={(id) => setSelectedServiceId(id)}
+          />
         </section>
 
         <section className={styles.contact} aria-labelledby="contato-titulo">

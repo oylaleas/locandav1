@@ -55,6 +55,22 @@ export interface QrTarget {
   destinationLabel: LocalizedText;
 }
 
+/** Canal de contato exibido como handoff por QR Code. */
+export interface ContactQrChannel {
+  id: string;
+  label: LocalizedText;
+  value: LocalizedText;
+  icon: Extract<IconName, 'chat' | 'instagram'>;
+  qrTargetId: string;
+}
+
+/** Bloco de contato com um QR próprio para cada canal. */
+export interface ContactQrDefinition {
+  title: LocalizedText;
+  intro: LocalizedText;
+  channels: ContactQrChannel[];
+}
+
 export interface FactItem {
   id: string;
   label: LocalizedText;
@@ -96,6 +112,8 @@ export interface ContentSection {
   galleryImageIds: string[];
   videoIds: string[];
   qrTargetId?: string;
+  /** Canais de contato que abrem QR Codes individuais (ex.: WhatsApp/Instagram). */
+  contact?: ContactQrDefinition;
   relatedSlugs: string[];
   /** Conteúdo textual ainda não fornecido pela Locanda. */
   contentPending: boolean;

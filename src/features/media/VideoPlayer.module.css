@@ -15,6 +15,7 @@
   position: fixed;
   inset: 0;
   z-index: var(--z-overlay);
+  min-height: var(--kiosk-viewport-height);
   border-radius: 0;
   justify-content: center;
   background-color: #000000;
@@ -23,13 +24,24 @@
 .stage {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  /* Chrome 64 não entende aspect-ratio: mantém uma altura estável até o
+     navegador moderno assumir a proporção 16:9 abaixo. */
+  height: 18rem;
+  height: clamp(12rem, 56vw, 36rem);
   background-color: #000000;
   isolation: isolate;
 }
 
+@supports (aspect-ratio: 16 / 9) {
+  .stage {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}
+
 .expanded .stage {
   flex: 1;
+  height: auto;
   aspect-ratio: auto;
   min-height: 0;
 }
@@ -198,6 +210,12 @@
   gap: var(--space-sm);
   padding: var(--space-md);
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+.expanded .controls {
+  padding:
+    var(--space-md) max(var(--space-md), var(--kiosk-safe-right))
+    max(var(--space-md), var(--kiosk-safe-bottom)) max(var(--space-md), var(--kiosk-safe-left));
 }
 
 .transport {

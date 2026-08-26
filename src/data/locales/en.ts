@@ -70,6 +70,8 @@ export const en: Dictionary = {
     contactIntro: 'Take the contact to your phone.',
     whatsapp: 'WhatsApp',
     instagram: 'Instagram',
+    carouselPrev: 'Previous service',
+    carouselNext: 'Next service',
   },
   tours: {
     indexTitle: 'Experiences and tours',
@@ -90,6 +92,9 @@ export const en: Dictionary = {
     optionsBadge: '{count} options',
     mediaPendingNote: 'Provisional images — awaiting the official tour material.',
     empty: 'There are no tours registered yet.',
+    carouselPrev: 'Previous tour',
+    carouselNext: 'Next tour',
+    priceNote: 'Tour prices available upon request at the reception.',
   },
   content: {
     indexTitle: 'Sections',

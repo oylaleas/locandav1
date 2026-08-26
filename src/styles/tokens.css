@@ -115,6 +115,9 @@
   /* Escala fluida ancorada no viewport do totem (1080x1920 [VALIDAR NO HARDWARE REAL]).
      --font-scale é multiplicado pelo controle de acessibilidade de texto. */
   --font-scale: 1;
+  /* Fallback explícito para Chromium antigo (Android 8.1/Go), que não
+     entende clamp(). A declaração fluida prevalece onde houver suporte. */
+  --font-root: 16px;
   --font-root: clamp(16px, 0.6vw + 0.62vh, 26px);
 
   --font-size-3xs: calc(0.72rem * var(--font-scale));
@@ -210,9 +213,21 @@
   --z-critical: 900;
 
   /* --------------------------------------------------------- LAYOUT KIOSK */
+  /* A unidade dinâmica evita a área fantasma deixada pelo browser chrome em
+     WebViews/PWAs. Declaramos 100vh primeiro como fallback para engines antigas. */
+  --kiosk-viewport-height: 100vh;
+  --kiosk-viewport-height: 100dvh;
   --kiosk-safe-top: env(safe-area-inset-top, 0px);
+  --kiosk-safe-right: env(safe-area-inset-right, 0px);
   --kiosk-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --kiosk-safe-left: env(safe-area-inset-left, 0px);
+  /* Primeiro valor: fallback para engines sem min()/max()/clamp(). */
+  --kiosk-gutter: 1.25rem;
   --kiosk-gutter: clamp(1.25rem, 3.5vw, 3.5rem);
+  --kiosk-inset-inline-start: var(--kiosk-gutter);
+  --kiosk-inset-inline-end: var(--kiosk-gutter);
+  --kiosk-inset-inline-start: max(var(--kiosk-gutter), var(--kiosk-safe-left));
+  --kiosk-inset-inline-end: max(var(--kiosk-gutter), var(--kiosk-safe-right));
 }
 
 /* --------------------------------------------------------------------------

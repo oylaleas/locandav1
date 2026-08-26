@@ -4,6 +4,10 @@
   border-radius: var(--radius-md);
   padding: var(--space-sm);
   box-shadow: var(--elevation-1);
+  width: 62vw;
+  height: 62vw;
+  max-width: 22rem;
+  max-height: 22rem;
   width: min(22rem, 62vw);
   aspect-ratio: 1;
   display: grid;

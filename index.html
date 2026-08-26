@@ -28,7 +28,11 @@
     <title>Locanda dei Venti — Totem</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <p id="boot-status" aria-live="polite" style="font-family: system-ui, sans-serif; padding: 2rem; text-align: center">
+        Carregando experiência…
+      </p>
+    </div>
     <noscript>
       <div style="font-family: Georgia, serif; padding: 4rem; text-align: center">
         <img
@@ -42,6 +46,25 @@
         <p>É necessário habilitar o JavaScript para utilizar este totem.</p>
       </div>
     </noscript>
+    <div id="legacy-browser" hidden role="alert" style="font-family: system-ui, sans-serif; padding: 2rem; text-align: center">
+      <h1>Atualize o navegador do totem</h1>
+      <p>Esta experiência precisa de uma versão recente do Google Chrome ou Android System WebView.</p>
+      <p>Abra novamente após atualizar o navegador.</p>
+    </div>
+    <script nomodule>
+      /* O build injeta um bundle legacy para WebViews antigos. Só mostramos a
+         orientação de atualização se esse fallback também não substituir a
+         mensagem de boot em alguns segundos. */
+      (function () {
+        window.setTimeout(function () {
+          var root = document.getElementById('root');
+          var message = document.getElementById('legacy-browser');
+          if (!root || !message || root.textContent.indexOf('Carregando experiência') === -1) return;
+          root.setAttribute('hidden', 'hidden');
+          message.removeAttribute('hidden');
+        }, 15000);
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

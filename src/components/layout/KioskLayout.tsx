@@ -97,17 +97,31 @@ export function KioskLayout({
       <nav className={styles.actionBar} aria-label={t.nav.menu}>
         <div className={styles.actionGroup}>
           {showBack && (
-            <Button variant="secondary" size="lg" icon="arrow-left" onClick={onBack ?? navigation.back}>
+            <Button
+              className={styles.primaryAction}
+              variant="secondary"
+              size="lg"
+              icon="arrow-left"
+              wrapLabel
+              onClick={onBack ?? navigation.back}
+            >
               {t.nav.back}
             </Button>
           )}
-          <Button variant="primary" size="lg" icon="home" onClick={navigation.home}>
+          <Button
+            className={styles.primaryAction}
+            variant="primary"
+            size="lg"
+            icon="home"
+            wrapLabel
+            onClick={navigation.home}
+          >
             {t.nav.home}
           </Button>
         </div>
         <div className={styles.actionGroup}>
-          <LanguageSelector />
-          <AccessibilityControl />
+          <LanguageSelector className={styles.utilityControl} />
+          <AccessibilityControl className={styles.utilityControl} />
           <FullScreenMenu />
         </div>
       </nav>

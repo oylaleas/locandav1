@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { Icon } from './Icon';
 import { useI18n } from '@/features/i18n/useI18n';
 import type { ImageAsset } from '@/types/media';
@@ -30,6 +30,18 @@ interface ImageLayerProps {
   decorative: boolean;
   fallbackLabel: string;
   className?: string;
+}
+
+type SmartImageStyle = CSSProperties & {
+  '--smart-image-ratio'?: string;
+};
+
+function ratioToPadding(aspectRatio: string, fallback = '75%'): string {
+  const [width, height] = aspectRatio.split('/').map((part) => Number(part.trim()));
+  if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0) {
+    return fallback;
+  }
+  return `${(height / width) * 100}%`;
 }
 
 /**
@@ -99,12 +111,13 @@ export function SmartImage({
   const { tx, t } = useI18n();
   const src = asset ? (useThumb ? asset.thumbSrc : asset.src) : undefined;
   const ratio = aspectRatio ?? (asset ? `${asset.width} / ${asset.height}` : '4 / 3');
+  const fallbackRatio = ratioToPadding(ratio);
 
   if (!asset || !src) {
     return (
       <div
         className={cn(styles.wrapper, styles.fallback, className)}
-        style={{ aspectRatio: ratio }}
+        style={{ aspectRatio: ratio, '--smart-image-ratio': fallbackRatio } as SmartImageStyle}
         role="img"
         aria-label={t.errors.imageFallback}
       >
@@ -116,7 +129,13 @@ export function SmartImage({
   return (
     <div
       className={cn(styles.wrapper, className)}
-      style={{ aspectRatio: ratio, backgroundColor: asset.dominantColor }}
+      style={
+        {
+          aspectRatio: ratio,
+          backgroundColor: asset.dominantColor,
+          '--smart-image-ratio': fallbackRatio,
+        } as SmartImageStyle
+      }
     >
       <ImageLayer
         key={src}
