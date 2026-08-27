@@ -1,10 +1,18 @@
 import { defineConfig } from 'vitest/config';
+import legacy from '@vitejs/plugin-legacy';
 import react from '@vitejs/plugin-react';
 
 const srcPath = new URL('./src', import.meta.url).pathname;
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    // Entrega bundle nomodule + polyfills somente para browsers antigos. Isso
+    // cobre WebViews não atualizados que ainda aparecem em tablets Android Go.
+    legacy({
+      targets: ['Chrome >= 49', 'Android >= 4.4'],
+    }),
+  ],
   resolve: {
     alias: { '@': srcPath },
   },
@@ -22,8 +30,9 @@ export default defineConfig({
     allowedHosts: true,
   },
   build: {
-    target: 'es2022',
-    cssTarget: 'chrome110',
+    // O plugin legacy define Chrome 64 como baseline do chunk moderno e gera
+    // um fallback nomodule para WebViews ainda mais antigos.
+    cssTarget: 'chrome64',
     sourcemap: false,
     // Mídia pesada nunca deve virar base64 inline.
     assetsInlineLimit: 2048,

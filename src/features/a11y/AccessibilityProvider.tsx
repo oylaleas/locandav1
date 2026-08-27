@@ -11,9 +11,12 @@ import { DEFAULT_ACCESSIBILITY } from '@/config/kiosk';
 import { subscribeToSessionReset } from '@/features/session/resetBus';
 import { track } from '@/services/analytics';
 
+export type InterfaceScale = 'compact' | 'standard' | 'large';
 export type TextScale = 'md' | 'lg' | 'xl';
 
 export interface AccessibilityState {
+  /** Escala estrutural: altera o rem raiz, não aplica transform/zoom. */
+  interfaceScale: InterfaceScale;
   textScale: TextScale;
   highContrast: boolean;
   /** Preferência explícita do visitante (soma-se ao prefers-reduced-motion). */
@@ -23,6 +26,7 @@ export interface AccessibilityState {
 interface AccessibilityContextValue extends AccessibilityState {
   /** true quando o sistema OU o visitante pedem menos movimento. */
   motionReduced: boolean;
+  setInterfaceScale: (scale: InterfaceScale) => void;
   setTextScale: (scale: TextScale) => void;
   toggleHighContrast: () => void;
   toggleReducedMotion: () => void;
@@ -38,11 +42,19 @@ function usePrefersReducedMotion(): boolean {
   });
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !window.matchMedia) return;
+    if (typeof window === 'undefined' || !window.matchMedia) return undefined;
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
     const handler = (event: MediaQueryListEvent) => setPrefers(event.matches);
-    query.addEventListener('change', handler);
-    return () => query.removeEventListener('change', handler);
+
+    // addListener/removeListener ainda são necessários em WebViews Android
+    // antigos; o M7 pode não expor addEventListener no MediaQueryList.
+    if (query.addEventListener) {
+      query.addEventListener('change', handler);
+      return () => query.removeEventListener('change', handler);
+    }
+
+    query.addListener(handler);
+    return () => query.removeListener(handler);
   }, []);
 
   return prefers;
@@ -60,6 +72,7 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const root = document.documentElement;
+    root.dataset.interfaceScale = state.interfaceScale;
     root.dataset.textScale = state.textScale;
     root.dataset.contrast = state.highContrast ? 'high' : 'normal';
     root.dataset.reducedMotion = state.reducedMotion ? 'true' : 'false';
@@ -69,6 +82,10 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
     () => ({
       ...state,
       motionReduced,
+      setInterfaceScale: (interfaceScale) => {
+        setState((current) => ({ ...current, interfaceScale }));
+        track({ name: 'accessibility_change', setting: 'interface-scale', value: interfaceScale });
+      },
       setTextScale: (textScale) => {
         setState((current) => ({ ...current, textScale }));
         track({ name: 'accessibility_change', setting: 'text-scale', value: textScale });

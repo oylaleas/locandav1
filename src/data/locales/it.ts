@@ -70,6 +70,8 @@ export const it: Dictionary = {
     contactIntro: 'Porta i contatti sul tuo telefono.',
     whatsapp: 'WhatsApp',
     instagram: 'Instagram',
+    carouselPrev: 'Servizio precedente',
+    carouselNext: 'Prossimo servizio',
   },
   tours: {
     indexTitle: 'Esperienze e tour',
@@ -90,6 +92,9 @@ export const it: Dictionary = {
     optionsBadge: '{count} opzioni',
     mediaPendingNote: 'Immagini provvisorie — in attesa del materiale ufficiale del tour.',
     empty: 'Non ci sono ancora tour registrati.',
+    carouselPrev: 'Tour precedente',
+    carouselNext: 'Prossimo tour',
+    priceNote: 'I prezzi dei tour sono su richiesta alla reception.',
   },
   content: {
     indexTitle: 'Contenuti',
@@ -186,6 +191,11 @@ export const it: Dictionary = {
   },
   a11y: {
     panelTitle: 'Accessibilità',
+    interfaceScale: 'Scala dell’interfaccia',
+    interfaceScaleHint: 'Regola card, pulsanti e spaziature senza usare lo zoom del browser.',
+    interfaceScaleCompact: 'Compatta · 85%',
+    interfaceScaleStandard: 'Standard · 100%',
+    interfaceScaleLarge: 'Ampliata · 115%',
     textSize: 'Dimensione del testo',
     textSizeNormal: 'Normale',
     textSizeLarge: 'Grande',

@@ -21,6 +21,13 @@
   color: var(--color-text-primary);
 }
 
+.hint {
+  margin: calc(var(--space-2xs) * -1) 0 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-secondary);
+}
+
 .row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

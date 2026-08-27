@@ -44,3 +44,18 @@
 .fallback {
   position: relative;
 }
+
+/* Android 8.1/Chromium antigo não implementa aspect-ratio. A pseudo-caixa
+   preserva a altura reservada, evitando imagens invisíveis e layout shift. */
+@supports not (aspect-ratio: 1 / 1) {
+  .wrapper:not(.fallback)::before {
+    content: '';
+    display: block;
+    padding-top: var(--smart-image-ratio, 75%);
+  }
+
+  .wrapper:not(.fallback) .image {
+    position: absolute;
+    inset: 0;
+  }
+}

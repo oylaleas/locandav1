@@ -13,8 +13,8 @@
   width: 100%;
   max-width: var(--size-content-max-width);
   margin: 0 auto;
-  min-height: 0;
-  height: 100%;
+  min-width: 0;
+  min-height: 100%;
   contain: layout style;
 }
 
@@ -249,24 +249,89 @@
   margin: 0 auto;
 }
 
-.activitiesGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.7rem, 1.8vh, 1rem);
-}
+/* -------------------------------------------------- CARROSSEL DE ATIVIDADES */
 
-.activityCard {
+.carousel {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
+  gap: var(--space-md);
+  min-width: 0;
+}
+
+.carouselTrack {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: clamp(1rem, 2vw, 1.25rem);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--space-2xs);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: var(--space-md) 0;
+  touch-action: pan-x pan-y;
+}
+
+.carouselTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.carouselBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-action-primary);
+  color: var(--color-text-on-action);
+  cursor: pointer;
+  z-index: 2;
+  transition:
+    transform var(--motion-fast) var(--easing-standard),
+    background-color var(--motion-fast) var(--easing-standard);
+}
+
+.carouselBtn:active {
+  transform: scale(0.95);
+  background: var(--color-action-primary-pressed);
+}
+
+.carouselBtn:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.carouselBtnLeft {
+  margin-right: var(--space-xs);
+}
+
+.carouselBtnRight {
+  margin-left: var(--space-xs);
+}
+
+/* ---------------------------------------- CAROUSEL CARD (dentro do carrossel) */
+
+.activityCard {
+  flex: 0 0 auto;
+  width: clamp(16rem, 32vw, 24rem);
+  min-height: 9rem;
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-xl) var(--space-2xl);
   border: none;
   border-radius: var(--radius-card);
   background: var(--color-surface);
-  box-shadow: var(--elevation-1);
+  box-shadow: var(--elevation-2);
   color: var(--color-text-primary);
   text-align: left;
   cursor: pointer;
+  scroll-snap-align: start;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   transition:
@@ -287,7 +352,8 @@
 .activityText {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  justify-content: center;
+  gap: var(--space-xs);
   flex: 1;
   min-width: 0;
 }
@@ -295,26 +361,48 @@
 .activityName {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-xl);
+  white-space: normal;
+  word-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.2;
 }
 
 .activityDesc {
-  font-size: var(--font-size-2xs);
+  font-size: var(--font-size-md);
   color: var(--color-text-secondary);
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 1;
-  line-clamp: 1;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
 .activityArrow {
   flex: 0 0 auto;
   color: var(--color-accent);
+  align-self: center;
+  width: 2rem;
+  height: 2rem;
 }
 
-/* ------------------------------------------- TOTEM ALTO (ex.: 1080x1920) */
+/* -------------------------------------------------- NOTA DE PREÇOS */
+
+.priceNote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  margin-top: var(--space-lg);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-pill);
+  background: var(--color-background-alt);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* --------------------- PAINEL ALTO (fallback portrait / desktop alto) */
 
 @media (min-height: 60rem) {
   .title {
@@ -357,10 +445,6 @@
 /* -------------------------------------- ESTREITO / HANDOFF MOBILE */
 
 @media (max-width: 60rem) {
-  .page {
-    height: auto;
-  }
-
   .routes {
     grid-template-columns: 1fr;
   }
@@ -371,5 +455,39 @@
 
   .activitiesGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 40rem) {
+  .page {
+    gap: var(--space-md);
+  }
+
+  .carousel {
+    gap: var(--space-2xs);
+  }
+
+  .carouselTrack {
+    gap: var(--space-sm);
+  }
+
+  .carouselBtn {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .activityCard {
+    width: min(82vw, 20rem);
+    min-height: 8rem;
+    padding: var(--space-lg);
+  }
+
+  .activityName {
+    font-size: var(--font-size-lg);
+  }
+
+  .priceNote {
+    margin-top: var(--space-sm);
+    text-align: center;
   }
 }
