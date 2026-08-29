@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor, within } from '@testing-library/react';
+import { act, fireEvent, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AppShell } from '@/app/AppShell';
 import { renderWithProviders } from '@/test/renderApp';
@@ -105,24 +105,33 @@ describe('jornada principal do totem', () => {
     expect(document.documentElement.lang).toBe('en');
   });
 
-  it('INATIVIDADE → AVISO → sem resposta → RESET → HOME (sem Attract)', async () => {
+  it('INATIVIDADE NA HOME → reset silencioso, sem aviso operacional', async () => {
     await enterFromAttract();
 
-    const warning = await screen.findByRole('heading', { name: 'Você ainda está aí?' }, { timeout: 3000 });
-    expect(warning).toBeVisible();
-
-    // O reset volta ao estado inicial: a Home (a tela inicial foi removida).
-    expect(await screen.findByRole('heading', { name: 'Locanda Experience' }, { timeout: 3000 })).toBeVisible();
-    expect(screen.queryByTestId('attract-mode')).not.toBeInTheDocument();
-  });
-
-  it('AVISO → "Continuar navegando" mantém a sessão ativa', async () => {
-    const { user } = await enterFromAttract();
-
-    await screen.findByRole('heading', { name: 'Você ainda está aí?' }, { timeout: 3000 });
-    await user.click(screen.getByRole('button', { name: 'Continuar navegando' }));
+    // A Home já é a tela de descanso do kiosk: após o timeout ela é
+    // reiniciada silenciosamente, sem interromper quem está diante do totem.
+    await act(async () => {
+      await new Promise((resolve) => window.setTimeout(resolve, 1_100));
+    });
 
     expect(screen.queryByRole('heading', { name: 'Você ainda está aí?' })).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Locanda Experience' })).toBeVisible();
+    expect(screen.queryByTestId('attract-mode')).not.toBeInTheDocument();
+  });
+
+  it('FORA DA HOME → aviso de inatividade → "Continuar navegando" mantém o contexto', async () => {
+    const { user } = await enterFromAttract();
+
+    await user.click(screen.getByRole('button', { name: /Comodidades/i }));
+    expect(
+      await screen.findByRole('heading', { level: 1, name: 'Comodidades de nossos hóspedes' }),
+    ).toBeVisible();
+
+    const warning = await screen.findByRole('heading', { name: 'Você ainda está aí?' }, { timeout: 3000 });
+    expect(warning).toBeVisible();
+    await user.click(screen.getByRole('button', { name: 'Continuar navegando' }));
+
+    expect(screen.queryByRole('heading', { name: 'Você ainda está aí?' })).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'Comodidades de nossos hóspedes' })).toBeVisible();
   });
 });

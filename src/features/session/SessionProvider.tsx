@@ -8,11 +8,13 @@ import {
   useState,
   type ReactNode,
 } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   ABSOLUTE_SESSION_MAX_MS,
   INACTIVITY_TICK_MS,
   INACTIVITY_TIMEOUT_MS,
   WARNING_DURATION_MS,
+  ROUTES,
 } from '@/config/kiosk';
 import { useMedia } from '@/features/media/MediaProvider';
 import { emitSessionReset } from '@/features/session/resetBus';
@@ -41,6 +43,7 @@ const ACTIVITY_EVENTS: Array<keyof DocumentEventMap> = [
 
 export function SessionProvider({ children }: { children: ReactNode }) {
   const media = useMedia();
+  const location = useLocation();
   // Sem Attract Mode: o totem abre direto com a sessão ativa (na Home).
   const [phase, setPhase] = useState<SessionPhase>('active');
   const [sessionId, setSessionId] = useState(0);
@@ -56,6 +59,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const startedAtRef = useRef<number | null>(null);
   const sessionIdRef = useRef(0);
   const mediaPlayingRef = useRef(false);
+  const isHomeRef = useRef(location.pathname === ROUTES.home);
 
   // Início da sessão (marcado após a montagem — mantém o render puro).
   useEffect(() => {
@@ -66,6 +70,10 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     phaseRef.current = phase;
   }, [phase]);
+
+  useEffect(() => {
+    isHomeRef.current = location.pathname === ROUTES.home;
+  }, [location.pathname]);
 
   useEffect(() => {
     startedAtRef.current = startedAt;
@@ -137,7 +145,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
    * Gerenciador central de inatividade (um único timer na aplicação).
    *
    * Regras:
-   *  - ATIVO + sem interação por INACTIVITY_TIMEOUT_MS → AVISO
+   *  - HOME + sem interação por INACTIVITY_TIMEOUT_MS → reset silencioso:
+   *    ela já é a tela de descanso, então não interrompemos a recepção com um aviso;
+   *  - outras telas + sem interação por INACTIVITY_TIMEOUT_MS → AVISO;
    *  - Vídeo em reprodução escolhido pelo visitante NÃO é ausência passiva:
    *    o relógio fica suspenso enquanto houver mídia ativa…
    *  - …mas existe um teto absoluto (ABSOLUTE_SESSION_MAX_MS) para o caso de
@@ -167,6 +177,13 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 
       const idleFor = now - lastActivityRef.current;
       if (idleFor >= INACTIVITY_TIMEOUT_MS || hitAbsoluteCap) {
+        if (isHomeRef.current) {
+          // A Home já é o destino de reset. Reiniciamos idioma, escala e mídia
+          // silenciosamente, sem exibir uma mensagem operacional ao visitante.
+          resetSession('inactivity-timeout');
+          return;
+        }
+
         warningStartedRef.current = now;
         setWarningSecondsLeft(Math.ceil(WARNING_DURATION_MS / 1000));
         setPhase('warning');

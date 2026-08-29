@@ -16,7 +16,7 @@ export const ptBR = {
   attract: {
     touchToStart: 'Toque na tela para começar',
     touchAnywhere: 'Toque em qualquer lugar',
-    languagesAvailable: 'Disponível em Português, English e Italiano',
+    languagesAvailable: 'Disponível em Português, English, Italiano e Español',
     videoUnavailable: 'Exibindo imagem — vídeo indisponível no momento',
   },
   nav: {
@@ -73,6 +73,8 @@ export const ptBR = {
     contactIntro: 'Leve o contato para o seu celular.',
     whatsapp: 'WhatsApp',
     instagram: 'Instagram',
+    carouselPrev: 'Serviço anterior',
+    carouselNext: 'Próximo serviço',
   },
   tours: {
     indexTitle: 'Experiências e passeios',
@@ -93,6 +95,9 @@ export const ptBR = {
     optionsBadge: '{count} opções',
     mediaPendingNote: 'Imagens provisórias — aguardando o material oficial do passeio.',
     empty: 'Ainda não há passeios cadastrados.',
+    carouselPrev: 'Passeio anterior',
+    carouselNext: 'Próximo passeio',
+    priceNote: 'Valores dos passeios sob consulta na recepção.',
   },
   content: {
     indexTitle: 'Conteúdos',
@@ -189,6 +194,11 @@ export const ptBR = {
   },
   a11y: {
     panelTitle: 'Acessibilidade',
+    interfaceScale: 'Escala da interface',
+    interfaceScaleHint: 'Ajusta cards, botões e espaçamentos sem aplicar zoom.',
+    interfaceScaleCompact: 'Compacta · 85%',
+    interfaceScaleStandard: 'Padrão · 100%',
+    interfaceScaleLarge: 'Ampliada · 115%',
     textSize: 'Tamanho do texto',
     textSizeNormal: 'Normal',
     textSizeLarge: 'Grande',

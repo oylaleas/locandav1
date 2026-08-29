@@ -69,10 +69,11 @@
 
 .body {
   display: flex;
+  flex: 1;
+  min-width: 0;
   flex-direction: column;
   gap: var(--space-2xs);
   padding: var(--space-md) var(--space-md) var(--space-lg);
-  flex: 1;
 }
 
 .eyebrow {
@@ -89,8 +90,10 @@
 .title {
   font-family: var(--font-display);
   font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-snug);
   color: var(--color-text-primary);
+  overflow-wrap: anywhere;
 }
 
 .featured .title {
@@ -99,6 +102,7 @@
 
 .description {
   font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-normal);
   color: var(--color-text-secondary);
   display: -webkit-box;
@@ -121,4 +125,18 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--color-action-primary);
+}
+
+/* A mídia lateral deixaria menos de uma linha útil para títulos longos em
+   handoff/mobile. A troca para pilha preserva leitura e área de toque. */
+@media (max-width: 34rem) {
+  .horizontal {
+    flex-direction: column;
+  }
+
+  .horizontal .media {
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: 16 / 9;
+  }
 }

@@ -29,3 +29,14 @@
   font-variant-numeric: tabular-nums;
   color: var(--color-text-primary);
 }
+
+@media (max-height: 40rem) {
+  .content {
+    gap: var(--space-md);
+  }
+
+  .countdown {
+    width: 6.5rem;
+    height: 6.5rem;
+  }
+}

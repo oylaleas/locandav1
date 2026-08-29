@@ -1,14 +1,25 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
-import { useAccessibility, type TextScale } from '@/features/a11y/AccessibilityProvider';
+import {
+  useAccessibility,
+  type InterfaceScale,
+  type TextScale,
+} from '@/features/a11y/AccessibilityProvider';
 import { useI18n } from '@/features/i18n/useI18n';
 import styles from './AccessibilityControl.module.css';
 
-export function AccessibilityControl({ compact = false }: { compact?: boolean }) {
+interface AccessibilityControlProps {
+  compact?: boolean;
+  className?: string;
+}
+
+export function AccessibilityControl({ compact = false, className }: AccessibilityControlProps) {
   const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const {
+    interfaceScale,
+    setInterfaceScale,
     textScale,
     setTextScale,
     highContrast,
@@ -17,6 +28,11 @@ export function AccessibilityControl({ compact = false }: { compact?: boolean })
     toggleReducedMotion,
   } = useAccessibility();
 
+  const interfaceScales: Array<{ value: InterfaceScale; label: string }> = [
+    { value: 'compact', label: t.a11y.interfaceScaleCompact },
+    { value: 'standard', label: t.a11y.interfaceScaleStandard },
+    { value: 'large', label: t.a11y.interfaceScaleLarge },
+  ];
   const scales: Array<{ value: TextScale; label: string }> = [
     { value: 'md', label: t.a11y.textSizeNormal },
     { value: 'lg', label: t.a11y.textSizeLarge },
@@ -26,11 +42,13 @@ export function AccessibilityControl({ compact = false }: { compact?: boolean })
   return (
     <>
       <Button
+        className={className}
         variant="quiet"
         size={compact ? 'sm' : 'md'}
         icon="accessibility"
         iconOnly={compact}
         onClick={() => setOpen(true)}
+        aria-label={t.nav.accessibility}
         aria-haspopup="dialog"
       >
         {compact ? t.nav.accessibility : t.nav.accessibility}
@@ -43,6 +61,25 @@ export function AccessibilityControl({ compact = false }: { compact?: boolean })
         description={t.a11y.hint}
       >
         <div className={styles.groups}>
+          <fieldset className={styles.group}>
+            <legend className={styles.legend}>{t.a11y.interfaceScale}</legend>
+            <p className={styles.hint}>{t.a11y.interfaceScaleHint}</p>
+            <div className={styles.row}>
+              {interfaceScales.map((scale) => (
+                <Button
+                  key={scale.value}
+                  variant={interfaceScale === scale.value ? 'primary' : 'secondary'}
+                  size="lg"
+                  selected={interfaceScale === scale.value}
+                  onClick={() => setInterfaceScale(scale.value)}
+                  aria-pressed={interfaceScale === scale.value}
+                >
+                  {scale.label}
+                </Button>
+              ))}
+            </div>
+          </fieldset>
+
           <fieldset className={styles.group}>
             <legend className={styles.legend}>{t.a11y.textSize}</legend>
             <div className={styles.row}>

@@ -4,11 +4,10 @@
    Mesma aplicação do totem, com duas diferenças para funcionar como um
    único HTML (file://, sem servidor):
 
-   1. HashRouter em vez de BrowserRouter — o arquivo pode ser aberto de
-      qualquer lugar (file://, pen drive, e-mail) sem servidor;
-   2. Sem registro de Service Worker (não existe em file://).
+   1. Sem registro de Service Worker (não existe em file://).
 
-   Nada do build de produção (src/main.tsx + BrowserRouter + SW) muda.
+   O PWA e o artifact usam HashRouter: as rotas sobrevivem a refresh mesmo em
+   hospedagem estática. A única diferença relevante é o Service Worker.
    ========================================================================== */
 
 import { StrictMode } from 'react';

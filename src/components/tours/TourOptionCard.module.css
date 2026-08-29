@@ -1,5 +1,6 @@
 .card {
   display: flex;
+  min-width: 0;
   flex-direction: column;
   gap: var(--space-md);
   padding: var(--space-lg);
@@ -32,9 +33,11 @@
   align-self: flex-start;
   padding: var(--space-2xs) var(--space-sm);
   border-radius: var(--radius-pill);
+  max-width: 100%;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--letter-spacing-wide);
+  overflow-wrap: anywhere;
   text-transform: uppercase;
 }
 
@@ -84,10 +87,12 @@
 }
 
 .infoValue {
+  min-width: 0;
   margin: 0;
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
+  overflow-wrap: anywhere;
 }
 
 .infoValue:not(.price) {
@@ -171,6 +176,16 @@
   flex-shrink: 0;
   color: var(--color-danger);
   margin-top: 0.15em;
+}
+
+@media (max-width: 40rem) {
+  .card {
+    padding: var(--space-md);
+  }
+
+  .info {
+    padding: var(--space-sm);
+  }
 }
 
 @media (min-width: 75rem) {

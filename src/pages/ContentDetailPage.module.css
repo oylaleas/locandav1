@@ -13,7 +13,9 @@
   justify-content: flex-end;
   gap: var(--space-2xs);
   min-height: clamp(10rem, 26vh, 16rem);
-  padding: var(--space-2xl) var(--kiosk-gutter) var(--space-lg);
+  min-height: clamp(10rem, 26dvh, 16rem);
+  padding: var(--space-2xl) var(--kiosk-inset-inline-end) var(--space-lg)
+    var(--kiosk-inset-inline-start);
   overflow: hidden;
   /* Identidade de marca — sem fotografias (decisão do responsável). */
   background:
@@ -62,9 +64,10 @@
   flex-direction: column;
   gap: var(--space-xl);
   width: 100%;
+  min-width: 0;
   max-width: var(--size-content-max-width);
   margin: 0 auto;
-  padding: 0 var(--kiosk-gutter);
+  padding: 0 var(--kiosk-inset-inline-end) 0 var(--kiosk-inset-inline-start);
 }
 
 .textBlock {
@@ -76,12 +79,14 @@
 
 .summary {
   font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-relaxed);
   color: var(--color-text-primary);
 }
 
 .paragraph {
   font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-relaxed);
   color: var(--color-text-secondary);
 }
@@ -214,6 +219,85 @@
 .qrSection .sectionIntro {
   color: var(--color-text-inverse-secondary);
   margin-bottom: 0;
+}
+
+/* Mesmo padrão de handoff usado no Espaço Onoda: o visitante escolhe o
+   canal no totem e leva o destino para o próprio celular via QR Code. */
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  padding: var(--space-xl);
+  border-radius: var(--radius-panel);
+  background-color: var(--color-surface-inverse);
+  color: var(--color-text-inverse);
+}
+
+.contactText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  min-width: 0;
+}
+
+.contact .sectionTitle {
+  color: var(--color-text-inverse);
+}
+
+.contact .sectionIntro {
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-inverse-secondary);
+}
+
+.contactList {
+  display: grid;
+  gap: var(--space-2xs);
+  margin: 0;
+}
+
+.contactRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.contactLabel {
+  font-size: var(--font-size-3xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: var(--color-text-inverse-secondary);
+}
+
+.contactValue {
+  margin: 0;
+  font-family: var(--font-data);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-inverse);
+}
+
+.contactActions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 40rem) {
+  .contact {
+    padding: var(--space-lg);
+  }
+
+  .contactActions {
+    width: 100%;
+  }
+
+  .contactActions > * {
+    flex: 1 1 12rem;
+  }
 }
 
 .relatedList {

@@ -10,8 +10,10 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 - [x] HOME → índice de conteúdos → detalhe
 - [x] Detalhe → vídeo → fim do vídeo → QR → fechar → Início
 - [x] HOME → galeria → VOLTAR → HOME (rota lazy)
+- [x] Refresh de rota interna via HashRouter (`/#/conteudos/...`) não depende de rewrite do servidor
 - [x] Galeria → visualizador → próximo/anterior → fechar
-- [x] Inatividade → aviso → sem resposta → reset → Home
+- [x] Inatividade na Home → reset silencioso (sem aviso operacional)
+- [x] Inatividade fora da Home → aviso → sem resposta → reset → Home
 - [x] Aviso → "Continuar navegando" mantém a sessão
 - [x] Rota inexistente → tela 404 com saída para a Home
 - [x] Nenhuma tela sem saída (todas têm Voltar + Início na barra inferior)
@@ -21,6 +23,7 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 ## Vídeo
 
 - [x] Sem tela inicial: o totem abre direto na Home (decisão do responsável)
+- [x] Home horizontal mantém o vídeo vertical 9:16, sem barras laterais azuis
 - [x] Poster sempre presente (nunca área preta)
 - [x] Play / Pause
 - [x] Estado de áudio textual ("Sem som"/"Com som"), não só ícone
@@ -79,9 +82,11 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 - [x] Alvos de toque ≥ 72 px (`--size-touch-min`), separação generosa
 - [x] Estados por texto + ícone (nunca só cor/ícone)
 - [x] `prefers-reduced-motion` + controle manual de "reduzir animações"
+- [x] Controle de escala estrutural da interface (85% / 100% / 115%), independente do texto
 - [x] Controle de tamanho de texto (100% / 115% / 132%) e alto contraste
 - [x] Legendas preparadas e legíveis sobre vídeo claro/escuro (`::cue`)
-- [x] Seletor de idioma por nome, com `lang` correto
+- [x] Seletor de idioma por nome, com `lang` correto e opções PT/EN/IT/ES
+- [x] Espanhol traduz a interface; conteúdo editorial sem tradução ES usa fallback seguro em pt-BR
 - [x] Sem dependência de hover; sem ação exclusiva por gesto
 - [~] Contraste medido em bancada — revalidar no vidro/brilho reais
 
@@ -144,7 +149,7 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 - [x] Comodidades: 12 itens + aviso com asteriscos preservados (Yoga e Funcional*, Piquenique*) — PT/EN/IT
 - [x] Happy Hour: frase oficial com horários marcados `[HORÁRIO DO HAPPY HOUR A DEFINIR]` + ação do menu `[MENU DO HAPPY HOUR A DEFINIR]` — nada inventado
 - [x] Serviços On Demand: 7 itens + aviso "tarifa definida pelo prestador" — PT/EN/IT
-- [x] Kite Center: conteúdo oficial parcial (flat water, Soulkite, guarda de equipamentos) + `[CONTEÚDO DO KITE CENTER A DEFINIR]`
+- [x] Kite Center: conteúdo institucional + QR de WhatsApp (88) 9987-7973 e Instagram (@islakitecenter), no mesmo fluxo totem → celular do Espaço Onoda
 - [x] Seletor PT/EN altera hub E conteúdo (testado), não só títulos
 - [x] Novas seções reutilizam ContentDetailPage/KioskLayout (Voltar + Início, timeout/reset herdados)
 - [x] 7 testes automatizados do hub (navegação das 6 áreas, PT→EN e EN→PT)

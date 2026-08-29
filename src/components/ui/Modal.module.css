@@ -5,8 +5,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--kiosk-gutter);
-  padding-bottom: calc(var(--kiosk-gutter) + var(--kiosk-safe-bottom));
+  min-width: 0;
+  min-height: var(--kiosk-viewport-height);
+  padding:
+    max(var(--kiosk-gutter), var(--kiosk-safe-top)) var(--kiosk-inset-inline-end)
+    max(var(--kiosk-gutter), var(--kiosk-safe-bottom)) var(--kiosk-inset-inline-start);
   background-color: var(--color-surface-scrim);
   animation: fade-in var(--motion-base) var(--easing-standard);
   backdrop-filter: blur(3px);
@@ -19,8 +22,12 @@
 .panel {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  width: 100%;
+  max-width: 46rem;
+  max-height: 100%;
   width: min(100%, 46rem);
-  max-height: min(92vh, 68rem);
+  max-height: min(100%, 68rem);
   background-color: var(--color-surface);
   color: var(--color-text-primary);
   border-radius: var(--radius-panel);
@@ -35,10 +42,14 @@
 }
 
 .md {
+  width: 100%;
+  max-width: 46rem;
   width: min(100%, 46rem);
 }
 
 .lg {
+  width: 100%;
+  max-width: 64rem;
   width: min(100%, 64rem);
 }
 
@@ -59,18 +70,22 @@
 
 .headings {
   display: flex;
+  flex: 1;
+  min-width: 0;
   flex-direction: column;
   gap: var(--space-2xs);
 }
 
 .title {
   font-size: var(--font-size-2xl);
+  overflow-wrap: anywhere;
 }
 
 .description {
   color: var(--color-text-secondary);
   font-size: var(--font-size-md);
   max-width: 46ch;
+  overflow-wrap: anywhere;
 }
 
 .panelDark .description {
@@ -93,7 +108,43 @@
   background-color: var(--color-background);
 }
 
+.footer > * {
+  flex: 1 1 13rem;
+  min-width: 0;
+}
+
+.footer > *:only-child {
+  flex: 0 1 auto;
+}
+
 .panelDark .footer {
   background-color: rgba(255, 255, 255, 0.04);
   border-top-color: var(--color-border-inverse);
+}
+
+@media (max-width: 40rem) {
+  .panel {
+    border-radius: var(--radius-card);
+  }
+
+  .header {
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-md) var(--space-sm);
+  }
+
+  .body {
+    padding-inline: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+  }
+
+  .footer > * {
+    flex-basis: 100%;
+  }
+
+  .footer > *:only-child {
+    flex: 1 1 100%;
+  }
 }

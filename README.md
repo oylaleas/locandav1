@@ -33,9 +33,10 @@ vez de pnpm + Parcel + `html-inline` — mesmo resultado, menos dependências).
 O bundle é o totem inteiro (JS, CSS, fotos e vídeos em base64) em um único
 HTML, com `HashRouter` e sem Service Worker — abre de qualquer lugar
 (`file://`, pen drive, e-mail), sem servidor. A entrada do artifact é
-`index.artifact.html` + `src/artifact-main.tsx`; o PWA de produção
-(`src/main.tsx` + `BrowserRouter` + SW) não muda. `bundle.html` e
-`dist-artifact/` são gerados (ignorados pelo git).
+`index.artifact.html` + `src/artifact-main.tsx`; o PWA de produção também usa
+`HashRouter` + Service Worker para que recarregamentos de rotas não dependam
+na configuração do servidor. `bundle.html` e `dist-artifact/` são gerados
+(ignorados pelo git).
 
 ---
 
@@ -115,11 +116,12 @@ HOME (LOCANDA EXPERIENCE)
 │                                ├── Passeio Pôr do Sol
 │                                ├── Moitas de Icaraí (Opção 1 — com barco / Opção 2 — sem barco)
 │                                └── Almofala, Ilha do Guajiru e Região
-└── KITE CENTER ──▶ seção institucional (conteúdo oficial parcial + pendência explícita)
+└── KITE CENTER ──▶ seção institucional ──▶ contatos QR (WhatsApp / Instagram)
 ```
 
-Todas as seções novas são data-driven em `src/data/content.ts` (PT/EN/IT) e
-reutilizam `ContentDetailPage`, `KioskLayout`, QR, galeria e vídeo existentes.
+Todas as seções novas são data-driven em `src/data/content.ts` (PT/EN/IT, com
+interface também em ES; conteúdo editorial sem ES cai com segurança em pt-BR)
+e reutilizam `ContentDetailPage`, `KioskLayout`, QR, galeria e vídeo existentes.
 
 **Menu fullscreen (todas as telas):** botão hamburger na barra de ações abre
 uma navegação fullscreen premium com GSAP + SplitText (timeline única
@@ -194,4 +196,5 @@ nunca no meio de uma visita.
 - `docs/PENDENCIAS.md` — o que depende de conteúdo real, hardware e backend futuro.
 - `docs/QA.md` — checklists de QA (vídeo, QR, PWA, sessão, acessibilidade, touch, performance).
 - `docs/CURADORIA.md` — sistema visual da fotografia (classificação A–E, narrativa, ritmo, grid).
+- `docs/RESPONSIVIDADE.md` — auditoria de viewport, touch, PWA, modais, carrosséis e matriz de validação responsiva.
 - `scripts/analyze-photos.py` — curadoria técnica automática das fotos (`python3 scripts/analyze-photos.py <pasta>`).

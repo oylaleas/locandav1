@@ -61,7 +61,16 @@ export function KioskLayout({
 
   return (
     <div className={styles.shell}>
-      <a className="skip-link" href="#conteudo-principal">
+      {/* HashRouter usa # para a rota; evitamos que o skip link sobrescreva a
+          navegação atual e movemos o foco diretamente para o conteúdo. */}
+      <a
+        className="skip-link"
+        href="#conteudo-principal"
+        onClick={(event) => {
+          event.preventDefault();
+          mainRef.current?.focus();
+        }}
+      >
         {t.app.skipToContent}
       </a>
 
@@ -97,17 +106,31 @@ export function KioskLayout({
       <nav className={styles.actionBar} aria-label={t.nav.menu}>
         <div className={styles.actionGroup}>
           {showBack && (
-            <Button variant="secondary" size="lg" icon="arrow-left" onClick={onBack ?? navigation.back}>
+            <Button
+              className={styles.primaryAction}
+              variant="secondary"
+              size="lg"
+              icon="arrow-left"
+              wrapLabel
+              onClick={onBack ?? navigation.back}
+            >
               {t.nav.back}
             </Button>
           )}
-          <Button variant="primary" size="lg" icon="home" onClick={navigation.home}>
+          <Button
+            className={styles.primaryAction}
+            variant="primary"
+            size="lg"
+            icon="home"
+            wrapLabel
+            onClick={navigation.home}
+          >
             {t.nav.home}
           </Button>
         </div>
         <div className={styles.actionGroup}>
-          <LanguageSelector />
-          <AccessibilityControl />
+          <LanguageSelector className={styles.utilityControl} />
+          <AccessibilityControl className={styles.utilityControl} />
           <FullScreenMenu />
         </div>
       </nav>

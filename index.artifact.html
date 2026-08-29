@@ -12,13 +12,29 @@
     <title>Locanda dei Venti — Totem</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <p id="boot-status" aria-live="polite" style="font-family: system-ui, sans-serif; padding: 2rem; text-align: center">
+        Carregando experiência…
+      </p>
+    </div>
     <noscript>
       <div style="font-family: Georgia, serif; padding: 4rem; text-align: center">
         <h1>Locanda dei Venti</h1>
         <p>É necessário habilitar o JavaScript para utilizar este totem.</p>
       </div>
     </noscript>
+    <div id="legacy-browser" hidden role="alert" style="font-family: system-ui, sans-serif; padding: 2rem; text-align: center">
+      <h1>Atualize o navegador do totem</h1>
+      <p>Esta experiência precisa de uma versão recente do Google Chrome ou Android System WebView.</p>
+    </div>
+    <script nomodule>
+      (function () {
+        var root = document.getElementById('root');
+        var message = document.getElementById('legacy-browser');
+        if (root) root.setAttribute('hidden', 'hidden');
+        if (message) message.removeAttribute('hidden');
+      })();
+    </script>
     <script type="module" src="/src/artifact-main.tsx"></script>
   </body>
 </html>
