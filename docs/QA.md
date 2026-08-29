@@ -104,8 +104,10 @@ no hardware real · `[ ]` depende de material/hardware ainda não disponível.
 
 - [x] Build de produção sem erros (`tsc -b` + `vite build`)
 - [x] Code splitting por rota + chunks separados de React e Router
+- [x] GSAP/SplitText do menu carregados somente após abrir o menu
+- [x] Poster leve da Home aparece antes do iframe externo do Vimeo
 - [x] `qrcode` carregado sob demanda (import dinâmico)
-- [x] Zero fontes remotas / zero requisições de terceiros
+- [x] Zero fontes remotas; única requisição de terceiro é o Vimeo da Home, adiada até após o primeiro paint
 - [x] Lazy loading de imagens fora da dobra; `priority` nas críticas
 - [x] Dimensões e `aspect-ratio` reservados (sem layout shift)
 - [x] Thumbnails separados das imagens grandes

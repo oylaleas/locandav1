@@ -33,8 +33,9 @@ export interface SessionContextValue extends SessionState {
 const SessionContext = createContext<SessionContextValue | null>(null);
 
 const ACTIVITY_EVENTS: Array<keyof DocumentEventMap> = [
+  // pointerdown/touchstart já cobrem interação humana. pointermove disparava
+  // dezenas de vezes por segundo durante um arrasto sem acrescentar sinal útil.
   'pointerdown',
-  'pointermove',
   'keydown',
   'wheel',
   'touchstart',

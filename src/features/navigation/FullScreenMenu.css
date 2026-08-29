@@ -94,8 +94,12 @@
   height: 100%;
   transform: scaleY(0);
   transform-origin: top;
-  will-change: transform;
   pointer-events: none;
+}
+
+/* Evita manter três camadas de GPU ativas enquanto o menu está fechado. */
+.menu--visible .menu__bg {
+  will-change: transform;
 }
 
 .menu__bg--1 {

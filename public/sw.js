@@ -15,9 +15,9 @@
          adicione a URL em VIDEO_PRECACHE_ALLOWLIST.
    ========================================================================== */
 
-// v3 invalida o shell anterior para entregar escala da interface, espanhol e
-// a política de inatividade silenciosa da Home em PWAs já instalados.
-const VERSION = 'v3';
+// v4 invalida o shell anterior para entregar otimizações de boot, poster local
+// e carregamento sob demanda do menu em PWAs já instalados.
+const VERSION = 'v4';
 const SHELL_CACHE = `ldv-shell-${VERSION}`;
 const STATIC_CACHE = `ldv-static-${VERSION}`;
 const IMAGE_CACHE = `ldv-images-${VERSION}`;

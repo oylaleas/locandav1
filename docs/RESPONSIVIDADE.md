@@ -101,10 +101,20 @@ baseline auditada.
   múltiplas dobras de scroll; os destinos mantêm prioridade.
 - Cards horizontais passam para pilha em `max-width: 34rem`.
 
-### Touchscreen e carrosséis
+### Touchscreen, carrosséis e fluidez
 
 - Tracks de passeios e serviços isolam o overflow horizontal, não deixam o
   conteúdo forçar a largura da página e mantêm `scroll-snap`.
+- GSAP e SplitText do menu fullscreen só são carregados depois do primeiro
+  toque no hamburger; o boot da Home deixa de baixar esses chunks.
+- O iframe externo do Vimeo é montado após o primeiro paint/tempo ocioso,
+  enquanto um poster local de 42 KB mantém a Home visualmente completa.
+- O poster crítico foi isolado de `data/media.ts`, evitando que a Home puxe o
+  catálogo inteiro de imagens e vídeos apenas para o primeiro frame.
+- O rastreador de inatividade deixou de escutar `pointermove`, evento de alta
+  frequência que não acrescentava sinal útil ao reset do totem.
+- Em landscape compacto, blur decorativo de botões inversos e animações dos
+  cards são reduzidos para poupar GPU sem retirar feedback de toque.
 - Setas declaram `aria-controls`; as regiões roláveis recebem nome acessível.
 - O deslocamento deixa de ser suave quando a preferência de reduzir movimento
   está ativada.
@@ -181,9 +191,10 @@ A implementação foi analisada para as seguintes famílias de viewport:
   `src/pages/WellnessPartnerPage.*` — reflow por largura/altura e carrosséis.
 - `src/pages/ContentDetailPage.module.css`, `src/pages/TourDetailPage.module.css`
   e CSS dos cards — conteúdo longo, cards e safe areas.
-- `src/features/navigation/FullScreenMenu.css`,
-  `src/features/media/VideoPlayer.module.css`, `src/components/ui/SmartImage.*`
-  e `public/offline.html` — overlays, mídia e fallback PWA.
+- `src/features/navigation/FullScreenMenu.*`, `src/pages/HomePage.*`,
+  `src/data/homeMedia.ts`, `src/services/homeMediaService.ts`,
+  `src/features/media/VideoPlayer.module.css` e `src/components/ui/SmartImage.*`
+  — carregamento sob demanda, poster crítico, overlays e mídia.
 - `vite.config.ts`, `vite.artifact.config.ts`, `index*.html`, `public/sw.js`,
   `vercel.json`, `src/app/App.tsx` e `package.json` — baseline Android/Chromium
   antigo, bundle legacy, HashRouter e atualização do app shell.

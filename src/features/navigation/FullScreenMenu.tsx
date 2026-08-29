@@ -165,8 +165,12 @@ export function FullScreenMenu() {
     [qrTargets, close],
   );
 
-  /* ------------------------ cria a timeline e o SplitText (uma única vez) */
+  /* Carrega GSAP/SplitText somente ao abrir o menu. Antes, os dois chunks eram
+     baixados durante o boot da Home, mesmo quando o visitante nunca tocava no
+     hamburger — um custo desnecessário no tablet de 1 GB. */
   useEffect(() => {
+    if (!visible) return undefined;
+
     const overlay = overlayRef.current;
     if (!overlay) return;
 
@@ -259,10 +263,12 @@ export function FullScreenMenu() {
         return null;
       });
     };
-  }, [motionReduced]);
+  }, [motionReduced, visible]);
 
-  /* ------------------------------------- resize: SplitText recalcula sem quebrar */
+  /* Recalcula SplitText só enquanto o menu está visível. Resize da Home não
+     deve acordar GSAP nem reconstruir nós invisíveis. */
   useEffect(() => {
+    if (!visible) return undefined;
     let timer: number | undefined;
     const onResize = () => {
       window.clearTimeout(timer);
@@ -300,7 +306,7 @@ export function FullScreenMenu() {
       window.clearTimeout(timer);
       window.removeEventListener('resize', onResize);
     };
-  }, []);
+  }, [visible]);
 
   /* ------------------------------------- foco, Esc, session reset, scroll lock */
   useEffect(() => {
